@@ -1,7 +1,10 @@
-
+import os
 import json
 
 def json_to_py(j):
+  
+  print j
+  
   o = json.loads(j)
   if isinstance(o, dict):
   	return dict_to_object(o)
@@ -22,3 +25,8 @@ def dict_to_object(d):
 	  else:
 	    setattr(top, i, j)
 	return top
+
+def get_fake_opener(filename):
+  def fake_opener():
+    return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), filename))
+  return fake_opener
