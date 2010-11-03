@@ -1,0 +1,25 @@
+{
+***REMOVED***"AccessDetails": {
+***REMOVED******REMOVED***"Username": "clientone",
+***REMOVED******REMOVED***"AccessLevel": 23
+***REMOVED***},
+***REMOVED***"BasicDetails": {
+***REMOVED******REMOVED***"ClientID": "4a397ccaaa55eb4e6aa1221e1e2d7122",
+***REMOVED******REMOVED***"CompanyName": "Client One",
+***REMOVED******REMOVED***"ContactName": "Client One (contact)",
+***REMOVED******REMOVED***"EmailAddress": "contact@example.com",
+***REMOVED******REMOVED***"Country": "Australia",
+***REMOVED******REMOVED***"Timezone": "(GMT+10:00) Canberra, Melbourne, Sydney"
+***REMOVED***},
+***REMOVED***"BillingDetails": {
+***REMOVED******REMOVED*** "CanPurchaseCredits": true,
+***REMOVED******REMOVED*** "MarkupOnDesignSpamTest": 0.0,
+***REMOVED******REMOVED*** "ClientPays": true,
+***REMOVED******REMOVED*** "BaseRatePerRecipient": 1.0,
+***REMOVED******REMOVED*** "MarkupPerRecipient": 0.0,
+***REMOVED******REMOVED*** "MarkupOnDelivery": 0.0,
+***REMOVED******REMOVED*** "BaseDeliveryRate": 5.0,
+***REMOVED******REMOVED*** "Currency": "USD",
+***REMOVED******REMOVED*** "BaseDesignSpamTestRate": 5.0
+***REMOVED***}
+}

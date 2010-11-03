@@ -1,0 +1,16 @@
+[
+***REMOVED***{
+***REMOVED******REMOVED***"EmailAddress": "asdf@softbouncemyemail.com",
+***REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
+***REMOVED******REMOVED***"BounceType": "Soft",
+***REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
+***REMOVED******REMOVED***"Reason": "Bounce - But No Email Address Returned "
+***REMOVED***},
+***REMOVED***{
+***REMOVED******REMOVED***"EmailAddress": "asdf@hardbouncemyemail.com",
+***REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
+***REMOVED******REMOVED***"BounceType": "Soft",
+***REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
+***REMOVED******REMOVED***"Reason": "Soft Bounce - General"
+***REMOVED***}
+]

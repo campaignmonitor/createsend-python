@@ -1,0 +1,45 @@
+[
+***REMOVED***{
+***REMOVED******REMOVED***"ID": "fc0ce7105baeaf97f47c99be31d02a91",
+***REMOVED******REMOVED***"Type": "Campaign",
+***REMOVED******REMOVED***"Name": "Campaign One",
+***REMOVED******REMOVED***"Actions": [
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Open",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:18:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": ""
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Click",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:16:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": "http://example.com/post/12323/"
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Click",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:15:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": "http://example.com/post/29889/"
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Open",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:15:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": ""
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Click",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:01:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": "http://example.com/post/82211/"
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"Event": "Open",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Date": "2010-10-12 13:01:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Detail": ""
+***REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED***]
+***REMOVED***}
+]

@@ -1,0 +1,20 @@
+[
+***REMOVED***{
+***REMOVED******REMOVED***"FieldName": "website",
+***REMOVED******REMOVED***"Key": "[website]",
+***REMOVED******REMOVED***"DataType": "Text",
+***REMOVED******REMOVED***"FieldOptions": []
+***REMOVED***},
+***REMOVED***{
+***REMOVED******REMOVED***"FieldName": "age",
+***REMOVED******REMOVED***"Key": "[age]",
+***REMOVED******REMOVED***"DataType": "Number",
+***REMOVED******REMOVED***"FieldOptions": []
+***REMOVED***},
+***REMOVED***{
+***REMOVED******REMOVED***"FieldName": "subscription date",
+***REMOVED******REMOVED***"Key": "[subscriptiondate]",
+***REMOVED******REMOVED***"DataType": "Date",
+***REMOVED******REMOVED***"FieldOptions": []
+***REMOVED***}
+]

@@ -1,0 +1,18 @@
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "bouncedsubscriber@example.com",
+***REMOVED******REMOVED******REMOVED***"Name": "Bounced One",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:11:00",
+***REMOVED******REMOVED******REMOVED***"State": "Bounced",
+***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "email",
+***REMOVED***"OrderDirection": "asc",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 1000,
+***REMOVED***"RecordsOnThisPage": 1,
+***REMOVED***"TotalNumberOfRecords": 1,
+***REMOVED***"NumberOfPages": 1
+}
