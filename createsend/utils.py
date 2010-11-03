@@ -2,16 +2,11 @@
 import json
 
 def json_to_py(j):
-***REMOVED***
-***REMOVED***print j
-***REMOVED***
 ***REMOVED***o = json.loads(j)
 ***REMOVED***if isinstance(o, dict):
 ***REMOVED***	return dict_to_object(o)
-***REMOVED***elif isinstance(o, list):
-***REMOVED******REMOVED***return dict_to_object({ "response": o }).response
 ***REMOVED***else:
-***REMOVED******REMOVED***raise Exception("Sorry, can't process that type.")
+***REMOVED******REMOVED***return dict_to_object({ "response": o }).response
 
 def dict_to_object(d):
 	"""Recursively converts a dict to an object"""
@@ -26,7 +21,10 @@ def dict_to_object(d):
 	***REMOVED******REMOVED***setattr(top, i, j)
 	return top
 
-def get_fake_opener(filename):
-***REMOVED***def fake_opener():
-***REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), filename))
-***REMOVED***return fake_opener
+def get_faker(filename):
+***REMOVED***class Faker(object):
+***REMOVED******REMOVED***def __init__(self, filename):
+***REMOVED******REMOVED******REMOVED***self.filename = filename
+***REMOVED******REMOVED***def open(self):
+***REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+***REMOVED***return Faker(filename)

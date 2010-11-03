@@ -1,14 +1,15 @@
 import urllib
 import urllib2
+import httplib
 import base64
-default_opener = urllib2.urlopen
-from utils import json_to_py, get_fake_opener
+from urlparse import urlparse
+from utils import json_to_py, get_faker
 
 class CreateSendError(Exception):
 ***REMOVED***def __init__(self, data):
 ***REMOVED******REMOVED***self.data = data
 ***REMOVED***def __str__(self):
-***REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s" % (data.Code, data.Message)
+***REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s" % (self.data.Code, self.data.Message)
 
 class ClientError(Exception): pass
 class ServerError(Exception): pass
@@ -18,48 +19,61 @@ class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
 class CreateSendBase(object):
-***REMOVED***def __init__(self, opener=default_opener):
+***REMOVED***def __init__(self):
 ***REMOVED******REMOVED***self.fake_web = False
-***REMOVED******REMOVED***self.opener = opener
 
 ***REMOVED***def stub_request(self, filename):
 ***REMOVED******REMOVED***self.fake_web = True
-***REMOVED******REMOVED***self.opener = get_fake_opener(filename) if filename else None
-***REMOVED******REMOVED***self.fake_web_filename = filename
+***REMOVED******REMOVED***self.faker = get_faker(filename) if filename else None
 
-***REMOVED***def make_request(self, path, username=None, password=None):
+***REMOVED***def make_request(self, method, path, params={}, body="", username=None, password=None):
 ***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
-***REMOVED******REMOVED***self.opener should be set to return the contents of a fixture file."""
+***REMOVED******REMOVED***self.faker should be set."""
 ***REMOVED******REMOVED***if self.fake_web:
-***REMOVED******REMOVED******REMOVED***return self.opener().read()
+***REMOVED******REMOVED******REMOVED***return self.faker.open() if self.faker else ''
 
+***REMOVED******REMOVED***headers = { 'User-Agent': 'createsend-python', 'Content-Type': 'application/json' }
 ***REMOVED******REMOVED***"""username and password should only be set when it is intended that
 ***REMOVED******REMOVED***the default basic authentication mechanism using the API key be 
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
-***REMOVED******REMOVED***r = urllib2.Request("%s%s" % (CreateSend.base_uri, path))
 ***REMOVED******REMOVED***if username and password:
-***REMOVED******REMOVED******REMOVED***r.add_header('Authorization', "Basic %s" % base64.b64encode("%s:%s" % (username, password)))
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
 ***REMOVED******REMOVED***else:
-***REMOVED******REMOVED******REMOVED***r.add_header('Authorization', "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key))
-***REMOVED******REMOVED***# TODO: Include version in user agent
-***REMOVED******REMOVED***r.add_header('User-Agent', "createsend-python")
-***REMOVED******REMOVED***r.add_header('Content-Type', 'application/json')
-***REMOVED******REMOVED***return self.opener(r).read()
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
+***REMOVED******REMOVED***parsed_url = urlparse(CreateSend.base_uri)
+***REMOVED******REMOVED***c = httplib.HTTPConnection(parsed_url.netloc)
+***REMOVED******REMOVED***c.request(method, parsed_url.path + path, body, headers)
+***REMOVED******REMOVED***response = c.getresponse()
+***REMOVED******REMOVED***data = response.read()
+***REMOVED******REMOVED***c.close()
+***REMOVED******REMOVED***return self.handle_response(response.status, data)
 
-***REMOVED***def get(self, path, username=None, password=None):
-***REMOVED******REMOVED***return self.make_request(path, username, password)
+***REMOVED***def handle_response(self, status, data):
+***REMOVED******REMOVED***if status == 400:
+***REMOVED******REMOVED******REMOVED***raise BadRequest(json_to_py(data))
+***REMOVED******REMOVED***elif status == 401:
+***REMOVED******REMOVED******REMOVED***raise Unauthorized()
+***REMOVED******REMOVED***elif status == 404:
+***REMOVED******REMOVED******REMOVED***raise NotFound()
+***REMOVED******REMOVED***elif status in range(400, 501):
+***REMOVED******REMOVED******REMOVED***raise ClientError()
+***REMOVED******REMOVED***elif status in range(500, 601):
+***REMOVED******REMOVED******REMOVED***raise ServerError()
+***REMOVED******REMOVED***return data
 
-***REMOVED***def post(self, path):
-***REMOVED******REMOVED***# TODO: Implement
-***REMOVED******REMOVED***return {}
+***REMOVED***def get(self, path, params={}, username=None, password=None):
+***REMOVED******REMOVED***return self.make_request(path=path, method="GET", params=params, username=username, password=password)
+
+***REMOVED***def post(self, path, body=""):
+***REMOVED******REMOVED***return self.make_request(path=path, method="POST", params={}, body=body)
 
 ***REMOVED***def put(self, path):
 ***REMOVED******REMOVED***# TODO: Implement
-***REMOVED******REMOVED***return {}
+***REMOVED******REMOVED***return ""
 
 ***REMOVED***def delete(self, path):
 ***REMOVED******REMOVED***# TODO: Implement
-***REMOVED******REMOVED***return {}
+***REMOVED******REMOVED***return ""
 
 class CreateSend(CreateSendBase):
 ***REMOVED***base_uri = "http://api.createsend.com/api/v3"
