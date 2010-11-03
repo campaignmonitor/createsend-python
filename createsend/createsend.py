@@ -40,13 +40,19 @@ class CreateSendBase(object):
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
     else:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
-    parsed_url = urlparse(CreateSend.base_uri)
-    c = httplib.HTTPConnection(parsed_url.netloc)
-    c.request(method, parsed_url.path + path, body, headers)
+    parsed_base_uri = urlparse(CreateSend.base_uri)
+    c = httplib.HTTPConnection(parsed_base_uri.netloc)
+    c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
     data = response.read()
     c.close()
     return self.handle_response(response.status, data)
+
+  def build_url(self, parsed_base_uri, path, params):
+    url = parsed_base_uri.path + path
+    if params and len(params) > 0:
+      url = (url + "?%s" % urllib.urlencode(params))
+    return url
 
   def handle_response(self, status, data):
     if status == 400:

@@ -10,7 +10,7 @@ def json_to_py(j):
 
 def dict_to_object(d):
 	"""Recursively converts a dict to an object"""
-	top = type('new', (object,), d)
+	top = type('CreateSendModel', (object,), d)
 	seqs = tuple, list, set, frozenset
 	for i, j in d.items():
 	  if isinstance(j, dict):
