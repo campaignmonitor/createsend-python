@@ -2,16 +2,11 @@ import os
 import json
 
 def json_to_py(j):
-  
-  print j
-  
   o = json.loads(j)
   if isinstance(o, dict):
   	return dict_to_object(o)
-  elif isinstance(o, list):
-    return dict_to_object({ "response": o }).response
   else:
-    raise Exception("Sorry, can't process that type.")
+    return dict_to_object({ "response": o }).response
 
 def dict_to_object(d):
 	"""Recursively converts a dict to an object"""
@@ -26,7 +21,10 @@ def dict_to_object(d):
 	    setattr(top, i, j)
 	return top
 
-def get_fake_opener(filename):
-  def fake_opener():
-    return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), filename))
-  return fake_opener
+def get_faker(filename):
+  class Faker(object):
+    def __init__(self, filename):
+      self.filename = filename
+    def open(self):
+      return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+  return Faker(filename)
