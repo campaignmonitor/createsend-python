@@ -40,13 +40,19 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
 ***REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
-***REMOVED******REMOVED***parsed_url = urlparse(CreateSend.base_uri)
-***REMOVED******REMOVED***c = httplib.HTTPConnection(parsed_url.netloc)
-***REMOVED******REMOVED***c.request(method, parsed_url.path + path, body, headers)
+***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri)
+***REMOVED******REMOVED***c = httplib.HTTPConnection(parsed_base_uri.netloc)
+***REMOVED******REMOVED***c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
 ***REMOVED******REMOVED***response = c.getresponse()
 ***REMOVED******REMOVED***data = response.read()
 ***REMOVED******REMOVED***c.close()
 ***REMOVED******REMOVED***return self.handle_response(response.status, data)
+
+***REMOVED***def build_url(self, parsed_base_uri, path, params):
+***REMOVED******REMOVED***url = parsed_base_uri.path + path
+***REMOVED******REMOVED***if params and len(params) > 0:
+***REMOVED******REMOVED******REMOVED***url = (url + "?%s" % urllib.urlencode(params))
+***REMOVED******REMOVED***return url
 
 ***REMOVED***def handle_response(self, status, data):
 ***REMOVED******REMOVED***if status == 400:
