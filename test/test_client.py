@@ -5,7 +5,7 @@ from createsend import Client
 class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cl = Client()
+***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***self.cl.stub_request("create_client.json")
