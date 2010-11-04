@@ -2,7 +2,7 @@ import unittest
 
 from createsend import Client
 
-class CreateSendTestCase(unittest.TestCase):
+class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.cl = Client()
@@ -56,7 +56,7 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(segments[0].SegmentID, '46aa5e01fd43381863d4e42cf277d3a9')
 ***REMOVED******REMOVED***self.assertEquals(segments[0].Title, 'Segment One')
 
-***REMOVED***def test_suppressoinlist(self):
+***REMOVED***def test_suppressionlist(self):
 ***REMOVED******REMOVED***self.cl.stub_request("suppressionlist.json")
 ***REMOVED******REMOVED***res = self.cl.suppressionlist()
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -70,3 +70,30 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "example+1@example.com")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Suppressed")
+
+***REMOVED***def test_templates(self):
+***REMOVED******REMOVED***self.cl.stub_request("templates.json")
+***REMOVED******REMOVED***templates = self.cl.templates()
+***REMOVED******REMOVED***self.assertEquals(len(templates), 2)
+***REMOVED******REMOVED***self.assertEquals(templates[0].TemplateID, '5cac213cf061dd4e008de5a82b7a3621')
+***REMOVED******REMOVED***self.assertEquals(templates[0].Name, 'Template One')
+
+***REMOVED***def test_set_basics(self):
+***REMOVED******REMOVED***self.cl.stub_request(None)
+***REMOVED******REMOVED***self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_set_access(self):
+***REMOVED******REMOVED***self.cl.stub_request(None)
+***REMOVED******REMOVED***self.cl.set_access("username", "password", 321)
+
+***REMOVED***def test_set_payg_billing(self):
+***REMOVED******REMOVED***self.cl.stub_request(None)
+***REMOVED******REMOVED***self.cl.set_payg_billing("CAD", True, True, 150)
+
+***REMOVED***def test_set_monthly_billing(self):
+***REMOVED******REMOVED***self.cl.stub_request(None)
+***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, True, 150)
+
+***REMOVED***def test_delete(self):
+***REMOVED******REMOVED***self.cl.stub_request(None)
+***REMOVED******REMOVED***self.cl.delete()

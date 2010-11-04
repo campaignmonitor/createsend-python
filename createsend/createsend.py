@@ -67,19 +67,17 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***raise ServerError()
 ***REMOVED******REMOVED***return data
 
-***REMOVED***def get(self, path, params={}, username=None, password=None):
+***REMOVED***def _get(self, path, params={}, username=None, password=None):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
-***REMOVED***def post(self, path, body=""):
-***REMOVED******REMOVED***return self.make_request(path=path, method="POST", params={}, body=body)
+***REMOVED***def _post(self, path, body=""):
+***REMOVED******REMOVED***return self.make_request(path=path, method="POST", body=body)
 
-***REMOVED***def put(self, path):
-***REMOVED******REMOVED***# TODO: Implement
-***REMOVED******REMOVED***return ""
+***REMOVED***def _put(self, path, body=""):
+***REMOVED******REMOVED***return self.make_request(path=path, method="PUT", body=body)
 
-***REMOVED***def delete(self, path):
-***REMOVED******REMOVED***# TODO: Implement
-***REMOVED******REMOVED***return ""
+***REMOVED***def _delete(self, path):
+***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE")
 
 class CreateSend(CreateSendBase):
 ***REMOVED***base_uri = "http://api.createsend.com/api/v3"
@@ -88,21 +86,21 @@ class CreateSend(CreateSendBase):
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***site_url = urllib.quote(site_url, '')
 ***REMOVED******REMOVED***# The only case in which username and password are passed to self.get
-***REMOVED******REMOVED***response = self.get("/apikey.json?SiteUrl=%s" % site_url, username, password)
+***REMOVED******REMOVED***response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
 ***REMOVED******REMOVED***return json_to_py(response).ApiKey
 
 ***REMOVED***def clients(self):
-***REMOVED******REMOVED***response = self.get('/clients.json')
+***REMOVED******REMOVED***response = self._get('/clients.json')
 ***REMOVED******REMOVED***return json_to_py(response)
 ***REMOVED******REMOVED***
 ***REMOVED***def countries(self):
-***REMOVED******REMOVED***response = self.get('/countries.json')
+***REMOVED******REMOVED***response = self._get('/countries.json')
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def systemdate(self):
-***REMOVED******REMOVED***response = self.get('/systemdate.json')
+***REMOVED******REMOVED***response = self._get('/systemdate.json')
 ***REMOVED******REMOVED***return json_to_py(response).SystemDate
 
 ***REMOVED***def timezones(self):
-***REMOVED******REMOVED***response = self.get('/timezones.json')
+***REMOVED******REMOVED***response = self._get('/timezones.json')
 ***REMOVED******REMOVED***return json_to_py(response)
