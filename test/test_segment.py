@@ -5,8 +5,8 @@ from createsend import Segment
 class SegmentTestCase(unittest.TestCase):
 
   def setUp(self):
-    self.list_id = "98y2e98y289dh89h938389"
-    self.segment = Segment(self.list_id)
+    self.segment_id = "98y2e98y289dh89h938389"
+    self.segment = Segment(self.segment_id)
 
   def test_subscribers(self):
     min_date = "2010-01-01"
