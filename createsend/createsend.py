@@ -67,19 +67,17 @@ class CreateSendBase(object):
       raise ServerError()
     return data
 
-  def get(self, path, params={}, username=None, password=None):
+  def _get(self, path, params={}, username=None, password=None):
     return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
-  def post(self, path, body=""):
-    return self.make_request(path=path, method="POST", params={}, body=body)
+  def _post(self, path, body=""):
+    return self.make_request(path=path, method="POST", body=body)
 
-  def put(self, path):
-    # TODO: Implement
-    return ""
+  def _put(self, path, body=""):
+    return self.make_request(path=path, method="PUT", body=body)
 
-  def delete(self, path):
-    # TODO: Implement
-    return ""
+  def _delete(self, path):
+    return self.make_request(path=path, method="DELETE")
 
 class CreateSend(CreateSendBase):
   base_uri = "http://api.createsend.com/api/v3"
@@ -88,21 +86,21 @@ class CreateSend(CreateSendBase):
   def apikey(self, site_url, username, password):
     site_url = urllib.quote(site_url, '')
     # The only case in which username and password are passed to self.get
-    response = self.get("/apikey.json?SiteUrl=%s" % site_url, username, password)
+    response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
     return json_to_py(response).ApiKey
 
   def clients(self):
-    response = self.get('/clients.json')
+    response = self._get('/clients.json')
     return json_to_py(response)
     
   def countries(self):
-    response = self.get('/countries.json')
+    response = self._get('/countries.json')
     return json_to_py(response)
 
   def systemdate(self):
-    response = self.get('/systemdate.json')
+    response = self._get('/systemdate.json')
     return json_to_py(response).SystemDate
 
   def timezones(self):
-    response = self.get('/timezones.json')
+    response = self._get('/timezones.json')
     return json_to_py(response)

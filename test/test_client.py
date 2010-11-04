@@ -2,7 +2,7 @@ import unittest
 
 from createsend import Client
 
-class CreateSendTestCase(unittest.TestCase):
+class ClientTestCase(unittest.TestCase):
 
   def setUp(self):
     self.cl = Client()
@@ -56,7 +56,7 @@ class CreateSendTestCase(unittest.TestCase):
     self.assertEquals(segments[0].SegmentID, '46aa5e01fd43381863d4e42cf277d3a9')
     self.assertEquals(segments[0].Title, 'Segment One')
 
-  def test_suppressoinlist(self):
+  def test_suppressionlist(self):
     self.cl.stub_request("suppressionlist.json")
     res = self.cl.suppressionlist()
     self.assertEquals(res.ResultsOrderedBy, "email")
@@ -70,3 +70,30 @@ class CreateSendTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].EmailAddress, "example+1@example.com")
     self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
     self.assertEquals(res.Results[0].State, "Suppressed")
+
+  def test_templates(self):
+    self.cl.stub_request("templates.json")
+    templates = self.cl.templates()
+    self.assertEquals(len(templates), 2)
+    self.assertEquals(templates[0].TemplateID, '5cac213cf061dd4e008de5a82b7a3621')
+    self.assertEquals(templates[0].Name, 'Template One')
+
+  def test_set_basics(self):
+    self.cl.stub_request(None)
+    self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_set_access(self):
+    self.cl.stub_request(None)
+    self.cl.set_access("username", "password", 321)
+
+  def test_set_payg_billing(self):
+    self.cl.stub_request(None)
+    self.cl.set_payg_billing("CAD", True, True, 150)
+
+  def test_set_monthly_billing(self):
+    self.cl.stub_request(None)
+    self.cl.set_monthly_billing("CAD", True, True, 150)
+
+  def test_delete(self):
+    self.cl.stub_request(None)
+    self.cl.delete()
