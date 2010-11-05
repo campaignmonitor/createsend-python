@@ -1,0 +1,91 @@
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t0@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t10@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t100@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1000@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1001@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1002@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1003@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1004@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1005@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1006@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1007@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1008@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1009@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t101@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1010@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1011@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1012@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1013@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6g76t7t1014@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "a994a3caf1328a16af9a69a730eaa706"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "email",
+***REMOVED***"OrderDirection": "asc",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 20,
+***REMOVED***"RecordsOnThisPage": 20,
+***REMOVED***"TotalNumberOfRecords": 2200,
+***REMOVED***"NumberOfPages": 110
+}
