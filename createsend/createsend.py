@@ -5,6 +5,9 @@ import base64
 from urlparse import urlparse
 from utils import json_to_py, get_faker
 
+__version_info__ = ('0', '0', '1')
+__version__ = '.'.join(__version_info__)
+
 class CreateSendError(Exception):
   def __init__(self, data):
     self.data = data
@@ -32,7 +35,7 @@ class CreateSendBase(object):
     if self.fake_web:
       return self.faker.open() if self.faker else ''
 
-    headers = { 'User-Agent': 'createsend-python', 'Content-Type': 'application/json' }
+    headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
     """username and password should only be set when it is intended that
     the default basic authentication mechanism using the API key be 
     overridden (e.g. when using the apikey route with username and password)."""
