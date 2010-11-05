@@ -1,11 +1,17 @@
 import unittest
 
-from createsend import CreateSend
+from createsend import *
 
 class CreateSendTestCase(unittest.TestCase):
 
   def setUp(self):
     self.cs = CreateSend()
+    # Mapping of http status codes to the exceptions expected to be raised
+    self.error_responses = {
+      400: BadRequest,
+      401: Unauthorized,
+      404: NotFound,
+      500: ServerError }
 
   def test_apikey(self):
     self.cs.stub_request("apikey.json")
@@ -38,3 +44,29 @@ class CreateSendTestCase(unittest.TestCase):
     timezones = self.cs.timezones()
     self.assertEquals(97, len(timezones))
     self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+
+  # Test that the corresponding exceptions are raised according to the returned http status code
+  def test_errors_on_get(self):
+    for (status, exception) in self.error_responses.items():
+      self.cs.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+      self.assertRaises(exception, self.cs.countries)
+
+  def test_errors_on_post(self):
+    for (status, exception) in self.error_responses.items():
+      client = Client("uhiuhiuhiuhiuhiuhiuh")
+      client.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+      self.assertRaises(exception, client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+        "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_errors_on_put(self):
+    for (status, exception) in self.error_responses.items():
+      template = Template("uhiuhiuhiuhiuhiuhiuh")
+      template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+      self.assertRaises(exception, template.update, "Template One Updated", "http://templates.org/index.html", 
+        "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+  
+  def test_errors_on_delete(self):
+    for (status, exception) in self.error_responses.items():
+      template = Template("uhiuhiuhiuhiuhiuhiuh")
+      template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+      self.assertRaises(exception, template.delete)

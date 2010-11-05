@@ -25,15 +25,17 @@ class CreateSendBase(object):
   def __init__(self):
     self.fake_web = False
 
-  def stub_request(self, filename):
+  def stub_request(self, filename, status=None):
     self.fake_web = True
-    self.faker = get_faker(filename) if filename else None
+    self.faker = get_faker(filename, status)
 
   def make_request(self, method, path, params={}, body="", username=None, password=None):
     """If in fake web mode (i.e. self.stub_request has been called), 
     self.faker should be set."""
     if self.fake_web:
-      return self.faker.open() if self.faker else ''
+      data = self.faker.open() if self.faker else ''
+      status = self.faker.status if (self.faker and self.faker.status) else 200
+      return self.handle_response(status, data)
 
     headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
     """username and password should only be set when it is intended that
@@ -64,9 +66,9 @@ class CreateSendBase(object):
       raise Unauthorized()
     elif status == 404:
       raise NotFound()
-    elif status in range(400, 501):
+    elif status in range(400, 500):
       raise ClientError()
-    elif status in range(500, 601):
+    elif status in range(500, 600):
       raise ServerError()
     return data
 

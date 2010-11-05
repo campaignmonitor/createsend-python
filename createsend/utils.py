@@ -21,10 +21,14 @@ def dict_to_object(d):
 	    setattr(top, i, j)
 	return top
 
-def get_faker(filename):
+def get_faker(filename, status=None):
   class Faker(object):
-    def __init__(self, filename):
+    def __init__(self, filename, status):
       self.filename = filename
+      self.status = status
     def open(self):
-      return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
-  return Faker(filename)
+      if self.filename:
+        return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+      else:
+        return ''
+  return Faker(filename, status)
