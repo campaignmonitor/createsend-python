@@ -4,9 +4,7 @@ A python wrapper for the createsend API v3.
 
 ## Installation
 
-    git clone git://github.com/jdennes/createsend-python.git
-    cd createsend-python
-    python setup.py install
+    pip install -e git+http://github.com/jdennes/createsend-python.git#egg=createsend
 
 ## Example
 
