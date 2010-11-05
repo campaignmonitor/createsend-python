@@ -1,5 +1,5 @@
 from createsend import __version__
-from createsend import CreateSend
+***REMOVED***
 from client import Client
 from template import Template
 from list import List

@@ -21,10 +21,14 @@ def dict_to_object(d):
 	***REMOVED******REMOVED***setattr(top, i, j)
 	return top
 
-def get_faker(filename):
+def get_faker(filename, status=None):
 ***REMOVED***class Faker(object):
-***REMOVED******REMOVED***def __init__(self, filename):
+***REMOVED******REMOVED***def __init__(self, filename, status):
 ***REMOVED******REMOVED******REMOVED***self.filename = filename
+***REMOVED******REMOVED******REMOVED***self.status = status
 ***REMOVED******REMOVED***def open(self):
-***REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
-***REMOVED***return Faker(filename)
+***REMOVED******REMOVED******REMOVED***if self.filename:
+***REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+***REMOVED******REMOVED******REMOVED***else:
+***REMOVED******REMOVED******REMOVED******REMOVED***return ''
+***REMOVED***return Faker(filename, status)

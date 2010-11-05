@@ -25,15 +25,17 @@ class CreateSendBase(object):
 ***REMOVED***def __init__(self):
 ***REMOVED******REMOVED***self.fake_web = False
 
-***REMOVED***def stub_request(self, filename):
+***REMOVED***def stub_request(self, filename, status=None):
 ***REMOVED******REMOVED***self.fake_web = True
-***REMOVED******REMOVED***self.faker = get_faker(filename) if filename else None
+***REMOVED******REMOVED***self.faker = get_faker(filename, status)
 
 ***REMOVED***def make_request(self, method, path, params={}, body="", username=None, password=None):
 ***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
 ***REMOVED******REMOVED***self.faker should be set."""
 ***REMOVED******REMOVED***if self.fake_web:
-***REMOVED******REMOVED******REMOVED***return self.faker.open() if self.faker else ''
+***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
+***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
+***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
 
 ***REMOVED******REMOVED***headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
 ***REMOVED******REMOVED***"""username and password should only be set when it is intended that
@@ -64,9 +66,9 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***raise Unauthorized()
 ***REMOVED******REMOVED***elif status == 404:
 ***REMOVED******REMOVED******REMOVED***raise NotFound()
-***REMOVED******REMOVED***elif status in range(400, 501):
+***REMOVED******REMOVED***elif status in range(400, 500):
 ***REMOVED******REMOVED******REMOVED***raise ClientError()
-***REMOVED******REMOVED***elif status in range(500, 601):
+***REMOVED******REMOVED***elif status in range(500, 600):
 ***REMOVED******REMOVED******REMOVED***raise ServerError()
 ***REMOVED******REMOVED***return data
 

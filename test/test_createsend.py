@@ -1,11 +1,17 @@
 import unittest
 
-from createsend import CreateSend
+***REMOVED***
 
 class CreateSendTestCase(unittest.TestCase):
 
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.cs = CreateSend()
+***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
+***REMOVED******REMOVED***self.error_responses = {
+***REMOVED******REMOVED******REMOVED***400: BadRequest,
+***REMOVED******REMOVED******REMOVED***401: Unauthorized,
+***REMOVED******REMOVED******REMOVED***404: NotFound,
+***REMOVED******REMOVED******REMOVED***500: ServerError }
 
 ***REMOVED***def test_apikey(self):
 ***REMOVED******REMOVED***self.cs.stub_request("apikey.json")
@@ -38,3 +44,29 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***timezones = self.cs.timezones()
 ***REMOVED******REMOVED***self.assertEquals(97, len(timezones))
 ***REMOVED******REMOVED***self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+
+***REMOVED***# Test that the corresponding exceptions are raised according to the returned http status code
+***REMOVED***def test_errors_on_get(self):
+***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
+***REMOVED******REMOVED******REMOVED***self.cs.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, self.cs.countries)
+
+***REMOVED***def test_errors_on_post(self):
+***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
+***REMOVED******REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED******REMOVED***client.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_errors_on_put(self):
+***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
+***REMOVED******REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED******REMOVED***template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, template.update, "Template One Updated", "http://templates.org/index.html", 
+***REMOVED******REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+***REMOVED***
+***REMOVED***def test_errors_on_delete(self):
+***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
+***REMOVED******REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED******REMOVED***template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
+***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, template.delete)
