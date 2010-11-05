@@ -2,6 +2,12 @@
 
 A python wrapper for the createsend API v3.
 
+## Installation
+
+    git clone git://github.com/jdennes/createsend-python.git
+    cd createsend-python
+    python setup.py install
+
 ## Example
 
     from createsend import *
