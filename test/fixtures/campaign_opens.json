@@ -32,7 +32,7 @@
 ***REMOVED******REMOVED***}
 ***REMOVED***],
 ***REMOVED***"ResultsOrderedBy": "date",
-***REMOVED***"OrderDirection": "desc",
+***REMOVED***"OrderDirection": "asc",
 ***REMOVED***"PageNumber": 1,
 ***REMOVED***"PageSize": 1000,
 ***REMOVED***"RecordsOnThisPage": 5,
