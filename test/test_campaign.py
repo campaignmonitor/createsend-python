@@ -39,16 +39,16 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://clientone.createsend.com/t/ViewEmail/r/3A433FC72FFE3B8B/C67FD2F38AC4859C/")
 
-***REMOVED***def test_lists(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_lists.json")
-***REMOVED******REMOVED***lists = self.campaign.lists()
-***REMOVED******REMOVED***self.assertEquals(len(lists), 2)
-***REMOVED******REMOVED***self.assertEquals(lists[0].Name, "List One")
-***REMOVED******REMOVED***self.assertEquals(lists[0].ListID, "a58ee1d3039b8bec838e6d1482a8a965")
-
-***REMOVED***# TODO: Add this test once segments has been implemented
-***REMOVED***# def test_segments(self):
-***REMOVED***#***REMOVED*** pass
+***REMOVED***def test_lists_and_segments(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaign_listsandsegments.json")
+***REMOVED******REMOVED***ls = self.campaign.lists_and_segments()
+***REMOVED******REMOVED***self.assertEquals(len(ls.Lists), 1)
+***REMOVED******REMOVED***self.assertEquals(len(ls.Segments), 1)
+***REMOVED******REMOVED***self.assertEquals(ls.Lists[0].Name, "List One")
+***REMOVED******REMOVED***self.assertEquals(ls.Lists[0].ListID, "a58ee1d3039b8bec838e6d1482a8a965")
+***REMOVED******REMOVED***self.assertEquals(ls.Segments[0].Title, "Segment for campaign")
+***REMOVED******REMOVED***self.assertEquals(ls.Segments[0].ListID, "2bea949d0bf96148c3e6a209d2e82060")
+***REMOVED******REMOVED***self.assertEquals(ls.Segments[0].SegmentID, "dba84a225d5ce3d19105d7257baac46f")
 
 ***REMOVED***def test_recipients(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaign_recipients.json")

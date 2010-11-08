@@ -42,13 +42,9 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("summary"))
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def lists(self):
-***REMOVED******REMOVED***response = self._get(self.uri_for("lists"))
+***REMOVED***def lists_and_segments(self):
+***REMOVED******REMOVED***response = self._get(self.uri_for("listsandsegments"))
 ***REMOVED******REMOVED***return json_to_py(response)
-
-***REMOVED***def segments(self):
-***REMOVED******REMOVED***# TODO: This needs to be implemented
-***REMOVED******REMOVED***return []
 
 ***REMOVED***def recipients(self, page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***params = { 
