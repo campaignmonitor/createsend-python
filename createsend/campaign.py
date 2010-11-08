@@ -55,23 +55,43 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("recipients"), params=params)
     return json_to_py(response)
 
-  def opens(self, date):
-    params = { "date": date }
+  def opens(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    params = { 
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
     response = self._get(self.uri_for("opens"), params=params)
     return json_to_py(response)
 
-  def clicks(self, date):
-    params = { "date": date }
+  def clicks(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    params = { 
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
     response = self._get(self.uri_for("clicks"), params=params)
     return json_to_py(response)
 
-  def unsubscribes(self, date):
-    params = { "date": date }
+  def unsubscribes(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    params = { 
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
     response = self._get(self.uri_for("unsubscribes"), params=params)
     return json_to_py(response)
 
-  def bounces(self):
-    response = self._get(self.uri_for("bounces"))
+  def bounces(self, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    params = { 
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
+    response = self._get(self.uri_for("bounces"), params=params)
     return json_to_py(response)
 
   def uri_for(self, action):
