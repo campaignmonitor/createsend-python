@@ -39,16 +39,16 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.UniqueOpened, 5)
     self.assertEquals(summary.WebVersionURL, "http://clientone.createsend.com/t/ViewEmail/r/3A433FC72FFE3B8B/C67FD2F38AC4859C/")
 
-  def test_lists(self):
-    self.campaign.stub_request("campaign_lists.json")
-    lists = self.campaign.lists()
-    self.assertEquals(len(lists), 2)
-    self.assertEquals(lists[0].Name, "List One")
-    self.assertEquals(lists[0].ListID, "a58ee1d3039b8bec838e6d1482a8a965")
-
-  # TODO: Add this test once segments has been implemented
-  # def test_segments(self):
-  #   pass
+  def test_lists_and_segments(self):
+    self.campaign.stub_request("campaign_listsandsegments.json")
+    ls = self.campaign.lists_and_segments()
+    self.assertEquals(len(ls.Lists), 1)
+    self.assertEquals(len(ls.Segments), 1)
+    self.assertEquals(ls.Lists[0].Name, "List One")
+    self.assertEquals(ls.Lists[0].ListID, "a58ee1d3039b8bec838e6d1482a8a965")
+    self.assertEquals(ls.Segments[0].Title, "Segment for campaign")
+    self.assertEquals(ls.Segments[0].ListID, "2bea949d0bf96148c3e6a209d2e82060")
+    self.assertEquals(ls.Segments[0].SegmentID, "dba84a225d5ce3d19105d7257baac46f")
 
   def test_recipients(self):
     self.campaign.stub_request("campaign_recipients.json")

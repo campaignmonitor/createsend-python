@@ -42,13 +42,9 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("summary"))
     return json_to_py(response)
 
-  def lists(self):
-    response = self._get(self.uri_for("lists"))
+  def lists_and_segments(self):
+    response = self._get(self.uri_for("listsandsegments"))
     return json_to_py(response)
-
-  def segments(self):
-    # TODO: This needs to be implemented
-    return []
 
   def recipients(self, page=1, page_size=1000, order_field="email", order_direction="asc"):
     params = { 
