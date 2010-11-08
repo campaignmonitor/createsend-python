@@ -16,7 +16,7 @@
     }
   ],
   "ResultsOrderedBy": "date",
-  "OrderDirection": "desc",
+  "OrderDirection": "asc",
   "PageNumber": 1,
   "PageSize": 1000,
   "RecordsOnThisPage": 2,
