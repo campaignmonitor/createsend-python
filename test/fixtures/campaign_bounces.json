@@ -1,16 +1,25 @@
-[
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "asdf@softbouncemyemail.com",
-***REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
-***REMOVED******REMOVED***"BounceType": "Soft",
-***REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
-***REMOVED******REMOVED***"Reason": "Bounce - But No Email Address Returned "
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "asdf@hardbouncemyemail.com",
-***REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
-***REMOVED******REMOVED***"BounceType": "Soft",
-***REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
-***REMOVED******REMOVED***"Reason": "Soft Bounce - General"
-***REMOVED***}
-]
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@softbouncemyemail.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
+***REMOVED******REMOVED******REMOVED***"BounceType": "Soft",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
+***REMOVED******REMOVED******REMOVED***"Reason": "Bounce - But No Email Address Returned "
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@hardbouncemyemail.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "654523a5855b4a440bae3fb295641546",
+***REMOVED******REMOVED******REMOVED***"BounceType": "Soft",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-07-02 16:46:00",
+***REMOVED******REMOVED******REMOVED***"Reason": "Soft Bounce - General"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "date",
+***REMOVED***"OrderDirection": "desc",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 1000,
+***REMOVED***"RecordsOnThisPage": 2,
+***REMOVED***"TotalNumberOfRecords": 2,
+***REMOVED***"NumberOfPages": 1
+}

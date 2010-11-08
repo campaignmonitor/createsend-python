@@ -55,23 +55,43 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("recipients"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def opens(self, date):
-***REMOVED******REMOVED***params = { "date": date }
+***REMOVED***def opens(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED******REMOVED***params = { 
+***REMOVED******REMOVED******REMOVED***"date": date,
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
 ***REMOVED******REMOVED***response = self._get(self.uri_for("opens"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def clicks(self, date):
-***REMOVED******REMOVED***params = { "date": date }
+***REMOVED***def clicks(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED******REMOVED***params = { 
+***REMOVED******REMOVED******REMOVED***"date": date,
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
 ***REMOVED******REMOVED***response = self._get(self.uri_for("clicks"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def unsubscribes(self, date):
-***REMOVED******REMOVED***params = { "date": date }
+***REMOVED***def unsubscribes(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED******REMOVED***params = { 
+***REMOVED******REMOVED******REMOVED***"date": date,
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribes"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def bounces(self):
-***REMOVED******REMOVED***response = self._get(self.uri_for("bounces"))
+***REMOVED***def bounces(self, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED******REMOVED***params = { 
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
+***REMOVED******REMOVED***response = self._get(self.uri_for("bounces"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def uri_for(self, action):

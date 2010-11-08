@@ -1,23 +1,32 @@
-[
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"URL": "http://video.google.com.au/?hl=en&tab=wv",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"URL": "http://mail.google.com/mail/?hl=en&tab=wm",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"URL": "http://mail.google.com/mail/?hl=en&tab=wm",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-06 17:24:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***}
-]
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"URL": "http://video.google.com.au/?hl=en&tab=wv",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"URL": "http://mail.google.com/mail/?hl=en&tab=wm",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"URL": "http://mail.google.com/mail/?hl=en&tab=wm",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-06 17:24:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "date",
+***REMOVED***"OrderDirection": "desc",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 1000,
+***REMOVED***"RecordsOnThisPage": 3,
+***REMOVED***"TotalNumberOfRecords": 3,
+***REMOVED***"NumberOfPages": 1
+}

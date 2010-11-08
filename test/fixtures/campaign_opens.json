@@ -1,32 +1,41 @@
-[
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-08 14:24:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-07 10:20:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-07 07:15:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
-***REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
-***REMOVED******REMOVED***"Date": "2010-10-07 06:58:00",
-***REMOVED******REMOVED***"IPAddress": "192.168.126.87"
-***REMOVED***}
-]
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-11 08:29:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-08 14:24:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-07 10:20:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-07 07:15:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+6576576576@example.com",
+***REMOVED******REMOVED******REMOVED***"ListID": "512a3bc577a58fdf689c654329b50fa0",
+***REMOVED******REMOVED******REMOVED***"Date": "2010-10-07 06:58:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "192.168.126.87"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "date",
+***REMOVED***"OrderDirection": "desc",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 1000,
+***REMOVED***"RecordsOnThisPage": 5,
+***REMOVED***"TotalNumberOfRecords": 5,
+***REMOVED***"NumberOfPages": 1
+}
