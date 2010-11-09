@@ -15,11 +15,12 @@ class ClientTestCase(unittest.TestCase):
   def test_details(self):
     self.cl.stub_request("client_details.json")
     cl = self.cl.details()
+    self.assertEquals(cl.ApiKey, "639d8cc27198202f5fe6037a8b17a29a59984b86d3289bc9")
     self.assertEquals(cl.BasicDetails.ClientID, "4a397ccaaa55eb4e6aa1221e1e2d7122")
     self.assertEquals(cl.BasicDetails.ContactName, "Client One (contact)")
     self.assertEquals(cl.AccessDetails.Username, "clientone")
     self.assertEquals(cl.AccessDetails.AccessLevel, 23)
-  
+
   def test_campaigns(self):
     self.cl.stub_request("campaigns.json")
     campaigns = self.cl.campaigns()
