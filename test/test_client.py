@@ -15,11 +15,12 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED***def test_details(self):
 ***REMOVED******REMOVED***self.cl.stub_request("client_details.json")
 ***REMOVED******REMOVED***cl = self.cl.details()
+***REMOVED******REMOVED***self.assertEquals(cl.ApiKey, "639d8cc27198202f5fe6037a8b17a29a59984b86d3289bc9")
 ***REMOVED******REMOVED***self.assertEquals(cl.BasicDetails.ClientID, "4a397ccaaa55eb4e6aa1221e1e2d7122")
 ***REMOVED******REMOVED***self.assertEquals(cl.BasicDetails.ContactName, "Client One (contact)")
 ***REMOVED******REMOVED***self.assertEquals(cl.AccessDetails.Username, "clientone")
 ***REMOVED******REMOVED***self.assertEquals(cl.AccessDetails.AccessLevel, 23)
-***REMOVED***
+
 ***REMOVED***def test_campaigns(self):
 ***REMOVED******REMOVED***self.cl.stub_request("campaigns.json")
 ***REMOVED******REMOVED***campaigns = self.cl.campaigns()
