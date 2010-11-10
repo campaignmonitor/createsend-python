@@ -40,6 +40,6 @@ If the createsend API returns an error, an exception will be thrown. For example
 
 Results in:
 
-***REMOVED******REMOVED******REMOVED***Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
-***REMOVED******REMOVED******REMOVED***Error Code:***REMOVED******REMOVED***304
-***REMOVED******REMOVED******REMOVED***Error Message: Campaign Subject Required
+***REMOVED******REMOVED***Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
+***REMOVED******REMOVED***Error Code:***REMOVED******REMOVED***304
+***REMOVED******REMOVED***Error Message: Campaign Subject Required
