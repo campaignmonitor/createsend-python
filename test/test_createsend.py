@@ -46,27 +46,86 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals("(GMT+12:00) Fiji", timezones[61])
 
 ***REMOVED***# Test that the corresponding exceptions are raised according to the returned http status code
-***REMOVED***def test_errors_on_get(self):
-***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
-***REMOVED******REMOVED******REMOVED***self.cs.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, self.cs.countries)
+***REMOVED***def test_bad_request_on_get(self):
+***REMOVED******REMOVED***self.cs.stub_request('custom_api_error.json', status=400)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], self.cs.countries)
 
-***REMOVED***def test_errors_on_post(self):
-***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
-***REMOVED******REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED******REMOVED***client.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
-***REMOVED******REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+***REMOVED***def test_unauthorized_on_get(self):
+***REMOVED******REMOVED***self.cs.stub_request(None, status=401)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], self.cs.countries)
 
-***REMOVED***def test_errors_on_put(self):
-***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
-***REMOVED******REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED******REMOVED***template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, template.update, "Template One Updated", "http://templates.org/index.html", 
-***REMOVED******REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+***REMOVED***def test_not_found_on_get(self):
+***REMOVED******REMOVED***self.cs.stub_request(None, status=404)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], self.cs.countries)
+
+***REMOVED***def test_server_error_on_get(self):
+***REMOVED******REMOVED***self.cs.stub_request(None, status=500)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], self.cs.countries)
+
+***REMOVED***def test_bad_request_on_post(self):
+***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client.stub_request('custom_api_error.json', status=400)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_unauthorized_on_post(self):
+***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client.stub_request(None, status=401)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_not_found_on_post(self):
+***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client.stub_request(None, status=404)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_server_error_on_post(self):
+***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client.stub_request(None, status=500)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+***REMOVED***def test_bad_request_on_put(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request('custom_api_error.json', status=400)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], template.update, "Template One Updated", "http://templates.org/index.html", 
+***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+***REMOVED***def test_unauthorized_on_put(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=401)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
+***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+***REMOVED***def test_not_found_on_put(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=404)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], template.update, "Template One Updated", "http://templates.org/index.html", 
+***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+***REMOVED***def test_server_error_on_put(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=500)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], template.update, "Template One Updated", "http://templates.org/index.html", 
+***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
 ***REMOVED***
-***REMOVED***def test_errors_on_delete(self):
-***REMOVED******REMOVED***for (status, exception) in self.error_responses.items():
-***REMOVED******REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED******REMOVED***template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-***REMOVED******REMOVED******REMOVED***self.assertRaises(exception, template.delete)
+***REMOVED***def test_bad_request_on_delete(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request('custom_api_error.json', status=400)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], template.delete)
+
+***REMOVED***def test_unauthorized_on_delete(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=401)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.delete)
+
+***REMOVED***def test_not_found_on_delete(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=404)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], template.delete)
+
+***REMOVED***def test_server_error_on_delete(self):
+***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template.stub_request(None, status=500)
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], template.delete)
