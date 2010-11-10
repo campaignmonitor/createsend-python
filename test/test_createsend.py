@@ -46,27 +46,86 @@ class CreateSendTestCase(unittest.TestCase):
     self.assertEquals("(GMT+12:00) Fiji", timezones[61])
 
   # Test that the corresponding exceptions are raised according to the returned http status code
-  def test_errors_on_get(self):
-    for (status, exception) in self.error_responses.items():
-      self.cs.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-      self.assertRaises(exception, self.cs.countries)
+  def test_bad_request_on_get(self):
+    self.cs.stub_request('custom_api_error.json', status=400)
+    self.assertRaises(self.error_responses[400], self.cs.countries)
 
-  def test_errors_on_post(self):
-    for (status, exception) in self.error_responses.items():
-      client = Client("uhiuhiuhiuhiuhiuhiuh")
-      client.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-      self.assertRaises(exception, client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
-        "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+  def test_unauthorized_on_get(self):
+    self.cs.stub_request(None, status=401)
+    self.assertRaises(self.error_responses[401], self.cs.countries)
 
-  def test_errors_on_put(self):
-    for (status, exception) in self.error_responses.items():
-      template = Template("uhiuhiuhiuhiuhiuhiuh")
-      template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-      self.assertRaises(exception, template.update, "Template One Updated", "http://templates.org/index.html", 
-        "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+  def test_not_found_on_get(self):
+    self.cs.stub_request(None, status=404)
+    self.assertRaises(self.error_responses[404], self.cs.countries)
+
+  def test_server_error_on_get(self):
+    self.cs.stub_request(None, status=500)
+    self.assertRaises(self.error_responses[500], self.cs.countries)
+
+  def test_bad_request_on_post(self):
+    client = Client("uhiuhiuhiuhiuhiuhiuh")
+    client.stub_request('custom_api_error.json', status=400)
+    self.assertRaises(self.error_responses[400], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+      "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_unauthorized_on_post(self):
+    client = Client("uhiuhiuhiuhiuhiuhiuh")
+    client.stub_request(None, status=401)
+    self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+      "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_not_found_on_post(self):
+    client = Client("uhiuhiuhiuhiuhiuhiuh")
+    client.stub_request(None, status=404)
+    self.assertRaises(self.error_responses[404], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+      "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_server_error_on_post(self):
+    client = Client("uhiuhiuhiuhiuhiuhiuh")
+    client.stub_request(None, status=500)
+    self.assertRaises(self.error_responses[500], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+      "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_bad_request_on_put(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request('custom_api_error.json', status=400)
+    self.assertRaises(self.error_responses[400], template.update, "Template One Updated", "http://templates.org/index.html", 
+      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+  def test_unauthorized_on_put(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=401)
+    self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
+      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+  def test_not_found_on_put(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=404)
+    self.assertRaises(self.error_responses[404], template.update, "Template One Updated", "http://templates.org/index.html", 
+      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+
+  def test_server_error_on_put(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=500)
+    self.assertRaises(self.error_responses[500], template.update, "Template One Updated", "http://templates.org/index.html", 
+      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
   
-  def test_errors_on_delete(self):
-    for (status, exception) in self.error_responses.items():
-      template = Template("uhiuhiuhiuhiuhiuhiuh")
-      template.stub_request('custom_api_error.json' if status == 400 else None, status=status)
-      self.assertRaises(exception, template.delete)
+  def test_bad_request_on_delete(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request('custom_api_error.json', status=400)
+    self.assertRaises(self.error_responses[400], template.delete)
+
+  def test_unauthorized_on_delete(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=401)
+    self.assertRaises(self.error_responses[401], template.delete)
+
+  def test_not_found_on_delete(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=404)
+    self.assertRaises(self.error_responses[404], template.delete)
+
+  def test_server_error_on_delete(self):
+    template = Template("uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request(None, status=500)
+    self.assertRaises(self.error_responses[500], template.delete)
