@@ -1,6 +1,6 @@
 # createsend
 
-A python wrapper for the createsend API v3.
+A python library which implements the complete functionality of v3 of the createsend API.
 
 ## Installation
 
