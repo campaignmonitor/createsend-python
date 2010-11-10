@@ -20,7 +20,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"TextUrl": text_url,
 ***REMOVED******REMOVED******REMOVED***"ListIDs": list_ids,
 ***REMOVED******REMOVED******REMOVED***"SegmentIDs": segment_ids }
-***REMOVED******REMOVED***response = self._post("/campaigns/%s.json" % self.campaign_id, json.dumps(body))
+***REMOVED******REMOVED***response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def send_preview(self, recipients, personalize="fallback"):
