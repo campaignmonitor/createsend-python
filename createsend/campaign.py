@@ -20,7 +20,7 @@ class Campaign(CreateSendBase):
       "TextUrl": text_url,
       "ListIDs": list_ids,
       "SegmentIDs": segment_ids }
-    response = self._post("/campaigns/%s.json" % self.campaign_id, json.dumps(body))
+    response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
     return json_to_py(response)
 
   def send_preview(self, recipients, personalize="fallback"):
