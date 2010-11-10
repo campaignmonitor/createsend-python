@@ -40,6 +40,6 @@ If the createsend API returns an error, an exception will be thrown. For example
 
 Results in:
 
-      Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
-      Error Code:    304
-      Error Message: Campaign Subject Required
+    Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
+    Error Code:    304
+    Error Message: Campaign Subject Required
