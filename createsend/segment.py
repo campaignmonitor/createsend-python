@@ -21,5 +21,8 @@ class Segment(CreateSendBase):
 ***REMOVED***def delete(self):
 ***REMOVED******REMOVED***response = self._delete("/segments/%s.json" % self.segment_id)
 
+***REMOVED***def clear_rules(self):
+***REMOVED******REMOVED***response = self._delete("/segments/%s/rules.json" % self.segment_id)
+
 ***REMOVED***def uri_for(self, action):
 ***REMOVED******REMOVED***return "/segments/%s/%s.json" % (self.segment_id, action)

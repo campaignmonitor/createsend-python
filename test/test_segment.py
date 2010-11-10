@@ -29,3 +29,7 @@ class SegmentTestCase(unittest.TestCase):
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.segment.stub_request(None)
 ***REMOVED******REMOVED***self.segment.delete()
+
+***REMOVED***def test_clear_rules(self):
+***REMOVED******REMOVED***self.segment.stub_request(None)
+***REMOVED******REMOVED***self.segment.clear_rules()
