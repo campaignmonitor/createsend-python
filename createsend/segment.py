@@ -21,5 +21,8 @@ class Segment(CreateSendBase):
   def delete(self):
     response = self._delete("/segments/%s.json" % self.segment_id)
 
+  def clear_rules(self):
+    response = self._delete("/segments/%s/rules.json" % self.segment_id)
+
   def uri_for(self, action):
     return "/segments/%s/%s.json" % (self.segment_id, action)
