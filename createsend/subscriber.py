@@ -1,5 +1,5 @@
 import json
-from createsend import CreateSendBase
+from createsend import CreateSendBase, BadRequest
 from utils import json_to_py
 
 class Subscriber(CreateSendBase):
@@ -27,7 +27,17 @@ class Subscriber(CreateSendBase):
     body = {
       "Subscribers": subscribers,
       "Resubscribe": resubscribe }
-    response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
+    try:
+      response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
+    except BadRequest as br:
+      # Subscriber import will throw BadRequest if some subscribers are not imported
+      # successfully. If this occurs, we want to return the ResultData property of
+      # the BadRequest exception (which is of the same "form" as the response we'd 
+      # receive upon a completely successful import)
+      if hasattr(br.data, 'ResultData'):
+        return br.data.ResultData
+      else:
+        raise br
     return json_to_py(response)
 
   def unsubscribe(self):

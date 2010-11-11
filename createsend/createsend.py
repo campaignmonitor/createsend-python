@@ -10,9 +10,11 @@ __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
   def __init__(self, data):
+    # self.data should contain Code, Message and optionally ResultData
     self.data = data
   def __str__(self):
-    return "The CreateSend API responded with the following error - %s: %s" % (self.data.Code, self.data.Message)
+    extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(self.data, 'ResultData') else ""
+    return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
 
 class ClientError(Exception): pass
 class ServerError(Exception): pass

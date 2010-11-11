@@ -31,7 +31,7 @@ class SubscriberTestCase(unittest.TestCase):
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
     self.assertEquals(email_address, "subscriber@example.com")
 
-  def test_import(self):
+  def test_import_subscribers(self):
     self.subscriber.stub_request("import_subscribers.json")
     subscribers = [
       { "EmailAddress": "example+1@example.com", "Name": "Example One" },
@@ -43,6 +43,24 @@ class SubscriberTestCase(unittest.TestCase):
     self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
     self.assertEquals(import_result.TotalExistingSubscribers, 0)
     self.assertEquals(import_result.TotalNewSubscribers, 3)
+    self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+
+  def test_import_subscribers_partial_success(self):
+    # Stub request with 400 Bad Request as the expected response status
+    self.subscriber.stub_request("import_subscribers_partial_success.json", 400)
+    subscribers = [
+      { "EmailAddress": "example+1@example", "Name": "Example One" },
+      { "EmailAddress": "example+2@example.com", "Name": "Example Two" },
+      { "EmailAddress": "example+3@example.com", "Name": "Example Three" },
+    ]
+    import_result = self.subscriber.import_subscribers(self.list_id, subscribers, True)
+    self.assertEquals(len(import_result.FailureDetails), 1)
+    self.assertEquals(import_result.FailureDetails[0].EmailAddress, "example+1@example")
+    self.assertEquals(import_result.FailureDetails[0].Code, 1)
+    self.assertEquals(import_result.FailureDetails[0].Message, "Invalid Email Address")
+    self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
+    self.assertEquals(import_result.TotalExistingSubscribers, 2)
+    self.assertEquals(import_result.TotalNewSubscribers, 0)
     self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
 
   def test_ubsubscribe(self):
