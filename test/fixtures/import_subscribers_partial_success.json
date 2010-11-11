@@ -1,0 +1,17 @@
+{
+***REMOVED***"ResultData": {
+***REMOVED******REMOVED***"TotalUniqueEmailsSubmitted": 3,
+***REMOVED******REMOVED***"TotalExistingSubscribers": 2,
+***REMOVED******REMOVED***"TotalNewSubscribers": 0,
+***REMOVED******REMOVED***"DuplicateEmailsInSubmission": [],
+***REMOVED******REMOVED***"FailureDetails": [
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"EmailAddress": "example+1@example",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Code": 1,
+***REMOVED******REMOVED******REMOVED******REMOVED***"Message": "Invalid Email Address"
+***REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED***]
+***REMOVED***},
+***REMOVED***"Code": 210,
+***REMOVED***"Message": "Subscriber Import had some failures"
+}

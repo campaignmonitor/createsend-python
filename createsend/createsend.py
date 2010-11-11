@@ -10,9 +10,11 @@ __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
 ***REMOVED***def __init__(self, data):
+***REMOVED******REMOVED***# self.data should contain Code, Message and optionally ResultData
 ***REMOVED******REMOVED***self.data = data
 ***REMOVED***def __str__(self):
-***REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s" % (self.data.Code, self.data.Message)
+***REMOVED******REMOVED***extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(self.data, 'ResultData') else ""
+***REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
 
 class ClientError(Exception): pass
 class ServerError(Exception): pass

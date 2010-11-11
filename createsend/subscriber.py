@@ -1,5 +1,5 @@
 import json
-from createsend import CreateSendBase
+from createsend import CreateSendBase, BadRequest
 from utils import json_to_py
 
 class Subscriber(CreateSendBase):
@@ -27,7 +27,17 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subscribers": subscribers,
 ***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
-***REMOVED******REMOVED***response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
+***REMOVED******REMOVED***try:
+***REMOVED******REMOVED******REMOVED***response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
+***REMOVED******REMOVED***except BadRequest as br:
+***REMOVED******REMOVED******REMOVED***# Subscriber import will throw BadRequest if some subscribers are not imported
+***REMOVED******REMOVED******REMOVED***# successfully. If this occurs, we want to return the ResultData property of
+***REMOVED******REMOVED******REMOVED***# the BadRequest exception (which is of the same "form" as the response we'd 
+***REMOVED******REMOVED******REMOVED***# receive upon a completely successful import)
+***REMOVED******REMOVED******REMOVED***if hasattr(br.data, 'ResultData'):
+***REMOVED******REMOVED******REMOVED******REMOVED***return br.data.ResultData
+***REMOVED******REMOVED******REMOVED***else:
+***REMOVED******REMOVED******REMOVED******REMOVED***raise br
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def unsubscribe(self):
