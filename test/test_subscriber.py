@@ -66,7 +66,7 @@ class SubscriberTestCase(unittest.TestCase):
   def test_ubsubscribe(self):
     self.subscriber.stub_request(None)
     self.subscriber.unsubscribe()
-  
+
   def test_history(self):
     self.subscriber.stub_request("subscriber_history.json")
     history = self.subscriber.history()

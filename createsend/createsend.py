@@ -9,10 +9,11 @@ __version_info__ = ('0', '0', '1')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
+  """Represents a CreateSend API error and contains specific data about the error."""
   def __init__(self, data):
-    # self.data should contain Code, Message and optionally ResultData
     self.data = data
   def __str__(self):
+    # self.data should contain Code, Message and optionally ResultData
     extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(self.data, 'ResultData') else ""
     return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
 
@@ -87,27 +88,33 @@ class CreateSendBase(object):
     return self.make_request(path=path, method="DELETE")
 
 class CreateSend(CreateSendBase):
+  """Provides high level CreateSend functionality/data you'll probably need."""
   base_uri = "http://api.createsend.com/api/v3"
   api_key = ""
 
   def apikey(self, site_url, username, password):
+    """Gets your CreateSend API key, given your site url, username and password."""
     site_url = urllib.quote(site_url, '')
     # The only case in which username and password are passed to self.get
     response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
     return json_to_py(response).ApiKey
 
   def clients(self):
+    """Gets your clients."""
     response = self._get('/clients.json')
     return json_to_py(response)
     
   def countries(self):
+    """Gets valid countries."""
     response = self._get('/countries.json')
     return json_to_py(response)
 
   def systemdate(self):
+    """Gets the current date in your account's timezone."""
     response = self._get('/systemdate.json')
     return json_to_py(response).SystemDate
 
   def timezones(self):
+    """Gets valid timezones."""
     response = self._get('/timezones.json')
     return json_to_py(response)

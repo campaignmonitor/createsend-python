@@ -3,12 +3,14 @@ from createsend import CreateSendBase
 from utils import json_to_py
 
 class Segment(CreateSendBase):
+  """Represents a subscriber list segment and associated functionality."""
 
   def __init__(self, segment_id=None):
     self.segment_id = segment_id
     super(Segment, self).__init__()
 
   def subscribers(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+    """Gets the active subscribers in this segment."""
     params = {
       "date": date,
       "page": page,
@@ -18,11 +20,13 @@ class Segment(CreateSendBase):
     response = self._get(self.uri_for("active"), params=params)
     return json_to_py(response)
 
-  def delete(self):
-    response = self._delete("/segments/%s.json" % self.segment_id)
-
   def clear_rules(self):
+    """Clears all rules of this segment."""
     response = self._delete("/segments/%s/rules.json" % self.segment_id)
+
+  def delete(self):
+    """Deletes this segment."""
+    response = self._delete("/segments/%s.json" % self.segment_id)
 
   def uri_for(self, action):
     return "/segments/%s/%s.json" % (self.segment_id, action)
