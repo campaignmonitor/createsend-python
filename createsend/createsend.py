@@ -9,10 +9,11 @@ __version_info__ = ('0', '0', '1')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
+***REMOVED***"""Represents a CreateSend API error and contains specific data about the error."""
 ***REMOVED***def __init__(self, data):
-***REMOVED******REMOVED***# self.data should contain Code, Message and optionally ResultData
 ***REMOVED******REMOVED***self.data = data
 ***REMOVED***def __str__(self):
+***REMOVED******REMOVED***# self.data should contain Code, Message and optionally ResultData
 ***REMOVED******REMOVED***extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(self.data, 'ResultData') else ""
 ***REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
 
@@ -87,27 +88,33 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE")
 
 class CreateSend(CreateSendBase):
+***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
 ***REMOVED***base_uri = "http://api.createsend.com/api/v3"
 ***REMOVED***api_key = ""
 
 ***REMOVED***def apikey(self, site_url, username, password):
+***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""
 ***REMOVED******REMOVED***site_url = urllib.quote(site_url, '')
 ***REMOVED******REMOVED***# The only case in which username and password are passed to self.get
 ***REMOVED******REMOVED***response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
 ***REMOVED******REMOVED***return json_to_py(response).ApiKey
 
 ***REMOVED***def clients(self):
+***REMOVED******REMOVED***"""Gets your clients."""
 ***REMOVED******REMOVED***response = self._get('/clients.json')
 ***REMOVED******REMOVED***return json_to_py(response)
 ***REMOVED******REMOVED***
 ***REMOVED***def countries(self):
+***REMOVED******REMOVED***"""Gets valid countries."""
 ***REMOVED******REMOVED***response = self._get('/countries.json')
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def systemdate(self):
+***REMOVED******REMOVED***"""Gets the current date in your account's timezone."""
 ***REMOVED******REMOVED***response = self._get('/systemdate.json')
 ***REMOVED******REMOVED***return json_to_py(response).SystemDate
 
 ***REMOVED***def timezones(self):
+***REMOVED******REMOVED***"""Gets valid timezones."""
 ***REMOVED******REMOVED***response = self._get('/timezones.json')
 ***REMOVED******REMOVED***return json_to_py(response)

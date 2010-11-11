@@ -3,6 +3,7 @@ from createsend import CreateSendBase, BadRequest
 from utils import json_to_py
 
 class Subscriber(CreateSendBase):
+***REMOVED***"""Represents a subscriber and associated functionality."""
 
 ***REMOVED***def __init__(self, list_id=None, email_address=None):
 ***REMOVED******REMOVED***self.list_id = list_id
@@ -10,11 +11,13 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***super(Subscriber, self).__init__()
 
 ***REMOVED***def get(self, list_id, email_address):
+***REMOVED******REMOVED***"""Gets a subscriber by list ID and email address."""
 ***REMOVED******REMOVED***params = { "email": email_address }
 ***REMOVED******REMOVED***response = self._get("/subscribers/%s.json" % list_id, params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def add(self, list_id, email_address, name, custom_fields, resubscribe):
+***REMOVED******REMOVED***"""Adds a subscriber to a subscriber list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": email_address,
 ***REMOVED******REMOVED******REMOVED***"Name": name,
@@ -24,6 +27,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def import_subscribers(self, list_id, subscribers, resubscribe):
+***REMOVED******REMOVED***"""Imports subscribers into a subscriber list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subscribers": subscribers,
 ***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
@@ -41,11 +45,13 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def unsubscribe(self):
+***REMOVED******REMOVED***"""Unsubscribes this subscriber from the associated list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": self.email_address }
 ***REMOVED******REMOVED***response = self._post("/subscribers/%s/unsubscribe.json" % self.list_id, json.dumps(body))
 
 ***REMOVED***def history(self):
+***REMOVED******REMOVED***"""Gets the historical record of this subscriber's trackable actions."""
 ***REMOVED******REMOVED***params = { "email": self.email_address }
 ***REMOVED******REMOVED***response = self._get("/subscribers/%s/history.json" % self.list_id, params=params)
 ***REMOVED******REMOVED***return json_to_py(response)

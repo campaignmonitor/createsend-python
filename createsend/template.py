@@ -3,12 +3,14 @@ from createsend import CreateSendBase
 from utils import json_to_py
 
 class Template(CreateSendBase):
+***REMOVED***"""Represents an email template and associated functionality."""
 
 ***REMOVED***def __init__(self, template_id=None):
 ***REMOVED******REMOVED***self.template_id = template_id
 ***REMOVED******REMOVED***super(Template, self).__init__()
 
 ***REMOVED***def create(self, client_id, name, html_url, zip_url, screenshot_url):
+***REMOVED******REMOVED***"""Creates a new email template."""
 ***REMOVED******REMOVED***body = { 
 ***REMOVED******REMOVED******REMOVED***"Name": name,
 ***REMOVED******REMOVED******REMOVED***"HtmlPageURL": html_url,
@@ -18,10 +20,12 @@ class Template(CreateSendBase):
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def details(self):
+***REMOVED******REMOVED***"""Gets the details of this email template."""
 ***REMOVED******REMOVED***response = self._get("/templates/%s.json" % self.template_id)
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def update(self, name, html_url, zip_url, screenshot_url):
+***REMOVED******REMOVED***"""Updates this email template."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Name": name,
 ***REMOVED******REMOVED******REMOVED***"HtmlPageURL": html_url,
@@ -30,4 +34,5 @@ class Template(CreateSendBase):
 ***REMOVED******REMOVED***response = self._put("/templates/%s.json" % self.template_id, json.dumps(body))
 
 ***REMOVED***def delete(self):
+***REMOVED******REMOVED***"""Deletes this email template."""
 ***REMOVED******REMOVED***response = self._delete("/templates/%s.json" % self.template_id)

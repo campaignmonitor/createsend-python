@@ -66,7 +66,7 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED***def test_ubsubscribe(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request(None)
 ***REMOVED******REMOVED***self.subscriber.unsubscribe()
-***REMOVED***
+
 ***REMOVED***def test_history(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request("subscriber_history.json")
 ***REMOVED******REMOVED***history = self.subscriber.history()
