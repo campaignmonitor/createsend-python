@@ -35,6 +35,12 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(custom_field_key)), None)
 ***REMOVED******REMOVED***self.list.delete_custom_field(custom_field_key)
 
+***REMOVED***def test_update_custom_field_options(self):
+***REMOVED******REMOVED***custom_field_key = "[newdatefield]"
+***REMOVED******REMOVED***new_options = [ "one", "two", "three" ]
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s/options.json" % (self.list.list_id, urllib.quote(custom_field_key)), None)
+***REMOVED******REMOVED***self.list.update_custom_field_options(custom_field_key, new_options, True)
+
 ***REMOVED***def test_details(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.list.list_id, "list_details.json")
 ***REMOVED******REMOVED***details = self.list.details()
