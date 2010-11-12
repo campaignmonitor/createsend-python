@@ -1,16 +1,19 @@
 import unittest
+import urllib
 
-from createsend import Subscriber
+from createsend import *
 
 class SubscriberTestCase(unittest.TestCase):
 
   def setUp(self):
+    self.api_key = '123123123123123123123'
+    CreateSend.api_key = self.api_key
     self.list_id = "d98h2938d9283d982u3d98u88"
     self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
 
   def test_get(self):
     email = "subscriber@example.com"
-    self.subscriber.stub_request("subscriber_details.json")
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
     subscriber = self.subscriber.get(self.list_id, email)
     self.assertEquals(subscriber.EmailAddress, email)
     self.assertEquals(subscriber.Name, "Subscriber One")
@@ -21,18 +24,18 @@ class SubscriberTestCase(unittest.TestCase):
     self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
 
   def test_add_without_custom_fields(self):
-    self.subscriber.stub_request("add_subscriber.json")
+    self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", [], True)
     self.assertEquals(email_address, "subscriber@example.com")
 
   def test_add_with_custom_fields(self):
-    self.subscriber.stub_request("add_subscriber.json")
+    self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
     custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
     self.assertEquals(email_address, "subscriber@example.com")
 
   def test_import_subscribers(self):
-    self.subscriber.stub_request("import_subscribers.json")
+    self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
     subscribers = [
       { "EmailAddress": "example+1@example.com", "Name": "Example One" },
       { "EmailAddress": "example+2@example.com", "Name": "Example Two" },
@@ -47,7 +50,7 @@ class SubscriberTestCase(unittest.TestCase):
 
   def test_import_subscribers_partial_success(self):
     # Stub request with 400 Bad Request as the expected response status
-    self.subscriber.stub_request("import_subscribers_partial_success.json", 400)
+    self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers_partial_success.json", 400)
     subscribers = [
       { "EmailAddress": "example+1@example", "Name": "Example One" },
       { "EmailAddress": "example+2@example.com", "Name": "Example Two" },
@@ -64,11 +67,11 @@ class SubscriberTestCase(unittest.TestCase):
     self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
 
   def test_ubsubscribe(self):
-    self.subscriber.stub_request(None)
+    self.subscriber.stub_request("subscribers/%s/unsubscribe.json" % self.list_id, None)
     self.subscriber.unsubscribe()
 
   def test_history(self):
-    self.subscriber.stub_request("subscriber_history.json")
+    self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), "subscriber_history.json")
     history = self.subscriber.history()
     self.assertEquals(len(history), 1)
     self.assertEquals(history[0].Name, "Campaign One")

@@ -1,16 +1,19 @@
 import unittest
+import urllib
 
-from createsend import Segment
+from createsend import *
 
 class SegmentTestCase(unittest.TestCase):
 
   def setUp(self):
+    self.api_key = '123123123123123123123'
+    CreateSend.api_key = self.api_key
     self.segment_id = "98y2e98y289dh89h938389"
     self.segment = Segment(self.segment_id)
 
   def test_subscribers(self):
     min_date = "2010-01-01"
-    self.segment.stub_request("segment_subscribers.json")
+    self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, urllib.quote(min_date)), "segment_subscribers.json")
     res = self.segment.subscribers(min_date)
     self.assertEquals(res.ResultsOrderedBy, "email")
     self.assertEquals(res.OrderDirection, "asc")
@@ -27,9 +30,9 @@ class SegmentTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].CustomFields, [])
 
   def test_delete(self):
-    self.segment.stub_request(None)
+    self.segment.stub_request("segments/%s.json" % self.segment.segment_id, None)
     self.segment.delete()
 
   def test_clear_rules(self):
-    self.segment.stub_request(None)
+    self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
     self.segment.clear_rules()

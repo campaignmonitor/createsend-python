@@ -21,14 +21,27 @@ def dict_to_object(d):
 	    setattr(top, i, j)
 	return top
 
-def get_faker(filename, status=None):
+def get_faker(expected_url, filename, status=None):
+
   class Faker(object):
-    def __init__(self, filename, status):
+    """Represents a fake web request, including the expected URL, an open 
+    function which reads the expected response from a fixture file, and the
+    expected response status code."""
+    def __init__(self, expected_url, filename, status):
+      self.url = self.createsend_url(expected_url)
       self.filename = filename
       self.status = status
+
     def open(self):
       if self.filename:
         return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
       else:
         return ''
-  return Faker(filename, status)
+
+    def createsend_url(self, url):
+      if url.startswith("http"):
+        return url
+      else:
+        return "http://api.createsend.com/api/v3/%s" % url
+
+  return Faker(expected_url, filename, status)

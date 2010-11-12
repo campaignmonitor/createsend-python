@@ -1,39 +1,42 @@
 import unittest
+import urllib
 
-from createsend import List
+from createsend import *
 
 class ListTestCase(unittest.TestCase):
 
   def setUp(self):
+    self.api_key = '123123123123123123123'
+    CreateSend.api_key = self.api_key
     self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
     self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
     self.list = List(self.list_id)
 
   def test_create(self):
-    self.list.stub_request("create_list.json")
+    self.list.stub_request("lists/%s.json" % self.client_id, "create_list.json")
     list_id = self.list.create(self.client_id, "List One", "", False, "")
     self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee")
 
   def test_update(self):
-    self.list.stub_request(None)
+    self.list.stub_request("lists/%s.json" % self.list.list_id, None)
     self.list.update("List One Renamed", "", False, "")
 
   def test_delete(self):
-    self.list.stub_request(None)
+    self.list.stub_request("lists/%s.json" % self.list.list_id, None)
     self.list.delete()
 
   def test_create_custom_field(self):
-    self.list.stub_request("create_custom_field.json")
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "create_custom_field.json")
     personalisation_tag = self.list.create_custom_field("new date field", "Date")
     self.assertEquals(personalisation_tag, "[newdatefield]")
 
   def test_delete_custom_field(self):
     custom_field_key = "[newdatefield]"
-    self.list.stub_request(None)
+    self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(custom_field_key)), None)
     self.list.delete_custom_field(custom_field_key)
 
   def test_details(self):
-    self.list.stub_request("list_details.json")
+    self.list.stub_request("lists/%s.json" % self.list.list_id, "list_details.json")
     details = self.list.details()
     self.assertEquals(details.ConfirmedOptIn, False)
     self.assertEquals(details.Title, "a non-basic list :)")
@@ -42,7 +45,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(details.ConfirmationSuccessPage, "")
 
   def test_custom_fields(self):
-    self.list.stub_request("custom_fields.json")
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "custom_fields.json")
     cfs = self.list.custom_fields()
     self.assertEquals(len(cfs), 3)
     self.assertEquals(cfs[0].FieldName, "website")
@@ -51,7 +54,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(cfs[0].FieldOptions, [])
 
   def test_segments(self):
-    self.list.stub_request("segments.json")
+    self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")
     segments = self.list.segments()
     self.assertEquals(len(segments), 2)
     self.assertEquals(segments[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
@@ -59,7 +62,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(segments[0].Title, 'Segment One')
 
   def test_stats(self):
-    self.list.stub_request("list_stats.json")
+    self.list.stub_request("lists/%s/stats.json" % self.list.list_id, "list_stats.json")
     stats = self.list.stats()
     self.assertEquals(stats.TotalActiveSubscribers, 6)
     self.assertEquals(stats.TotalUnsubscribes, 2)
@@ -68,7 +71,7 @@ class ListTestCase(unittest.TestCase):
 
   def test_active(self):
     min_date = "2010-01-01"
-    self.list.stub_request("active_subscribers.json")
+    self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "active_subscribers.json")
     res = self.list.active(min_date)
     self.assertEquals(res.ResultsOrderedBy, "email")
     self.assertEquals(res.OrderDirection, "asc")
@@ -86,7 +89,7 @@ class ListTestCase(unittest.TestCase):
 
   def test_unsubscribed(self):
     min_date = "2010-01-01"
-    self.list.stub_request("unsubscribed_subscribers.json")
+    self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unsubscribed_subscribers.json")
     res = self.list.unsubscribed(min_date)
     self.assertEquals(res.ResultsOrderedBy, "email")
     self.assertEquals(res.OrderDirection, "asc")
@@ -104,7 +107,7 @@ class ListTestCase(unittest.TestCase):
 
   def test_bounced(self):
     min_date = "2010-01-01"
-    self.list.stub_request("bounced_subscribers.json")
+    self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "bounced_subscribers.json")
     res = self.list.bounced(min_date)
     self.assertEquals(res.ResultsOrderedBy, "email")
     self.assertEquals(res.OrderDirection, "asc")

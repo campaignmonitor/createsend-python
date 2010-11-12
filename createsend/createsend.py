@@ -28,19 +28,13 @@ class CreateSendBase(object):
   def __init__(self):
     self.fake_web = False
 
-  def stub_request(self, filename, status=None):
+  def stub_request(self, expected_url, filename, status=None):
     self.fake_web = True
-    self.faker = get_faker(filename, status)
+    self.faker = get_faker(expected_url, filename, status)
 
   def make_request(self, method, path, params={}, body="", username=None, password=None):
-    """If in fake web mode (i.e. self.stub_request has been called), 
-    self.faker should be set."""
-    if self.fake_web:
-      data = self.faker.open() if self.faker else ''
-      status = self.faker.status if (self.faker and self.faker.status) else 200
-      return self.handle_response(status, data)
-
     headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
+    parsed_base_uri = urlparse(CreateSend.base_uri)
     """username and password should only be set when it is intended that
     the default basic authentication mechanism using the API key be 
     overridden (e.g. when using the apikey route with username and password)."""
@@ -48,7 +42,18 @@ class CreateSendBase(object):
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
     else:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
-    parsed_base_uri = urlparse(CreateSend.base_uri)
+
+    """If in fake web mode (i.e. self.stub_request has been called), 
+    self.faker should be set, and this request should be treated as a fake."""
+    if self.fake_web:
+      # Check that the actual url which would be requested matches self.faker.url. 
+      actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
+      if self.faker.url != actual_url:
+        raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
+      data = self.faker.open() if self.faker else ''
+      status = self.faker.status if (self.faker and self.faker.status) else 200
+      return self.handle_response(status, data)
+
     c = httplib.HTTPConnection(parsed_base_uri.netloc)
     c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
@@ -94,9 +99,9 @@ class CreateSend(CreateSendBase):
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""
-    site_url = urllib.quote(site_url, '')
     # The only case in which username and password are passed to self.get
-    response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
+    params = { "SiteUrl": site_url }
+    response = self._get("/apikey.json", params, username, password)
     return json_to_py(response).ApiKey
 
   def clients(self):
