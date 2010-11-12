@@ -1,16 +1,19 @@
 import unittest
+import urllib
 
-from createsend import Subscriber
+***REMOVED***
 
 class SubscriberTestCase(unittest.TestCase):
 
 ***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.api_key = '123123123123123123123'
+***REMOVED******REMOVED***CreateSend.api_key = self.api_key
 ***REMOVED******REMOVED***self.list_id = "d98h2938d9283d982u3d98u88"
 ***REMOVED******REMOVED***self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "subscriber@example.com"
-***REMOVED******REMOVED***self.subscriber.stub_request("subscriber_details.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
 ***REMOVED******REMOVED***subscriber = self.subscriber.get(self.list_id, email)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.Name, "Subscriber One")
@@ -21,18 +24,18 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
 
 ***REMOVED***def test_add_without_custom_fields(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("add_subscriber.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED***email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", [], True)
 ***REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED***def test_add_with_custom_fields(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("add_subscriber.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED***custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
 ***REMOVED******REMOVED***email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
 ***REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED***def test_import_subscribers(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("import_subscribers.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
 ***REMOVED******REMOVED***subscribers = [
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example.com", "Name": "Example One" },
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two" },
@@ -47,7 +50,7 @@ class SubscriberTestCase(unittest.TestCase):
 
 ***REMOVED***def test_import_subscribers_partial_success(self):
 ***REMOVED******REMOVED***# Stub request with 400 Bad Request as the expected response status
-***REMOVED******REMOVED***self.subscriber.stub_request("import_subscribers_partial_success.json", 400)
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers_partial_success.json", 400)
 ***REMOVED******REMOVED***subscribers = [
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example", "Name": "Example One" },
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two" },
@@ -64,11 +67,11 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
 
 ***REMOVED***def test_ubsubscribe(self):
-***REMOVED******REMOVED***self.subscriber.stub_request(None)
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/unsubscribe.json" % self.list_id, None)
 ***REMOVED******REMOVED***self.subscriber.unsubscribe()
 
 ***REMOVED***def test_history(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("subscriber_history.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), "subscriber_history.json")
 ***REMOVED******REMOVED***history = self.subscriber.history()
 ***REMOVED******REMOVED***self.assertEquals(len(history), 1)
 ***REMOVED******REMOVED***self.assertEquals(history[0].Name, "Campaign One")

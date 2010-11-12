@@ -56,7 +56,7 @@ The best way of finding out the expected input and output of a particular method
 For example, if you wanted to find out how to call the Subscriber.add() method, you would look at the file test/test_subscriber.py
 
 ***REMOVED******REMOVED***def test_add_with_custom_fields(self):
-***REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("add_subscriber.json")
+***REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED******REMOVED***custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
 ***REMOVED******REMOVED******REMOVED***email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
 ***REMOVED******REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")

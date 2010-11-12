@@ -1,35 +1,38 @@
 import unittest
+import urllib
 
-from createsend import Campaign
+***REMOVED***
 
 class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.campaign_id = ""
+***REMOVED******REMOVED***self.api_key = '123123123123123123123'
+***REMOVED******REMOVED***CreateSend.api_key = self.api_key
+***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
 ***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("create_campaign.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
 ***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
 ***REMOVED***def test_sendpreview(self):
-***REMOVED******REMOVED***self.campaign.stub_request(None)
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")
 
 ***REMOVED***def test_send(self):
-***REMOVED******REMOVED***self.campaign.stub_request(None)
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/send.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send("confirmation@example.com")
 
 ***REMOVED***def test_delete(self):
-***REMOVED******REMOVED***self.campaign.stub_request(None)
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.delete()
 ***REMOVED***
 ***REMOVED***def test_summary(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_summary.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/summary.json" % self.campaign_id, "campaign_summary.json")
 ***REMOVED******REMOVED***summary = self.campaign.summary()
 ***REMOVED******REMOVED***self.assertEquals(summary.Recipients, 5)
 ***REMOVED******REMOVED***self.assertEquals(summary.TotalOpened, 10)
@@ -40,7 +43,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://clientone.createsend.com/t/ViewEmail/r/3A433FC72FFE3B8B/C67FD2F38AC4859C/")
 
 ***REMOVED***def test_lists_and_segments(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_listsandsegments.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
 ***REMOVED******REMOVED***ls = self.campaign.lists_and_segments()
 ***REMOVED******REMOVED***self.assertEquals(len(ls.Lists), 1)
 ***REMOVED******REMOVED***self.assertEquals(len(ls.Segments), 1)
@@ -51,7 +54,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(ls.Segments[0].SegmentID, "dba84a225d5ce3d19105d7257baac46f")
 
 ***REMOVED***def test_recipients(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_recipients.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/recipients.json?orderfield=email&page=1&pagesize=20&orderdirection=asc" % self.campaign_id, "campaign_recipients.json")
 ***REMOVED******REMOVED***res = self.campaign.recipients(page=1, page_size=20)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
@@ -66,7 +69,7 @@ class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def test_opens(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_opens.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_opens.json")
 ***REMOVED******REMOVED***opens = self.campaign.opens(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(opens.Results), 5)
 ***REMOVED******REMOVED***self.assertEquals(opens.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -83,7 +86,7 @@ class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def test_clicks(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_clicks.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_clicks.json")
 ***REMOVED******REMOVED***clicks = self.campaign.clicks(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(clicks.Results), 3)
 ***REMOVED******REMOVED***self.assertEquals(clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -101,7 +104,7 @@ class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def test_unsubscribes(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_unsubscribes.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_unsubscribes.json")
 ***REMOVED******REMOVED***unsubscribes = self.campaign.unsubscribes(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(unsubscribes.Results), 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -117,7 +120,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.NumberOfPages, 1)
 
 ***REMOVED***def test_bounces(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaign_bounces.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?orderfield=date&page=1&pagesize=1000&orderdirection=asc" % self.campaign_id, "campaign_bounces.json")
 ***REMOVED******REMOVED***bounces = self.campaign.bounces()
 ***REMOVED******REMOVED***self.assertEquals(len(bounces.Results), 2)
 ***REMOVED******REMOVED***self.assertEquals(bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")

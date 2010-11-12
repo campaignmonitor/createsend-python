@@ -28,19 +28,13 @@ class CreateSendBase(object):
 ***REMOVED***def __init__(self):
 ***REMOVED******REMOVED***self.fake_web = False
 
-***REMOVED***def stub_request(self, filename, status=None):
+***REMOVED***def stub_request(self, expected_url, filename, status=None):
 ***REMOVED******REMOVED***self.fake_web = True
-***REMOVED******REMOVED***self.faker = get_faker(filename, status)
+***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status)
 
 ***REMOVED***def make_request(self, method, path, params={}, body="", username=None, password=None):
-***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
-***REMOVED******REMOVED***self.faker should be set."""
-***REMOVED******REMOVED***if self.fake_web:
-***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
-***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
-***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
-
 ***REMOVED******REMOVED***headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
+***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri)
 ***REMOVED******REMOVED***"""username and password should only be set when it is intended that
 ***REMOVED******REMOVED***the default basic authentication mechanism using the API key be 
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
@@ -48,7 +42,18 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
 ***REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
-***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri)
+
+***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
+***REMOVED******REMOVED***self.faker should be set, and this request should be treated as a fake."""
+***REMOVED******REMOVED***if self.fake_web:
+***REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches self.faker.url. 
+***REMOVED******REMOVED******REMOVED***actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
+***REMOVED******REMOVED******REMOVED***if self.faker.url != actual_url:
+***REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
+***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
+***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
+***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
+
 ***REMOVED******REMOVED***c = httplib.HTTPConnection(parsed_base_uri.netloc)
 ***REMOVED******REMOVED***c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
 ***REMOVED******REMOVED***response = c.getresponse()
@@ -94,9 +99,9 @@ class CreateSend(CreateSendBase):
 
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""
-***REMOVED******REMOVED***site_url = urllib.quote(site_url, '')
 ***REMOVED******REMOVED***# The only case in which username and password are passed to self.get
-***REMOVED******REMOVED***response = self._get("/apikey.json?SiteUrl=%s" % site_url, username, password)
+***REMOVED******REMOVED***params = { "SiteUrl": site_url }
+***REMOVED******REMOVED***response = self._get("/apikey.json", params, username, password)
 ***REMOVED******REMOVED***return json_to_py(response).ApiKey
 
 ***REMOVED***def clients(self):

@@ -21,14 +21,27 @@ def dict_to_object(d):
 	***REMOVED******REMOVED***setattr(top, i, j)
 	return top
 
-def get_faker(filename, status=None):
+def get_faker(expected_url, filename, status=None):
+
 ***REMOVED***class Faker(object):
-***REMOVED******REMOVED***def __init__(self, filename, status):
+***REMOVED******REMOVED***"""Represents a fake web request, including the expected URL, an open 
+***REMOVED******REMOVED***function which reads the expected response from a fixture file, and the
+***REMOVED******REMOVED***expected response status code."""
+***REMOVED******REMOVED***def __init__(self, expected_url, filename, status):
+***REMOVED******REMOVED******REMOVED***self.url = self.createsend_url(expected_url)
 ***REMOVED******REMOVED******REMOVED***self.filename = filename
 ***REMOVED******REMOVED******REMOVED***self.status = status
+
 ***REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED***if self.filename:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
 ***REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return ''
-***REMOVED***return Faker(filename, status)
+
+***REMOVED******REMOVED***def createsend_url(self, url):
+***REMOVED******REMOVED******REMOVED***if url.startswith("http"):
+***REMOVED******REMOVED******REMOVED******REMOVED***return url
+***REMOVED******REMOVED******REMOVED***else:
+***REMOVED******REMOVED******REMOVED******REMOVED***return "http://api.createsend.com/api/v3/%s" % url
+
+***REMOVED***return Faker(expected_url, filename, status)
