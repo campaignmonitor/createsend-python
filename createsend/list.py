@@ -38,6 +38,14 @@ class List(CreateSendBase):
     custom_field_key = urllib.quote(custom_field_key, '')
     response = self._delete("/lists/%s/customfields/%s.json" % (self.list_id, custom_field_key))
 
+  def update_custom_field_options(self, custom_field_key, new_options, keep_existing_options):
+    """Updates the options of a multi-optioned custom field on this list."""
+    custom_field_key = urllib.quote(custom_field_key, '')
+    body = {
+      "Options": new_options,
+      "KeepExistingOptions": keep_existing_options }
+    response = self._put(self.uri_for("customfields/%s/options" % custom_field_key), json.dumps(body))
+
   def details(self):
     """Gets the details of this list."""
     response = self._get("/lists/%s.json" % self.list_id)
