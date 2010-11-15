@@ -1,0 +1,20 @@
+{
+***REMOVED***"ActiveSubscribers": 0,
+***REMOVED***"Rules": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"Subject": "EmailAddress",
+***REMOVED******REMOVED******REMOVED***"Clauses": [
+***REMOVED******REMOVED******REMOVED******REMOVED***"CONTAINS @hello.com"
+***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"Subject": "Name",
+***REMOVED******REMOVED******REMOVED***"Clauses": [
+***REMOVED******REMOVED******REMOVED******REMOVED***"PROVIDED"
+***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ListID": "2bea949d0bf96148c3e6a209d2e82060",
+***REMOVED***"SegmentID": "dba84a225d5ce3d19105d7257baac46f",
+***REMOVED***"Title": "My Segment"
+}

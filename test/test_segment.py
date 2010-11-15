@@ -36,3 +36,15 @@ class SegmentTestCase(unittest.TestCase):
 ***REMOVED***def test_clear_rules(self):
 ***REMOVED******REMOVED***self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
 ***REMOVED******REMOVED***self.segment.clear_rules()
+***REMOVED******REMOVED***
+***REMOVED***def test_details(self):
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % self.segment.segment_id, "segment_details.json")
+***REMOVED******REMOVED***res = self.segment.details()
+***REMOVED******REMOVED***self.assertEquals(res.ActiveSubscribers, 0)
+***REMOVED******REMOVED***self.assertEquals(len(res.Rules), 2)
+***REMOVED******REMOVED***self.assertEquals(res.Rules[0].Subject, "EmailAddress")
+***REMOVED******REMOVED***self.assertEquals(len(res.Rules[0].Clauses), 1)
+***REMOVED******REMOVED***self.assertEquals(res.Rules[0].Clauses[0], "CONTAINS @hello.com")
+***REMOVED******REMOVED***self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
+***REMOVED******REMOVED***self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
+***REMOVED******REMOVED***self.assertEquals(res.Title, "My Segment")
