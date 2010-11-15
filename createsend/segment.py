@@ -20,6 +20,11 @@ class Segment(CreateSendBase):
     response = self._get(self.uri_for("active"), params=params)
     return json_to_py(response)
 
+  def details(self):
+    """Gets the details of this segment"""
+    response = self._get("/segments/%s.json" % self.segment_id)
+    return json_to_py(response)
+
   def clear_rules(self):
     """Clears all rules of this segment."""
     response = self._delete("/segments/%s/rules.json" % self.segment_id)

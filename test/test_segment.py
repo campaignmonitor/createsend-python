@@ -36,3 +36,15 @@ class SegmentTestCase(unittest.TestCase):
   def test_clear_rules(self):
     self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
     self.segment.clear_rules()
+    
+  def test_details(self):
+    self.segment.stub_request("segments/%s.json" % self.segment.segment_id, "segment_details.json")
+    res = self.segment.details()
+    self.assertEquals(res.ActiveSubscribers, 0)
+    self.assertEquals(len(res.Rules), 2)
+    self.assertEquals(res.Rules[0].Subject, "EmailAddress")
+    self.assertEquals(len(res.Rules[0].Clauses), 1)
+    self.assertEquals(res.Rules[0].Clauses[0], "CONTAINS @hello.com")
+    self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
+    self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
+    self.assertEquals(res.Title, "My Segment")
