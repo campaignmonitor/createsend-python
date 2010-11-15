@@ -10,7 +10,7 @@
 ***REMOVED******REMOVED***"ContactName": "Client One (contact)",
 ***REMOVED******REMOVED***"EmailAddress": "contact@example.com",
 ***REMOVED******REMOVED***"Country": "Australia",
-***REMOVED******REMOVED***"Timezone": "(GMT+10:00) Canberra, Melbourne, Sydney"
+***REMOVED******REMOVED***"TimeZone": "(GMT+10:00) Canberra, Melbourne, Sydney"
 ***REMOVED***},
 ***REMOVED***"BillingDetails": {
 ***REMOVED******REMOVED*** "CanPurchaseCredits": true,
