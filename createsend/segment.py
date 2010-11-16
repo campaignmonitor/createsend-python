@@ -9,6 +9,28 @@ class Segment(CreateSendBase):
     self.segment_id = segment_id
     super(Segment, self).__init__()
 
+  def create(self, list_id, title, rules):
+    """Creates a new segment."""
+    body = {
+      "Title": title,
+      "Rules": rules }
+    response = self._post("/segments/%s.json" % list_id, json.dumps(body))
+    return json_to_py(response)
+
+  def update(self, title, rules):
+    """Updates this segment."""
+    body = {
+      "Title": title,
+      "Rules": rules }
+    response = self._put("/segments/%s.json" % self.segment_id, json.dumps(body))
+
+  def add_rule(self, subject, clauses):
+    """Adds a rule to this segment."""
+    body = {
+      "Subject": subject,
+      "Clauses": clauses }
+    response = self._post("/segments/%s/rules.json" % self.segment_id, json.dumps(body))
+
   def subscribers(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
     """Gets the active subscribers in this segment."""
     params = {

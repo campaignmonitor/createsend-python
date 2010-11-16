@@ -11,6 +11,23 @@ class SegmentTestCase(unittest.TestCase):
     self.segment_id = "98y2e98y289dh89h938389"
     self.segment = Segment(self.segment_id)
 
+  def test_create(self):
+    list_id = "2983492834987394879837498"
+    rules = [ { "Subject": "EmailAddress", "Clauses": [ "CONTAINS example.com" ] } ]
+    self.segment.stub_request("segments/%s.json" % list_id, "create_segment.json")
+    res = self.segment.create(list_id, "new segment title", rules)
+    self.assertEquals(res, "0246c2aea610a3545d9780bf6ab89006")
+
+  def test_update(self):
+    rules = [ { "Subject": "Name", "Clauses": [ "EQUALS subscriber" ] } ]
+    self.segment.stub_request("segments/%s.json" % self.segment.segment_id, None)
+    self.segment.update("new title for segment", rules)
+
+  def test_add_rule(self):
+    clauses = [ "CONTAINS example.com" ]
+    self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
+    self.segment.add_rule("EmailAddress", clauses)
+
   def test_subscribers(self):
     min_date = "2010-01-01"
     self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, urllib.quote(min_date)), "segment_subscribers.json")
