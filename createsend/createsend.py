@@ -5,7 +5,7 @@ import base64
 from urlparse import urlparse
 from utils import json_to_py, get_faker
 
-__version_info__ = ('0', '0', '1')
+__version_info__ = ('0', '0', '2')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
