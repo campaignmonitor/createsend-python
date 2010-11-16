@@ -11,6 +11,23 @@ class SegmentTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.segment_id = "98y2e98y289dh89h938389"
 ***REMOVED******REMOVED***self.segment = Segment(self.segment_id)
 
+***REMOVED***def test_create(self):
+***REMOVED******REMOVED***list_id = "2983492834987394879837498"
+***REMOVED******REMOVED***rules = [ { "Subject": "EmailAddress", "Clauses": [ "CONTAINS example.com" ] } ]
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % list_id, "create_segment.json")
+***REMOVED******REMOVED***res = self.segment.create(list_id, "new segment title", rules)
+***REMOVED******REMOVED***self.assertEquals(res, "0246c2aea610a3545d9780bf6ab89006")
+
+***REMOVED***def test_update(self):
+***REMOVED******REMOVED***rules = [ { "Subject": "Name", "Clauses": [ "EQUALS subscriber" ] } ]
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % self.segment.segment_id, None)
+***REMOVED******REMOVED***self.segment.update("new title for segment", rules)
+
+***REMOVED***def test_add_rule(self):
+***REMOVED******REMOVED***clauses = [ "CONTAINS example.com" ]
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
+***REMOVED******REMOVED***self.segment.add_rule("EmailAddress", clauses)
+
 ***REMOVED***def test_subscribers(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, urllib.quote(min_date)), "segment_subscribers.json")

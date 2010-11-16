@@ -9,6 +9,28 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED***self.segment_id = segment_id
 ***REMOVED******REMOVED***super(Segment, self).__init__()
 
+***REMOVED***def create(self, list_id, title, rules):
+***REMOVED******REMOVED***"""Creates a new segment."""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Title": title,
+***REMOVED******REMOVED******REMOVED***"Rules": rules }
+***REMOVED******REMOVED***response = self._post("/segments/%s.json" % list_id, json.dumps(body))
+***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def update(self, title, rules):
+***REMOVED******REMOVED***"""Updates this segment."""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Title": title,
+***REMOVED******REMOVED******REMOVED***"Rules": rules }
+***REMOVED******REMOVED***response = self._put("/segments/%s.json" % self.segment_id, json.dumps(body))
+
+***REMOVED***def add_rule(self, subject, clauses):
+***REMOVED******REMOVED***"""Adds a rule to this segment."""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Subject": subject,
+***REMOVED******REMOVED******REMOVED***"Clauses": clauses }
+***REMOVED******REMOVED***response = self._post("/segments/%s/rules.json" % self.segment_id, json.dumps(body))
+
 ***REMOVED***def subscribers(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the active subscribers in this segment."""
 ***REMOVED******REMOVED***params = {
