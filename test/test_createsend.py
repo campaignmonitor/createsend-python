@@ -56,7 +56,7 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], self.cs.countries)
 
 ***REMOVED***def test_unauthorized_on_get(self):
-***REMOVED******REMOVED***self.cs.stub_request('countries.json', None, status=401)
+***REMOVED******REMOVED***self.cs.stub_request('countries.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], self.cs.countries)
 
 ***REMOVED***def test_not_found_on_get(self):
@@ -75,7 +75,7 @@ class CreateSendTestCase(unittest.TestCase):
 
 ***REMOVED***def test_unauthorized_on_post(self):
 ***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED***client.stub_request('clients.json', None, status=401)
+***REMOVED******REMOVED***client.stub_request('clients.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
@@ -99,7 +99,7 @@ class CreateSendTestCase(unittest.TestCase):
 
 ***REMOVED***def test_unauthorized_on_put(self):
 ***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=401)
+***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
 
@@ -122,7 +122,7 @@ class CreateSendTestCase(unittest.TestCase):
 
 ***REMOVED***def test_unauthorized_on_delete(self):
 ***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
-***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=401)
+***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.delete)
 
 ***REMOVED***def test_not_found_on_delete(self):

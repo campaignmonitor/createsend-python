@@ -20,7 +20,7 @@ class CreateSendError(Exception):
 class ClientError(Exception): pass
 class ServerError(Exception): pass
 class BadRequest(CreateSendError): pass
-class Unauthorized(ClientError): pass
+class Unauthorized(CreateSendError): pass
 class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
@@ -71,7 +71,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***if status == 400:
 ***REMOVED******REMOVED******REMOVED***raise BadRequest(json_to_py(data))
 ***REMOVED******REMOVED***elif status == 401:
-***REMOVED******REMOVED******REMOVED***raise Unauthorized()
+***REMOVED******REMOVED******REMOVED***raise Unauthorized(json_to_py(data))
 ***REMOVED******REMOVED***elif status == 404:
 ***REMOVED******REMOVED******REMOVED***raise NotFound()
 ***REMOVED******REMOVED***elif status in range(400, 500):
