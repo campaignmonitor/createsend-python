@@ -20,7 +20,7 @@ class CreateSendError(Exception):
 class ClientError(Exception): pass
 class ServerError(Exception): pass
 class BadRequest(CreateSendError): pass
-class Unauthorized(ClientError): pass
+class Unauthorized(CreateSendError): pass
 class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
@@ -71,7 +71,7 @@ class CreateSendBase(object):
     if status == 400:
       raise BadRequest(json_to_py(data))
     elif status == 401:
-      raise Unauthorized()
+      raise Unauthorized(json_to_py(data))
     elif status == 404:
       raise NotFound()
     elif status in range(400, 500):

@@ -56,7 +56,7 @@ class CreateSendTestCase(unittest.TestCase):
     self.assertRaises(self.error_responses[400], self.cs.countries)
 
   def test_unauthorized_on_get(self):
-    self.cs.stub_request('countries.json', None, status=401)
+    self.cs.stub_request('countries.json', 'custom_api_error.json', status=401)
     self.assertRaises(self.error_responses[401], self.cs.countries)
 
   def test_not_found_on_get(self):
@@ -75,7 +75,7 @@ class CreateSendTestCase(unittest.TestCase):
 
   def test_unauthorized_on_post(self):
     client = Client("uhiuhiuhiuhiuhiuhiuh")
-    client.stub_request('clients.json', None, status=401)
+    client.stub_request('clients.json', 'custom_api_error.json', status=401)
     self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
@@ -99,7 +99,7 @@ class CreateSendTestCase(unittest.TestCase):
 
   def test_unauthorized_on_put(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
-    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=401)
+    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
     self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
       "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
 
@@ -122,7 +122,7 @@ class CreateSendTestCase(unittest.TestCase):
 
   def test_unauthorized_on_delete(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
-    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=401)
+    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
     self.assertRaises(self.error_responses[401], template.delete)
 
   def test_not_found_on_delete(self):
