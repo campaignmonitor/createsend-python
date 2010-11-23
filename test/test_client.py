@@ -95,7 +95,7 @@ class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def test_set_monthly_billing(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None)
-***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, True, 150)
+***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, 150)
 
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
