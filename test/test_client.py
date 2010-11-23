@@ -95,7 +95,7 @@ class ClientTestCase(unittest.TestCase):
 
   def test_set_monthly_billing(self):
     self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None)
-    self.cl.set_monthly_billing("CAD", True, True, 150)
+    self.cl.set_monthly_billing("CAD", True, 150)
 
   def test_delete(self):
     self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)

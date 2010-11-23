@@ -91,11 +91,10 @@ class Client(CreateSendBase):
       "MarkupOnDesignSpamTest": markup_on_design_spam_test }
     response = self._put(self.uri_for('setpaygbilling'), json.dumps(body))
 
-  def set_monthly_billing(self, currency, can_purchase_credits, client_pays, markup_percentage):
+  def set_monthly_billing(self, currency, client_pays, markup_percentage):
     """Sets the monthly billing settings for this client."""
     body = {
       "Currency": currency,
-      "CanPurchaseCredits": can_purchase_credits,
       "ClientPays": client_pays,
       "MarkupPercentage": markup_percentage }
     response = self._put(self.uri_for('setmonthlybilling'), json.dumps(body))
