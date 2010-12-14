@@ -108,5 +108,39 @@ class List(CreateSendBase):
       "ConfirmationSuccessPage": confirmation_success_page }
     response = self._put("/lists/%s.json" % self.list_id, json.dumps(body))
 
+  def webhooks(self):
+    """Gets the webhooks for this list."""
+    response = self._get(self.uri_for("webhooks"))
+    return json_to_py(response)
+
+  def create_webhook(self, events, url, payload_format):
+    """Creates a new webhook for the specified events (an array of strings). 
+    Valid events are "Subscribe", "Unsubscribe", "Bounce", "Spam", and 
+    "SubscriberUpdate". Valid payload formats are "json", and "xml"."""
+    body = {
+      "Events": events,
+      "Url": url,
+      "PayloadFormat": payload_format }
+    response = self._post(self.uri_for("webhooks"), json.dumps(body))
+    return json_to_py(response)
+
+  def test_webhook(self, webhook_id):
+    """Tests that a post can be made to the endpoint specified for the webhook
+    identified by webhook_id."""
+    response = self._get(self.uri_for("webhooks/%s/test" % webhook_id))
+    return True # An exception will be raised if any error occurs
+
+  def delete_webhook(self, webhook_id):
+    """Deletes a webhook associated with this list."""
+    response = self._delete("/lists/%s/webhooks/%s.json" % (self.list_id, webhook_id))
+
+  def activate_webhook(self, webhook_id):
+    """Activates a webhook associated with this list."""
+    response = self._put(self.uri_for("webhooks/%s/activate" % webhook_id), ' ')
+
+  def deactivate_webhook(self, webhook_id):
+    """De-activates a webhook associated with this list."""
+    response = self._put(self.uri_for("webhooks/%s/deactivate" % webhook_id), ' ')
+
   def uri_for(self, action):
     return "/lists/%s/%s.json" % (self.list_id, action)

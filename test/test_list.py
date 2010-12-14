@@ -128,3 +128,39 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Bounced")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+
+  def test_webhooks(self):
+    self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "list_webhooks.json")
+    hooks = self.list.webhooks()
+    self.assertEquals(len(hooks), 2)
+    self.assertEquals(hooks[0].WebhookID, "943678317049bc13")
+    self.assertEquals(len(hooks[0].Events), 2)
+    self.assertEquals(hooks[0].Events[0], "Bounce")
+    self.assertEquals(hooks[0].Url, "http://www.postbin.org/d9w8ud9wud9w")
+    self.assertEquals(hooks[0].Status, "Active")
+    self.assertEquals(hooks[0].PayloadFormat, "Json")
+
+  def test_create_webhook(self):
+    self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "create_list_webhook.json")
+    webhook_id = self.list.create_webhook(["Unsubscribe", "Spam"], "http://example.com/unsub", "json")
+    self.assertEquals(webhook_id, "6a783d359bd44ef62c6ca0d3eda4412a")
+
+  def test_test_webhook(self):
+    webhook_id = "jiuweoiwueoiwueowiueo"
+    self.list.stub_request("lists/%s/webhooks/%s/test.json" % (self.list.list_id, webhook_id), None)
+    self.list.test_webhook(webhook_id)
+
+  def test_delete_webhook(self):
+    webhook_id = "jiuweoiwueoiwueowiueo"
+    self.list.stub_request("lists/%s/webhooks/%s.json" % (self.list.list_id, webhook_id), None)
+    self.list.delete_webhook(webhook_id)
+
+  def test_activate_webhook(self):
+    webhook_id = "jiuweoiwueoiwueowiueo"
+    self.list.stub_request("lists/%s/webhooks/%s/activate.json" % (self.list.list_id, webhook_id), None)
+    self.list.activate_webhook(webhook_id)
+
+  def test_deactivate_webhook(self):
+    webhook_id = "jiuweoiwueoiwueowiueo"
+    self.list.stub_request("lists/%s/webhooks/%s/deactivate.json" % (self.list.list_id, webhook_id), None)
+    self.list.deactivate_webhook(webhook_id)
