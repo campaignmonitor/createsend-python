@@ -128,3 +128,39 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Bounced")
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
+
+***REMOVED***def test_webhooks(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "list_webhooks.json")
+***REMOVED******REMOVED***hooks = self.list.webhooks()
+***REMOVED******REMOVED***self.assertEquals(len(hooks), 2)
+***REMOVED******REMOVED***self.assertEquals(hooks[0].WebhookID, "943678317049bc13")
+***REMOVED******REMOVED***self.assertEquals(len(hooks[0].Events), 2)
+***REMOVED******REMOVED***self.assertEquals(hooks[0].Events[0], "Bounce")
+***REMOVED******REMOVED***self.assertEquals(hooks[0].Url, "http://www.postbin.org/d9w8ud9wud9w")
+***REMOVED******REMOVED***self.assertEquals(hooks[0].Status, "Active")
+***REMOVED******REMOVED***self.assertEquals(hooks[0].PayloadFormat, "Json")
+
+***REMOVED***def test_create_webhook(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "create_list_webhook.json")
+***REMOVED******REMOVED***webhook_id = self.list.create_webhook(["Unsubscribe", "Spam"], "http://example.com/unsub", "json")
+***REMOVED******REMOVED***self.assertEquals(webhook_id, "6a783d359bd44ef62c6ca0d3eda4412a")
+
+***REMOVED***def test_test_webhook(self):
+***REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks/%s/test.json" % (self.list.list_id, webhook_id), None)
+***REMOVED******REMOVED***self.list.test_webhook(webhook_id)
+
+***REMOVED***def test_delete_webhook(self):
+***REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks/%s.json" % (self.list.list_id, webhook_id), None)
+***REMOVED******REMOVED***self.list.delete_webhook(webhook_id)
+
+***REMOVED***def test_activate_webhook(self):
+***REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks/%s/activate.json" % (self.list.list_id, webhook_id), None)
+***REMOVED******REMOVED***self.list.activate_webhook(webhook_id)
+
+***REMOVED***def test_deactivate_webhook(self):
+***REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks/%s/deactivate.json" % (self.list.list_id, webhook_id), None)
+***REMOVED******REMOVED***self.list.deactivate_webhook(webhook_id)

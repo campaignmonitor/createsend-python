@@ -1,0 +1,21 @@
+[
+***REMOVED***{
+***REMOVED******REMOVED***"WebhookID": "943678317049bc13",
+***REMOVED******REMOVED***"Events": [
+***REMOVED******REMOVED******REMOVED***"Bounce",
+***REMOVED******REMOVED******REMOVED***"Spam"
+***REMOVED******REMOVED***],
+***REMOVED******REMOVED***"Url": "http://www.postbin.org/d9w8ud9wud9w",
+***REMOVED******REMOVED***"Status": "Active",
+***REMOVED******REMOVED***"PayloadFormat": "Json"
+***REMOVED***},
+***REMOVED***{
+***REMOVED******REMOVED***"WebhookID": "ee1b3864e5ca6161",
+***REMOVED******REMOVED***"Events": [
+***REMOVED******REMOVED******REMOVED***"Subscribe"
+***REMOVED******REMOVED***],
+***REMOVED******REMOVED***"Url": "http://www.postbin.org/hiuhiu2h2u",
+***REMOVED******REMOVED***"Status": "Active",
+***REMOVED******REMOVED***"PayloadFormat": "Xml"
+***REMOVED***}
+]

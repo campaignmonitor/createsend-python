@@ -108,5 +108,39 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"ConfirmationSuccessPage": confirmation_success_page }
 ***REMOVED******REMOVED***response = self._put("/lists/%s.json" % self.list_id, json.dumps(body))
 
+***REMOVED***def webhooks(self):
+***REMOVED******REMOVED***"""Gets the webhooks for this list."""
+***REMOVED******REMOVED***response = self._get(self.uri_for("webhooks"))
+***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def create_webhook(self, events, url, payload_format):
+***REMOVED******REMOVED***"""Creates a new webhook for the specified events (an array of strings). 
+***REMOVED******REMOVED***Valid events are "Subscribe", "Unsubscribe", "Bounce", "Spam", and 
+***REMOVED******REMOVED***"SubscriberUpdate". Valid payload formats are "json", and "xml"."""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Events": events,
+***REMOVED******REMOVED******REMOVED***"Url": url,
+***REMOVED******REMOVED******REMOVED***"PayloadFormat": payload_format }
+***REMOVED******REMOVED***response = self._post(self.uri_for("webhooks"), json.dumps(body))
+***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def test_webhook(self, webhook_id):
+***REMOVED******REMOVED***"""Tests that a post can be made to the endpoint specified for the webhook
+***REMOVED******REMOVED***identified by webhook_id."""
+***REMOVED******REMOVED***response = self._get(self.uri_for("webhooks/%s/test" % webhook_id))
+***REMOVED******REMOVED***return True # An exception will be raised if any error occurs
+
+***REMOVED***def delete_webhook(self, webhook_id):
+***REMOVED******REMOVED***"""Deletes a webhook associated with this list."""
+***REMOVED******REMOVED***response = self._delete("/lists/%s/webhooks/%s.json" % (self.list_id, webhook_id))
+
+***REMOVED***def activate_webhook(self, webhook_id):
+***REMOVED******REMOVED***"""Activates a webhook associated with this list."""
+***REMOVED******REMOVED***response = self._put(self.uri_for("webhooks/%s/activate" % webhook_id), ' ')
+
+***REMOVED***def deactivate_webhook(self, webhook_id):
+***REMOVED******REMOVED***"""De-activates a webhook associated with this list."""
+***REMOVED******REMOVED***response = self._put(self.uri_for("webhooks/%s/deactivate" % webhook_id), ' ')
+
 ***REMOVED***def uri_for(self, action):
 ***REMOVED******REMOVED***return "/lists/%s/%s.json" % (self.list_id, action)
