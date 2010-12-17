@@ -115,8 +115,8 @@ class List(CreateSendBase):
 
   def create_webhook(self, events, url, payload_format):
     """Creates a new webhook for the specified events (an array of strings). 
-    Valid events are "Subscribe", "Unsubscribe", "Bounce", "Spam", and 
-    "SubscriberUpdate". Valid payload formats are "json", and "xml"."""
+    Valid events are "Subscribe", "Deactivate", and "Update".
+    Valid payload formats are "json", and "xml"."""
     body = {
       "Events": events,
       "Url": url,
