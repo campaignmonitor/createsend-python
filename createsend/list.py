@@ -115,8 +115,8 @@ class List(CreateSendBase):
 
 ***REMOVED***def create_webhook(self, events, url, payload_format):
 ***REMOVED******REMOVED***"""Creates a new webhook for the specified events (an array of strings). 
-***REMOVED******REMOVED***Valid events are "Subscribe", "Unsubscribe", "Bounce", "Spam", and 
-***REMOVED******REMOVED***"SubscriberUpdate". Valid payload formats are "json", and "xml"."""
+***REMOVED******REMOVED***Valid events are "Subscribe", "Deactivate", and "Update".
+***REMOVED******REMOVED***Valid payload formats are "json", and "xml"."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Events": events,
 ***REMOVED******REMOVED******REMOVED***"Url": url,

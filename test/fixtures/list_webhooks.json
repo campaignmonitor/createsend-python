@@ -1,10 +1,7 @@
 [
 ***REMOVED***{
 ***REMOVED******REMOVED***"WebhookID": "943678317049bc13",
-***REMOVED******REMOVED***"Events": [
-***REMOVED******REMOVED******REMOVED***"Bounce",
-***REMOVED******REMOVED******REMOVED***"Spam"
-***REMOVED******REMOVED***],
+***REMOVED******REMOVED***"Events": [ "Deactivate" ],
 ***REMOVED******REMOVED***"Url": "http://www.postbin.org/d9w8ud9wud9w",
 ***REMOVED******REMOVED***"Status": "Active",
 ***REMOVED******REMOVED***"PayloadFormat": "Json"
