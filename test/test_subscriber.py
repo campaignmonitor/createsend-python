@@ -34,6 +34,14 @@ class SubscriberTestCase(unittest.TestCase):
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
     self.assertEquals(email_address, "subscriber@example.com")
 
+  def test_add_with_custom_fields_including_multioption(self):
+    self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
+    custom_fields = [ { "Key": 'multioptionselectone', "Value": 'myoption' },
+      { "Key": 'multioptionselectmany', "Value": 'firstoption' },
+      { "Key": 'multioptionselectmany', "Value": 'secondoption' } ]
+    email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+    self.assertEquals(email_address, "subscriber@example.com")
+
   def test_import_subscribers(self):
     self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
     subscribers = [
