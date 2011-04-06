@@ -70,6 +70,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(res.TotalNumberOfRecords, 5)
     self.assertEquals(res.NumberOfPages, 1)
     self.assertEquals(len(res.Results), 5)
+    self.assertEquals(res.Results[0].SuppressionReason, "Unsubscribed")
     self.assertEquals(res.Results[0].EmailAddress, "example+1@example.com")
     self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
     self.assertEquals(res.Results[0].State, "Suppressed")
