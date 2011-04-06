@@ -1,26 +1,31 @@
 {
 ***REMOVED***"Results": [
 ***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"SuppressionReason": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+1@example.com",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:55:31",
 ***REMOVED******REMOVED******REMOVED***"State": "Suppressed"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"SuppressionReason": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+2@example.com",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:55:31",
 ***REMOVED******REMOVED******REMOVED***"State": "Suppressed"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"SuppressionReason": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+3@example.com",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:55:31",
 ***REMOVED******REMOVED******REMOVED***"State": "Suppressed"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"SuppressionReason": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subscriber@example.com",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:11:04",
 ***REMOVED******REMOVED******REMOVED***"State": "Suppressed"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"SuppressionReason": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subscriberone@example.com",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:04:15",
 ***REMOVED******REMOVED******REMOVED***"State": "Suppressed"

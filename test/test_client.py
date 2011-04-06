@@ -70,6 +70,7 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 5)
 ***REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results), 5)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].SuppressionReason, "Unsubscribed")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "example+1@example.com")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Suppressed")
