@@ -37,6 +37,8 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
 ***REMOVED******REMOVED***response = self._put("/subscribers/%s.json" % self.list_id, 
 ***REMOVED******REMOVED******REMOVED***body=json.dumps(body), params=params)
+***REMOVED******REMOVED***# Update self.email_address, so this object can continue to be used reliably
+***REMOVED******REMOVED***self.email_address = new_email_address
 
 ***REMOVED***def import_subscribers(self, list_id, subscribers, resubscribe):
 ***REMOVED******REMOVED***"""Imports subscribers into a subscriber list."""
