@@ -25,6 +25,18 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
 ***REMOVED******REMOVED***response = self._post("/subscribers/%s.json" % list_id, json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED***
+***REMOVED***def update(self, new_email_address, name, custom_fields, resubscribe):
+***REMOVED******REMOVED***"""Updates any aspect of a subscriber, including email address, name, and 
+***REMOVED******REMOVED***custom field data if supplied."""
+***REMOVED******REMOVED***params = { "email": self.email_address }
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"EmailAddress": new_email_address,
+***REMOVED******REMOVED******REMOVED***"Name": name,
+***REMOVED******REMOVED******REMOVED***"CustomFields": custom_fields,
+***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
+***REMOVED******REMOVED***response = self._put("/subscribers/%s.json" % self.list_id, 
+***REMOVED******REMOVED******REMOVED***body=json.dumps(body), params=params)
 
 ***REMOVED***def import_subscribers(self, list_id, subscribers, resubscribe):
 ***REMOVED******REMOVED***"""Imports subscribers into a subscriber list."""
