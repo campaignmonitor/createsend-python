@@ -25,6 +25,18 @@ class Subscriber(CreateSendBase):
       "Resubscribe": resubscribe }
     response = self._post("/subscribers/%s.json" % list_id, json.dumps(body))
     return json_to_py(response)
+  
+  def update(self, new_email_address, name, custom_fields, resubscribe):
+    """Updates any aspect of a subscriber, including email address, name, and 
+    custom field data if supplied."""
+    params = { "email": self.email_address }
+    body = {
+      "EmailAddress": new_email_address,
+      "Name": name,
+      "CustomFields": custom_fields,
+      "Resubscribe": resubscribe }
+    response = self._put("/subscribers/%s.json" % self.list_id, 
+      body=json.dumps(body), params=params)
 
   def import_subscribers(self, list_id, subscribers, resubscribe):
     """Imports subscribers into a subscriber list."""

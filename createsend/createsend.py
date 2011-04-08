@@ -86,8 +86,8 @@ class CreateSendBase(object):
   def _post(self, path, body=""):
     return self.make_request(path=path, method="POST", body=body)
 
-  def _put(self, path, body=""):
-    return self.make_request(path=path, method="PUT", body=body)
+  def _put(self, path, body="", params={}):
+    return self.make_request(path=path, method="PUT", params=params, body=body)
 
   def _delete(self, path):
     return self.make_request(path=path, method="DELETE")

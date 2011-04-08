@@ -42,6 +42,11 @@ class SubscriberTestCase(unittest.TestCase):
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
     self.assertEquals(email_address, "subscriber@example.com")
 
+  def test_update_with_custom_fields(self):
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+    custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
+    self.subscriber.update("new_email_address@example.com", "Subscriber", custom_fields, True)
+
   def test_import_subscribers(self):
     self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
     subscribers = [
