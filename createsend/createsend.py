@@ -2,6 +2,8 @@ import urllib
 import urllib2
 import httplib
 import base64
+import gzip
+from StringIO import StringIO
 from urlparse import urlparse
 from utils import json_to_py, get_faker
 
@@ -33,7 +35,10 @@ class CreateSendBase(object):
     self.faker = get_faker(expected_url, filename, status)
 
   def make_request(self, method, path, params={}, body="", username=None, password=None):
-    headers = { 'User-Agent': 'createsend-python-%s' % __version__, 'Content-Type': 'application/json' }
+    headers = {
+      'User-Agent': 'createsend-python-%s' % __version__,
+      'Content-Type': 'application/json; charset=utf-8',
+      'Accept-Encoding' : 'gzip, deflate' }
     parsed_base_uri = urlparse(CreateSend.base_uri)
     """username and password should only be set when it is intended that
     the default basic authentication mechanism using the API key be 
@@ -57,7 +62,10 @@ class CreateSendBase(object):
     c = httplib.HTTPConnection(parsed_base_uri.netloc)
     c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
-    data = response.read()
+    if response.getheader('content-encoding', '') == 'gzip':
+      data = gzip.GzipFile(fileobj=StringIO(response.read())).read()
+    else:
+      data = response.read()
     c.close()
     return self.handle_response(response.status, data)
 
