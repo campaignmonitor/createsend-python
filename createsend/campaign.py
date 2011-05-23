@@ -96,9 +96,10 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribes"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def bounces(self, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def bounces(self, date="1900-01-01", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the bounces for this campaign."""
 ***REMOVED******REMOVED***params = { 
+***REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
