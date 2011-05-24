@@ -28,7 +28,7 @@ class ClientTestCase(unittest.TestCase):
     campaigns = self.cl.campaigns()
     self.assertEquals(len(campaigns), 2)
     self.assertEquals(campaigns[0].CampaignID, 'fc0ce7105baeaf97f47c99be31d02a91')
-    self.assertEquals(campaigns[0].WebVersionURL, 'http://hello.createsend.com/t/ViewEmail/r/765E86829575EE2C/C67FD2F38AC4859C/')
+    self.assertEquals(campaigns[0].WebVersionURL, 'http://createsend.com/t/r-765E86829575EE2C')
     self.assertEquals(campaigns[0].Subject, 'Campaign One')
     self.assertEquals(campaigns[0].Name, 'Campaign One')
     self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
@@ -54,7 +54,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(drafts[0].Name, 'Draft One')
     self.assertEquals(drafts[0].Subject, 'Draft One')
     self.assertEquals(drafts[0].DateCreated, '2010-08-19 16:08:00')
-    self.assertEquals(drafts[0].PreviewURL, 'http://hello.createsend.com/t/ViewEmail/r/E97A7BB2E6983DA1/C67FD2F38AC4859C/')
+    self.assertEquals(drafts[0].PreviewURL, 'http://createsend.com/t/r-E97A7BB2E6983DA1')
 
   def test_lists(self):
     self.cl.stub_request("clients/%s/lists.json" % self.cl.client_id, "lists.json")
