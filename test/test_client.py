@@ -34,6 +34,18 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
     self.assertEquals(campaigns[0].TotalRecipients, 2245)
 
+  def test_scheduled(self):
+    self.cl.stub_request("clients/%s/scheduled.json" % self.cl.client_id, "scheduled_campaigns.json")
+    campaigns = self.cl.scheduled()
+    self.assertEquals(len(campaigns), 2)
+    self.assertEquals(campaigns[0].DateScheduled, "2011-05-25 10:40:00")
+    self.assertEquals(campaigns[0].ScheduledTimeZone, "(GMT+10:00) Canberra, Melbourne, Sydney")
+    self.assertEquals(campaigns[0].CampaignID, "827dbbd2161ea9989fa11ad562c66937")
+    self.assertEquals(campaigns[0].Name, "Magic Issue One")
+    self.assertEquals(campaigns[0].Subject, "Magic Issue One")
+    self.assertEquals(campaigns[0].DateCreated, "2011-05-24 10:37:00")
+    self.assertEquals(campaigns[0].PreviewURL, "http://createsend.com/t/r-DD543521A87C9B8B")
+
   def test_drafts(self):
     self.cl.stub_request("clients/%s/drafts.json" % self.cl.client_id, "drafts.json")
     drafts = self.cl.drafts()
