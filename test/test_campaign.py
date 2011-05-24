@@ -40,7 +40,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Unsubscribed, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.Bounced, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
-***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://clientone.createsend.com/t/ViewEmail/r/3A433FC72FFE3B8B/C67FD2F38AC4859C/")
+***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
 ***REMOVED***def test_lists_and_segments(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
