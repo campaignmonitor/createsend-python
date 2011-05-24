@@ -34,6 +34,18 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].TotalRecipients, 2245)
 
+***REMOVED***def test_scheduled(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/scheduled.json" % self.cl.client_id, "scheduled_campaigns.json")
+***REMOVED******REMOVED***campaigns = self.cl.scheduled()
+***REMOVED******REMOVED***self.assertEquals(len(campaigns), 2)
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].DateScheduled, "2011-05-25 10:40:00")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].ScheduledTimeZone, "(GMT+10:00) Canberra, Melbourne, Sydney")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].CampaignID, "827dbbd2161ea9989fa11ad562c66937")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].Name, "Magic Issue One")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].Subject, "Magic Issue One")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].DateCreated, "2011-05-24 10:37:00")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].PreviewURL, "http://createsend.com/t/r-DD543521A87C9B8B")
+
 ***REMOVED***def test_drafts(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/drafts.json" % self.cl.client_id, "drafts.json")
 ***REMOVED******REMOVED***drafts = self.cl.drafts()
