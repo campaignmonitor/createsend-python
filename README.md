@@ -4,7 +4,7 @@ A python library which implements the complete functionality of v3 of the Create
 
 ## Installation
 
-    pip install -e git+http://github.com/campaignmonitor/createsend-python.git#egg=createsend
+    pip install createsend
 
 ## Examples
 

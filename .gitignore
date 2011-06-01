@@ -2,3 +2,4 @@
 *.pyc
 example.py
 build
+dist
