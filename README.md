@@ -4,6 +4,8 @@ A python library which implements the complete functionality of v3 of the Create
 
 ## Installation
 
+Requires Python 2.6+
+
     pip install createsend
 
 ## Examples
