@@ -30,6 +30,11 @@ class Client(CreateSendBase):
     response = self._get(self.uri_for("campaigns"))
     return json_to_py(response)
 
+  def scheduled(self):
+    """Gets the currently scheduled campaigns belonging to this client."""
+    response = self._get(self.uri_for("scheduled"))
+    return json_to_py(response)
+
   def drafts(self):
     """Gets the draft campaigns belonging to this client."""
     response = self._get(self.uri_for("drafts"))
