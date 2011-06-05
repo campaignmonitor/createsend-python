@@ -40,7 +40,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Unsubscribed, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.Bounced, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
-***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://clientone.createsend.com/t/ViewEmail/r/3A433FC72FFE3B8B/C67FD2F38AC4859C/")
+***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
 ***REMOVED***def test_lists_and_segments(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
@@ -120,8 +120,9 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.NumberOfPages, 1)
 
 ***REMOVED***def test_bounces(self):
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?orderfield=date&page=1&pagesize=1000&orderdirection=asc" % self.campaign_id, "campaign_bounces.json")
-***REMOVED******REMOVED***bounces = self.campaign.bounces()
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_bounces.json")
+***REMOVED******REMOVED***bounces = self.campaign.bounces(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(bounces.Results), 2)
 ***REMOVED******REMOVED***self.assertEquals(bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")
 ***REMOVED******REMOVED***self.assertEquals(bounces.Results[0].ListID, "654523a5855b4a440bae3fb295641546")

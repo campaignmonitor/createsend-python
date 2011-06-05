@@ -30,6 +30,11 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("campaigns"))
 ***REMOVED******REMOVED***return json_to_py(response)
 
+***REMOVED***def scheduled(self):
+***REMOVED******REMOVED***"""Gets the currently scheduled campaigns belonging to this client."""
+***REMOVED******REMOVED***response = self._get(self.uri_for("scheduled"))
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def drafts(self):
 ***REMOVED******REMOVED***"""Gets the draft campaigns belonging to this client."""
 ***REMOVED******REMOVED***response = self._get(self.uri_for("drafts"))
