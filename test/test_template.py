@@ -14,7 +14,7 @@ class TemplateTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
 ***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % client_id, "create_template.json")
 ***REMOVED******REMOVED***template_id = self.template.create(client_id, "Template One", "http://templates.org/index.html", 
-***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
 ***REMOVED******REMOVED***self.assertEquals(template_id, "98y2e98y289dh89h938389")
 ***REMOVED******REMOVED***
 ***REMOVED***def test_details(self):
@@ -27,7 +27,7 @@ class TemplateTestCase(unittest.TestCase):
 
 ***REMOVED***def test_update(self):
 ***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % self.template.template_id, None)
-***REMOVED******REMOVED***self.template.update("Template One Updated", "http://templates.org/index.html", "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+***REMOVED******REMOVED***self.template.update("Template One Updated", "http://templates.org/index.html", "http://templates.org/files.zip")
 ***REMOVED***
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % self.template.template_id, None)
