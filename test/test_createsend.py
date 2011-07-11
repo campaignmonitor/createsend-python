@@ -95,25 +95,25 @@ class CreateSendTestCase(unittest.TestCase):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=400)
     self.assertRaises(self.error_responses[400], template.update, "Template One Updated", "http://templates.org/index.html", 
-      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+      "http://templates.org/files.zip")
 
   def test_unauthorized_on_put(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
     self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
-      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+      "http://templates.org/files.zip")
 
   def test_not_found_on_put(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=404)
     self.assertRaises(self.error_responses[404], template.update, "Template One Updated", "http://templates.org/index.html", 
-      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+      "http://templates.org/files.zip")
 
   def test_server_error_on_put(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
     self.assertRaises(self.error_responses[500], template.update, "Template One Updated", "http://templates.org/index.html", 
-      "http://templates.org/files.zip", "http://templates.org/screenshot.jpg")
+      "http://templates.org/files.zip")
   
   def test_bad_request_on_delete(self):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
