@@ -49,12 +49,47 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
 ***REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
 
+***REMOVED***def test_update_with_custom_fields_including_clear_option(self):
+***REMOVED******REMOVED***new_email = "new_email_address@example.com"
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+***REMOVED******REMOVED***custom_fields = [ { "Key": 'website', "Value": 'http://example.com/', "Clear": True } ]
+***REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
+***REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
+
 ***REMOVED***def test_import_subscribers(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
 ***REMOVED******REMOVED***subscribers = [
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example.com", "Name": "Example One" },
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two" },
 ***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+3@example.com", "Name": "Example Three" },
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***import_result = self.subscriber.import_subscribers(self.list_id, subscribers, True)
+***REMOVED******REMOVED***self.assertEquals(len(import_result.FailureDetails), 0)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalExistingSubscribers, 0)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalNewSubscribers, 3)
+***REMOVED******REMOVED***self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+
+***REMOVED***def test_import_subscribers_start_subscription_autoresponders(self):
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
+***REMOVED******REMOVED***subscribers = [
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example.com", "Name": "Example One" },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two" },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+3@example.com", "Name": "Example Three" },
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***import_result = self.subscriber.import_subscribers(self.list_id, subscribers, True, True)
+***REMOVED******REMOVED***self.assertEquals(len(import_result.FailureDetails), 0)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalExistingSubscribers, 0)
+***REMOVED******REMOVED***self.assertEquals(import_result.TotalNewSubscribers, 3)
+***REMOVED******REMOVED***self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+
+***REMOVED***def test_import_subscribers_with_custom_fields_including_clear_option(self):
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "import_subscribers.json")
+***REMOVED******REMOVED***subscribers = [
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example.com", "Name": "Example One", "CustomFields": [ { "Key": "website", "Value": "", "Clear": True } ] },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two", "CustomFields": [ { "Key": "website", "Value": "", "Clear": False } ] },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+3@example.com", "Name": "Example Three", "CustomFields": [ { "Key": "website", "Value": "", "Clear": False } ] },
 ***REMOVED******REMOVED***]
 ***REMOVED******REMOVED***import_result = self.subscriber.import_subscribers(self.list_id, subscribers, True)
 ***REMOVED******REMOVED***self.assertEquals(len(import_result.FailureDetails), 0)

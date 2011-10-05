@@ -40,11 +40,12 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***# Update self.email_address, so this object can continue to be used reliably
 ***REMOVED******REMOVED***self.email_address = new_email_address
 
-***REMOVED***def import_subscribers(self, list_id, subscribers, resubscribe):
+***REMOVED***def import_subscribers(self, list_id, subscribers, resubscribe, queue_subscription_based_autoresponders=False):
 ***REMOVED******REMOVED***"""Imports subscribers into a subscriber list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subscribers": subscribers,
-***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe }
+***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe,
+***REMOVED******REMOVED******REMOVED***"QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders }
 ***REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED***response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
 ***REMOVED******REMOVED***except BadRequest as br:
@@ -69,3 +70,8 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***params = { "email": self.email_address }
 ***REMOVED******REMOVED***response = self._get("/subscribers/%s/history.json" % self.list_id, params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def delete(self):
+***REMOVED******REMOVED***"""Moves this subscriber to the Deleted state in the associated list."""
+***REMOVED******REMOVED***params = { "email": self.email_address }
+***REMOVED******REMOVED***response = self._delete("/subscribers/%s.json" % self.list_id, params=params)

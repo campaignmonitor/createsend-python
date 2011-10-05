@@ -39,6 +39,10 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"SendDate": send_date }
 ***REMOVED******REMOVED***response = self._post(self.uri_for("send"), json.dumps(body))
 
+***REMOVED***def unschedule(self):
+***REMOVED******REMOVED***"""Unschedules this campaign if it is currently scheduled."""
+***REMOVED******REMOVED***response = self._post(self.uri_for("unschedule"), json.dumps({}))
+
 ***REMOVED***def delete(self):
 ***REMOVED******REMOVED***"""Deletes this campaign."""
 ***REMOVED******REMOVED***response = self._delete("/campaigns/%s.json" % self.campaign_id)

@@ -97,8 +97,8 @@ class CreateSendBase(object):
 ***REMOVED***def _put(self, path, body="", params={}):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="PUT", params=params, body=body)
 
-***REMOVED***def _delete(self, path):
-***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE")
+***REMOVED***def _delete(self, path, params={}):
+***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE", params=params)
 
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
