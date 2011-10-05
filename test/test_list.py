@@ -111,6 +111,24 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].State, "Unsubscribed")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
 
+  def test_unsubscribed(self):
+    min_date = "2010-01-01"
+    self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
+    res = self.list.deleted(min_date)
+    self.assertEquals(res.ResultsOrderedBy, "email")
+    self.assertEquals(res.OrderDirection, "asc")
+    self.assertEquals(res.PageNumber, 1)
+    self.assertEquals(res.PageSize, 1000)
+    self.assertEquals(res.RecordsOnThisPage, 5)
+    self.assertEquals(res.TotalNumberOfRecords, 5)
+    self.assertEquals(res.NumberOfPages, 1)
+    self.assertEquals(len(res.Results), 5)
+    self.assertEquals(res.Results[0].EmailAddress, "subscriber@example.com")
+    self.assertEquals(res.Results[0].Name, "Deleted One")
+    self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
+    self.assertEquals(res.Results[0].State, "Deleted")
+    self.assertEquals(len(res.Results[0].CustomFields), 0)
+
   def test_bounced(self):
     min_date = "2010-01-01"
     self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "bounced_subscribers.json")

@@ -40,11 +40,12 @@ class Subscriber(CreateSendBase):
     # Update self.email_address, so this object can continue to be used reliably
     self.email_address = new_email_address
 
-  def import_subscribers(self, list_id, subscribers, resubscribe):
+  def import_subscribers(self, list_id, subscribers, resubscribe, queue_subscription_based_autoresponders=False):
     """Imports subscribers into a subscriber list."""
     body = {
       "Subscribers": subscribers,
-      "Resubscribe": resubscribe }
+      "Resubscribe": resubscribe,
+      "QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders }
     try:
       response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
     except BadRequest as br:
@@ -69,3 +70,8 @@ class Subscriber(CreateSendBase):
     params = { "email": self.email_address }
     response = self._get("/subscribers/%s/history.json" % self.list_id, params=params)
     return json_to_py(response)
+
+  def delete(self):
+    """Moves this subscriber to the Deleted state in the associated list."""
+    params = { "email": self.email_address }
+    response = self._delete("/subscribers/%s.json" % self.list_id, params=params)
