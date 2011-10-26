@@ -1,5 +1,8 @@
 import os
-import json
+try:
+  import json
+except ImportError:
+  import simplejson as json
 
 def json_to_py(j):
   o = json.loads(j)
