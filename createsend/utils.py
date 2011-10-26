@@ -1,5 +1,8 @@
 ***REMOVED***
-import json
+try:
+***REMOVED***import json
+except ImportError:
+***REMOVED***import simplejson as json
 
 def json_to_py(j):
 ***REMOVED***o = json.loads(j)

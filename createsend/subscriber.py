@@ -1,4 +1,7 @@
-import json
+try:
+***REMOVED***import json
+except ImportError:
+***REMOVED***import simplejson as json
 from createsend import CreateSendBase, BadRequest
 from utils import json_to_py
 
