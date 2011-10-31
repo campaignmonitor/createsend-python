@@ -111,6 +111,24 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Unsubscribed")
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
 
+***REMOVED***def test_unsubscribed(self):
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
+***REMOVED******REMOVED***res = self.list.deleted(min_date)
+***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
+***REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
+***REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
+***REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 5)
+***REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 5)
+***REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
+***REMOVED******REMOVED***self.assertEquals(len(res.Results), 5)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "subscriber@example.com")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Deleted One")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Deleted")
+***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
+
 ***REMOVED***def test_bounced(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "bounced_subscribers.json")

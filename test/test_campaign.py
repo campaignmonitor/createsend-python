@@ -27,6 +27,10 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/send.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send("confirmation@example.com")
 
+***REMOVED***def test_unschedule(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/unschedule.json" % self.campaign_id, None)
+***REMOVED******REMOVED***self.campaign.unschedule()
+
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.delete()
@@ -40,6 +44,9 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Unsubscribed, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.Bounced, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
+***REMOVED******REMOVED***self.assertEquals(summary.Mentions, 23)
+***REMOVED******REMOVED***self.assertEquals(summary.Forwards, 11)
+***REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
 ***REMOVED***def test_lists_and_segments(self):

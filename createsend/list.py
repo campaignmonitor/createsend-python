@@ -102,6 +102,17 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribed"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
+***REMOVED***def deleted(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***"""Gets the deleted subscribers for this list."""
+***REMOVED******REMOVED***params = {
+***REMOVED******REMOVED******REMOVED***"date": date,
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
+***REMOVED******REMOVED***response = self._get(self.uri_for("deleted"), params=params)
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def update(self, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
 ***REMOVED******REMOVED***"""Updates this list."""
 ***REMOVED******REMOVED***body = {
