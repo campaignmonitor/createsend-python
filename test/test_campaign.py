@@ -44,9 +44,9 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Unsubscribed, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.Bounced, 0)
 ***REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
-***REMOVED******REMOVED***self.assertEquals(summary.TwitterTweets, 23)
-***REMOVED******REMOVED***self.assertEquals(summary.ForwardToAFriends, 11)
-***REMOVED******REMOVED***self.assertEquals(summary.FacebookLikes, 32)
+***REMOVED******REMOVED***self.assertEquals(summary.Mentions, 23)
+***REMOVED******REMOVED***self.assertEquals(summary.Forwards, 11)
+***REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
 ***REMOVED***def test_lists_and_segments(self):
