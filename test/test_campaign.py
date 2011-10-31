@@ -44,9 +44,9 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.Unsubscribed, 0)
     self.assertEquals(summary.Bounced, 0)
     self.assertEquals(summary.UniqueOpened, 5)
-    self.assertEquals(summary.TwitterTweets, 23)
-    self.assertEquals(summary.ForwardToAFriends, 11)
-    self.assertEquals(summary.FacebookLikes, 32)
+    self.assertEquals(summary.Mentions, 23)
+    self.assertEquals(summary.Forwards, 11)
+    self.assertEquals(summary.Likes, 32)
     self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
   def test_lists_and_segments(self):
