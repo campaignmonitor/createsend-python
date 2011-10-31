@@ -27,6 +27,10 @@ class CampaignTestCase(unittest.TestCase):
     self.campaign.stub_request("campaigns/%s/send.json" % self.campaign_id, None)
     self.campaign.send("confirmation@example.com")
 
+  def test_unschedule(self):
+    self.campaign.stub_request("campaigns/%s/unschedule.json" % self.campaign_id, None)
+    self.campaign.unschedule()
+
   def test_delete(self):
     self.campaign.stub_request("campaigns/%s.json" % self.campaign_id, None)
     self.campaign.delete()
@@ -40,6 +44,9 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.Unsubscribed, 0)
     self.assertEquals(summary.Bounced, 0)
     self.assertEquals(summary.UniqueOpened, 5)
+    self.assertEquals(summary.Mentions, 23)
+    self.assertEquals(summary.Forwards, 11)
+    self.assertEquals(summary.Likes, 32)
     self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 
   def test_lists_and_segments(self):
