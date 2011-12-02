@@ -51,7 +51,7 @@ class Subscriber(CreateSendBase):
       "QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders }
     try:
       response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
-    except BadRequest as br:
+    except BadRequest, br:
       # Subscriber import will throw BadRequest if some subscribers are not imported
       # successfully. If this occurs, we want to return the ResultData property of
       # the BadRequest exception (which is of the same "form" as the response we'd 
