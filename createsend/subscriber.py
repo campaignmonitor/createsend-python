@@ -51,7 +51,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders }
 ***REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED***response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
-***REMOVED******REMOVED***except BadRequest as br:
+***REMOVED******REMOVED***except BadRequest, br:
 ***REMOVED******REMOVED******REMOVED***# Subscriber import will throw BadRequest if some subscribers are not imported
 ***REMOVED******REMOVED******REMOVED***# successfully. If this occurs, we want to return the ResultData property of
 ***REMOVED******REMOVED******REMOVED***# the BadRequest exception (which is of the same "form" as the response we'd 
