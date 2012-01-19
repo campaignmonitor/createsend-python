@@ -1,0 +1,6 @@
+rvm:
+***REMOVED***- 1.9.3
+before_script:
+***REMOVED***- sudo pip install nose
+script:
+***REMOVED***- nosetests 
