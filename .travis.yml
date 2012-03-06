@@ -1,6 +1,8 @@
-rvm:
-***REMOVED***- 1.9.3
-before_script:
-***REMOVED***- sudo pip install nose
-script:
-***REMOVED***- nosetests 
+language: python
+python:
+***REMOVED***- 2.5
+***REMOVED***- 2.6
+***REMOVED***- 2.7
+***REMOVED***- 3.2
+install: pip install nose
+script:***REMOVED***nosetests
