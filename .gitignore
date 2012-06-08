@@ -3,3 +3,5 @@
 example.py
 build
 dist
+/.buildpath
+/.project

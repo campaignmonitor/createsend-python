@@ -106,6 +106,22 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"ClientPays": client_pays,
 ***REMOVED******REMOVED******REMOVED***"MarkupPercentage": markup_percentage }
 ***REMOVED******REMOVED***response = self._put(self.uri_for('setmonthlybilling'), json.dumps(body))
+***REMOVED******REMOVED***
+***REMOVED***def people(self):
+***REMOVED***	"""gets people associated with the client"""
+***REMOVED***	response = self._get(self.uri_for('people'))
+***REMOVED***	return json_to_py(response)
+***REMOVED***
+***REMOVED***def get_primary_contact(self):
+***REMOVED***	"""retrieves the primary contact for this client"""
+***REMOVED***	response = self._get(self.uri_for('primarycontact'))
+***REMOVED***	return json_to_py(response)
+***REMOVED***
+***REMOVED***def set_primary_contact(self, email):
+***REMOVED***	"""assigns the primary contact for this client"""
+	params = { "email": email }
+	response = self._put(self.uri_for('primarycontact'), params = params)
+	return json_to_py(response)***REMOVED******REMOVED***
 
 ***REMOVED***def delete(self):
 ***REMOVED******REMOVED***"""Deletes this client."""

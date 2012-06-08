@@ -49,7 +49,26 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***timezones = self.cs.timezones()
 ***REMOVED******REMOVED***self.assertEquals(97, len(timezones))
 ***REMOVED******REMOVED***self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+***REMOVED******REMOVED***
+***REMOVED***def test_administrators(self):
+***REMOVED***	self.cs.stub_request("admins.json", "administrators.json")
+***REMOVED***	administrators = self.cs.administrators()
+***REMOVED***	self.assertEquals(2, len(administrators))
+***REMOVED***	self.assertEquals('admin1@blackhole.com', administrators[0].EmailAddress)
+***REMOVED***	self.assertEquals('Admin One', administrators[0].Name)
+***REMOVED***	self.assertEquals('Active', administrators[0].Status)***REMOVED***
 
+***REMOVED***def test_get_primary_contact(self):
+***REMOVED***	self.cs.stub_request("primarycontact.json", "admin_get_primary_contact.json")
+***REMOVED***	primary_contact = self.cs.get_primary_contact()
+***REMOVED***	self.assertEquals('admin@blackhole.com', primary_contact.EmailAddress)
+***REMOVED***	
+***REMOVED***def test_set_primary_contact(self):
+***REMOVED******REMOVED***email = 'admin@blackhole.com'
+***REMOVED******REMOVED***self.cs.stub_request('primarycontact.json?email=%s' % urllib.quote(email, ''), 'admin_set_primary_contact.json')
+***REMOVED******REMOVED***result = self.cs.set_primary_contact(email)
+***REMOVED******REMOVED***self.assertEquals(email, result.EmailAddress)
+***REMOVED***	
 ***REMOVED***# Test that the corresponding exceptions are raised according to the returned http status code
 ***REMOVED***def test_bad_request_on_get(self):
 ***REMOVED******REMOVED***self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)
