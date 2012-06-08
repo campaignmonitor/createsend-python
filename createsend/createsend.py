@@ -7,7 +7,7 @@ from StringIO import StringIO
 from urlparse import urlparse
 from utils import json_to_py, get_faker
 
-__version_info__ = ('1', '0', '2')
+__version_info__ = ('1', '1', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
@@ -131,3 +131,19 @@ class CreateSend(CreateSendBase):
     """Gets valid timezones."""
     response = self._get('/timezones.json')
     return json_to_py(response)
+
+  def administrators(self):
+  	"""gets administrators associated with the account"""
+  	response = self._get('/admins.json')
+  	return json_to_py(response)
+  
+  def get_primary_contact(self):
+  	"""retrieves the primary contact for this account"""
+  	response = self._get('/primarycontact.json')
+  	return json_to_py(response)
+  	
+  def set_primary_contact(self, email):
+	"""assigns the primary contact for this account"""
+	params = { "email": email }
+	response = self._put('/primarycontact.json', params = params)
+	return json_to_py(response)

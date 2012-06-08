@@ -49,7 +49,26 @@ class CreateSendTestCase(unittest.TestCase):
     timezones = self.cs.timezones()
     self.assertEquals(97, len(timezones))
     self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+    
+  def test_administrators(self):
+  	self.cs.stub_request("admins.json", "administrators.json")
+  	administrators = self.cs.administrators()
+  	self.assertEquals(2, len(administrators))
+  	self.assertEquals('admin1@blackhole.com', administrators[0].EmailAddress)
+  	self.assertEquals('Admin One', administrators[0].Name)
+  	self.assertEquals('Active', administrators[0].Status)  
 
+  def test_get_primary_contact(self):
+  	self.cs.stub_request("primarycontact.json", "admin_get_primary_contact.json")
+  	primary_contact = self.cs.get_primary_contact()
+  	self.assertEquals('admin@blackhole.com', primary_contact.EmailAddress)
+  	
+  def test_set_primary_contact(self):
+    email = 'admin@blackhole.com'
+    self.cs.stub_request('primarycontact.json?email=%s' % urllib.quote(email, ''), 'admin_set_primary_contact.json')
+    result = self.cs.set_primary_contact(email)
+    self.assertEquals(email, result.EmailAddress)
+  	
   # Test that the corresponding exceptions are raised according to the returned http status code
   def test_bad_request_on_get(self):
     self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)

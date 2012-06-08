@@ -108,8 +108,27 @@ class ClientTestCase(unittest.TestCase):
 
   def test_set_monthly_billing(self):
     self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None)
-    self.cl.set_monthly_billing("CAD", True, 150)
+    self.cl.set_monthly_billing("CAD", True, 150)   
+    
+  def test_people(self):
+ 	self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
+ 	people = self.cl.people()
+ 	self.assertEquals(2, len(people))
+ 	self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
+ 	self.assertEquals('Person One', people[0].Name)
+ 	self.assertEquals('Active', people[0].Status)  
 
+  def test_get_primary_contact(self):
+  	self.cl.stub_request("clients/%s/primarycontact.json" % self.cl.client_id, "client_get_primary_contact.json")
+  	primary_contact = self.cl.get_primary_contact()
+  	self.assertEquals('person@blackhole.com', primary_contact.EmailAddress)
+  	
+  def test_set_primary_contact(self):
+    email = 'person@blackhole.com'
+    self.cl.stub_request("clients/%s/primarycontact.json?email=%s" % (self.cl.client_id, urllib.quote(email, '')), 'client_set_primary_contact.json')
+    result = self.cl.set_primary_contact(email)
+    self.assertEquals(email, result.EmailAddress)
+      
   def test_delete(self):
     self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
     self.cl.delete()
