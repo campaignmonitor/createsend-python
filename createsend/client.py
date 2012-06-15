@@ -4,6 +4,7 @@ except ImportError:
   import simplejson as json
 from createsend import CreateSendBase
 from utils import json_to_py
+import warnings
 
 class Client(CreateSendBase):
   """Represents a client and associated functionality."""
@@ -14,6 +15,11 @@ class Client(CreateSendBase):
 
   def create(self, company, contact_name, email, timezone, country):
     """Creates a client."""
+    if not (contact_name is None or contact_name == ""):
+    	warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
+	if not (email is None or email == ""):
+		warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
+        
     body = { 
       "CompanyName": company, 
       "ContactName": contact_name,
@@ -70,6 +76,10 @@ class Client(CreateSendBase):
 
   def set_basics(self, company, contact_name, email, timezone, country):
     """Sets the basic details for this client."""
+    if not (contact_name is None or contact_name == ""):
+    	warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
+   	if not (email is None or email == ""):
+   		warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
     body = {
       "CompanyName": company, 
       "ContactName": contact_name,
@@ -80,6 +90,7 @@ class Client(CreateSendBase):
 
   def set_access(self, username, password, access_level):
     """Sets the access settings for this client."""
+    warnings.warn("[DEPRECATION] set_access has been deprecated. Instead, set access on persons in this client using person.add or person.update")
     body = {
       "Username": username, 
       "Password": password, 
