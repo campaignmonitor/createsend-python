@@ -4,6 +4,7 @@ except ImportError:
 ***REMOVED***import simplejson as json
 from createsend import CreateSendBase
 from utils import json_to_py
+import warnings
 
 class Client(CreateSendBase):
 ***REMOVED***"""Represents a client and associated functionality."""
@@ -14,6 +15,11 @@ class Client(CreateSendBase):
 
 ***REMOVED***def create(self, company, contact_name, email, timezone, country):
 ***REMOVED******REMOVED***"""Creates a client."""
+***REMOVED******REMOVED***if not (contact_name is None or contact_name == ""):
+***REMOVED******REMOVED***	warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
+	if not (email is None or email == ""):
+		warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
+***REMOVED******REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED***body = { 
 ***REMOVED******REMOVED******REMOVED***"CompanyName": company, 
 ***REMOVED******REMOVED******REMOVED***"ContactName": contact_name,
@@ -70,6 +76,10 @@ class Client(CreateSendBase):
 
 ***REMOVED***def set_basics(self, company, contact_name, email, timezone, country):
 ***REMOVED******REMOVED***"""Sets the basic details for this client."""
+***REMOVED******REMOVED***if not (contact_name is None or contact_name == ""):
+***REMOVED******REMOVED***	warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
+***REMOVED*** 	if not (email is None or email == ""):
+***REMOVED*** 		warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"CompanyName": company, 
 ***REMOVED******REMOVED******REMOVED***"ContactName": contact_name,
@@ -80,6 +90,7 @@ class Client(CreateSendBase):
 
 ***REMOVED***def set_access(self, username, password, access_level):
 ***REMOVED******REMOVED***"""Sets the access settings for this client."""
+***REMOVED******REMOVED***warnings.warn("[DEPRECATION] set_access has been deprecated. Instead, set access on persons in this client using person.add or person.update")
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Username": username, 
 ***REMOVED******REMOVED******REMOVED***"Password": password, 
