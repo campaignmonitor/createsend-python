@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>createsend-python by campaignmonitor</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>createsend-python</h1>
+        <p>A python library for v3 of the createsend API</p>
+
+        <p class="view"><a href="https://github.com/campaignmonitor/createsend-python">View the Project on GitHub <small>campaignmonitor/createsend-python</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/campaignmonitor/createsend-python/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/campaignmonitor/createsend-python/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/campaignmonitor/createsend-python">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>createsend <a href="http://travis-ci.org/campaignmonitor/createsend-python"><img src="https://secure.travis-ci.org/campaignmonitor/createsend-python.png" alt="Build Status"></a>
+</h1>
+
+<p>A python library which implements the complete functionality of v3 of the <a href="http://www.campaignmonitor.com/api/">Campaign Monitor API</a>.</p>
+
+<h2>Installation</h2>
+
+<pre><code>pip install createsend
+</code></pre>
+
+<h2>Examples</h2>
+
+<h3>Basic usage</h3>
+
+<p>Retrieve a list of all your clients.</p>
+
+<pre><code>from createsend import *
+
+CreateSend.api_key = 'your_api_key'
+
+cs = CreateSend()
+clients = cs.clients()
+
+for c in clients:
+  print "%s: %s" % (c.ClientID, c.Name)
+</code></pre>
+
+<p>Results in:</p>
+
+<pre><code>4a397ccaaa55eb4e6aa1221e1e2d7122: Client One
+a206def0582eec7dae47d937a4109cb2: Client Two
+</code></pre>
+
+<h3>Handling errors</h3>
+
+<p>If the createsend API returns an error, an exception will be thrown. For example, if you attempt to create a campaign and enter empty values for subject etc:</p>
+
+<pre><code>from createsend import *
+
+CreateSend.api_key = 'your_api_key'
+
+try:
+  cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+  id = Campaign().create(cl.client_id, "", "", "", "", "", "", "", [], [])
+  print "New campaign ID: %s" % id
+except BadRequest as br:
+  print "Bad request error: %s" % br
+  print "Error Code:    %s" % br.data.Code
+  print "Error Message: %s" % br.data.Message
+except Exception as e:
+  print "Error: %s" % e
+</code></pre>
+
+<p>Results in:</p>
+
+<pre><code>Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
+Error Code:    304
+Error Message: Campaign Subject Required
+</code></pre>
+
+<h3>Expected input and output</h3>
+
+<p>The best way of finding out the expected input and output of a particular method in a particular class is to use the unit tests as a reference.</p>
+
+<p>For example, if you wanted to find out how to call the Subscriber.add() method, you would look at the file test/test_subscriber.py</p>
+
+<pre><code>def test_add_with_custom_fields(self):
+  self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
+  custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
+  email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+  self.assertEquals(email_address, "subscriber@example.com")
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/campaignmonitor">campaignmonitor</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
