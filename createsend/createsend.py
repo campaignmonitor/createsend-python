@@ -7,7 +7,7 @@ from StringIO import StringIO
 from urlparse import urlparse
 from utils import json_to_py, get_faker
 
-__version_info__ = ('1', '1', '0')
+__version_info__ = ('1', '1', '1')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
