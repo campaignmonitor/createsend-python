@@ -19,17 +19,18 @@ class Subscriber(CreateSendBase):
     response = self._get("/subscribers/%s.json" % list_id, params=params)
     return json_to_py(response)
 
-  def add(self, list_id, email_address, name, custom_fields, resubscribe):
+  def add(self, list_id, email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
     """Adds a subscriber to a subscriber list."""
     body = {
       "EmailAddress": email_address,
       "Name": name,
       "CustomFields": custom_fields,
-      "Resubscribe": resubscribe }
+      "Resubscribe": resubscribe,
+      "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
     response = self._post("/subscribers/%s.json" % list_id, json.dumps(body))
     return json_to_py(response)
   
-  def update(self, new_email_address, name, custom_fields, resubscribe):
+  def update(self, new_email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
     """Updates any aspect of a subscriber, including email address, name, and 
     custom field data if supplied."""
     params = { "email": self.email_address }
@@ -37,18 +38,20 @@ class Subscriber(CreateSendBase):
       "EmailAddress": new_email_address,
       "Name": name,
       "CustomFields": custom_fields,
-      "Resubscribe": resubscribe }
+      "Resubscribe": resubscribe,
+      "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
     response = self._put("/subscribers/%s.json" % self.list_id, 
       body=json.dumps(body), params=params)
     # Update self.email_address, so this object can continue to be used reliably
     self.email_address = new_email_address
 
-  def import_subscribers(self, list_id, subscribers, resubscribe, queue_subscription_based_autoresponders=False):
+  def import_subscribers(self, list_id, subscribers, resubscribe, queue_subscription_based_autoresponders=False, restart_subscription_based_autoresponders=False):
     """Imports subscribers into a subscriber list."""
     body = {
       "Subscribers": subscribers,
       "Resubscribe": resubscribe,
-      "QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders }
+      "QueueSubscriptionBasedAutoresponders": queue_subscription_based_autoresponders,
+      "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
     try:
       response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
     except BadRequest, br:
