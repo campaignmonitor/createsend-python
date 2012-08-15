@@ -13,13 +13,15 @@ class List(CreateSendBase):
     self.list_id = list_id
     super(List, self).__init__()
 
-  def create(self, client_id, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
+  def create(self, client_id, title, unsubscribe_page, confirmed_opt_in,
+    confirmation_success_page, unsubscribe_setting="AllClientLists"):
     """Creates a new list for a client."""
     body = { 
       "Title": title,
       "UnsubscribePage": unsubscribe_page,
       "ConfirmedOptIn": confirmed_opt_in,
-      "ConfirmationSuccessPage": confirmation_success_page }
+      "ConfirmationSuccessPage": confirmation_success_page,
+      "UnsubscribeSetting": unsubscribe_setting }
     response = self._post("/lists/%s.json" % client_id, json.dumps(body))
     return json_to_py(response)
 
@@ -113,13 +115,18 @@ class List(CreateSendBase):
     response = self._get(self.uri_for("deleted"), params=params)
     return json_to_py(response)
 
-  def update(self, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
+  def update(self, title, unsubscribe_page, confirmed_opt_in,
+    confirmation_success_page, unsubscribe_setting="AllClientLists",
+    add_unsubscribes_to_supp_list=False, scrub_active_with_supp_list=False):
     """Updates this list."""
     body = {
       "Title": title,
       "UnsubscribePage": unsubscribe_page,
       "ConfirmedOptIn": confirmed_opt_in,
-      "ConfirmationSuccessPage": confirmation_success_page }
+      "ConfirmationSuccessPage": confirmation_success_page,
+      "UnsubscribeSetting": unsubscribe_setting,
+      "AddUnsubscribesToSuppList": add_unsubscribes_to_supp_list,
+      "ScrubActiveWithSuppList": scrub_active_with_supp_list }
     response = self._put("/lists/%s.json" % self.list_id, json.dumps(body))
 
   def webhooks(self):
