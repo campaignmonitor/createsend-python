@@ -62,6 +62,16 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(len(lists), 2)
     self.assertEquals(lists[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
     self.assertEquals(lists[0].Name, 'List One')
+
+  def test_lists_for_email(self):
+    email = "valid@example.com"
+    self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, urllib.quote(email)), "listsforemail.json")
+    lists = self.cl.lists_for_email(email)
+    self.assertEquals(len(lists), 2)
+    self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
+    self.assertEquals(lists[0].ListName, 'List Number One')
+    self.assertEquals(lists[0].SubscriberState, 'Active')
+    self.assertEquals(lists[0].DateSubscriberAdded, '2012-08-20 22:32:00')
     
   def test_segments(self):
     self.cl.stub_request("clients/%s/segments.json" % self.cl.client_id, "segments.json")
