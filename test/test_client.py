@@ -11,7 +11,7 @@ class ClientTestCase(unittest.TestCase):
 
   def test_create(self):
     self.cl.stub_request("clients.json", "create_client.json")
-    client_id = self.cl.create("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+    client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
     self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
 
   def test_details(self):
@@ -106,11 +106,7 @@ class ClientTestCase(unittest.TestCase):
 
   def test_set_basics(self):
     self.cl.stub_request("clients/%s/setbasics.json" % self.cl.client_id, None)
-    self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
-
-  def test_set_access(self):
-    self.cl.stub_request("clients/%s/setaccess.json" % self.cl.client_id, None)
-    self.cl.set_access("username", "password", 321)
+    self.cl.set_basics("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_set_payg_billing(self):
     self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)

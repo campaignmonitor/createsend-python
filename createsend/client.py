@@ -4,7 +4,6 @@ except ImportError:
   import simplejson as json
 from createsend import CreateSendBase
 from utils import json_to_py
-import warnings
 
 class Client(CreateSendBase):
   """Represents a client and associated functionality."""
@@ -13,17 +12,11 @@ class Client(CreateSendBase):
     self.client_id = client_id
     super(Client, self).__init__()
 
-  def create(self, company, contact_name, email, timezone, country):
+  def create(self, company, timezone, country):
     """Creates a client."""
-    if not (contact_name is None or contact_name == ""):
-    	warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
-	if not (email is None or email == ""):
-		warnings.warn("[DEPRECATION] create used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
-        
+
     body = { 
       "CompanyName": company, 
-      "ContactName": contact_name,
-      "EmailAddress": email,
       "TimeZone": timezone,
       "Country": country }
     response = self._post("/clients.json", json.dumps(body))
@@ -81,28 +74,12 @@ class Client(CreateSendBase):
     response = self._get(self.uri_for("templates"))
     return json_to_py(response)
 
-  def set_basics(self, company, contact_name, email, timezone, country):
-    """Sets the basic details for this client."""
-    if not (contact_name is None or contact_name == ""):
-    	warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set contact_name on persons in this client using person.add or person.update")
-   	if not (email is None or email == ""):
-   		warnings.warn("[DEPRECATION] set_basics used in this way has been deprecated. Instead, set email on persons in this client using person.add or person.update")
+  def set_basics(self, company, timezone, country):
     body = {
       "CompanyName": company, 
-      "ContactName": contact_name,
-      "EmailAddress": email,
       "TimeZone": timezone,
       "Country": country }
     response = self._put(self.uri_for('setbasics'), json.dumps(body))
-
-  def set_access(self, username, password, access_level):
-    """Sets the access settings for this client."""
-    warnings.warn("[DEPRECATION] set_access has been deprecated. Instead, set access on persons in this client using person.add or person.update")
-    body = {
-      "Username": username, 
-      "Password": password, 
-      "AccessLevel": access_level }
-    response = self._put(self.uri_for('setaccess'), json.dumps(body))
 
   def set_payg_billing(self, currency, can_purchase_credits, client_pays, markup_percentage, 
     markup_on_delivery=0, markup_per_recipient=0, markup_on_design_spam_test=0):
