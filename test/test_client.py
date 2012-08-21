@@ -11,7 +11,7 @@ class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients.json", "create_client.json")
-***REMOVED******REMOVED***client_id = self.cl.create("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+***REMOVED******REMOVED***client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 ***REMOVED******REMOVED***self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
 
 ***REMOVED***def test_details(self):
@@ -106,11 +106,7 @@ class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def test_set_basics(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setbasics.json" % self.cl.client_id, None)
-***REMOVED******REMOVED***self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
-
-***REMOVED***def test_set_access(self):
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setaccess.json" % self.cl.client_id, None)
-***REMOVED******REMOVED***self.cl.set_access("username", "password", 321)
+***REMOVED******REMOVED***self.cl.set_basics("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_set_payg_billing(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)

@@ -89,25 +89,25 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED***def test_bad_request_on_post(self):
 ***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', 'custom_api_error.json', status=400)
-***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_unauthorized_on_post(self):
 ***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', 'custom_api_error.json', status=401)
-***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_not_found_on_post(self):
 ***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', None, status=404)
-***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_server_error_on_post(self):
 ***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', None, status=500)
-***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], client.create, "Client Company Name", 
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_bad_request_on_put(self):
