@@ -54,6 +54,13 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("lists"))
 ***REMOVED******REMOVED***return json_to_py(response)
 
+***REMOVED***def lists_for_email(self, email_address):
+***REMOVED******REMOVED***"""Gets the lists across a client to which a subscriber with a particular
+***REMOVED******REMOVED***email address belongs."""
+***REMOVED******REMOVED***params = { "email": email_address }
+***REMOVED******REMOVED***response = self._get(self.uri_for("listsforemail"), params=params)
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def segments(self):
 ***REMOVED******REMOVED***"""Gets the segments belonging to this client."""
 ***REMOVED******REMOVED***response = self._get(self.uri_for("segments"))
