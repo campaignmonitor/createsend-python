@@ -13,13 +13,15 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***self.list_id = list_id
 ***REMOVED******REMOVED***super(List, self).__init__()
 
-***REMOVED***def create(self, client_id, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
+***REMOVED***def create(self, client_id, title, unsubscribe_page, confirmed_opt_in,
+***REMOVED******REMOVED***confirmation_success_page, unsubscribe_setting="AllClientLists"):
 ***REMOVED******REMOVED***"""Creates a new list for a client."""
 ***REMOVED******REMOVED***body = { 
 ***REMOVED******REMOVED******REMOVED***"Title": title,
 ***REMOVED******REMOVED******REMOVED***"UnsubscribePage": unsubscribe_page,
 ***REMOVED******REMOVED******REMOVED***"ConfirmedOptIn": confirmed_opt_in,
-***REMOVED******REMOVED******REMOVED***"ConfirmationSuccessPage": confirmation_success_page }
+***REMOVED******REMOVED******REMOVED***"ConfirmationSuccessPage": confirmation_success_page,
+***REMOVED******REMOVED******REMOVED***"UnsubscribeSetting": unsubscribe_setting }
 ***REMOVED******REMOVED***response = self._post("/lists/%s.json" % client_id, json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
 
@@ -113,13 +115,18 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("deleted"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def update(self, title, unsubscribe_page, confirmed_opt_in, confirmation_success_page):
+***REMOVED***def update(self, title, unsubscribe_page, confirmed_opt_in,
+***REMOVED******REMOVED***confirmation_success_page, unsubscribe_setting="AllClientLists",
+***REMOVED******REMOVED***add_unsubscribes_to_supp_list=False, scrub_active_with_supp_list=False):
 ***REMOVED******REMOVED***"""Updates this list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Title": title,
 ***REMOVED******REMOVED******REMOVED***"UnsubscribePage": unsubscribe_page,
 ***REMOVED******REMOVED******REMOVED***"ConfirmedOptIn": confirmed_opt_in,
-***REMOVED******REMOVED******REMOVED***"ConfirmationSuccessPage": confirmation_success_page }
+***REMOVED******REMOVED******REMOVED***"ConfirmationSuccessPage": confirmation_success_page,
+***REMOVED******REMOVED******REMOVED***"UnsubscribeSetting": unsubscribe_setting,
+***REMOVED******REMOVED******REMOVED***"AddUnsubscribesToSuppList": add_unsubscribes_to_supp_list,
+***REMOVED******REMOVED******REMOVED***"ScrubActiveWithSuppList": scrub_active_with_supp_list }
 ***REMOVED******REMOVED***response = self._put("/lists/%s.json" % self.list_id, json.dumps(body))
 
 ***REMOVED***def webhooks(self):

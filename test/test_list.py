@@ -12,14 +12,27 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
 ***REMOVED******REMOVED***self.list = List(self.list_id)
 
-***REMOVED***def test_create(self):
+***REMOVED***def test_create_without_unsubscribe_setting(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.client_id, "create_list.json")
 ***REMOVED******REMOVED***list_id = self.list.create(self.client_id, "List One", "", False, "")
 ***REMOVED******REMOVED***self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee")
 
-***REMOVED***def test_update(self):
+***REMOVED***def test_create_with_unsubscribe_setting(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.client_id, "create_list.json")
+***REMOVED******REMOVED***list_id = self.list.create(self.client_id, "List One", "", False, "", "OnlyThisList")
+***REMOVED******REMOVED***self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee")
+
+***REMOVED***def test_update_without_unsubscribe_setting(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.list.list_id, None)
 ***REMOVED******REMOVED***self.list.update("List One Renamed", "", False, "")
+
+***REMOVED***def test_update_with_unsubscribe_setting(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.list.list_id, None)
+***REMOVED******REMOVED***self.list.update("List One Renamed", "", False, "", "OnlyThisList")
+
+***REMOVED***def test_update_with_unsubscribe_setting_and_supp_list_options(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.list.list_id, None)
+***REMOVED******REMOVED***self.list.update("List One Renamed", "", False, "", "OnlyThisList", True, True)
 
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s.json" % self.list.list_id, None)
