@@ -89,25 +89,25 @@ class CreateSendTestCase(unittest.TestCase):
   def test_bad_request_on_post(self):
     client = Client("uhiuhiuhiuhiuhiuhiuh")
     client.stub_request('clients.json', 'custom_api_error.json', status=400)
-    self.assertRaises(self.error_responses[400], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+    self.assertRaises(self.error_responses[400], client.create, "Client Company Name",
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_unauthorized_on_post(self):
     client = Client("uhiuhiuhiuhiuhiuhiuh")
     client.stub_request('clients.json', 'custom_api_error.json', status=401)
-    self.assertRaises(self.error_responses[401], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+    self.assertRaises(self.error_responses[401], client.create, "Client Company Name",
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_not_found_on_post(self):
     client = Client("uhiuhiuhiuhiuhiuhiuh")
     client.stub_request('clients.json', None, status=404)
-    self.assertRaises(self.error_responses[404], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+    self.assertRaises(self.error_responses[404], client.create, "Client Company Name",
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_server_error_on_post(self):
     client = Client("uhiuhiuhiuhiuhiuhiuh")
     client.stub_request('clients.json', None, status=500)
-    self.assertRaises(self.error_responses[500], client.create, "Client Company Name", "Client Contact Name", "client@example.com", 
+    self.assertRaises(self.error_responses[500], client.create, "Client Company Name", 
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_bad_request_on_put(self):

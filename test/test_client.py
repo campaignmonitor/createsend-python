@@ -11,7 +11,7 @@ class ClientTestCase(unittest.TestCase):
 
   def test_create(self):
     self.cl.stub_request("clients.json", "create_client.json")
-    client_id = self.cl.create("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+    client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
     self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
 
   def test_details(self):
@@ -62,6 +62,16 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(len(lists), 2)
     self.assertEquals(lists[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
     self.assertEquals(lists[0].Name, 'List One')
+
+  def test_lists_for_email(self):
+    email = "valid@example.com"
+    self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, urllib.quote(email)), "listsforemail.json")
+    lists = self.cl.lists_for_email(email)
+    self.assertEquals(len(lists), 2)
+    self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
+    self.assertEquals(lists[0].ListName, 'List Number One')
+    self.assertEquals(lists[0].SubscriberState, 'Active')
+    self.assertEquals(lists[0].DateSubscriberAdded, '2012-08-20 22:32:00')
     
   def test_segments(self):
     self.cl.stub_request("clients/%s/segments.json" % self.cl.client_id, "segments.json")
@@ -96,11 +106,7 @@ class ClientTestCase(unittest.TestCase):
 
   def test_set_basics(self):
     self.cl.stub_request("clients/%s/setbasics.json" % self.cl.client_id, None)
-    self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
-
-  def test_set_access(self):
-    self.cl.stub_request("clients/%s/setaccess.json" % self.cl.client_id, None)
-    self.cl.set_access("username", "password", 321)
+    self.cl.set_basics("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_set_payg_billing(self):
     self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)
