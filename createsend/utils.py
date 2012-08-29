@@ -24,16 +24,17 @@ def dict_to_object(d):
 	***REMOVED******REMOVED***setattr(top, i, j)
 	return top
 
-def get_faker(expected_url, filename, status=None):
+def get_faker(expected_url, filename, status=None, body = None):
 
 ***REMOVED***class Faker(object):
 ***REMOVED******REMOVED***"""Represents a fake web request, including the expected URL, an open 
 ***REMOVED******REMOVED***function which reads the expected response from a fixture file, and the
 ***REMOVED******REMOVED***expected response status code."""
-***REMOVED******REMOVED***def __init__(self, expected_url, filename, status):
+***REMOVED******REMOVED***def __init__(self, expected_url, filename, status, body = None):
 ***REMOVED******REMOVED******REMOVED***self.url = self.createsend_url(expected_url)
 ***REMOVED******REMOVED******REMOVED***self.filename = filename
 ***REMOVED******REMOVED******REMOVED***self.status = status
+***REMOVED******REMOVED******REMOVED***self.body = body
 
 ***REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED***if self.filename:
@@ -47,4 +48,4 @@ def get_faker(expected_url, filename, status=None):
 ***REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return "http://api.createsend.com/api/v3/%s" % url
 
-***REMOVED***return Faker(expected_url, filename, status)
+***REMOVED***return Faker(expected_url, filename, status, body)

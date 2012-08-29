@@ -110,12 +110,16 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"MarkupOnDesignSpamTest": markup_on_design_spam_test }
 ***REMOVED******REMOVED***response = self._put(self.uri_for('setpaygbilling'), json.dumps(body))
 
-***REMOVED***def set_monthly_billing(self, currency, client_pays, markup_percentage):
+***REMOVED***def set_monthly_billing(self, currency, client_pays, markup_percentage, monthly_scheme = None):
 ***REMOVED******REMOVED***"""Sets the monthly billing settings for this client."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Currency": currency,
 ***REMOVED******REMOVED******REMOVED***"ClientPays": client_pays,
 ***REMOVED******REMOVED******REMOVED***"MarkupPercentage": markup_percentage }
+***REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED***if monthly_scheme is not None:
+***REMOVED******REMOVED******REMOVED***body["MonthlyScheme"] = monthly_scheme
+***REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED***response = self._put(self.uri_for('setmonthlybilling'), json.dumps(body))
 ***REMOVED******REMOVED***
 ***REMOVED***def people(self):

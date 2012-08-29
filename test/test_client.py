@@ -106,10 +106,18 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)
 ***REMOVED******REMOVED***self.cl.set_payg_billing("CAD", True, True, 150)
 
-***REMOVED***def test_set_monthly_billing(self):
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None)
+***REMOVED***def test_set_monthly_billing_implicit(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MarkupPercentage\": 150, \"ClientPays\": true}")
 ***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, 150)***REMOVED*** 
-***REMOVED******REMOVED***
+
+***REMOVED***def test_set_monthly_billing_basic(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Basic\", \"MarkupPercentage\": 120, \"ClientPays\": false}")
+***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", False, 120, "Basic")
+
+***REMOVED***def test_set_monthly_billing_unlimited(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Unlimited\", \"MarkupPercentage\": 100, \"ClientPays\": true}")
+***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, 100, "Unlimited")
+***REMOVED******REMOVED******REMOVED******REMOVED***
 ***REMOVED***def test_people(self):
  	self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
  	people = self.cl.people()

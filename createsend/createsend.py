@@ -30,9 +30,9 @@ class CreateSendBase(object):
 ***REMOVED***def __init__(self):
 ***REMOVED******REMOVED***self.fake_web = False
 
-***REMOVED***def stub_request(self, expected_url, filename, status=None):
+***REMOVED***def stub_request(self, expected_url, filename, status=None, body=None):
 ***REMOVED******REMOVED***self.fake_web = True
-***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status)
+***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status, body)
 
 ***REMOVED***def make_request(self, method, path, params={}, body="", username=None, password=None):
 ***REMOVED******REMOVED***headers = {
@@ -55,6 +55,11 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
 ***REMOVED******REMOVED******REMOVED***if self.faker.url != actual_url:
 ***REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
+***REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED******REMOVED***if self.faker.body is not None:
+***REMOVED******REMOVED******REMOVED******REMOVED***if self.faker.body != body:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
+***REMOVED******REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
 ***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
 ***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
