@@ -106,10 +106,18 @@ class ClientTestCase(unittest.TestCase):
     self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)
     self.cl.set_payg_billing("CAD", True, True, 150)
 
-  def test_set_monthly_billing(self):
-    self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None)
+  def test_set_monthly_billing_implicit(self):
+    self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MarkupPercentage\": 150, \"ClientPays\": true}")
     self.cl.set_monthly_billing("CAD", True, 150)   
-    
+
+  def test_set_monthly_billing_basic(self):
+    self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Basic\", \"MarkupPercentage\": 120, \"ClientPays\": false}")
+    self.cl.set_monthly_billing("CAD", False, 120, "Basic")
+
+  def test_set_monthly_billing_unlimited(self):
+    self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Unlimited\", \"MarkupPercentage\": 100, \"ClientPays\": true}")
+    self.cl.set_monthly_billing("CAD", True, 100, "Unlimited")
+        
   def test_people(self):
  	self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
  	people = self.cl.people()

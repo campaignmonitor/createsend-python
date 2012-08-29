@@ -30,9 +30,9 @@ class CreateSendBase(object):
   def __init__(self):
     self.fake_web = False
 
-  def stub_request(self, expected_url, filename, status=None):
+  def stub_request(self, expected_url, filename, status=None, body=None):
     self.fake_web = True
-    self.faker = get_faker(expected_url, filename, status)
+    self.faker = get_faker(expected_url, filename, status, body)
 
   def make_request(self, method, path, params={}, body="", username=None, password=None):
     headers = {
@@ -55,6 +55,11 @@ class CreateSendBase(object):
       actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
       if self.faker.url != actual_url:
         raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
+      
+      if self.faker.body is not None:
+        if self.faker.body != body:
+          raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
+        
       data = self.faker.open() if self.faker else ''
       status = self.faker.status if (self.faker and self.faker.status) else 200
       return self.handle_response(status, data)
