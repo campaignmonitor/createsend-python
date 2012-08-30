@@ -11,7 +11,7 @@ class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients.json", "create_client.json")
-***REMOVED******REMOVED***client_id = self.cl.create("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+***REMOVED******REMOVED***client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 ***REMOVED******REMOVED***self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
 
 ***REMOVED***def test_details(self):
@@ -62,6 +62,16 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(len(lists), 2)
 ***REMOVED******REMOVED***self.assertEquals(lists[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
 ***REMOVED******REMOVED***self.assertEquals(lists[0].Name, 'List One')
+
+***REMOVED***def test_lists_for_email(self):
+***REMOVED******REMOVED***email = "valid@example.com"
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, urllib.quote(email)), "listsforemail.json")
+***REMOVED******REMOVED***lists = self.cl.lists_for_email(email)
+***REMOVED******REMOVED***self.assertEquals(len(lists), 2)
+***REMOVED******REMOVED***self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
+***REMOVED******REMOVED***self.assertEquals(lists[0].ListName, 'List Number One')
+***REMOVED******REMOVED***self.assertEquals(lists[0].SubscriberState, 'Active')
+***REMOVED******REMOVED***self.assertEquals(lists[0].DateSubscriberAdded, '2012-08-20 22:32:00')
 ***REMOVED******REMOVED***
 ***REMOVED***def test_segments(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/segments.json" % self.cl.client_id, "segments.json")
@@ -96,11 +106,7 @@ class ClientTestCase(unittest.TestCase):
 
 ***REMOVED***def test_set_basics(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setbasics.json" % self.cl.client_id, None)
-***REMOVED******REMOVED***self.cl.set_basics("Client Company Name", "Client Contact Name", "client@example.com", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
-
-***REMOVED***def test_set_access(self):
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setaccess.json" % self.cl.client_id, None)
-***REMOVED******REMOVED***self.cl.set_access("username", "password", 321)
+***REMOVED******REMOVED***self.cl.set_basics("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_set_payg_billing(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setpaygbilling.json" % self.cl.client_id, None)
