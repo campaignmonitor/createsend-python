@@ -19,6 +19,86 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
+***REMOVED***def test_create_from_template(self):
+***REMOVED******REMOVED***template_content = {
+***REMOVED******REMOVED******REMOVED***"Singlelines": [
+***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "This is a heading",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
+***REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"Multilines": [
+***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+***REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"Images": [
+***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "http://example.com/image.png",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text for an image",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
+***REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"Repeaters": [
+***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Items": [
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Layout": "My layout",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Singlelines": [
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "This is a repeater heading",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Multilines": [
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Images": [
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "http://example.com/repeater-image.png",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text for a repeater image",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED***}
+
+***REMOVED******REMOVED***# template_content as defined above would be used to fill the content of
+***REMOVED******REMOVED***# a template with markup similar to the following:
+***REMOVED******REMOVED***# 
+***REMOVED******REMOVED***# <html>
+***REMOVED******REMOVED***#***REMOVED*** <head><title>My Template</title></head>
+***REMOVED******REMOVED***#***REMOVED*** <body>
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** <p><singleline>Enter heading...</singleline></p>
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** <div><multiline>Enter description...</multiline></div>
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** <img id="header-image" editable="true" width="500" />
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** <repeater>
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED*** <layout label="My layout">
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED******REMOVED*** <div class="repeater-item">
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** <p><singleline></singleline></p>
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** <div><multiline></multiline></div>
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** <img editable="true" width="500" />
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED******REMOVED*** </div>
+***REMOVED******REMOVED***#***REMOVED******REMOVED******REMOVED*** </layout>
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** </repeater>
+***REMOVED******REMOVED***#***REMOVED******REMOVED*** <p><unsubscribe>Unsubscribe</unsubscribe></p>
+***REMOVED******REMOVED***#***REMOVED*** </body>
+***REMOVED******REMOVED***# </html>***REMOVED******REMOVED*** 
+
+***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
+***REMOVED******REMOVED***campaign_id = self.campaign.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+***REMOVED******REMOVED******REMOVED***[ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ], [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ],
+***REMOVED******REMOVED******REMOVED***"7j8uw98udowy12989e8298u2e", template_content)
+***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+
 ***REMOVED***def test_sendpreview(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")

@@ -28,6 +28,22 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
 
+***REMOVED***def create_from_template(self, client_id, subject, name, from_name,
+***REMOVED******REMOVED***from_email, reply_to, list_ids, segment_ids, template_id, template_content):
+***REMOVED******REMOVED***"""Creates a new campaign for a client, from a template."""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Subject": subject,
+***REMOVED******REMOVED******REMOVED***"Name": name,
+***REMOVED******REMOVED******REMOVED***"FromName": from_name,
+***REMOVED******REMOVED******REMOVED***"FromEmail": from_email,
+***REMOVED******REMOVED******REMOVED***"ReplyTo": reply_to,
+***REMOVED******REMOVED******REMOVED***"ListIDs": list_ids,
+***REMOVED******REMOVED******REMOVED***"SegmentIDs": segment_ids,
+***REMOVED******REMOVED******REMOVED***"TemplateID": template_id,
+***REMOVED******REMOVED******REMOVED***"TemplateContent": template_content }
+***REMOVED******REMOVED***response = self._post("/campaigns/%s/fromtemplate.json" % client_id, json.dumps(body))
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def send_preview(self, recipients, personalize="fallback"):
 ***REMOVED******REMOVED***"""Sends a preview of this campaign."""
 ***REMOVED******REMOVED***body = {
