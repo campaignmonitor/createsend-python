@@ -19,6 +19,86 @@ class CampaignTestCase(unittest.TestCase):
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
+  def test_create_from_template(self):
+    template_content = {
+      "Singlelines": [
+        {
+          "Content": "This is a heading",
+          "Alt": "This is alt text",
+          "Href": "http://example.com/"
+        }
+      ],
+      "Multilines": [
+        {
+          "Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+        }
+      ],
+      "Images": [
+        {
+          "Content": "http://example.com/image.png",
+          "Alt": "This is alt text for an image",
+          "Href": "http://example.com/"
+        }
+      ],
+      "Repeaters": [
+        {
+          "Items": [
+            {
+              "Layout": "My layout",
+              "Singlelines": [
+                {
+                  "Content": "This is a repeater heading",
+                  "Alt": "This is alt text",
+                  "Href": "http://example.com/"
+                }
+              ],
+              "Multilines": [
+                {
+                  "Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+                }
+              ],
+              "Images": [
+                {
+                  "Content": "http://example.com/repeater-image.png",
+                  "Alt": "This is alt text for a repeater image",
+                  "Href": "http://example.com/"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    # template_content as defined above would be used to fill the content of
+    # a template with markup similar to the following:
+    # 
+    # <html>
+    #   <head><title>My Template</title></head>
+    #   <body>
+    #     <p><singleline>Enter heading...</singleline></p>
+    #     <div><multiline>Enter description...</multiline></div>
+    #     <img id="header-image" editable="true" width="500" />
+    #     <repeater>
+    #       <layout label="My layout">
+    #         <div class="repeater-item">
+    #           <p><singleline></singleline></p>
+    #           <div><multiline></multiline></div>
+    #           <img editable="true" width="500" />
+    #         </div>
+    #       </layout>
+    #     </repeater>
+    #     <p><unsubscribe>Unsubscribe</unsubscribe></p>
+    #   </body>
+    # </html>     
+
+    client_id = '87y8d7qyw8d7yq8w7ydwqwd'
+    self.campaign.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
+    campaign_id = self.campaign.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+      [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ], [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ],
+      "7j8uw98udowy12989e8298u2e", template_content)
+    self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+
   def test_sendpreview(self):
     self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
     self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")

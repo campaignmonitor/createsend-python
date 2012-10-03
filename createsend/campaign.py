@@ -28,6 +28,22 @@ class Campaign(CreateSendBase):
     response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
     return json_to_py(response)
 
+  def create_from_template(self, client_id, subject, name, from_name,
+    from_email, reply_to, list_ids, segment_ids, template_id, template_content):
+    """Creates a new campaign for a client, from a template."""
+    body = {
+      "Subject": subject,
+      "Name": name,
+      "FromName": from_name,
+      "FromEmail": from_email,
+      "ReplyTo": reply_to,
+      "ListIDs": list_ids,
+      "SegmentIDs": segment_ids,
+      "TemplateID": template_id,
+      "TemplateContent": template_content }
+    response = self._post("/campaigns/%s/fromtemplate.json" % client_id, json.dumps(body))
+    return json_to_py(response)
+
   def send_preview(self, recipients, personalize="fallback"):
     """Sends a preview of this campaign."""
     body = {
