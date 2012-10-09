@@ -104,7 +104,13 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
-***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 3)
+***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[0].Key, "website")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[0].Value, "http://example.com")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[1].Key, "multi select field")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Key, "multi select field")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
 
 ***REMOVED***def test_unsubscribed(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"

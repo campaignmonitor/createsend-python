@@ -11,6 +11,14 @@
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "http://example.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***},
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "multi select field",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "option one"
+***REMOVED******REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "multi select field",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "option two"
+***REMOVED******REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "age",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "24"
 ***REMOVED******REMOVED******REMOVED******REMOVED***},
