@@ -97,6 +97,11 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
     self.assertEquals(res.Results[0].State, "Suppressed")
 
+  def test_unsuppress(self):
+    email = "example@example.com"
+    self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, urllib.quote(email)), None)
+    res = self.cl.unsuppress(email)
+
   def test_templates(self):
     self.cl.stub_request("clients/%s/templates.json" % self.cl.client_id, "templates.json")
     templates = self.cl.templates()

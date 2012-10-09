@@ -69,6 +69,12 @@ class Client(CreateSendBase):
     response = self._get(self.uri_for("suppressionlist"), params=params)
     return json_to_py(response)
 
+  def unsuppress(self, email):
+    """Unsuppresses an email address by removing it from the the client's
+    suppression list"""
+    params = { "email": email }
+    response = self._put(self.uri_for("unsuppress"), body=" ", params=params)
+
   def templates(self):
     """Gets the templates belonging to this client."""
     response = self._get(self.uri_for("templates"))
