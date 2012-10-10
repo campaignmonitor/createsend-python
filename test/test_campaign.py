@@ -24,7 +24,6 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***"Singlelines": [
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "This is a heading",
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
 ***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED***],
@@ -48,7 +47,6 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Singlelines": [
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Content": "This is a repeater heading",
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Alt": "This is alt text",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Href": "http://example.com/"
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***],
