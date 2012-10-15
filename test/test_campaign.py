@@ -128,6 +128,15 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 ***REMOVED******REMOVED***self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
 
+***REMOVED***def test_email_client_usage(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/emailclientusage.json" % self.campaign_id, "email_client_usage.json")
+***REMOVED******REMOVED***ecu = self.campaign.email_client_usage()
+***REMOVED******REMOVED***self.assertEqual(len(ecu), 6)
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Client, "iOS Devices")
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Version, "iPhone")
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Percentage, 19.83)
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Subscribers, 7056)
+
 ***REMOVED***def test_lists_and_segments(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
 ***REMOVED******REMOVED***ls = self.campaign.lists_and_segments()
