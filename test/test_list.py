@@ -111,6 +111,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
     self.assertEquals(res.Results[0].CustomFields[2].Key, "multi select field")
     self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
   def test_unsubscribed(self):
     min_date = "2010-01-01"
@@ -129,8 +130,9 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Unsubscribed")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
-  def test_unsubscribed(self):
+  def test_deleted(self):
     min_date = "2010-01-01"
     self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
     res = self.list.deleted(min_date)
@@ -147,6 +149,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Deleted")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
   def test_bounced(self):
     min_date = "2010-01-01"
@@ -165,6 +168,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Bounced")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "")
 
   def test_webhooks(self):
     self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "list_webhooks.json")
