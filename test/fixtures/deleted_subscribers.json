@@ -5,7 +5,8 @@
 ***REMOVED******REMOVED******REMOVED***"Name": "Deleted One",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:11:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Deleted",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subscriberone@example.com",
@@ -17,28 +18,32 @@
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "website",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "http://google.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***}
-***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+1@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example One",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Deleted",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+2@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example Two",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Deleted",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+3@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example Three",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Deleted",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***}
 ***REMOVED***],
 ***REMOVED***"ResultsOrderedBy": "email",

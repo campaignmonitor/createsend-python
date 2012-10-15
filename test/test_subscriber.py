@@ -22,6 +22,7 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(len(subscriber.CustomFields), 3)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Key, 'website')
 ***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
+***REMOVED******REMOVED***self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
 
 ***REMOVED***def test_add_without_custom_fields(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")

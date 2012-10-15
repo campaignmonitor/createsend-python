@@ -26,7 +26,8 @@
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "subscription date",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "2010-03-09"
 ***REMOVED******REMOVED******REMOVED******REMOVED***}
-***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+7878787y8ggg@example.com",
@@ -38,7 +39,8 @@
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "website",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "http://subdomain.example.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***}
-***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+7890909i0ggg@example.com",
@@ -50,21 +52,24 @@
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Key": "website",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Value": "http://subdomain.example.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***}
-***REMOVED******REMOVED******REMOVED***]
+***REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Four",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "joey@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Five",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
-***REMOVED******REMOVED******REMOVED***"CustomFields": []
+***REMOVED******REMOVED******REMOVED***"CustomFields": [],
+***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
 ***REMOVED******REMOVED***}
 ***REMOVED***],
 ***REMOVED***"ResultsOrderedBy": "email",
