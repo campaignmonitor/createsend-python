@@ -71,6 +71,11 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("summary"))
     return json_to_py(response)
 
+  def email_client_usage(self):
+    """Gets the email clients that subscribers used to open the campaign"""
+    response = self._get(self.uri_for("emailclientusage"))
+    return json_to_py(response)
+
   def lists_and_segments(self):
     """Retrieves the lists and segments to which this campaaign will be (or was) sent."""
     response = self._get(self.uri_for("listsandsegments"))
