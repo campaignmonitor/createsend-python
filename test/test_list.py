@@ -113,6 +113,22 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
+***REMOVED***def test_active(self):
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
+***REMOVED******REMOVED***res = self.list.unconfirmed(min_date)
+***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
+***REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
+***REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
+***REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 2)
+***REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
+***REMOVED******REMOVED***self.assertEquals(len(res.Results), 2)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "subs+7t8787Y@example.com")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Unconfirmed One")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Unconfirmed")
+
 ***REMOVED***def test_unsubscribed(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unsubscribed_subscribers.json")

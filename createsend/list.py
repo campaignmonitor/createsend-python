@@ -82,6 +82,17 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("active"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
+***REMOVED***def unconfirmed(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***"""Gets the unconfirmed subscribers for this list."""
+***REMOVED******REMOVED***params = {
+***REMOVED******REMOVED******REMOVED***"date": date,
+***REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED***"orderfield": order_field,
+***REMOVED******REMOVED******REMOVED***"orderdirection": order_direction }
+***REMOVED******REMOVED***response = self._get(self.uri_for("unconfirmed"), params=params)
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def bounced(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the bounced subscribers for this list."""
 ***REMOVED******REMOVED***params = {
