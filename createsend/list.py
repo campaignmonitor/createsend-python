@@ -82,6 +82,17 @@ class List(CreateSendBase):
     response = self._get(self.uri_for("active"), params=params)
     return json_to_py(response)
 
+  def unconfirmed(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+    """Gets the unconfirmed subscribers for this list."""
+    params = {
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
+    response = self._get(self.uri_for("unconfirmed"), params=params)
+    return json_to_py(response)
+
   def bounced(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
     """Gets the bounced subscribers for this list."""
     params = {

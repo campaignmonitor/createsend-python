@@ -113,6 +113,22 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
     self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
+  def test_active(self):
+    min_date = "2010-01-01"
+    self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
+    res = self.list.unconfirmed(min_date)
+    self.assertEquals(res.ResultsOrderedBy, "email")
+    self.assertEquals(res.OrderDirection, "asc")
+    self.assertEquals(res.PageNumber, 1)
+    self.assertEquals(res.PageSize, 1000)
+    self.assertEquals(res.RecordsOnThisPage, 2)
+    self.assertEquals(res.TotalNumberOfRecords, 2)
+    self.assertEquals(res.NumberOfPages, 1)
+    self.assertEquals(len(res.Results), 2)
+    self.assertEquals(res.Results[0].EmailAddress, "subs+7t8787Y@example.com")
+    self.assertEquals(res.Results[0].Name, "Unconfirmed One")
+    self.assertEquals(res.Results[0].State, "Unconfirmed")
+
   def test_unsubscribed(self):
     min_date = "2010-01-01"
     self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unsubscribed_subscribers.json")
