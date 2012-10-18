@@ -97,7 +97,11 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***"7j8uw98udowy12989e8298u2e", template_content)
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
-***REMOVED***def test_sendpreview(self):
+***REMOVED***def test_send_preview_with_single_recipient(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
+***REMOVED******REMOVED***self.campaign.send_preview("test+89898u9@example.com", "random")
+
+***REMOVED***def test_send_preview_with_multiple_recipients(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")
 
