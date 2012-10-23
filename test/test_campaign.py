@@ -131,6 +131,7 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.Likes, 32)
     self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
     self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
+    self.assertEquals(summary.SpamComplaints, 23)
 
   def test_email_client_usage(self):
     self.campaign.stub_request("campaigns/%s/emailclientusage.json" % self.campaign_id, "email_client_usage.json")
@@ -229,6 +230,22 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
     self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
     self.assertEquals(unsubscribes.NumberOfPages, 1)
+
+  def test_spam(self):
+    min_date = "2010-01-01"
+    self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+    spam = self.campaign.spam(min_date)
+    self.assertEquals(len(spam.Results), 1)
+    self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
+    self.assertEquals(spam.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
+    self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
+    self.assertEquals(spam.ResultsOrderedBy, "date")
+    self.assertEquals(spam.OrderDirection, "asc")
+    self.assertEquals(spam.PageNumber, 1)
+    self.assertEquals(spam.PageSize, 1000)
+    self.assertEquals(spam.RecordsOnThisPage, 1)
+    self.assertEquals(spam.TotalNumberOfRecords, 1)
+    self.assertEquals(spam.NumberOfPages, 1)
 
   def test_bounces(self):
     min_date = "2010-01-01"

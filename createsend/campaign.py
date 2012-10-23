@@ -124,6 +124,17 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("unsubscribes"), params=params)
     return json_to_py(response)
 
+  def spam(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    """Retrieves the spam complaints for this campaign."""
+    params = { 
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
+    response = self._get(self.uri_for("spam"), params=params)
+    return json_to_py(response)
+
   def bounces(self, date="1900-01-01", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the bounces for this campaign."""
     params = { 
