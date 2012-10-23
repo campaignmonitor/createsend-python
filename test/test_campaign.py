@@ -131,6 +131,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 ***REMOVED******REMOVED***self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
+***REMOVED******REMOVED***self.assertEquals(summary.SpamComplaints, 23)
 
 ***REMOVED***def test_email_client_usage(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/emailclientusage.json" % self.campaign_id, "email_client_usage.json")
@@ -229,6 +230,22 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.NumberOfPages, 1)
+
+***REMOVED***def test_spam(self):
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+***REMOVED******REMOVED***spam = self.campaign.spam(min_date)
+***REMOVED******REMOVED***self.assertEquals(len(spam.Results), 1)
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED***self.assertEquals(spam.ResultsOrderedBy, "date")
+***REMOVED******REMOVED***self.assertEquals(spam.OrderDirection, "asc")
+***REMOVED******REMOVED***self.assertEquals(spam.PageNumber, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.PageSize, 1000)
+***REMOVED******REMOVED***self.assertEquals(spam.RecordsOnThisPage, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.TotalNumberOfRecords, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.NumberOfPages, 1)
 
 ***REMOVED***def test_bounces(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
