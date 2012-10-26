@@ -39,9 +39,28 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.list.delete()
 
 ***REMOVED***def test_create_custom_field(self):
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "create_custom_field.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+***REMOVED******REMOVED***"create_custom_field.json", None,
+***REMOVED******REMOVED***"{\"DataType\": \"Date\", \"FieldName\": \"new date field\", \"Options\": [], \"VisibleInPreferenceCenter\": true}")
 ***REMOVED******REMOVED***personalisation_tag = self.list.create_custom_field("new date field", "Date")
 ***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[newdatefield]")
+
+***REMOVED***def test_create_custom_field_with_options_and_visible_in_preference_center(self):
+***REMOVED******REMOVED***options = ["one", "two"]
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+***REMOVED******REMOVED***"create_custom_field.json", None,
+***REMOVED******REMOVED***"{\"DataType\": \"MultiSelectOne\", \"FieldName\": \"newsletter format\", \"Options\": [\"one\", \"two\"], \"VisibleInPreferenceCenter\": false}")
+***REMOVED******REMOVED***personalisation_tag = self.list.create_custom_field("newsletter format",
+***REMOVED******REMOVED***"MultiSelectOne", options, False)
+***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[newdatefield]")
+
+***REMOVED***def test_update_custom_field(self):
+***REMOVED******REMOVED***key = "[mycustomfield]"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(key)),
+***REMOVED******REMOVED***"update_custom_field.json", None,
+***REMOVED******REMOVED***"{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
+***REMOVED******REMOVED***personalisation_tag = self.list.update_custom_field(key, "my renamed custom field", True)
+***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[myrenamedcustomfield]")
 
 ***REMOVED***def test_delete_custom_field(self):
 ***REMOVED******REMOVED***custom_field_key = "[newdatefield]"
@@ -71,6 +90,7 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].Key, "[website]")
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].DataType, "Text")
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].FieldOptions, [])
+***REMOVED******REMOVED***self.assertEquals(cfs[0].VisibleInPreferenceCenter, True)
 
 ***REMOVED***def test_segments(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")

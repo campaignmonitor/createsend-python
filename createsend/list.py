@@ -29,21 +29,35 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***"""Deletes this list."""
 ***REMOVED******REMOVED***response = self._delete("/lists/%s.json" % self.list_id)
 
-***REMOVED***def create_custom_field(self, field_name, data_type, options=[]):
+***REMOVED***def create_custom_field(self, field_name, data_type, options=[],
+***REMOVED******REMOVED***visible_in_preference_center=True):
 ***REMOVED******REMOVED***"""Creates a new custom field for this list."""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"FieldName": field_name,
 ***REMOVED******REMOVED******REMOVED***"DataType": data_type,
-***REMOVED******REMOVED******REMOVED***"Options": options }
+***REMOVED******REMOVED******REMOVED***"Options": options,
+***REMOVED******REMOVED******REMOVED***"VisibleInPreferenceCenter": visible_in_preference_center }
 ***REMOVED******REMOVED***response = self._post(self.uri_for("customfields"), json.dumps(body))
+***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def update_custom_field(self, custom_field_key, field_name,
+***REMOVED******REMOVED***visible_in_preference_center):
+***REMOVED******REMOVED***"""Updates a custom field belonging to this list."""
+***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"FieldName": field_name,
+***REMOVED******REMOVED******REMOVED***"VisibleInPreferenceCenter": visible_in_preference_center }
+***REMOVED******REMOVED***response = self._put(self.uri_for("customfields/%s" % custom_field_key), json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def delete_custom_field(self, custom_field_key):
 ***REMOVED******REMOVED***"""Deletes a custom field associated with this list."""
 ***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
-***REMOVED******REMOVED***response = self._delete("/lists/%s/customfields/%s.json" % (self.list_id, custom_field_key))
+***REMOVED******REMOVED***response = self._delete("/lists/%s/customfields/%s.json" %
+***REMOVED******REMOVED***(self.list_id, custom_field_key))
 
-***REMOVED***def update_custom_field_options(self, custom_field_key, new_options, keep_existing_options):
+***REMOVED***def update_custom_field_options(self, custom_field_key, new_options,
+***REMOVED******REMOVED***keep_existing_options):
 ***REMOVED******REMOVED***"""Updates the options of a multi-optioned custom field on this list."""
 ***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
 ***REMOVED******REMOVED***body = {
