@@ -39,9 +39,28 @@ class ListTestCase(unittest.TestCase):
     self.list.delete()
 
   def test_create_custom_field(self):
-    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "create_custom_field.json")
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+    "create_custom_field.json", None,
+    "{\"DataType\": \"Date\", \"FieldName\": \"new date field\", \"Options\": [], \"VisibleInPreferenceCenter\": true}")
     personalisation_tag = self.list.create_custom_field("new date field", "Date")
     self.assertEquals(personalisation_tag, "[newdatefield]")
+
+  def test_create_custom_field_with_options_and_visible_in_preference_center(self):
+    options = ["one", "two"]
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+    "create_custom_field.json", None,
+    "{\"DataType\": \"MultiSelectOne\", \"FieldName\": \"newsletter format\", \"Options\": [\"one\", \"two\"], \"VisibleInPreferenceCenter\": false}")
+    personalisation_tag = self.list.create_custom_field("newsletter format",
+    "MultiSelectOne", options, False)
+    self.assertEquals(personalisation_tag, "[newdatefield]")
+
+  def test_update_custom_field(self):
+    key = "[mycustomfield]"
+    self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(key)),
+    "update_custom_field.json", None,
+    "{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
+    personalisation_tag = self.list.update_custom_field(key, "my renamed custom field", True)
+    self.assertEquals(personalisation_tag, "[myrenamedcustomfield]")
 
   def test_delete_custom_field(self):
     custom_field_key = "[newdatefield]"
@@ -71,6 +90,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(cfs[0].Key, "[website]")
     self.assertEquals(cfs[0].DataType, "Text")
     self.assertEquals(cfs[0].FieldOptions, [])
+    self.assertEquals(cfs[0].VisibleInPreferenceCenter, True)
 
   def test_segments(self):
     self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")
