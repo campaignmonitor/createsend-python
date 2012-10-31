@@ -17,7 +17,6 @@ class CampaignTestCase(unittest.TestCase):
     campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
-    request_body = self.campaign.faker.body
 
     self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
