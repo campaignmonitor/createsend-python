@@ -13,20 +13,23 @@ class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json", None,
-***REMOVED******REMOVED***"{\"FromEmail\": \"good.day@example.com\", \"SegmentIDs\": [\"y78q9w8d9w8ud9q8uw\", \"djw98quw9duqw98uwd98\"], \"Name\": \"name\", \"TextUrl\": \"http://example.com/campaign.txt\", \"ReplyTo\": \"good.day@example.com\", \"FromName\": \"g'day\", \"ListIDs\": [\"7y12989e82ue98u2e\", \"dh9w89q8w98wudwd989\"], \"HtmlUrl\": \"http://example.com/campaign.html\", \"Subject\": \"subject\"}")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
 ***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+***REMOVED******REMOVED***request_body = self.campaign.faker.body
+
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
 ***REMOVED***def test_create_with_none_text_url(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json", None,
-***REMOVED******REMOVED***"{\"FromEmail\": \"good.day@example.com\", \"SegmentIDs\": [\"y78q9w8d9w8ud9q8uw\", \"djw98quw9duqw98uwd98\"], \"Name\": \"name\", \"TextUrl\": null, \"ReplyTo\": \"good.day@example.com\", \"FromName\": \"g'day\", \"ListIDs\": [\"7y12989e82ue98u2e\", \"dh9w89q8w98wudwd989\"], \"HtmlUrl\": \"http://example.com/campaign.html\", \"Subject\": \"subject\"}")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
 ***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
 ***REMOVED***def test_create_from_template(self):
