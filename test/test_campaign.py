@@ -13,20 +13,23 @@ class CampaignTestCase(unittest.TestCase):
 
   def test_create(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json", None,
-    "{\"FromEmail\": \"good.day@example.com\", \"SegmentIDs\": [\"y78q9w8d9w8ud9q8uw\", \"djw98quw9duqw98uwd98\"], \"Name\": \"name\", \"TextUrl\": \"http://example.com/campaign.txt\", \"ReplyTo\": \"good.day@example.com\", \"FromName\": \"g'day\", \"ListIDs\": [\"7y12989e82ue98u2e\", \"dh9w89q8w98wudwd989\"], \"HtmlUrl\": \"http://example.com/campaign.html\", \"Subject\": \"subject\"}")
+    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
     campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+    request_body = self.campaign.faker.body
+
+    self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
   def test_create_with_none_text_url(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json", None,
-    "{\"FromEmail\": \"good.day@example.com\", \"SegmentIDs\": [\"y78q9w8d9w8ud9q8uw\", \"djw98quw9duqw98uwd98\"], \"Name\": \"name\", \"TextUrl\": null, \"ReplyTo\": \"good.day@example.com\", \"FromName\": \"g'day\", \"ListIDs\": [\"7y12989e82ue98u2e\", \"dh9w89q8w98wudwd989\"], \"HtmlUrl\": \"http://example.com/campaign.html\", \"Subject\": \"subject\"}")
+    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
     campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+    self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
   def test_create_from_template(self):
