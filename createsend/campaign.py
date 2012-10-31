@@ -14,7 +14,24 @@ class Campaign(CreateSendBase):
 
 ***REMOVED***def create(self, client_id, subject, name, from_name, from_email, reply_to, html_url,
 ***REMOVED******REMOVED***text_url, list_ids, segment_ids):
-***REMOVED******REMOVED***"""Creates a new campaign for a client."""
+***REMOVED******REMOVED***"""Creates a new campaign for a client.
+
+***REMOVED******REMOVED***:param client_id: String representing the ID of the client for whom the
+***REMOVED******REMOVED******REMOVED***campaign will be created.
+***REMOVED******REMOVED***:param subject: String representing the subject of the campaign.
+***REMOVED******REMOVED***:param name: String representing the name of the campaign.
+***REMOVED******REMOVED***:param from_name: String representing the from name for the campaign.
+***REMOVED******REMOVED***:param from_email: String representing the from address for the campaign.
+***REMOVED******REMOVED***:param reply_to: String representing the reply-to address for the campaign.
+***REMOVED******REMOVED***:param html_url: String representing the URL for the campaign HTML content.
+***REMOVED******REMOVED***:param text_url: String representing the URL for the campaign text content.
+***REMOVED******REMOVED******REMOVED***Note that text_url is optional and if None or an empty string, text
+***REMOVED******REMOVED******REMOVED***content will be automatically generated from the HTML content.
+***REMOVED******REMOVED***:param list_ids: Array of Strings representing the IDs of the lists to
+***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
+***REMOVED******REMOVED***:param segment_ids: Array of Strings representing the IDs of the segments to
+***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
+***REMOVED******REMOVED***"""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subject": subject,
 ***REMOVED******REMOVED******REMOVED***"Name": name,
@@ -30,7 +47,26 @@ class Campaign(CreateSendBase):
 
 ***REMOVED***def create_from_template(self, client_id, subject, name, from_name,
 ***REMOVED******REMOVED***from_email, reply_to, list_ids, segment_ids, template_id, template_content):
-***REMOVED******REMOVED***"""Creates a new campaign for a client, from a template."""
+***REMOVED******REMOVED***"""Creates a new campaign for a client, from a template.
+
+***REMOVED******REMOVED***:param client_id: String representing the ID of the client for whom the
+***REMOVED******REMOVED******REMOVED***campaign will be created.
+***REMOVED******REMOVED***:param subject: String representing the subject of the campaign.
+***REMOVED******REMOVED***:param name: String representing the name of the campaign.
+***REMOVED******REMOVED***:param from_name: String representing the from name for the campaign.
+***REMOVED******REMOVED***:param from_email: String representing the from address for the campaign.
+***REMOVED******REMOVED***:param reply_to: String representing the reply-to address for the campaign.
+***REMOVED******REMOVED***:param list_ids: Array of Strings representing the IDs of the lists to
+***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
+***REMOVED******REMOVED***:param segment_ids: Array of Strings representing the IDs of the segments to
+***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
+***REMOVED******REMOVED***:param template_id: String representing the ID of the template on which
+***REMOVED******REMOVED******REMOVED***the campaign will be based.
+***REMOVED******REMOVED***:param template_content: Hash representing the content to be used for the
+***REMOVED******REMOVED******REMOVED***editable areas of the template. See documentation at
+***REMOVED******REMOVED******REMOVED***campaignmonitor.com/api/campaigns/#creating_a_campaign_from_template
+***REMOVED******REMOVED******REMOVED***for full details of template content format.
+***REMOVED******REMOVED***"""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subject": subject,
 ***REMOVED******REMOVED******REMOVED***"Name": name,
