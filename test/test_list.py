@@ -39,9 +39,28 @@ class ListTestCase(unittest.TestCase):
     self.list.delete()
 
   def test_create_custom_field(self):
-    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "create_custom_field.json")
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+    "create_custom_field.json", None,
+    "{\"DataType\": \"Date\", \"FieldName\": \"new date field\", \"Options\": [], \"VisibleInPreferenceCenter\": true}")
     personalisation_tag = self.list.create_custom_field("new date field", "Date")
     self.assertEquals(personalisation_tag, "[newdatefield]")
+
+  def test_create_custom_field_with_options_and_visible_in_preference_center(self):
+    options = ["one", "two"]
+    self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+    "create_custom_field.json", None,
+    "{\"DataType\": \"MultiSelectOne\", \"FieldName\": \"newsletter format\", \"Options\": [\"one\", \"two\"], \"VisibleInPreferenceCenter\": false}")
+    personalisation_tag = self.list.create_custom_field("newsletter format",
+    "MultiSelectOne", options, False)
+    self.assertEquals(personalisation_tag, "[newdatefield]")
+
+  def test_update_custom_field(self):
+    key = "[mycustomfield]"
+    self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(key)),
+    "update_custom_field.json", None,
+    "{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
+    personalisation_tag = self.list.update_custom_field(key, "my renamed custom field", True)
+    self.assertEquals(personalisation_tag, "[myrenamedcustomfield]")
 
   def test_delete_custom_field(self):
     custom_field_key = "[newdatefield]"
@@ -71,6 +90,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(cfs[0].Key, "[website]")
     self.assertEquals(cfs[0].DataType, "Text")
     self.assertEquals(cfs[0].FieldOptions, [])
+    self.assertEquals(cfs[0].VisibleInPreferenceCenter, True)
 
   def test_segments(self):
     self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")
@@ -111,6 +131,23 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
     self.assertEquals(res.Results[0].CustomFields[2].Key, "multi select field")
     self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
+
+  def test_active(self):
+    min_date = "2010-01-01"
+    self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
+    res = self.list.unconfirmed(min_date)
+    self.assertEquals(res.ResultsOrderedBy, "email")
+    self.assertEquals(res.OrderDirection, "asc")
+    self.assertEquals(res.PageNumber, 1)
+    self.assertEquals(res.PageSize, 1000)
+    self.assertEquals(res.RecordsOnThisPage, 2)
+    self.assertEquals(res.TotalNumberOfRecords, 2)
+    self.assertEquals(res.NumberOfPages, 1)
+    self.assertEquals(len(res.Results), 2)
+    self.assertEquals(res.Results[0].EmailAddress, "subs+7t8787Y@example.com")
+    self.assertEquals(res.Results[0].Name, "Unconfirmed One")
+    self.assertEquals(res.Results[0].State, "Unconfirmed")
 
   def test_unsubscribed(self):
     min_date = "2010-01-01"
@@ -129,8 +166,9 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Unsubscribed")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
-  def test_unsubscribed(self):
+  def test_deleted(self):
     min_date = "2010-01-01"
     self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
     res = self.list.deleted(min_date)
@@ -147,6 +185,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Deleted")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
   def test_bounced(self):
     min_date = "2010-01-01"
@@ -165,6 +204,7 @@ class ListTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
     self.assertEquals(res.Results[0].State, "Bounced")
     self.assertEquals(len(res.Results[0].CustomFields), 0)
+    self.assertEquals(res.Results[0].ReadsEmailWith, "")
 
   def test_webhooks(self):
     self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "list_webhooks.json")

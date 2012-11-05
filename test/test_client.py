@@ -97,6 +97,14 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
     self.assertEquals(res.Results[0].State, "Suppressed")
 
+  def test_suppress_with_single_email(self):
+    self.cl.stub_request("clients/%s/suppress.json" % self.cl.client_id, None)
+    self.cl.suppress("example@example.com") 
+
+  def test_suppress_with_multiple_emails(self):
+    self.cl.stub_request("clients/%s/suppress.json" % self.cl.client_id, None)
+    self.cl.suppress(["one@example.com", "two@example.com"]) 
+
   def test_unsuppress(self):
     email = "example@example.com"
     self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, urllib.quote(email)), None)

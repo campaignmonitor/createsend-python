@@ -53,9 +53,11 @@ class CreateSendBase(object):
     if self.fake_web:
       # Check that the actual url which would be requested matches self.faker.url. 
       actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
+      self.faker.actual_url = actual_url
       if self.faker.url != actual_url:
         raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
-      
+
+      self.faker.actual_body = body
       if self.faker.body is not None:
         if self.faker.body != body:
           raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))

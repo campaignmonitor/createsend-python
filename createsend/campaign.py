@@ -14,7 +14,24 @@ class Campaign(CreateSendBase):
 
   def create(self, client_id, subject, name, from_name, from_email, reply_to, html_url,
     text_url, list_ids, segment_ids):
-    """Creates a new campaign for a client."""
+    """Creates a new campaign for a client.
+
+    :param client_id: String representing the ID of the client for whom the
+      campaign will be created.
+    :param subject: String representing the subject of the campaign.
+    :param name: String representing the name of the campaign.
+    :param from_name: String representing the from name for the campaign.
+    :param from_email: String representing the from address for the campaign.
+    :param reply_to: String representing the reply-to address for the campaign.
+    :param html_url: String representing the URL for the campaign HTML content.
+    :param text_url: String representing the URL for the campaign text content.
+      Note that text_url is optional and if None or an empty string, text
+      content will be automatically generated from the HTML content.
+    :param list_ids: Array of Strings representing the IDs of the lists to
+      which the campaign will be sent.
+    :param segment_ids: Array of Strings representing the IDs of the segments to
+      which the campaign will be sent.
+    """
     body = {
       "Subject": subject,
       "Name": name,
@@ -30,7 +47,26 @@ class Campaign(CreateSendBase):
 
   def create_from_template(self, client_id, subject, name, from_name,
     from_email, reply_to, list_ids, segment_ids, template_id, template_content):
-    """Creates a new campaign for a client, from a template."""
+    """Creates a new campaign for a client, from a template.
+
+    :param client_id: String representing the ID of the client for whom the
+      campaign will be created.
+    :param subject: String representing the subject of the campaign.
+    :param name: String representing the name of the campaign.
+    :param from_name: String representing the from name for the campaign.
+    :param from_email: String representing the from address for the campaign.
+    :param reply_to: String representing the reply-to address for the campaign.
+    :param list_ids: Array of Strings representing the IDs of the lists to
+      which the campaign will be sent.
+    :param segment_ids: Array of Strings representing the IDs of the segments to
+      which the campaign will be sent.
+    :param template_id: String representing the ID of the template on which
+      the campaign will be based.
+    :param template_content: Hash representing the content to be used for the
+      editable areas of the template. See documentation at
+      campaignmonitor.com/api/campaigns/#creating_a_campaign_from_template
+      for full details of template content format.
+    """
     body = {
       "Subject": subject,
       "Name": name,
@@ -69,6 +105,11 @@ class Campaign(CreateSendBase):
   def summary(self):
     """Gets a summary of this campaign"""
     response = self._get(self.uri_for("summary"))
+    return json_to_py(response)
+
+  def email_client_usage(self):
+    """Gets the email clients that subscribers used to open the campaign"""
+    response = self._get(self.uri_for("emailclientusage"))
     return json_to_py(response)
 
   def lists_and_segments(self):
@@ -117,6 +158,17 @@ class Campaign(CreateSendBase):
       "orderfield": order_field,
       "orderdirection": order_direction }
     response = self._get(self.uri_for("unsubscribes"), params=params)
+    return json_to_py(response)
+
+  def spam(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+    """Retrieves the spam complaints for this campaign."""
+    params = { 
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
+    response = self._get(self.uri_for("spam"), params=params)
     return json_to_py(response)
 
   def bounces(self, date="1900-01-01", page=1, page_size=1000, order_field="date", order_direction="asc"):

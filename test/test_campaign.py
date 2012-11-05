@@ -17,6 +17,18 @@ class CampaignTestCase(unittest.TestCase):
     campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+    self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
+    self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+
+  def test_create_with_none_text_url(self):
+    client_id = '87y8d7qyw8d7yq8w7ydwqwd'
+    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+    campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+      "http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
+      [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+    self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
   def test_create_from_template(self):
@@ -97,7 +109,11 @@ class CampaignTestCase(unittest.TestCase):
       "7j8uw98udowy12989e8298u2e", template_content)
     self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
-  def test_sendpreview(self):
+  def test_send_preview_with_single_recipient(self):
+    self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
+    self.campaign.send_preview("test+89898u9@example.com", "random")
+
+  def test_send_preview_with_multiple_recipients(self):
     self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
     self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")
 
@@ -127,6 +143,16 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.Likes, 32)
     self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
     self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
+    self.assertEquals(summary.SpamComplaints, 23)
+
+  def test_email_client_usage(self):
+    self.campaign.stub_request("campaigns/%s/emailclientusage.json" % self.campaign_id, "email_client_usage.json")
+    ecu = self.campaign.email_client_usage()
+    self.assertEqual(len(ecu), 6)
+    self.assertEqual(ecu[0].Client, "iOS Devices")
+    self.assertEqual(ecu[0].Version, "iPhone")
+    self.assertEqual(ecu[0].Percentage, 19.83)
+    self.assertEqual(ecu[0].Subscribers, 7056)
 
   def test_lists_and_segments(self):
     self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
@@ -216,6 +242,22 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
     self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
     self.assertEquals(unsubscribes.NumberOfPages, 1)
+
+  def test_spam(self):
+    min_date = "2010-01-01"
+    self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+    spam = self.campaign.spam(min_date)
+    self.assertEquals(len(spam.Results), 1)
+    self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
+    self.assertEquals(spam.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
+    self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
+    self.assertEquals(spam.ResultsOrderedBy, "date")
+    self.assertEquals(spam.OrderDirection, "asc")
+    self.assertEquals(spam.PageNumber, 1)
+    self.assertEquals(spam.PageSize, 1000)
+    self.assertEquals(spam.RecordsOnThisPage, 1)
+    self.assertEquals(spam.TotalNumberOfRecords, 1)
+    self.assertEquals(spam.NumberOfPages, 1)
 
   def test_bounces(self):
     min_date = "2010-01-01"

@@ -29,21 +29,35 @@ class List(CreateSendBase):
     """Deletes this list."""
     response = self._delete("/lists/%s.json" % self.list_id)
 
-  def create_custom_field(self, field_name, data_type, options=[]):
+  def create_custom_field(self, field_name, data_type, options=[],
+    visible_in_preference_center=True):
     """Creates a new custom field for this list."""
     body = {
       "FieldName": field_name,
       "DataType": data_type,
-      "Options": options }
+      "Options": options,
+      "VisibleInPreferenceCenter": visible_in_preference_center }
     response = self._post(self.uri_for("customfields"), json.dumps(body))
+    return json_to_py(response)
+
+  def update_custom_field(self, custom_field_key, field_name,
+    visible_in_preference_center):
+    """Updates a custom field belonging to this list."""
+    custom_field_key = urllib.quote(custom_field_key, '')
+    body = {
+      "FieldName": field_name,
+      "VisibleInPreferenceCenter": visible_in_preference_center }
+    response = self._put(self.uri_for("customfields/%s" % custom_field_key), json.dumps(body))
     return json_to_py(response)
 
   def delete_custom_field(self, custom_field_key):
     """Deletes a custom field associated with this list."""
     custom_field_key = urllib.quote(custom_field_key, '')
-    response = self._delete("/lists/%s/customfields/%s.json" % (self.list_id, custom_field_key))
+    response = self._delete("/lists/%s/customfields/%s.json" %
+    (self.list_id, custom_field_key))
 
-  def update_custom_field_options(self, custom_field_key, new_options, keep_existing_options):
+  def update_custom_field_options(self, custom_field_key, new_options,
+    keep_existing_options):
     """Updates the options of a multi-optioned custom field on this list."""
     custom_field_key = urllib.quote(custom_field_key, '')
     body = {
@@ -80,6 +94,17 @@ class List(CreateSendBase):
       "orderfield": order_field,
       "orderdirection": order_direction }
     response = self._get(self.uri_for("active"), params=params)
+    return json_to_py(response)
+
+  def unconfirmed(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+    """Gets the unconfirmed subscribers for this list."""
+    params = {
+      "date": date,
+      "page": page,
+      "pagesize": page_size,
+      "orderfield": order_field,
+      "orderdirection": order_direction }
+    response = self._get(self.uri_for("unconfirmed"), params=params)
     return json_to_py(response)
 
   def bounced(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
