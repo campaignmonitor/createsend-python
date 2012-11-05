@@ -1,5 +1,20 @@
 # createsend-python history
 
+## v2.4.0 - 5 Nov, 2012***REMOVED*** (3e258ae7)
+
+* Added Campaign.email_client_usage().
+* Added support for ReadsEmailWith field on subscriber objects.
+* Added support for retrieving unconfirmed subscribers for a list.
+* Added support for suppressing email addresses.
+* Added support for retrieving spam complaints for a campaign, as well as
+adding SpamComplaints field to campaign summary output.
+* Added VisibleInPreferenceCenter field to custom field output.
+* Added support for setting preference center visibility when creating custom
+fields.
+* Added the ability to update a custom field name and preference visibility.
+* Added documentation explaining that text_url may now be None or an empty
+string when creating a campaign.
+
 ## v2.3.0 - 10 Oct, 2012***REMOVED*** (2293fc80)
 
 * Added support for creating campaigns from templates.
