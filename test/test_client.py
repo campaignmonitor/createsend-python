@@ -97,6 +97,14 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Suppressed")
 
+***REMOVED***def test_suppress_with_single_email(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/suppress.json" % self.cl.client_id, None)
+***REMOVED******REMOVED***self.cl.suppress("example@example.com") 
+
+***REMOVED***def test_suppress_with_multiple_emails(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/suppress.json" % self.cl.client_id, None)
+***REMOVED******REMOVED***self.cl.suppress(["one@example.com", "two@example.com"]) 
+
 ***REMOVED***def test_unsuppress(self):
 ***REMOVED******REMOVED***email = "example@example.com"
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, urllib.quote(email)), None)

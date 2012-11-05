@@ -17,6 +17,18 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
+***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+
+***REMOVED***def test_create_with_none_text_url(self):
+***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
+***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
+
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
 ***REMOVED***def test_create_from_template(self):
@@ -97,7 +109,11 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***"7j8uw98udowy12989e8298u2e", template_content)
 ***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
 
-***REMOVED***def test_sendpreview(self):
+***REMOVED***def test_send_preview_with_single_recipient(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
+***REMOVED******REMOVED***self.campaign.send_preview("test+89898u9@example.com", "random")
+
+***REMOVED***def test_send_preview_with_multiple_recipients(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)
 ***REMOVED******REMOVED***self.campaign.send_preview([ "test+89898u9@example.com", "test+787y8y7y8@example.com" ], "random")
 
@@ -127,6 +143,16 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
 ***REMOVED******REMOVED***self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
+***REMOVED******REMOVED***self.assertEquals(summary.SpamComplaints, 23)
+
+***REMOVED***def test_email_client_usage(self):
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/emailclientusage.json" % self.campaign_id, "email_client_usage.json")
+***REMOVED******REMOVED***ecu = self.campaign.email_client_usage()
+***REMOVED******REMOVED***self.assertEqual(len(ecu), 6)
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Client, "iOS Devices")
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Version, "iPhone")
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Percentage, 19.83)
+***REMOVED******REMOVED***self.assertEqual(ecu[0].Subscribers, 7056)
 
 ***REMOVED***def test_lists_and_segments(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" % self.campaign_id, "campaign_listsandsegments.json")
@@ -216,6 +242,22 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.NumberOfPages, 1)
+
+***REMOVED***def test_spam(self):
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+***REMOVED******REMOVED***spam = self.campaign.spam(min_date)
+***REMOVED******REMOVED***self.assertEquals(len(spam.Results), 1)
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
+***REMOVED******REMOVED***self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED***self.assertEquals(spam.ResultsOrderedBy, "date")
+***REMOVED******REMOVED***self.assertEquals(spam.OrderDirection, "asc")
+***REMOVED******REMOVED***self.assertEquals(spam.PageNumber, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.PageSize, 1000)
+***REMOVED******REMOVED***self.assertEquals(spam.RecordsOnThisPage, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.TotalNumberOfRecords, 1)
+***REMOVED******REMOVED***self.assertEquals(spam.NumberOfPages, 1)
 
 ***REMOVED***def test_bounces(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"

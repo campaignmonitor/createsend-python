@@ -39,9 +39,28 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.list.delete()
 
 ***REMOVED***def test_create_custom_field(self):
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "create_custom_field.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+***REMOVED******REMOVED***"create_custom_field.json", None,
+***REMOVED******REMOVED***"{\"DataType\": \"Date\", \"FieldName\": \"new date field\", \"Options\": [], \"VisibleInPreferenceCenter\": true}")
 ***REMOVED******REMOVED***personalisation_tag = self.list.create_custom_field("new date field", "Date")
 ***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[newdatefield]")
+
+***REMOVED***def test_create_custom_field_with_options_and_visible_in_preference_center(self):
+***REMOVED******REMOVED***options = ["one", "two"]
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id,
+***REMOVED******REMOVED***"create_custom_field.json", None,
+***REMOVED******REMOVED***"{\"DataType\": \"MultiSelectOne\", \"FieldName\": \"newsletter format\", \"Options\": [\"one\", \"two\"], \"VisibleInPreferenceCenter\": false}")
+***REMOVED******REMOVED***personalisation_tag = self.list.create_custom_field("newsletter format",
+***REMOVED******REMOVED***"MultiSelectOne", options, False)
+***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[newdatefield]")
+
+***REMOVED***def test_update_custom_field(self):
+***REMOVED******REMOVED***key = "[mycustomfield]"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(key)),
+***REMOVED******REMOVED***"update_custom_field.json", None,
+***REMOVED******REMOVED***"{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
+***REMOVED******REMOVED***personalisation_tag = self.list.update_custom_field(key, "my renamed custom field", True)
+***REMOVED******REMOVED***self.assertEquals(personalisation_tag, "[myrenamedcustomfield]")
 
 ***REMOVED***def test_delete_custom_field(self):
 ***REMOVED******REMOVED***custom_field_key = "[newdatefield]"
@@ -71,6 +90,7 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].Key, "[website]")
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].DataType, "Text")
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].FieldOptions, [])
+***REMOVED******REMOVED***self.assertEquals(cfs[0].VisibleInPreferenceCenter, True)
 
 ***REMOVED***def test_segments(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")
@@ -111,6 +131,23 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Key, "multi select field")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
+
+***REMOVED***def test_active(self):
+***REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
+***REMOVED******REMOVED***res = self.list.unconfirmed(min_date)
+***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
+***REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
+***REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
+***REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 2)
+***REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
+***REMOVED******REMOVED***self.assertEquals(len(res.Results), 2)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "subs+7t8787Y@example.com")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Unconfirmed One")
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Unconfirmed")
 
 ***REMOVED***def test_unsubscribed(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
@@ -129,8 +166,9 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Unsubscribed")
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
-***REMOVED***def test_unsubscribed(self):
+***REMOVED***def test_deleted(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.deleted(min_date)
@@ -147,6 +185,7 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Deleted")
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
 ***REMOVED***def test_bounced(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
@@ -165,6 +204,7 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Bounced")
 ***REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
+***REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "")
 
 ***REMOVED***def test_webhooks(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks.json" % self.list.list_id, "list_webhooks.json")
