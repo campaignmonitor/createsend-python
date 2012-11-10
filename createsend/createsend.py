@@ -47,7 +47,7 @@ class CreateSendBase(object):
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
     else:
       # Allow the api_key to be specific to an instance of the CreateSend class.
-      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key or self.api_key)
+      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
 
     """If in fake web mode (i.e. self.stub_request has been called), 
     self.faker should be set, and this request should be treated as a fake."""
