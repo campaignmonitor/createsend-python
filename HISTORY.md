@@ -1,5 +1,10 @@
 # createsend-python history
 
+## v2.4.1 - 11 Nov, 2012***REMOVED*** (f924770c)
+
+* Added the ability to set api_key for a CreateSend instance, rather than
+only at the class level.
+
 ## v2.4.0 - 5 Nov, 2012***REMOVED*** (3e258ae7)
 
 * Added Campaign.email_client_usage().
