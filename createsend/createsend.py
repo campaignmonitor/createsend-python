@@ -46,7 +46,9 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
 ***REMOVED******REMOVED***else:
-***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
+***REMOVED******REMOVED******REMOVED***# Allow api_key to be set for a CreateSend instance.
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
+***REMOVED******REMOVED***self.headers = headers
 
 ***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
 ***REMOVED******REMOVED***self.faker should be set, and this request should be treated as a fake."""
@@ -148,9 +150,9 @@ class CreateSend(CreateSendBase):
 ***REMOVED***	"""retrieves the primary contact for this account"""
 ***REMOVED***	response = self._get('/primarycontact.json')
 ***REMOVED***	return json_to_py(response)
-***REMOVED***	
+
 ***REMOVED***def set_primary_contact(self, email):
-	"""assigns the primary contact for this account"""
-	params = { "email": email }
-	response = self._put('/primarycontact.json', params = params)
-	return json_to_py(response)
+***REMOVED******REMOVED***"""assigns the primary contact for this account"""
+***REMOVED******REMOVED***params = { "email": email }
+***REMOVED******REMOVED***response = self._put('/primarycontact.json', params = params)
+***REMOVED******REMOVED***return json_to_py(response)

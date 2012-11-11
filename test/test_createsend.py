@@ -18,6 +18,20 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***404: NotFound,
 ***REMOVED******REMOVED******REMOVED***500: ServerError }
 
+***REMOVED***def test_set_class_api_key(self):
+***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
+***REMOVED******REMOVED***systemdate = self.cs.systemdate()
+***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
+***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
+
+***REMOVED***def test_set_instance_api_key(self):
+***REMOVED******REMOVED***CreateSend.api_key = None
+***REMOVED******REMOVED***self.cs.api_key = self.api_key
+***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
+***REMOVED******REMOVED***systemdate = self.cs.systemdate()
+***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
+***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
+
 ***REMOVED***def test_apikey(self):
 ***REMOVED******REMOVED***site_url = "http://iamadesigner.createsend.com"
 ***REMOVED******REMOVED***username = "myusername"
