@@ -18,6 +18,20 @@ class CreateSendTestCase(unittest.TestCase):
       404: NotFound,
       500: ServerError }
 
+  def test_set_class_api_key(self):
+    self.cs.stub_request("systemdate.json", "systemdate.json")
+    systemdate = self.cs.systemdate()
+    self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
+    self.assertEquals(systemdate, "2010-10-15 09:27:00")
+
+  def test_set_instance_api_key(self):
+    CreateSend.api_key = None
+    self.cs.api_key = self.api_key
+    self.cs.stub_request("systemdate.json", "systemdate.json")
+    systemdate = self.cs.systemdate()
+    self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
+    self.assertEquals(systemdate, "2010-10-15 09:27:00")
+
   def test_apikey(self):
     site_url = "http://iamadesigner.createsend.com"
     username = "myusername"

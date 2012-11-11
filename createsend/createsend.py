@@ -46,7 +46,9 @@ class CreateSendBase(object):
     if username and password:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
     else:
-      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % CreateSend.api_key)
+      # Allow api_key to be set for a CreateSend instance.
+      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
+    self.headers = headers
 
     """If in fake web mode (i.e. self.stub_request has been called), 
     self.faker should be set, and this request should be treated as a fake."""
@@ -148,9 +150,9 @@ class CreateSend(CreateSendBase):
   	"""retrieves the primary contact for this account"""
   	response = self._get('/primarycontact.json')
   	return json_to_py(response)
-  	
+
   def set_primary_contact(self, email):
-	"""assigns the primary contact for this account"""
-	params = { "email": email }
-	response = self._put('/primarycontact.json', params = params)
-	return json_to_py(response)
+    """assigns the primary contact for this account"""
+    params = { "email": email }
+    response = self._put('/primarycontact.json', params = params)
+    return json_to_py(response)
