@@ -127,7 +127,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("recipients"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def opens(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def opens(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the opens for this campaign."""
 ***REMOVED******REMOVED***params = { 
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -138,7 +138,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("opens"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def clicks(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def clicks(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the subscriber clicks for this campaign."""
 ***REMOVED******REMOVED***params = { 
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -149,7 +149,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("clicks"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def unsubscribes(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def unsubscribes(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the unsubscribes for this campaign."""
 ***REMOVED******REMOVED***params = { 
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -160,7 +160,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribes"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def spam(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def spam(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the spam complaints for this campaign."""
 ***REMOVED******REMOVED***params = { 
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -171,7 +171,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("spam"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def bounces(self, date="1900-01-01", page=1, page_size=1000, order_field="date", order_direction="asc"):
+***REMOVED***def bounces(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
 ***REMOVED******REMOVED***"""Retrieves the bounces for this campaign."""
 ***REMOVED******REMOVED***params = { 
 ***REMOVED******REMOVED******REMOVED***"date": date,

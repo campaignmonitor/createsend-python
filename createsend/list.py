@@ -85,7 +85,7 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("stats"))
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def active(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def active(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the active subscribers for this list."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -96,7 +96,7 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("active"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def unconfirmed(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def unconfirmed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the unconfirmed subscribers for this list."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -107,7 +107,7 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unconfirmed"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def bounced(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def bounced(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the bounced subscribers for this list."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -118,7 +118,7 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("bounced"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def unsubscribed(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def unsubscribed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the unsubscribed subscribers for this list."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,
@@ -129,7 +129,7 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribed"), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED***def deleted(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def deleted(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the deleted subscribers for this list."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,

@@ -34,7 +34,7 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"Clauses": clauses }
 ***REMOVED******REMOVED***response = self._post("/segments/%s/rules.json" % self.segment_id, json.dumps(body))
 
-***REMOVED***def subscribers(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED***def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
 ***REMOVED******REMOVED***"""Gets the active subscribers in this segment."""
 ***REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED***"date": date,
