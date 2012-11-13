@@ -34,7 +34,7 @@ class Segment(CreateSendBase):
       "Clauses": clauses }
     response = self._post("/segments/%s/rules.json" % self.segment_id, json.dumps(body))
 
-  def subscribers(self, date, page=1, page_size=1000, order_field="email", order_direction="asc"):
+  def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
     """Gets the active subscribers in this segment."""
     params = {
       "date": date,

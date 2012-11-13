@@ -127,7 +127,7 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("recipients"), params=params)
     return json_to_py(response)
 
-  def opens(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+  def opens(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the opens for this campaign."""
     params = { 
       "date": date,
@@ -138,7 +138,7 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("opens"), params=params)
     return json_to_py(response)
 
-  def clicks(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+  def clicks(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the subscriber clicks for this campaign."""
     params = { 
       "date": date,
@@ -149,7 +149,7 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("clicks"), params=params)
     return json_to_py(response)
 
-  def unsubscribes(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+  def unsubscribes(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the unsubscribes for this campaign."""
     params = { 
       "date": date,
@@ -160,7 +160,7 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("unsubscribes"), params=params)
     return json_to_py(response)
 
-  def spam(self, date, page=1, page_size=1000, order_field="date", order_direction="asc"):
+  def spam(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the spam complaints for this campaign."""
     params = { 
       "date": date,
@@ -171,7 +171,7 @@ class Campaign(CreateSendBase):
     response = self._get(self.uri_for("spam"), params=params)
     return json_to_py(response)
 
-  def bounces(self, date="1900-01-01", page=1, page_size=1000, order_field="date", order_direction="asc"):
+  def bounces(self, date="", page=1, page_size=1000, order_field="date", order_direction="asc"):
     """Retrieves the bounces for this campaign."""
     params = { 
       "date": date,
