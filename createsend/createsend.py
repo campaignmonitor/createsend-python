@@ -125,7 +125,12 @@ class CreateSend(CreateSendBase):
     """Gets your clients."""
     response = self._get('/clients.json')
     return json_to_py(response)
-    
+
+  def billing_details(self):
+    """Gets your billing details."""
+    response = self._get('/billingdetails.json')
+    return json_to_py(response)
+
   def countries(self):
     """Gets valid countries."""
     response = self._get('/countries.json')

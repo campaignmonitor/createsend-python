@@ -22,6 +22,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(cl.BasicDetails.ContactName, "Client One (contact)")
     self.assertEquals(cl.AccessDetails.Username, "clientone")
     self.assertEquals(cl.AccessDetails.AccessLevel, 23)
+    self.assertEquals(cl.BillingDetails.Credits, 500)
 
   def test_campaigns(self):
     self.cl.stub_request("clients/%s/campaigns.json" % self.cl.client_id, "campaigns.json")

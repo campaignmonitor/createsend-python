@@ -47,6 +47,11 @@ class CreateSendTestCase(unittest.TestCase):
     self.assertEquals("4a397ccaaa55eb4e6aa1221e1e2d7122", cl[0].ClientID)
     self.assertEquals("Client One", cl[0].Name)
 
+  def test_billing_details(self):
+    self.cs.stub_request("billingdetails.json", "billingdetails.json")
+    bd = self.cs.billing_details()
+    self.assertEquals(3021, bd.Credits)
+
   def test_countries(self):
     self.cs.stub_request("countries.json", "countries.json")
     countries = self.cs.countries()
