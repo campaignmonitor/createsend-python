@@ -22,6 +22,7 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(cl.BasicDetails.ContactName, "Client One (contact)")
 ***REMOVED******REMOVED***self.assertEquals(cl.AccessDetails.Username, "clientone")
 ***REMOVED******REMOVED***self.assertEquals(cl.AccessDetails.AccessLevel, 23)
+***REMOVED******REMOVED***self.assertEquals(cl.BillingDetails.Credits, 500)
 
 ***REMOVED***def test_campaigns(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/campaigns.json" % self.cl.client_id, "campaigns.json")

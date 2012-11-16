@@ -125,7 +125,12 @@ class CreateSend(CreateSendBase):
 ***REMOVED******REMOVED***"""Gets your clients."""
 ***REMOVED******REMOVED***response = self._get('/clients.json')
 ***REMOVED******REMOVED***return json_to_py(response)
-***REMOVED******REMOVED***
+
+***REMOVED***def billing_details(self):
+***REMOVED******REMOVED***"""Gets your billing details."""
+***REMOVED******REMOVED***response = self._get('/billingdetails.json')
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def countries(self):
 ***REMOVED******REMOVED***"""Gets valid countries."""
 ***REMOVED******REMOVED***response = self._get('/countries.json')

@@ -14,6 +14,7 @@
 ***REMOVED***},
 ***REMOVED***"BillingDetails": {
 ***REMOVED******REMOVED*** "CanPurchaseCredits": true,
+***REMOVED******REMOVED*** "Credits": 500,
 ***REMOVED******REMOVED*** "MarkupOnDesignSpamTest": 0.0,
 ***REMOVED******REMOVED*** "ClientPays": true,
 ***REMOVED******REMOVED*** "BaseRatePerRecipient": 1.0,
