@@ -117,7 +117,32 @@ class Client(CreateSendBase):
       body["MonthlyScheme"] = monthly_scheme
       
     response = self._put(self.uri_for('setmonthlybilling'), json.dumps(body))
-    
+
+  def transfer_credits(self, credits, can_use_my_credits_when_they_run_out):
+    """Transfer credits to or from this client.
+
+    :param credits: An Integer representing the number of credits to transfer.
+      This value may be either positive if you want to allocate credits from
+      your account to the client, or negative if you want to deduct credits
+      from the client back into your account.
+    :param can_use_my_credits_when_they_run_out: A Boolean value representing
+      which, if set to true, will allow the client to continue sending using
+      your credits or payment details once they run out of credits, and if
+      set to false, will prevent the client from using your credits to
+      continue sending until you allocate more credits to them.
+    :returns: An object of the following form representing the result:
+      {
+        AccountCredits # Integer representing credits in your account now
+        ClientCredits # Integer representing credits in this client's
+          account now
+      }
+    """
+    body = {
+      "Credits": credits,
+      "CanUseMyCreditsWhenTheyRunOut": can_use_my_credits_when_they_run_out }
+    response = self._post(self.uri_for('credits'), json.dumps(body))
+    return json_to_py(response)
+
   def people(self):
   	"""gets people associated with the client"""
   	response = self._get(self.uri_for('people'))

@@ -137,14 +137,20 @@ class ClientTestCase(unittest.TestCase):
   def test_set_monthly_billing_unlimited(self):
     self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Unlimited\", \"MarkupPercentage\": 100, \"ClientPays\": true}")
     self.cl.set_monthly_billing("CAD", True, 100, "Unlimited")
-        
+
+  def test_transfer_credits(self):
+    self.cl.stub_request("clients/%s/credits.json" % self.cl.client_id, "transfer_credits.json")
+    result = self.cl.transfer_credits(200, False)
+    self.assertEquals(result.AccountCredits, 800)
+    self.assertEquals(result.ClientCredits, 200)
+
   def test_people(self):
- 	self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
- 	people = self.cl.people()
- 	self.assertEquals(2, len(people))
- 	self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
- 	self.assertEquals('Person One', people[0].Name)
- 	self.assertEquals('Active', people[0].Status)  
+    self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
+    people = self.cl.people()
+    self.assertEquals(2, len(people))
+    self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
+    self.assertEquals('Person One', people[0].Name)
+    self.assertEquals('Active', people[0].Status)  
 
   def test_get_primary_contact(self):
   	self.cl.stub_request("clients/%s/primarycontact.json" % self.cl.client_id, "client_get_primary_contact.json")
