@@ -137,14 +137,20 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED***def test_set_monthly_billing_unlimited(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/setmonthlybilling.json" % self.cl.client_id, None, None, "{\"Currency\": \"CAD\", \"MonthlyScheme\": \"Unlimited\", \"MarkupPercentage\": 100, \"ClientPays\": true}")
 ***REMOVED******REMOVED***self.cl.set_monthly_billing("CAD", True, 100, "Unlimited")
-***REMOVED******REMOVED******REMOVED******REMOVED***
+
+***REMOVED***def test_transfer_credits(self):
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/credits.json" % self.cl.client_id, "transfer_credits.json")
+***REMOVED******REMOVED***result = self.cl.transfer_credits(200, False)
+***REMOVED******REMOVED***self.assertEquals(result.AccountCredits, 800)
+***REMOVED******REMOVED***self.assertEquals(result.ClientCredits, 200)
+
 ***REMOVED***def test_people(self):
- 	self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
- 	people = self.cl.people()
- 	self.assertEquals(2, len(people))
- 	self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
- 	self.assertEquals('Person One', people[0].Name)
- 	self.assertEquals('Active', people[0].Status)***REMOVED***
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/people.json" % self.cl.client_id, "people.json")
+***REMOVED******REMOVED***people = self.cl.people()
+***REMOVED******REMOVED***self.assertEquals(2, len(people))
+***REMOVED******REMOVED***self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
+***REMOVED******REMOVED***self.assertEquals('Person One', people[0].Name)
+***REMOVED******REMOVED***self.assertEquals('Active', people[0].Status)***REMOVED***
 
 ***REMOVED***def test_get_primary_contact(self):
 ***REMOVED***	self.cl.stub_request("clients/%s/primarycontact.json" % self.cl.client_id, "client_get_primary_contact.json")

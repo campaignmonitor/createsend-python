@@ -117,7 +117,32 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***body["MonthlyScheme"] = monthly_scheme
 ***REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED***response = self._put(self.uri_for('setmonthlybilling'), json.dumps(body))
-***REMOVED******REMOVED***
+
+***REMOVED***def transfer_credits(self, credits, can_use_my_credits_when_they_run_out):
+***REMOVED******REMOVED***"""Transfer credits to or from this client.
+
+***REMOVED******REMOVED***:param credits: An Integer representing the number of credits to transfer.
+***REMOVED******REMOVED******REMOVED***This value may be either positive if you want to allocate credits from
+***REMOVED******REMOVED******REMOVED***your account to the client, or negative if you want to deduct credits
+***REMOVED******REMOVED******REMOVED***from the client back into your account.
+***REMOVED******REMOVED***:param can_use_my_credits_when_they_run_out: A Boolean value representing
+***REMOVED******REMOVED******REMOVED***which, if set to true, will allow the client to continue sending using
+***REMOVED******REMOVED******REMOVED***your credits or payment details once they run out of credits, and if
+***REMOVED******REMOVED******REMOVED***set to false, will prevent the client from using your credits to
+***REMOVED******REMOVED******REMOVED***continue sending until you allocate more credits to them.
+***REMOVED******REMOVED***:returns: An object of the following form representing the result:
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***AccountCredits # Integer representing credits in your account now
+***REMOVED******REMOVED******REMOVED******REMOVED***ClientCredits # Integer representing credits in this client's
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***account now
+***REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED***"""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Credits": credits,
+***REMOVED******REMOVED******REMOVED***"CanUseMyCreditsWhenTheyRunOut": can_use_my_credits_when_they_run_out }
+***REMOVED******REMOVED***response = self._post(self.uri_for('credits'), json.dumps(body))
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def people(self):
 ***REMOVED***	"""gets people associated with the client"""
 ***REMOVED***	response = self._get(self.uri_for('people'))
