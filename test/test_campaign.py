@@ -142,6 +142,7 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(summary.Forwards, 11)
     self.assertEquals(summary.Likes, 32)
     self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
+    self.assertEquals(summary.WebVersionTextURL, "http://createsend.com/t/r-3A433FC72FFE3B8B/t")
     self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
     self.assertEquals(summary.SpamComplaints, 23)
 

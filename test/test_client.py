@@ -30,6 +30,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(len(campaigns), 2)
     self.assertEquals(campaigns[0].CampaignID, 'fc0ce7105baeaf97f47c99be31d02a91')
     self.assertEquals(campaigns[0].WebVersionURL, 'http://createsend.com/t/r-765E86829575EE2C')
+    self.assertEquals(campaigns[0].WebVersionTextURL, 'http://createsend.com/t/r-765E86829575EE2C/t')
     self.assertEquals(campaigns[0].Subject, 'Campaign One')
     self.assertEquals(campaigns[0].Name, 'Campaign One')
     self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
@@ -46,6 +47,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(campaigns[0].Subject, "Magic Issue One")
     self.assertEquals(campaigns[0].DateCreated, "2011-05-24 10:37:00")
     self.assertEquals(campaigns[0].PreviewURL, "http://createsend.com/t/r-DD543521A87C9B8B")
+    self.assertEquals(campaigns[0].PreviewTextURL, "http://createsend.com/t/r-DD543521A87C9B8B/t")
 
   def test_drafts(self):
     self.cl.stub_request("clients/%s/drafts.json" % self.cl.client_id, "drafts.json")
@@ -56,6 +58,7 @@ class ClientTestCase(unittest.TestCase):
     self.assertEquals(drafts[0].Subject, 'Draft One')
     self.assertEquals(drafts[0].DateCreated, '2010-08-19 16:08:00')
     self.assertEquals(drafts[0].PreviewURL, 'http://createsend.com/t/r-E97A7BB2E6983DA1')
+    self.assertEquals(drafts[0].PreviewTextURL, 'http://createsend.com/t/r-E97A7BB2E6983DA1/t')
 
   def test_lists(self):
     self.cl.stub_request("clients/%s/lists.json" % self.cl.client_id, "lists.json")
