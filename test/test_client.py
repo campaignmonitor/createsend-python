@@ -30,6 +30,7 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(len(campaigns), 2)
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].CampaignID, 'fc0ce7105baeaf97f47c99be31d02a91')
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].WebVersionURL, 'http://createsend.com/t/r-765E86829575EE2C')
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].WebVersionTextURL, 'http://createsend.com/t/r-765E86829575EE2C/t')
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].Subject, 'Campaign One')
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].Name, 'Campaign One')
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
@@ -46,6 +47,7 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].Subject, "Magic Issue One")
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].DateCreated, "2011-05-24 10:37:00")
 ***REMOVED******REMOVED***self.assertEquals(campaigns[0].PreviewURL, "http://createsend.com/t/r-DD543521A87C9B8B")
+***REMOVED******REMOVED***self.assertEquals(campaigns[0].PreviewTextURL, "http://createsend.com/t/r-DD543521A87C9B8B/t")
 
 ***REMOVED***def test_drafts(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/drafts.json" % self.cl.client_id, "drafts.json")
@@ -56,6 +58,7 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(drafts[0].Subject, 'Draft One')
 ***REMOVED******REMOVED***self.assertEquals(drafts[0].DateCreated, '2010-08-19 16:08:00')
 ***REMOVED******REMOVED***self.assertEquals(drafts[0].PreviewURL, 'http://createsend.com/t/r-E97A7BB2E6983DA1')
+***REMOVED******REMOVED***self.assertEquals(drafts[0].PreviewTextURL, 'http://createsend.com/t/r-E97A7BB2E6983DA1/t')
 
 ***REMOVED***def test_lists(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s/lists.json" % self.cl.client_id, "lists.json")

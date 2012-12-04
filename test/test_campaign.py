@@ -142,6 +142,7 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(summary.Forwards, 11)
 ***REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
 ***REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL, "http://createsend.com/t/r-3A433FC72FFE3B8B")
+***REMOVED******REMOVED***self.assertEquals(summary.WebVersionTextURL, "http://createsend.com/t/r-3A433FC72FFE3B8B/t")
 ***REMOVED******REMOVED***self.assertEquals(summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
 ***REMOVED******REMOVED***self.assertEquals(summary.SpamComplaints, 23)
 
