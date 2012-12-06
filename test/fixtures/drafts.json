@@ -3,6 +3,9 @@
 ***REMOVED******REMOVED***"CampaignID": "7c7424792065d92627139208c8c01db1",
 ***REMOVED******REMOVED***"Name": "Draft One",
 ***REMOVED******REMOVED***"Subject": "Draft One",
+***REMOVED******REMOVED***"FromName": "My Name",
+***REMOVED******REMOVED***"FromEmail": "myemail@example.com",
+***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2010-08-19 16:08:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-E97A7BB2E6983DA1",
 ***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t"
@@ -11,6 +14,9 @@
 ***REMOVED******REMOVED***"CampaignID": "2e928e982065d92627139208c8c01db1",
 ***REMOVED******REMOVED***"Name": "Draft Two",
 ***REMOVED******REMOVED***"Subject": "Draft Two",
+***REMOVED******REMOVED***"FromName": "My Name",
+***REMOVED******REMOVED***"FromEmail": "myemail@example.com",
+***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2010-08-19 16:08:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-E97A7BB2E6983DA1",
 ***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t"
