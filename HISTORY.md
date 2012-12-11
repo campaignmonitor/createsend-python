@@ -1,5 +1,14 @@
 # createsend-python history
 
+## v2.5.0 - 11 Dec, 2012   (9c23c53)
+
+* Added support for including from name, from email, and reply to email in
+drafts, scheduled, and sent campaigns.
+* Added support for campaign text version urls.
+* Added support for transferring credits to/from a client.
+* Added support for getting account billing details as well as client credits.
+* Made all date fields optional when getting paged results.
+
 ## v2.4.1 - 11 Nov, 2012   (f924770c)
 
 * Added the ability to set api_key for a CreateSend instance, rather than
