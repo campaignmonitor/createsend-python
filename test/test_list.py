@@ -13,14 +13,18 @@ class ListTestCase(unittest.TestCase):
     self.list = List(self.list_id)
 
   def test_create_without_unsubscribe_setting(self):
-    self.list.stub_request("lists/%s.json" % self.client_id, "create_list.json")
-    list_id = self.list.create(self.client_id, "List One", "", False, "")
-    self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee")
+    l = List()
+    l.stub_request("lists/%s.json" % self.client_id, "create_list.json")
+    list_id = l.create(self.client_id, "List One", "", False, "")
+    self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee1234")
+    self.assertEquals(l.list_id, "e3c5f034d68744f7881fdccf13c2daee1234")
 
   def test_create_with_unsubscribe_setting(self):
-    self.list.stub_request("lists/%s.json" % self.client_id, "create_list.json")
-    list_id = self.list.create(self.client_id, "List One", "", False, "", "OnlyThisList")
-    self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee")
+    l = List()
+    l.stub_request("lists/%s.json" % self.client_id, "create_list.json")
+    list_id = l.create(self.client_id, "List One", "", False, "", "OnlyThisList")
+    self.assertEquals(list_id, "e3c5f034d68744f7881fdccf13c2daee1234")
+    self.assertEquals(l.list_id, "e3c5f034d68744f7881fdccf13c2daee1234")
 
   def test_update_without_unsubscribe_setting(self):
     self.list.stub_request("lists/%s.json" % self.list.list_id, None)

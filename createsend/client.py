@@ -20,7 +20,8 @@ class Client(CreateSendBase):
       "TimeZone": timezone,
       "Country": country }
     response = self._post("/clients.json", json.dumps(body))
-    return json_to_py(response)
+    self.client_id = json_to_py(response)
+    return self.client_id
 
   def details(self):
     """Gets the details of this client."""
