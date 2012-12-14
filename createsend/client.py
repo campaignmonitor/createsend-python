@@ -20,7 +20,8 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"TimeZone": timezone,
 ***REMOVED******REMOVED******REMOVED***"Country": country }
 ***REMOVED******REMOVED***response = self._post("/clients.json", json.dumps(body))
-***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED******REMOVED***self.client_id = json_to_py(response)
+***REMOVED******REMOVED***return self.client_id
 
 ***REMOVED***def details(self):
 ***REMOVED******REMOVED***"""Gets the details of this client."""

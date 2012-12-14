@@ -13,23 +13,27 @@ class CampaignTestCase(unittest.TestCase):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
-***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+***REMOVED******REMOVED***c = Campaign()
+***REMOVED******REMOVED***c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+***REMOVED******REMOVED***campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 
-***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
-***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in c.faker.actual_body, True)
+***REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED***def test_create_with_none_text_url(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
-***REMOVED******REMOVED***campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+***REMOVED******REMOVED***c = Campaign()
+***REMOVED******REMOVED***c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+***REMOVED******REMOVED***campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***"http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
 ***REMOVED******REMOVED******REMOVED***[ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 
-***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
-***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+***REMOVED******REMOVED***self.assertEquals("\"TextUrl\": null" in c.faker.actual_body, True)
+***REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED***def test_create_from_template(self):
 ***REMOVED******REMOVED***template_content = {
@@ -103,11 +107,13 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***# </html>***REMOVED******REMOVED*** 
 
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
-***REMOVED******REMOVED***campaign_id = self.campaign.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+***REMOVED******REMOVED***c = Campaign()
+***REMOVED******REMOVED***c.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
+***REMOVED******REMOVED***campaign_id = c.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
 ***REMOVED******REMOVED******REMOVED***[ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ], [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ],
 ***REMOVED******REMOVED******REMOVED***"7j8uw98udowy12989e8298u2e", template_content)
-***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+***REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED***def test_send_preview_with_single_recipient(self):
 ***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)

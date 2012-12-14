@@ -18,7 +18,8 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"Title": title,
 ***REMOVED******REMOVED******REMOVED***"Rules": rules }
 ***REMOVED******REMOVED***response = self._post("/segments/%s.json" % list_id, json.dumps(body))
-***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED******REMOVED***self.segment_id = json_to_py(response)
+***REMOVED******REMOVED***return self.segment_id
 
 ***REMOVED***def update(self, title, rules):
 ***REMOVED******REMOVED***"""Updates this segment."""
