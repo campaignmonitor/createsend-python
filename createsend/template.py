@@ -19,7 +19,8 @@ class Template(CreateSendBase):
       "HtmlPageURL": html_url,
       "ZipFileURL": zip_url }
     response = self._post("/templates/%s.json" % client_id, json.dumps(body))
-    return json_to_py(response)
+    self.template_id = json_to_py(response)
+    return self.template_id
 
   def details(self):
     """Gets the details of this email template."""
