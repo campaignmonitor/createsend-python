@@ -31,6 +31,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
 ***REMOVED******REMOVED***:param segment_ids: Array of Strings representing the IDs of the segments to
 ***REMOVED******REMOVED******REMOVED***which the campaign will be sent.
+***REMOVED******REMOVED***:returns String representing the ID of the newly created campaign.
 ***REMOVED******REMOVED***"""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subject": subject,
@@ -43,7 +44,8 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"ListIDs": list_ids,
 ***REMOVED******REMOVED******REMOVED***"SegmentIDs": segment_ids }
 ***REMOVED******REMOVED***response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
-***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED******REMOVED***self.campaign_id = json_to_py(response)
+***REMOVED******REMOVED***return self.campaign_id
 
 ***REMOVED***def create_from_template(self, client_id, subject, name, from_name,
 ***REMOVED******REMOVED***from_email, reply_to, list_ids, segment_ids, template_id, template_content):
@@ -66,6 +68,7 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***editable areas of the template. See documentation at
 ***REMOVED******REMOVED******REMOVED***campaignmonitor.com/api/campaigns/#creating_a_campaign_from_template
 ***REMOVED******REMOVED******REMOVED***for full details of template content format.
+***REMOVED******REMOVED***:returns String representing the ID of the newly created campaign.
 ***REMOVED******REMOVED***"""
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Subject": subject,
@@ -78,7 +81,8 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"TemplateID": template_id,
 ***REMOVED******REMOVED******REMOVED***"TemplateContent": template_content }
 ***REMOVED******REMOVED***response = self._post("/campaigns/%s/fromtemplate.json" % client_id, json.dumps(body))
-***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED******REMOVED***self.campaign_id = json_to_py(response)
+***REMOVED******REMOVED***return self.campaign_id
 
 ***REMOVED***def send_preview(self, recipients, personalize="fallback"):
 ***REMOVED******REMOVED***"""Sends a preview of this campaign."""

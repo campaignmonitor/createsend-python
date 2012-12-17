@@ -19,7 +19,8 @@ class Template(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"HtmlPageURL": html_url,
 ***REMOVED******REMOVED******REMOVED***"ZipFileURL": zip_url }
 ***REMOVED******REMOVED***response = self._post("/templates/%s.json" % client_id, json.dumps(body))
-***REMOVED******REMOVED***return json_to_py(response)
+***REMOVED******REMOVED***self.template_id = json_to_py(response)
+***REMOVED******REMOVED***return self.template_id
 
 ***REMOVED***def details(self):
 ***REMOVED******REMOVED***"""Gets the details of this email template."""

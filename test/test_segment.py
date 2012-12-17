@@ -14,9 +14,11 @@ class SegmentTestCase(unittest.TestCase):
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***list_id = "2983492834987394879837498"
 ***REMOVED******REMOVED***rules = [ { "Subject": "EmailAddress", "Clauses": [ "CONTAINS example.com" ] } ]
-***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % list_id, "create_segment.json")
-***REMOVED******REMOVED***res = self.segment.create(list_id, "new segment title", rules)
-***REMOVED******REMOVED***self.assertEquals(res, "0246c2aea610a3545d9780bf6ab89006")
+***REMOVED******REMOVED***s = Segment()
+***REMOVED******REMOVED***s.stub_request("segments/%s.json" % list_id, "create_segment.json")
+***REMOVED******REMOVED***segment_id = s.create(list_id, "new segment title", rules)
+***REMOVED******REMOVED***self.assertEquals(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
+***REMOVED******REMOVED***self.assertEquals(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
 
 ***REMOVED***def test_update(self):
 ***REMOVED******REMOVED***rules = [ { "Subject": "Name", "Clauses": [ "EQUALS subscriber" ] } ]

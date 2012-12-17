@@ -12,11 +12,13 @@ class TemplateTestCase(unittest.TestCase):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % client_id, "create_template.json")
-***REMOVED******REMOVED***template_id = self.template.create(client_id, "Template One", "http://templates.org/index.html", 
+***REMOVED******REMOVED***t = Template()
+***REMOVED******REMOVED***t.stub_request("templates/%s.json" % client_id, "create_template.json")
+***REMOVED******REMOVED***template_id = t.create(client_id, "Template One", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
-***REMOVED******REMOVED***self.assertEquals(template_id, "98y2e98y289dh89h938389")
-***REMOVED******REMOVED***
+***REMOVED******REMOVED***self.assertEquals(template_id, "98y2e98y289dh89h9383891234")
+***REMOVED******REMOVED***self.assertEquals(t.template_id, "98y2e98y289dh89h9383891234")
+
 ***REMOVED***def test_details(self):
 ***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % self.template.template_id, "template_details.json")
 ***REMOVED******REMOVED***t = self.template.details()

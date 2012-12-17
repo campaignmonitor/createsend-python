@@ -10,9 +10,11 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
 
 ***REMOVED***def test_create(self):
-***REMOVED******REMOVED***self.cl.stub_request("clients.json", "create_client.json")
-***REMOVED******REMOVED***client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+***REMOVED******REMOVED***c = Client()
+***REMOVED******REMOVED***c.stub_request("clients.json", "create_client.json")
+***REMOVED******REMOVED***client_id = c.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 ***REMOVED******REMOVED***self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
+***REMOVED******REMOVED***self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", c.client_id)
 
 ***REMOVED***def test_details(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s.json" % self.cl.client_id, "client_details.json")
