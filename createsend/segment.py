@@ -18,7 +18,8 @@ class Segment(CreateSendBase):
       "Title": title,
       "Rules": rules }
     response = self._post("/segments/%s.json" % list_id, json.dumps(body))
-    return json_to_py(response)
+    self.segment_id = json_to_py(response)
+    return self.segment_id
 
   def update(self, title, rules):
     """Updates this segment."""

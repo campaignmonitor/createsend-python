@@ -31,6 +31,7 @@ class Campaign(CreateSendBase):
       which the campaign will be sent.
     :param segment_ids: Array of Strings representing the IDs of the segments to
       which the campaign will be sent.
+    :returns String representing the ID of the newly created campaign.
     """
     body = {
       "Subject": subject,
@@ -43,7 +44,8 @@ class Campaign(CreateSendBase):
       "ListIDs": list_ids,
       "SegmentIDs": segment_ids }
     response = self._post("/campaigns/%s.json" % client_id, json.dumps(body))
-    return json_to_py(response)
+    self.campaign_id = json_to_py(response)
+    return self.campaign_id
 
   def create_from_template(self, client_id, subject, name, from_name,
     from_email, reply_to, list_ids, segment_ids, template_id, template_content):
@@ -66,6 +68,7 @@ class Campaign(CreateSendBase):
       editable areas of the template. See documentation at
       campaignmonitor.com/api/campaigns/#creating_a_campaign_from_template
       for full details of template content format.
+    :returns String representing the ID of the newly created campaign.
     """
     body = {
       "Subject": subject,
@@ -78,7 +81,8 @@ class Campaign(CreateSendBase):
       "TemplateID": template_id,
       "TemplateContent": template_content }
     response = self._post("/campaigns/%s/fromtemplate.json" % client_id, json.dumps(body))
-    return json_to_py(response)
+    self.campaign_id = json_to_py(response)
+    return self.campaign_id
 
   def send_preview(self, recipients, personalize="fallback"):
     """Sends a preview of this campaign."""

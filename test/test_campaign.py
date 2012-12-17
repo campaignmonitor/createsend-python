@@ -13,23 +13,27 @@ class CampaignTestCase(unittest.TestCase):
 
   def test_create(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
-    campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+    c = Campaign()
+    c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+    campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", "http://example.com/campaign.txt", [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 
-    self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in self.campaign.faker.actual_body, True)
-    self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+    self.assertEquals("\"TextUrl\": \"http://example.com/campaign.txt\"" in c.faker.actual_body, True)
+    self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+    self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
   def test_create_with_none_text_url(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-    self.campaign.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
-    campaign_id = self.campaign.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+    c = Campaign()
+    c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
+    campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       "http://example.com/campaign.html", None, [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ],
       [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ])
 
-    self.assertEquals("\"TextUrl\": null" in self.campaign.faker.actual_body, True)
-    self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+    self.assertEquals("\"TextUrl\": null" in c.faker.actual_body, True)
+    self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+    self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
   def test_create_from_template(self):
     template_content = {
@@ -103,11 +107,13 @@ class CampaignTestCase(unittest.TestCase):
     # </html>     
 
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
-    self.campaign.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
-    campaign_id = self.campaign.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
+    c = Campaign()
+    c.stub_request("campaigns/%s/fromtemplate.json" % client_id, "create_campaign.json")
+    campaign_id = c.create_from_template(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com", 
       [ '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989' ], [ 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98' ],
       "7j8uw98udowy12989e8298u2e", template_content)
-    self.assertEquals(campaign_id, "787y87y87y87y87y87y87")
+    self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
+    self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
 
   def test_send_preview_with_single_recipient(self):
     self.campaign.stub_request("campaigns/%s/sendpreview.json" % self.campaign_id, None)

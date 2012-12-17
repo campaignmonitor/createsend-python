@@ -16,14 +16,15 @@ class List(CreateSendBase):
   def create(self, client_id, title, unsubscribe_page, confirmed_opt_in,
     confirmation_success_page, unsubscribe_setting="AllClientLists"):
     """Creates a new list for a client."""
-    body = { 
+    body = {
       "Title": title,
       "UnsubscribePage": unsubscribe_page,
       "ConfirmedOptIn": confirmed_opt_in,
       "ConfirmationSuccessPage": confirmation_success_page,
       "UnsubscribeSetting": unsubscribe_setting }
     response = self._post("/lists/%s.json" % client_id, json.dumps(body))
-    return json_to_py(response)
+    self.list_id = json_to_py(response)
+    return self.list_id
 
   def delete(self):
     """Deletes this list."""

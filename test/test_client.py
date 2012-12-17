@@ -10,9 +10,11 @@ class ClientTestCase(unittest.TestCase):
     self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
 
   def test_create(self):
-    self.cl.stub_request("clients.json", "create_client.json")
-    client_id = self.cl.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+    c = Client()
+    c.stub_request("clients.json", "create_client.json")
+    client_id = c.create("Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
     self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
+    self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", c.client_id)
 
   def test_details(self):
     self.cl.stub_request("clients/%s.json" % self.cl.client_id, "client_details.json")
