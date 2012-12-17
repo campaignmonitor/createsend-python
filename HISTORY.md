@@ -1,5 +1,28 @@
 # createsend-python history
 
+## v2.6.0 - 17 Dec, 2012***REMOVED*** (df33d50)
+
+* Created objects (clients, campaigns, lists, segments, and templates) now
+retain identifiers they are given when created. This allows the following code
+to be written:
+
+***REMOVED***```
+***REMOVED***client = Client()
+***REMOVED***client.create("Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney",
+***REMOVED******REMOVED***"Australia")
+***REMOVED***details = client.details()
+***REMOVED***```
+
+***REMOVED***Previously, this code would have been written as follows:
+
+***REMOVED***```
+***REMOVED***client = Client()
+***REMOVED***client_id = client.create("Company Name",
+***REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+***REMOVED***client.client_id = client_id
+***REMOVED***details = client.details()
+***REMOVED***```
+
 ## v2.5.0 - 11 Dec, 2012***REMOVED*** (9c23c53)
 
 * Added support for including from name, from email, and reply to email in
