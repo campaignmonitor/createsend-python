@@ -25,6 +25,32 @@ cs.auth({
 ***REMOVED***
 ```
 
+All OAuth tokens have an expiry time, and can be renewed with a corresponding refresh token. If your access token expires when attempting to make an API call, the `ExpiredOAuthToken` exception will be raised, so your code should handle this. Here's an example of how you could do this:
+
+```python
+***REMOVED***
+
+try:
+	cs = CreateSend()
+	cs.auth({
+		'access_token': 'your access token',
+		'refresh_token': 'your refresh token' })
+***REMOVED******REMOVED***
+except ExpiredOAuthToken as eot:
+	access_token, refresh_token = cs.refresh_token()
+	# retry...
+except Exception as e:
+***REMOVED***print "Error: %s" % e
+
+***REMOVED***rescue CreateSend::ExpiredOAuthToken => eot
+***REMOVED******REMOVED***access_token, refresh_token = CreateSend.refresh_token
+***REMOVED******REMOVED***retry unless (tries -= 1).zero?
+***REMOVED******REMOVED***p "Error: #{eot}"
+***REMOVED***rescue Exception => e
+***REMOVED******REMOVED***p "Error: #{e}"
+end
+```
+
 ### Using an API key
 
 ```python
@@ -59,7 +85,7 @@ a206def0582eec7dae47d937a4109cb2: Client Two
 ```
 
 ## Handling errors
-If the createsend API returns an error, an exception will be thrown. For example, if you attempt to create a campaign and enter empty values for subject etc:
+If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject etc:
 
 ```python
 ***REMOVED***

@@ -9,7 +9,7 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***# The following line just resets the state of the api_key class variable
 ***REMOVED******REMOVED***# set by the test_deprecated_can_authenticate_by_setting_class_api_key test.
-***REMOVED******REMOVED***CreateSend.api_key = None 
+***REMOVED******REMOVED***CreateSend.api_key = None
 
 ***REMOVED******REMOVED***self.oauth_credentials = {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}
 ***REMOVED******REMOVED***self.api_key = '123123123123123123123'
@@ -47,3 +47,8 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***systemdate = self.cs.systemdate()
 ***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Bearer %s" % self.oauth_credentials['access_token'])
 ***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
+
+***REMOVED***def test_raise_error_when_authenticating_with_oauth_and_token_expired(self):
+***REMOVED******REMOVED***self.cs.auth(self.oauth_credentials)
+***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", 'expired_oauth_token_api_error.json', status=401)
+***REMOVED******REMOVED***self.assertRaises(ExpiredOAuthToken, self.cs.systemdate)
