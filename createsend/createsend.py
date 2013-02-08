@@ -76,12 +76,15 @@ class CreateSendBase(object):
     self.fake_web = True
     self.faker = get_faker(expected_url, filename, status, body)
 
-  def make_request(self, method, path, params={}, body="", username=None, password=None):
+  def make_request(self, method, path, params={}, body="", username=None, 
+    password=None, base_uri=None, content_type=None, no_auth=None):
     headers = {
       'User-Agent': 'createsend-python-%s' % __version__,
       'Content-Type': 'application/json; charset=utf-8',
       'Accept-Encoding' : 'gzip, deflate' }
-    parsed_base_uri = urlparse(CreateSend.base_uri)
+    if content_type:
+      headers['Content-Type'] = content_type
+    parsed_base_uri = urlparse(CreateSend.base_uri if not base_uri else base_uri)
     """username and password should only be set when it is intended that
     the default basic authentication mechanism using the API key be 
     overridden (e.g. when using the apikey route with username and password)."""
@@ -92,14 +95,15 @@ class CreateSendBase(object):
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
     elif (self.oauth):
       headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
-
+    if no_auth:
+      del headers['Authorization']
     self.headers = headers
 
     """If in fake web mode (i.e. self.stub_request has been called), 
     self.faker should be set, and this request should be treated as a fake."""
     if self.fake_web:
       # Check that the actual url which would be requested matches self.faker.url. 
-      actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
+      actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
       self.faker.actual_url = actual_url
       if self.faker.url != actual_url:
         raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
@@ -108,7 +112,7 @@ class CreateSendBase(object):
       if self.faker.body is not None:
         if self.faker.body != body:
           raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
-        
+
       data = self.faker.open() if self.faker else ''
       status = self.faker.status if (self.faker and self.faker.status) else 200
       return self.handle_response(status, data)
@@ -148,8 +152,9 @@ class CreateSendBase(object):
   def _get(self, path, params={}, username=None, password=None):
     return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
-  def _post(self, path, body=""):
-    return self.make_request(path=path, method="POST", body=body)
+  def _post(self, path, body="", base_uri=None, content_type=None, no_auth=None):
+    return self.make_request(path=path, method="POST", body=body, 
+      base_uri=base_uri, content_type=content_type)
 
   def _put(self, path, body="", params={}):
     return self.make_request(path=path, method="PUT", params=params, body=body)
@@ -157,9 +162,25 @@ class CreateSendBase(object):
   def _delete(self, path, params={}):
     return self.make_request(path=path, method="DELETE", params=params)
 
+  def refresh_token(self, refresh_token=None):
+    """Refresh an OAuth token using a refresh token."""
+    if (not refresh_token and 'refresh_token' in self.authentication):
+      refresh_token = self.authentication['refresh_token']
+    response = self._post(
+      '', "grant_type=refresh_token&refresh_token=%s" % refresh_token,
+      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+    new_access_token, new_refresh_token = None, None
+    r = json_to_py(response)
+    new_access_token, new_refresh_token = r.access_token, r.refresh_token
+    self.auth({
+      'access_token': new_access_token,
+      'refresh_token': new_refresh_token})
+    return [new_access_token, new_refresh_token]
+
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
-  base_uri = "http://api.createsend.com/api/v3"
+  base_uri = "https://api.createsend.com/api/v3"
+  oauth_token_uri = "https://api.createsend.com/oauth/token"
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""

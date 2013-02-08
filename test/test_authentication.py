@@ -13,7 +13,6 @@ class AuthenticationTestCase(unittest.TestCase):
 
     self.oauth_credentials = {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}
     self.api_key = '123123123123123123123'
-    self.base_uri = 'http://api.createsend.com/api/v3'
     self.cs = CreateSend()
 
   def test_deprecated_can_authenticate_by_setting_class_api_key(self):
@@ -52,3 +51,12 @@ class AuthenticationTestCase(unittest.TestCase):
     self.cs.auth(self.oauth_credentials)
     self.cs.stub_request("systemdate.json", 'expired_oauth_token_api_error.json', status=401)
     self.assertRaises(ExpiredOAuthToken, self.cs.systemdate)
+
+  def test_refresh_token(self):
+    self.cs.auth(self.oauth_credentials)
+    self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
+    new_access_token, new_refresh_token = self.cs.refresh_token()
+    self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
+    self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
+    self.assertEquals(self.cs.authentication,
+      { 'access_token': new_access_token, 'refresh_token': new_refresh_token })

@@ -46,6 +46,6 @@ def get_faker(expected_url, filename, status=None, body = None):
       if url.startswith("http"):
         return url
       else:
-        return "http://api.createsend.com/api/v3/%s" % url
+        return "https://api.createsend.com/api/v3/%s" % url
 
   return Faker(expected_url, filename, status, body)

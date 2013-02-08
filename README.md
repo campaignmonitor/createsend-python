@@ -1,4 +1,5 @@
 # createsend [![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-python.png)][travis]
+
 A python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
 
 [travis]: http://travis-ci.org/campaignmonitor/createsend-python
@@ -20,8 +21,8 @@ from createsend import *
 
 cs = CreateSend()
 cs.auth({
-	'access_token': 'your access token',
-	'refresh_token': 'your refresh token' })
+  'access_token': 'your access token',
+  'refresh_token': 'your refresh token' })
 clients = cs.clients()
 ```
 
@@ -31,15 +32,17 @@ All OAuth tokens have an expiry time, and can be renewed with a corresponding re
 from createsend import *
 
 try:
-	cs = CreateSend()
-	cs.auth({
-		'access_token': 'your access token',
-		'refresh_token': 'your refresh token' })
-	clients = cs.clients()
+  cs = CreateSend()
+  cs.auth({
+    'access_token': 'your access token',
+    'refresh_token': 'your refresh token' })
+  clients = cs.clients()
 except ExpiredOAuthToken as eot:
-	# TODO: Refresh token and retry
+  access_token, refresh_token = cs.refresh_token()
+  # Save your updated access token and refresh token
+  clients = cs.clients()
 except Exception as e:
-	print "Error: %s" % e
+  print "Error: %s" % e
 ```
 
 ### Using an API key
@@ -60,8 +63,8 @@ from createsend import *
 
 cs = CreateSend()
 cs.auth({
-	'access_token': 'your access token',
-	'refresh_token': 'your refresh token' })
+  'access_token': 'your access token',
+  'refresh_token': 'your refresh token' })
 clients = cs.clients()
 
 for c in clients:
