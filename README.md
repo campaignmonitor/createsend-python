@@ -86,8 +86,8 @@ from createsend import *
 
 campaign = Campaign()
 campaign.auth({
-	'access_token': 'your access token',
-	'refresh_token': 'your refresh token' })
+  'access_token': 'your access token',
+  'refresh_token': 'your refresh token' })
 
 try:
   id = campaign.create("4a397ccaaa55eb4e6aa1221e1e2d7122", "", "", "", "", "", "", "", [], [])
