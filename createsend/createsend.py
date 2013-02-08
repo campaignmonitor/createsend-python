@@ -45,9 +45,12 @@ class CreateSendBase(object):
     overridden (e.g. when using the apikey route with username and password)."""
     if username and password:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
-    else:
+    elif (CreateSend.api_key or self.api_key):
       # Allow api_key to be set for a CreateSend instance.
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
+    elif (CreateSend.oauth or self.oauth):
+      headers['Authorization'] = "Bearer %s" % (CreateSend.oauth["access_token"] or self.oauth["access_token"])
+
     self.headers = headers
 
     """If in fake web mode (i.e. self.stub_request has been called), 
@@ -112,6 +115,7 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
   base_uri = "http://api.createsend.com/api/v3"
+  oauth = None
   api_key = ""
 
   def apikey(self, site_url, username, password):
