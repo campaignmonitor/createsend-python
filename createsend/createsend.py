@@ -26,6 +26,11 @@ class Unauthorized(CreateSendError): pass
 class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
+class ExpiredOAuthToken(Unauthorized):
+  """Raised for HTTP response code of 401, specifically when an OAuth
+  token has expired (Code: 121, Message: 'Expired OAuth Token')"""
+  pass
+
 class CreateSendBase(object):
   authentication = None
   oauth = None
@@ -128,7 +133,10 @@ class CreateSendBase(object):
     if status == 400:
       raise BadRequest(json_to_py(data))
     elif status == 401:
-      raise Unauthorized(json_to_py(data))
+      json_data = json_to_py(data)
+      if json_data.Code == 121:
+        raise ExpiredOAuthToken(json_data)
+      raise Unauthorized(json_data)
     elif status == 404:
       raise NotFound()
     elif status in range(400, 500):
