@@ -76,12 +76,15 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***self.fake_web = True
 ***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status, body)
 
-***REMOVED***def make_request(self, method, path, params={}, body="", username=None, password=None):
+***REMOVED***def make_request(self, method, path, params={}, body="", username=None, 
+***REMOVED******REMOVED***password=None, base_uri=None, content_type=None, no_auth=None):
 ***REMOVED******REMOVED***headers = {
 ***REMOVED******REMOVED******REMOVED***'User-Agent': 'createsend-python-%s' % __version__,
 ***REMOVED******REMOVED******REMOVED***'Content-Type': 'application/json; charset=utf-8',
 ***REMOVED******REMOVED******REMOVED***'Accept-Encoding' : 'gzip, deflate' }
-***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri)
+***REMOVED******REMOVED***if content_type:
+***REMOVED******REMOVED******REMOVED***headers['Content-Type'] = content_type
+***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri if not base_uri else base_uri)
 ***REMOVED******REMOVED***"""username and password should only be set when it is intended that
 ***REMOVED******REMOVED***the default basic authentication mechanism using the API key be 
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
@@ -92,14 +95,15 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
 ***REMOVED******REMOVED***elif (self.oauth):
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
-
+***REMOVED******REMOVED***if no_auth:
+***REMOVED******REMOVED******REMOVED***del headers['Authorization']
 ***REMOVED******REMOVED***self.headers = headers
 
 ***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
 ***REMOVED******REMOVED***self.faker should be set, and this request should be treated as a fake."""
 ***REMOVED******REMOVED***if self.fake_web:
 ***REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches self.faker.url. 
-***REMOVED******REMOVED******REMOVED***actual_url = "http://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
+***REMOVED******REMOVED******REMOVED***actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
 ***REMOVED******REMOVED******REMOVED***self.faker.actual_url = actual_url
 ***REMOVED******REMOVED******REMOVED***if self.faker.url != actual_url:
 ***REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
@@ -108,7 +112,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***if self.faker.body is not None:
 ***REMOVED******REMOVED******REMOVED******REMOVED***if self.faker.body != body:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
-***REMOVED******REMOVED******REMOVED******REMOVED***
+
 ***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
 ***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
 ***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
@@ -148,8 +152,9 @@ class CreateSendBase(object):
 ***REMOVED***def _get(self, path, params={}, username=None, password=None):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
-***REMOVED***def _post(self, path, body=""):
-***REMOVED******REMOVED***return self.make_request(path=path, method="POST", body=body)
+***REMOVED***def _post(self, path, body="", base_uri=None, content_type=None, no_auth=None):
+***REMOVED******REMOVED***return self.make_request(path=path, method="POST", body=body, 
+***REMOVED******REMOVED******REMOVED***base_uri=base_uri, content_type=content_type)
 
 ***REMOVED***def _put(self, path, body="", params={}):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="PUT", params=params, body=body)
@@ -157,9 +162,25 @@ class CreateSendBase(object):
 ***REMOVED***def _delete(self, path, params={}):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE", params=params)
 
+***REMOVED***def refresh_token(self, refresh_token=None):
+***REMOVED******REMOVED***"""Refresh an OAuth token using a refresh token."""
+***REMOVED******REMOVED***if (not refresh_token and 'refresh_token' in self.authentication):
+***REMOVED******REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
+***REMOVED******REMOVED***response = self._post(
+***REMOVED******REMOVED******REMOVED***'', "grant_type=refresh_token&refresh_token=%s" % refresh_token,
+***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+***REMOVED******REMOVED***new_access_token, new_refresh_token = None, None
+***REMOVED******REMOVED***r = json_to_py(response)
+***REMOVED******REMOVED***new_access_token, new_refresh_token = r.access_token, r.refresh_token
+***REMOVED******REMOVED***self.auth({
+***REMOVED******REMOVED******REMOVED***'access_token': new_access_token,
+***REMOVED******REMOVED******REMOVED***'refresh_token': new_refresh_token})
+***REMOVED******REMOVED***return [new_access_token, new_refresh_token]
+
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
-***REMOVED***base_uri = "http://api.createsend.com/api/v3"
+***REMOVED***base_uri = "https://api.createsend.com/api/v3"
+***REMOVED***oauth_token_uri = "https://api.createsend.com/oauth/token"
 
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""
