@@ -3,12 +3,7 @@ import urllib
 
 from createsend import *
 
-class AdministratorTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key   
-    self.administrator = Administrator("admin@example.com")
+class AdministratorTestCase(object):
 
   def test_get(self):
     email = "admin@example.com"
@@ -32,5 +27,15 @@ class AdministratorTestCase(unittest.TestCase):
   def test_delete(self):
     self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
     email_address = self.administrator.delete()
-    
-    
+
+class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.administrator = Administrator("admin@example.com")
+    self.administrator.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.administrator = Administrator("admin@example.com")
+    self.administrator.auth({'api_key': '123123123123123123123'})

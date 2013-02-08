@@ -3,14 +3,7 @@ import urllib
 
 from createsend import *
 
-class ListTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
-    self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
-    self.list = List(self.list_id)
+class ListTestCase(object):
 
   def test_create_without_unsubscribe_setting(self):
     l = List()
@@ -245,3 +238,19 @@ class ListTestCase(unittest.TestCase):
     webhook_id = "jiuweoiwueoiwueowiueo"
     self.list.stub_request("lists/%s/webhooks/%s/deactivate.json" % (self.list.list_id, webhook_id), None)
     self.list.deactivate_webhook(webhook_id)
+
+class OAuthListTestCase(unittest.TestCase, ListTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
+    self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
+    self.list = List(self.list_id)
+    self.list.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyListTestCase(unittest.TestCase, ListTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
+    self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
+    self.list = List(self.list_id)
+    self.list.auth({'api_key': '123123123123123123123'})

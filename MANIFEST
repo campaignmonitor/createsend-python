@@ -11,6 +11,7 @@ createsend/subscriber.py
 createsend/template.py
 createsend/utils.py
 test/test_administrator.py
+test/test_authentication.py
 test/test_campaign.py
 test/test_client.py
 test/test_createsend.py

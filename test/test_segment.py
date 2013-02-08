@@ -3,13 +3,7 @@ import urllib
 
 from createsend import *
 
-class SegmentTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.segment_id = "98y2e98y289dh89h938389"
-    self.segment = Segment(self.segment_id)
+class SegmentTestCase(object):
 
   def test_create(self):
     list_id = "2983492834987394879837498"
@@ -67,3 +61,17 @@ class SegmentTestCase(unittest.TestCase):
     self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
     self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
     self.assertEquals(res.Title, "My Segment")
+
+class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.segment_id = "98y2e98y289dh89h938389"
+    self.segment = Segment(self.segment_id)
+    self.segment.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeySegmentTestCase(unittest.TestCase, SegmentTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.segment_id = "98y2e98y289dh89h938389"
+    self.segment = Segment(self.segment_id)
+    self.segment.auth({'api_key': '123123123123123123123'})

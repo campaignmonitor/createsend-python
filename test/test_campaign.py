@@ -3,13 +3,7 @@ import urllib
 
 from createsend import *
 
-class CampaignTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.campaign_id = "787y87y87y87y87y87y87"
-    self.campaign = Campaign(self.campaign_id)
+class CampaignTestCase(object):
 
   def test_create(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -283,3 +277,17 @@ class CampaignTestCase(unittest.TestCase):
     self.assertEquals(bounces.RecordsOnThisPage, 2)
     self.assertEquals(bounces.TotalNumberOfRecords, 2)
     self.assertEquals(bounces.NumberOfPages, 1)
+
+class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.campaign_id = "787y87y87y87y87y87y87"
+    self.campaign = Campaign(self.campaign_id)
+    self.campaign.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyCampaignTestCase(unittest.TestCase, CampaignTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.campaign_id = "787y87y87y87y87y87y87"
+    self.campaign = Campaign(self.campaign_id)
+    self.campaign.auth({'api_key': '123123123123123123123'})

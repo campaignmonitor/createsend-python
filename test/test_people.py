@@ -3,13 +3,7 @@ import urllib
 
 from createsend import *
 
-class PeopleTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.client_id = "d98h2938d9283d982u3d98u88"
-    self.person = Person(self.client_id, "person@example.com")
+class PeopleTestCase(object):
 
   def test_get(self):
     email = "person@example.com"
@@ -34,5 +28,17 @@ class PeopleTestCase(unittest.TestCase):
   def test_delete(self):
     self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
     email_address = self.person.delete()
-    
-    
+
+class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.client_id = "d98h2938d9283d982u3d98u88"
+    self.person = Person(self.client_id, "person@example.com")
+    self.person.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyPeopleTestCase(unittest.TestCase, PeopleTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.client_id = "d98h2938d9283d982u3d98u88"
+    self.person = Person(self.client_id, "person@example.com")
+    self.person.auth({'api_key': '123123123123123123123'})

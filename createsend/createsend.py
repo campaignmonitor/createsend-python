@@ -27,8 +27,45 @@ class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
 class CreateSendBase(object):
+  authentication = None
+  oauth = None
+  api_key = None
+
   def __init__(self):
     self.fake_web = False
+
+  def reset_auth(self):
+    self.oauth = None
+    self.api_key = None
+
+  def auth(self, auth):
+    """Authenticate with the Campaign Monitor API using either OAuth or
+    an API key.
+
+    :param auth: A dictionary representing the authentication scheme to use.
+    This dictionary must take either of the following forms:
+
+    {'access_token': 'your access token', 'refresh_token': 'your refresh token'}
+
+    {'api_key': 'your api key'}
+
+    :returns If no auth is specified, returns the current authentication
+    data as a dictionary.
+    """
+    if not auth:
+      return self.authentication
+    self.reset_auth()
+    self.authentication = auth
+    if 'api_key' in auth:
+      self.api_key = auth['api_key']
+    elif 'access_token' in auth:
+      access_token = auth['access_token']
+      refresh_token = None
+      if 'refresh_token' in auth:
+        refresh_token = auth['refresh_token']
+      self.oauth = {
+        'access_token': access_token,
+        'refresh_token': refresh_token }
 
   def stub_request(self, expected_url, filename, status=None, body=None):
     self.fake_web = True
@@ -48,8 +85,8 @@ class CreateSendBase(object):
     elif (CreateSend.api_key or self.api_key):
       # Allow api_key to be set for a CreateSend instance.
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
-    elif (CreateSend.oauth or self.oauth):
-      headers['Authorization'] = "Bearer %s" % (CreateSend.oauth["access_token"] or self.oauth["access_token"])
+    elif (self.oauth):
+      headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
 
     self.headers = headers
 
@@ -115,8 +152,6 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
   base_uri = "http://api.createsend.com/api/v3"
-  oauth = None
-  api_key = ""
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""

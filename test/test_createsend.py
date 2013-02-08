@@ -4,33 +4,9 @@ from urlparse import urlparse
 
 from createsend import *
 
-class CreateSendTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    self.base_uri = 'http://api.createsend.com/api/v3'
-    CreateSend.api_key = self.api_key
-    self.cs = CreateSend()
-    # Mapping of http status codes to the exceptions expected to be raised
-    self.error_responses = {
-      400: BadRequest,
-      401: Unauthorized,
-      404: NotFound,
-      500: ServerError }
-
-  def test_set_class_api_key(self):
-    self.cs.stub_request("systemdate.json", "systemdate.json")
-    systemdate = self.cs.systemdate()
-    self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
-    self.assertEquals(systemdate, "2010-10-15 09:27:00")
-
-  def test_set_instance_api_key(self):
-    CreateSend.api_key = None
-    self.cs.api_key = self.api_key
-    self.cs.stub_request("systemdate.json", "systemdate.json")
-    systemdate = self.cs.systemdate()
-    self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
-    self.assertEquals(systemdate, "2010-10-15 09:27:00")
+class CreateSendTestCase(object):
+  """CreateSend tests to be run in the context of both using an API key 
+  and using OAuth."""
 
   def test_apikey(self):
     site_url = "http://iamadesigner.createsend.com"
@@ -172,3 +148,21 @@ class CreateSendTestCase(unittest.TestCase):
     template = Template("uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
     self.assertRaises(self.error_responses[500], template.delete)
+
+class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.cs = CreateSend()
+    self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+    # Mapping of http status codes to the exceptions expected to be raised
+    self.error_responses = {
+      400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }
+
+class ApiKeyCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.cs = CreateSend()
+    self.cs.auth({'api_key': '123123123123123123123'})
+    # Mapping of http status codes to the exceptions expected to be raised
+    self.error_responses = {
+      400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }

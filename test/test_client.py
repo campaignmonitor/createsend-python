@@ -2,12 +2,7 @@ import unittest
 
 from createsend import *
 
-class ClientTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+class ClientTestCase(object):
 
   def test_create(self):
     c = Client()
@@ -180,3 +175,15 @@ class ClientTestCase(unittest.TestCase):
   def test_delete(self):
     self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
     self.cl.delete()
+
+class OAuthClientTestCase(unittest.TestCase, ClientTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+    self.cl.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyClientTestCase(unittest.TestCase, ClientTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+    self.cl.auth({'api_key': '123123123123123123123'})

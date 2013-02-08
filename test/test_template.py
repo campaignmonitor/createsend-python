@@ -3,12 +3,7 @@ import urllib
 
 from createsend import *
 
-class TemplateTestCase(unittest.TestCase):
-
-  def setUp(self):
-    self.api_key = '123123123123123123123'
-    CreateSend.api_key = self.api_key
-    self.template = Template("98y2e98y289dh89h938389")
+class TemplateTestCase(object):
 
   def test_create(self):
     client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -34,3 +29,15 @@ class TemplateTestCase(unittest.TestCase):
   def test_delete(self):
     self.template.stub_request("templates/%s.json" % self.template.template_id, None)
     self.template.delete()
+
+class OAuthTemplateTestCase(unittest.TestCase, TemplateTestCase):
+  """Test when using OAuth to authenticate"""
+  def setUp(self):
+    self.template = Template("98y2e98y289dh89h938389")
+    self.template.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyTemplateTestCase(unittest.TestCase, TemplateTestCase):
+  """Test when using an API key to authenticate"""
+  def setUp(self):
+    self.template = Template("98y2e98y289dh89h938389")
+    self.template.auth({'api_key': '123123123123123123123'})
