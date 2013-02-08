@@ -45,9 +45,12 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
-***REMOVED******REMOVED***else:
+***REMOVED******REMOVED***elif (CreateSend.api_key or self.api_key):
 ***REMOVED******REMOVED******REMOVED***# Allow api_key to be set for a CreateSend instance.
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
+***REMOVED******REMOVED***elif (CreateSend.oauth or self.oauth):
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % (CreateSend.oauth["access_token"] or self.oauth["access_token"])
+
 ***REMOVED******REMOVED***self.headers = headers
 
 ***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
@@ -112,6 +115,7 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
 ***REMOVED***base_uri = "http://api.createsend.com/api/v3"
+***REMOVED***oauth = None
 ***REMOVED***api_key = ""
 
 ***REMOVED***def apikey(self, site_url, username, password):
