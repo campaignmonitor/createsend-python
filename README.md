@@ -86,8 +86,8 @@ If the Campaign Monitor API returns an error, an exception will be raised. For e
 
 campaign = Campaign()
 campaign.auth({
-	'access_token': 'your access token',
-	'refresh_token': 'your refresh token' })
+***REMOVED***'access_token': 'your access token',
+***REMOVED***'refresh_token': 'your refresh token' })
 
 try:
 ***REMOVED***id = campaign.create("4a397ccaaa55eb4e6aa1221e1e2d7122", "", "", "", "", "", "", "", [], [])
