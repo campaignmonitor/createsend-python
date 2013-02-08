@@ -35,20 +35,11 @@ try:
 	cs.auth({
 		'access_token': 'your access token',
 		'refresh_token': 'your refresh token' })
-***REMOVED******REMOVED***
+	***REMOVED***
 except ExpiredOAuthToken as eot:
-	access_token, refresh_token = cs.refresh_token()
-	# retry...
+	# TODO: Refresh token and retry
 except Exception as e:
-***REMOVED***print "Error: %s" % e
-
-***REMOVED***rescue CreateSend::ExpiredOAuthToken => eot
-***REMOVED******REMOVED***access_token, refresh_token = CreateSend.refresh_token
-***REMOVED******REMOVED***retry unless (tries -= 1).zero?
-***REMOVED******REMOVED***p "Error: #{eot}"
-***REMOVED***rescue Exception => e
-***REMOVED******REMOVED***p "Error: #{e}"
-end
+	print "Error: %s" % e
 ```
 
 ### Using an API key
