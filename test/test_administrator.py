@@ -3,12 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class AdministratorTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key***REMOVED*** 
-***REMOVED******REMOVED***self.administrator = Administrator("admin@example.com")
+class AdministratorTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "admin@example.com"
@@ -32,5 +27,15 @@ class AdministratorTestCase(unittest.TestCase):
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
 ***REMOVED******REMOVED***email_address = self.administrator.delete()
-***REMOVED******REMOVED***
-***REMOVED******REMOVED***
+
+class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.administrator = Administrator("admin@example.com")
+***REMOVED******REMOVED***self.administrator.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.administrator = Administrator("admin@example.com")
+***REMOVED******REMOVED***self.administrator.auth({'api_key': '123123123123123123123'})

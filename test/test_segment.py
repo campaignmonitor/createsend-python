@@ -3,13 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class SegmentTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.segment_id = "98y2e98y289dh89h938389"
-***REMOVED******REMOVED***self.segment = Segment(self.segment_id)
+class SegmentTestCase(object):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***list_id = "2983492834987394879837498"
@@ -67,3 +61,17 @@ class SegmentTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
 ***REMOVED******REMOVED***self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
 ***REMOVED******REMOVED***self.assertEquals(res.Title, "My Segment")
+
+class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.segment_id = "98y2e98y289dh89h938389"
+***REMOVED******REMOVED***self.segment = Segment(self.segment_id)
+***REMOVED******REMOVED***self.segment.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeySegmentTestCase(unittest.TestCase, SegmentTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.segment_id = "98y2e98y289dh89h938389"
+***REMOVED******REMOVED***self.segment = Segment(self.segment_id)
+***REMOVED******REMOVED***self.segment.auth({'api_key': '123123123123123123123'})

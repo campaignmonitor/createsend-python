@@ -3,13 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class CampaignTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
-***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
+class CampaignTestCase(object):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -283,3 +277,17 @@ class CampaignTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(bounces.RecordsOnThisPage, 2)
 ***REMOVED******REMOVED***self.assertEquals(bounces.TotalNumberOfRecords, 2)
 ***REMOVED******REMOVED***self.assertEquals(bounces.NumberOfPages, 1)
+
+class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
+***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
+***REMOVED******REMOVED***self.campaign.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyCampaignTestCase(unittest.TestCase, CampaignTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
+***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
+***REMOVED******REMOVED***self.campaign.auth({'api_key': '123123123123123123123'})

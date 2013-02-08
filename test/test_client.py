@@ -2,12 +2,7 @@ import unittest
 
 ***REMOVED***
 
-class ClientTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+class ClientTestCase(object):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***c = Client()
@@ -180,3 +175,15 @@ class ClientTestCase(unittest.TestCase):
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
 ***REMOVED******REMOVED***self.cl.delete()
+
+class OAuthClientTestCase(unittest.TestCase, ClientTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+***REMOVED******REMOVED***self.cl.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyClientTestCase(unittest.TestCase, ClientTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
+***REMOVED******REMOVED***self.cl.auth({'api_key': '123123123123123123123'})

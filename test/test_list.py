@@ -3,14 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class ListTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
-***REMOVED******REMOVED***self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
-***REMOVED******REMOVED***self.list = List(self.list_id)
+class ListTestCase(object):
 
 ***REMOVED***def test_create_without_unsubscribe_setting(self):
 ***REMOVED******REMOVED***l = List()
@@ -245,3 +238,19 @@ class ListTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/webhooks/%s/deactivate.json" % (self.list.list_id, webhook_id), None)
 ***REMOVED******REMOVED***self.list.deactivate_webhook(webhook_id)
+
+class OAuthListTestCase(unittest.TestCase, ListTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
+***REMOVED******REMOVED***self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
+***REMOVED******REMOVED***self.list = List(self.list_id)
+***REMOVED******REMOVED***self.list.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyListTestCase(unittest.TestCase, ListTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
+***REMOVED******REMOVED***self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
+***REMOVED******REMOVED***self.list = List(self.list_id)
+***REMOVED******REMOVED***self.list.auth({'api_key': '123123123123123123123'})

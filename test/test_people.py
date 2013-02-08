@@ -3,13 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class PeopleTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.client_id = "d98h2938d9283d982u3d98u88"
-***REMOVED******REMOVED***self.person = Person(self.client_id, "person@example.com")
+class PeopleTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "person@example.com"
@@ -34,5 +28,17 @@ class PeopleTestCase(unittest.TestCase):
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
 ***REMOVED******REMOVED***email_address = self.person.delete()
-***REMOVED******REMOVED***
-***REMOVED******REMOVED***
+
+class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.client_id = "d98h2938d9283d982u3d98u88"
+***REMOVED******REMOVED***self.person = Person(self.client_id, "person@example.com")
+***REMOVED******REMOVED***self.person.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyPeopleTestCase(unittest.TestCase, PeopleTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.client_id = "d98h2938d9283d982u3d98u88"
+***REMOVED******REMOVED***self.person = Person(self.client_id, "person@example.com")
+***REMOVED******REMOVED***self.person.auth({'api_key': '123123123123123123123'})

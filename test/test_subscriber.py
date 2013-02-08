@@ -3,13 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class SubscriberTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.list_id = "d98h2938d9283d982u3d98u88"
-***REMOVED******REMOVED***self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
+class SubscriberTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "subscriber@example.com"
@@ -133,3 +127,17 @@ class SubscriberTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(history[0].Actions[0].Date, "2010-10-12 13:18:00")
 ***REMOVED******REMOVED***self.assertEquals(history[0].Actions[0].IPAddress, "192.168.126.87")
 ***REMOVED******REMOVED***self.assertEquals(history[0].Actions[0].Detail, "")
+
+class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.list_id = "d98h2938d9283d982u3d98u88"
+***REMOVED******REMOVED***self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
+***REMOVED******REMOVED***self.subscriber.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeySubscriberTestCase(unittest.TestCase, SubscriberTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.list_id = "d98h2938d9283d982u3d98u88"
+***REMOVED******REMOVED***self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
+***REMOVED******REMOVED***self.subscriber.auth({'api_key': '123123123123123123123'})

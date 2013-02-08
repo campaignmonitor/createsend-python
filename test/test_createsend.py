@@ -4,33 +4,9 @@ from urlparse import urlparse
 
 ***REMOVED***
 
-class CreateSendTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***self.base_uri = 'http://api.createsend.com/api/v3'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.cs = CreateSend()
-***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
-***REMOVED******REMOVED***self.error_responses = {
-***REMOVED******REMOVED******REMOVED***400: BadRequest,
-***REMOVED******REMOVED******REMOVED***401: Unauthorized,
-***REMOVED******REMOVED******REMOVED***404: NotFound,
-***REMOVED******REMOVED******REMOVED***500: ServerError }
-
-***REMOVED***def test_set_class_api_key(self):
-***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
-***REMOVED******REMOVED***systemdate = self.cs.systemdate()
-***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
-***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
-
-***REMOVED***def test_set_instance_api_key(self):
-***REMOVED******REMOVED***CreateSend.api_key = None
-***REMOVED******REMOVED***self.cs.api_key = self.api_key
-***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
-***REMOVED******REMOVED***systemdate = self.cs.systemdate()
-***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key))
-***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
+class CreateSendTestCase(object):
+***REMOVED***"""CreateSend tests to be run in the context of both using an API key 
+***REMOVED***and using OAuth."""
 
 ***REMOVED***def test_apikey(self):
 ***REMOVED******REMOVED***site_url = "http://iamadesigner.createsend.com"
@@ -172,3 +148,21 @@ class CreateSendTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], template.delete)
+
+class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.cs = CreateSend()
+***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
+***REMOVED******REMOVED***self.error_responses = {
+***REMOVED******REMOVED******REMOVED***400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }
+
+class ApiKeyCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.cs = CreateSend()
+***REMOVED******REMOVED***self.cs.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
+***REMOVED******REMOVED***self.error_responses = {
+***REMOVED******REMOVED******REMOVED***400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }

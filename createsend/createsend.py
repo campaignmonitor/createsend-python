@@ -27,8 +27,45 @@ class NotFound(ClientError): pass
 class Unavailable(Exception): pass
 
 class CreateSendBase(object):
+***REMOVED***authentication = None
+***REMOVED***oauth = None
+***REMOVED***api_key = None
+
 ***REMOVED***def __init__(self):
 ***REMOVED******REMOVED***self.fake_web = False
+
+***REMOVED***def reset_auth(self):
+***REMOVED******REMOVED***self.oauth = None
+***REMOVED******REMOVED***self.api_key = None
+
+***REMOVED***def auth(self, auth):
+***REMOVED******REMOVED***"""Authenticate with the Campaign Monitor API using either OAuth or
+***REMOVED******REMOVED***an API key.
+
+***REMOVED******REMOVED***:param auth: A dictionary representing the authentication scheme to use.
+***REMOVED******REMOVED***This dictionary must take either of the following forms:
+
+***REMOVED******REMOVED***{'access_token': 'your access token', 'refresh_token': 'your refresh token'}
+
+***REMOVED******REMOVED***{'api_key': 'your api key'}
+
+***REMOVED******REMOVED***:returns If no auth is specified, returns the current authentication
+***REMOVED******REMOVED***data as a dictionary.
+***REMOVED******REMOVED***"""
+***REMOVED******REMOVED***if not auth:
+***REMOVED******REMOVED******REMOVED***return self.authentication
+***REMOVED******REMOVED***self.reset_auth()
+***REMOVED******REMOVED***self.authentication = auth
+***REMOVED******REMOVED***if 'api_key' in auth:
+***REMOVED******REMOVED******REMOVED***self.api_key = auth['api_key']
+***REMOVED******REMOVED***elif 'access_token' in auth:
+***REMOVED******REMOVED******REMOVED***access_token = auth['access_token']
+***REMOVED******REMOVED******REMOVED***refresh_token = None
+***REMOVED******REMOVED******REMOVED***if 'refresh_token' in auth:
+***REMOVED******REMOVED******REMOVED******REMOVED***refresh_token = auth['refresh_token']
+***REMOVED******REMOVED******REMOVED***self.oauth = {
+***REMOVED******REMOVED******REMOVED******REMOVED***'access_token': access_token,
+***REMOVED******REMOVED******REMOVED******REMOVED***'refresh_token': refresh_token }
 
 ***REMOVED***def stub_request(self, expected_url, filename, status=None, body=None):
 ***REMOVED******REMOVED***self.fake_web = True
@@ -48,8 +85,8 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***elif (CreateSend.api_key or self.api_key):
 ***REMOVED******REMOVED******REMOVED***# Allow api_key to be set for a CreateSend instance.
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
-***REMOVED******REMOVED***elif (CreateSend.oauth or self.oauth):
-***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % (CreateSend.oauth["access_token"] or self.oauth["access_token"])
+***REMOVED******REMOVED***elif (self.oauth):
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
 
 ***REMOVED******REMOVED***self.headers = headers
 
@@ -115,8 +152,6 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
 ***REMOVED***base_uri = "http://api.createsend.com/api/v3"
-***REMOVED***oauth = None
-***REMOVED***api_key = ""
 
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""

@@ -3,12 +3,7 @@ import urllib
 
 ***REMOVED***
 
-class TemplateTestCase(unittest.TestCase):
-
-***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.api_key = '123123123123123123123'
-***REMOVED******REMOVED***CreateSend.api_key = self.api_key
-***REMOVED******REMOVED***self.template = Template("98y2e98y289dh89h938389")
+class TemplateTestCase(object):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -34,3 +29,15 @@ class TemplateTestCase(unittest.TestCase):
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.template.stub_request("templates/%s.json" % self.template.template_id, None)
 ***REMOVED******REMOVED***self.template.delete()
+
+class OAuthTemplateTestCase(unittest.TestCase, TemplateTestCase):
+***REMOVED***"""Test when using OAuth to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.template = Template("98y2e98y289dh89h938389")
+***REMOVED******REMOVED***self.template.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+
+class ApiKeyTemplateTestCase(unittest.TestCase, TemplateTestCase):
+***REMOVED***"""Test when using an API key to authenticate"""
+***REMOVED***def setUp(self):
+***REMOVED******REMOVED***self.template = Template("98y2e98y289dh89h938389")
+***REMOVED******REMOVED***self.template.auth({'api_key': '123123123123123123123'})
