@@ -16,6 +16,8 @@ The Campaign Monitor API supports authentication using either OAuth or an API ke
 
 ### Using OAuth
 
+Once you have an access token and refresh token for your user, you authenticate using the `auth()` method like so:
+
 ```python
 ***REMOVED***
 
