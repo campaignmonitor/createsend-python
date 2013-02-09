@@ -9,4 +9,7 @@ setup(name = "createsend",
       description = "A library which implements the complete functionality of the Campaign Monitor API.",
       author = "James Dennes",
       author_email = 'jdennes@gmail.com',
+      url = "http://campaignmonitor.github.com/createsend-python/",
+      license = "MIT",
+      keywords = "createsend campaign monitor email",
       packages = ['createsend'])
