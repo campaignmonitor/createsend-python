@@ -40,6 +40,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***self.fake_web = False
 
 ***REMOVED***def reset_auth(self):
+***REMOVED******REMOVED***"""Reset the authentication which was set for this object."""
 ***REMOVED******REMOVED***self.oauth = None
 ***REMOVED******REMOVED***self.api_key = None
 
@@ -73,6 +74,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***'refresh_token': refresh_token }
 
 ***REMOVED***def stub_request(self, expected_url, filename, status=None, body=None):
+***REMOVED******REMOVED***"""Stub a web request for testing."""
 ***REMOVED******REMOVED***self.fake_web = True
 ***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status, body)
 
@@ -163,7 +165,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE", params=params)
 
 ***REMOVED***def refresh_token(self, refresh_token=None):
-***REMOVED******REMOVED***"""Refresh an OAuth token using a refresh token."""
+***REMOVED******REMOVED***"""Refresh an OAuth token given a refresh token."""
 ***REMOVED******REMOVED***if (not refresh_token and 'refresh_token' in self.authentication):
 ***REMOVED******REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
 ***REMOVED******REMOVED***response = self._post(

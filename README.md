@@ -42,7 +42,7 @@ except ExpiredOAuthToken as eot:
 ***REMOVED***# Save your updated access token and refresh token
 ***REMOVED******REMOVED***
 except Exception as e:
-***REMOVED***print "Error: %s" % e
+***REMOVED***print("Error: %s" % e)
 ```
 
 ### Using an API key
@@ -56,30 +56,41 @@ cs.auth({'api_key': 'your api key'})
 ```
 
 ## Basic usage
-Retrieve a list of all your clients.
+This example of listing all your clients and their campaigns demonstrates basic usage of the library and the data returned from the API:
 
 ```python
 ***REMOVED***
 
+auth = {
+***REMOVED***'access_token': access_token,
+***REMOVED***'refresh_token': refresh_token }
 cs = CreateSend()
-cs.auth({
-***REMOVED***'access_token': 'your access token',
-***REMOVED***'refresh_token': 'your refresh token' })
+cs.auth(auth)
 ***REMOVED***
 
-for c in clients:
-***REMOVED***print "%s: %s" % (c.ClientID, c.Name)
+***REMOVED***
+***REMOVED***print("Client: %s" % cl.Name)
+***REMOVED***client = Client(cl.ClientID)
+***REMOVED***client.auth(auth)
+***REMOVED***print("- Campaigns:")
+***REMOVED***for cm in client.campaigns():
+***REMOVED******REMOVED***print("***REMOVED***- %s" % cm.Subject)
 ```
 
-Results in:
+Running this example will result in something like:
 
 ```
-4a397ccaaa55eb4e6aa1221e1e2d7122: Client One
-a206def0582eec7dae47d937a4109cb2: Client Two
+Client: First Client
+- Campaigns:
+***REMOVED***- Newsletter Number One
+***REMOVED***- Newsletter Number Two
+Client: Second Client
+- Campaigns:
+***REMOVED***- News for January 2013
 ```
 
 ## Handling errors
-If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject etc:
+If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject and other required fields:
 
 ```python
 ***REMOVED***
@@ -91,16 +102,16 @@ campaign.auth({
 
 try:
 ***REMOVED***id = campaign.create("4a397ccaaa55eb4e6aa1221e1e2d7122", "", "", "", "", "", "", "", [], [])
-***REMOVED***print "New campaign ID: %s" % id
+***REMOVED***print("New campaign ID: %s" % id)
 except BadRequest as br:
-***REMOVED***print "Bad request error: %s" % br
-***REMOVED***print "Error Code:***REMOVED******REMOVED***%s" % br.data.Code
-***REMOVED***print "Error Message: %s" % br.data.Message
+***REMOVED***print("Bad request error: %s" % br)
+***REMOVED***print("Error Code:***REMOVED******REMOVED***%s" % br.data.Code)
+***REMOVED***print("Error Message: %s" % br.data.Message)
 except Exception as e:
-***REMOVED***print "Error: %s" % e
+***REMOVED***print("Error: %s" % e)
 ```
 
-Results in:
+Running this example will result in:
 
 ```
 Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
