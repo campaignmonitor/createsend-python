@@ -42,7 +42,7 @@ except ExpiredOAuthToken as eot:
   # Save your updated access token and refresh token
   clients = cs.clients()
 except Exception as e:
-  print "Error: %s" % e
+  print("Error: %s" % e)
 ```
 
 ### Using an API key
@@ -56,30 +56,41 @@ clients = cs.clients()
 ```
 
 ## Basic usage
-Retrieve a list of all your clients.
+This example of listing all your clients and their campaigns demonstrates basic usage of the library and the data returned from the API:
 
 ```python
 from createsend import *
 
+auth = {
+  'access_token': access_token,
+  'refresh_token': refresh_token }
 cs = CreateSend()
-cs.auth({
-  'access_token': 'your access token',
-  'refresh_token': 'your refresh token' })
+cs.auth(auth)
 clients = cs.clients()
 
-for c in clients:
-  print "%s: %s" % (c.ClientID, c.Name)
+for cl in clients:
+  print("Client: %s" % cl.Name)
+  client = Client(cl.ClientID)
+  client.auth(auth)
+  print("- Campaigns:")
+  for cm in client.campaigns():
+    print("  - %s" % cm.Subject)
 ```
 
-Results in:
+Running this example will result in something like:
 
 ```
-4a397ccaaa55eb4e6aa1221e1e2d7122: Client One
-a206def0582eec7dae47d937a4109cb2: Client Two
+Client: First Client
+- Campaigns:
+  - Newsletter Number One
+  - Newsletter Number Two
+Client: Second Client
+- Campaigns:
+  - News for January 2013
 ```
 
 ## Handling errors
-If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject etc:
+If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject and other required fields:
 
 ```python
 from createsend import *
@@ -91,16 +102,16 @@ campaign.auth({
 
 try:
   id = campaign.create("4a397ccaaa55eb4e6aa1221e1e2d7122", "", "", "", "", "", "", "", [], [])
-  print "New campaign ID: %s" % id
+  print("New campaign ID: %s" % id)
 except BadRequest as br:
-  print "Bad request error: %s" % br
-  print "Error Code:    %s" % br.data.Code
-  print "Error Message: %s" % br.data.Message
+  print("Bad request error: %s" % br)
+  print("Error Code:    %s" % br.data.Code)
+  print("Error Message: %s" % br.data.Message)
 except Exception as e:
-  print "Error: %s" % e
+  print("Error: %s" % e)
 ```
 
-Results in:
+Running this example will result in:
 
 ```
 Bad request error: The CreateSend API responded with the following error - 304: Campaign Subject Required
