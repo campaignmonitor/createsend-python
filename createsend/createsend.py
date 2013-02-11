@@ -44,6 +44,20 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***self.oauth = None
 ***REMOVED******REMOVED***self.api_key = None
 
+***REMOVED***def authorize_url(self, client_id, client_secret, redirect_uri,
+***REMOVED******REMOVED***scope, state=None):
+***REMOVED******REMOVED***"""Get the authorization URL for your application, given the application's
+***REMOVED******REMOVED***client_id, client_secret, redirect_uri, scope, and optional state data."""
+***REMOVED******REMOVED***options = [
+***REMOVED******REMOVED******REMOVED***('client_id', client_id),
+***REMOVED******REMOVED******REMOVED***('client_secret', client_secret),
+***REMOVED******REMOVED******REMOVED***('redirect_uri', redirect_uri),
+***REMOVED******REMOVED******REMOVED***('scope', scope)
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***if state:
+***REMOVED******REMOVED******REMOVED***options.append(('state', state))
+***REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(options))
+
 ***REMOVED***def auth(self, auth):
 ***REMOVED******REMOVED***"""Authenticate with the Campaign Monitor API using either OAuth or
 ***REMOVED******REMOVED***an API key.
@@ -78,7 +92,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***self.fake_web = True
 ***REMOVED******REMOVED***self.faker = get_faker(expected_url, filename, status, body)
 
-***REMOVED***def make_request(self, method, path, params={}, body="", username=None, 
+***REMOVED***def make_request(self, method, path, params={}, body="", username=None,
 ***REMOVED******REMOVED***password=None, base_uri=None, content_type=None, no_auth=None):
 ***REMOVED******REMOVED***headers = {
 ***REMOVED******REMOVED******REMOVED***'User-Agent': 'createsend-python-%s' % __version__,
@@ -182,7 +196,8 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
 ***REMOVED***base_uri = "https://api.createsend.com/api/v3"
-***REMOVED***oauth_token_uri = "https://api.createsend.com/oauth/token"
+***REMOVED***oauth_uri = "https://api.createsend.com/oauth"
+***REMOVED***oauth_token_uri = "%s/token" % oauth_uri
 
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""
