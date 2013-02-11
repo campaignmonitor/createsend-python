@@ -44,6 +44,20 @@ class CreateSendBase(object):
     self.oauth = None
     self.api_key = None
 
+  def authorize_url(self, client_id, client_secret, redirect_uri,
+    scope, state=None):
+    """Get the authorization URL for your application, given the application's
+    client_id, client_secret, redirect_uri, scope, and optional state data."""
+    options = [
+      ('client_id', client_id),
+      ('client_secret', client_secret),
+      ('redirect_uri', redirect_uri),
+      ('scope', scope)
+    ]
+    if state:
+      options.append(('state', state))
+    return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(options))
+
   def auth(self, auth):
     """Authenticate with the Campaign Monitor API using either OAuth or
     an API key.
@@ -78,7 +92,7 @@ class CreateSendBase(object):
     self.fake_web = True
     self.faker = get_faker(expected_url, filename, status, body)
 
-  def make_request(self, method, path, params={}, body="", username=None, 
+  def make_request(self, method, path, params={}, body="", username=None,
     password=None, base_uri=None, content_type=None, no_auth=None):
     headers = {
       'User-Agent': 'createsend-python-%s' % __version__,
@@ -182,7 +196,8 @@ class CreateSendBase(object):
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
   base_uri = "https://api.createsend.com/api/v3"
-  oauth_token_uri = "https://api.createsend.com/oauth/token"
+  oauth_uri = "https://api.createsend.com/oauth"
+  oauth_token_uri = "%s/token" % oauth_uri
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""

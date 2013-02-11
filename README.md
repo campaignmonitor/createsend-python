@@ -16,6 +16,27 @@ The Campaign Monitor API supports authentication using either OAuth or an API ke
 
 ### Using OAuth
 
+Depending on the environment you are developing in, you may wish to use a Python OAuth library to get access tokens for your users. If you use [Flask](http://flask.pocoo.org/), you may like to refer to this [example application](https://gist.github.com/jdennes/4754097), which uses the [Flask-OAuth](http://pythonhosted.org/Flask-OAuth/) package to authenticate.
+
+If you don't use an OAuth library, you will need to manually get access tokens for your users by following the instructions included in the Campaign Monitor API [documentation](http://www.campaignmonitor.com/api/getting-started/#authenticating_with_oauth). This package provides functionality to help you do this, as described below.
+
+You can retrieve the authorization URL for your application like so:
+
+```python
+from createsend import *
+
+cs = CreateSend()
+authorize_url = cs.authorize_url(
+  client_id='Client ID for your application',
+  client_secret='Client Secret for your application',
+  redirect_uri='Redirect URI for your application',
+  scope='The permission level your application requires',
+  state='Optional state data to be included'
+)
+
+# Your app would redirect your users to authorize_url
+```
+
 Once you have an access token and refresh token for your user, you authenticate using the `auth()` method like so:
 
 ```python
