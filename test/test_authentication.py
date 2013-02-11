@@ -28,7 +28,8 @@ class AuthenticationTestCase(unittest.TestCase):
       client_secret=client_secret,
       redirect_uri=redirect_uri,
       scope=scope,
-      state=state)
+      state=state
+    )
     self.assertEquals(authorize_url,
       "https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
     )
@@ -44,10 +45,28 @@ class AuthenticationTestCase(unittest.TestCase):
       client_id=client_id,
       client_secret=client_secret,
       redirect_uri=redirect_uri,
-      scope=scope)
+      scope=scope
+    )
     self.assertEquals(authorize_url,
       "https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
     )
+
+  def test_exchange_token_success(self):
+    client_id = 8998879
+    client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
+    redirect_uri = 'http://example.com/auth'
+    code = '98uqw9d8qu9wdu'
+    self.cs.stub_request("https://api.createsend.com/oauth/token", "oauth_exchange_token.json")
+    access_token, expires_in, refresh_token = self.cs.exchange_token(
+      client_id=client_id,
+      client_secret=client_secret,
+      redirect_uri=redirect_uri,
+      code=code
+    )
+    self.assertEquals(self.cs.faker.actual_body, "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&code=98uqw9d8qu9wdu")
+    self.assertEquals(access_token, "SlAV32hkKG")
+    self.assertEquals(expires_in, 1209600)
+    self.assertEquals(refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
 
   def test_can_authenticate_by_calling_auth_with_api_key(self):
     self.cs.auth({'api_key': self.api_key})
@@ -72,6 +91,8 @@ class AuthenticationTestCase(unittest.TestCase):
     self.cs.auth(self.oauth_credentials)
     self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
     new_access_token, new_refresh_token = self.cs.refresh_token()
+
+    self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=9u09i02e3")
     self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
     self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
     self.assertEquals(self.cs.authentication,

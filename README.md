@@ -20,7 +20,7 @@ Depending on the environment you are developing in, you may wish to use a Python
 
 If you don't use an OAuth library, you will need to manually get access tokens for your users by following the instructions included in the Campaign Monitor API [documentation](http://www.campaignmonitor.com/api/getting-started/#authenticating_with_oauth). This package provides functionality to help you do this, as described below.
 
-You can retrieve the authorization URL for your application like so:
+The first thing your application should do is redirect your user to the Campaign Monitor authorization URL where they will have the opportunity to approve your application to access their Campaign Monitor account. You can get this Authorisation URL by using the `authorize_url()` function, like so:
 
 ```python
 from createsend import *
@@ -33,11 +33,27 @@ authorize_url = cs.authorize_url(
   scope='The permission level your application requires',
   state='Optional state data to be included'
 )
-
-# Your app would redirect your users to authorize_url
+# Redirect your users to authorize_url.
 ```
 
-Once you have an access token and refresh token for your user, you authenticate using the `auth()` method like so:
+If your user approves your application, they will then be redirected to the `redirect_uri` you specified, which will include a `code` parameter, and optionally a `state` parameter in the query string. Your application should implement a handler which can exchange the code passed to it for an access token, using the `exchange_token()` function like so:
+
+```python
+from createsend import *
+
+cs = CreateSend()
+access_token, expires_in, refresh_token = cs.exchange_token(
+  client_id='Client ID for your application',
+  client_secret='Client Secret for your application',
+  redirect_uri='Redirect URI for your application',
+  code='A unique code for your user' # Get the code parameter from the query string
+)
+# Save access_token, expires_in, and refresh_token.
+```
+
+At this point you have an access token and refresh token for your user which you should store somewhere convenient so that your application can look up these values when your user wants to make future Campaign Monitor API calls.
+
+Once you have an access token and refresh token for your user, you can authenticate using the `auth()` method and make further API calls like so:
 
 ```python
 from createsend import *
@@ -62,7 +78,7 @@ try:
   clients = cs.clients()
 except ExpiredOAuthToken as eot:
   access_token, refresh_token = cs.refresh_token()
-  # Save your updated access token and refresh token
+  # Save your updated access_token and refresh_token.
   clients = cs.clients()
 except Exception as e:
   print("Error: %s" % e)

@@ -48,15 +48,32 @@ class CreateSendBase(object):
     scope, state=None):
     """Get the authorization URL for your application, given the application's
     client_id, client_secret, redirect_uri, scope, and optional state data."""
-    options = [
+    params = [
       ('client_id', client_id),
       ('client_secret', client_secret),
       ('redirect_uri', redirect_uri),
       ('scope', scope)
     ]
     if state:
-      options.append(('state', state))
-    return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(options))
+      params.append(('state', state))
+    return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(params))
+
+  def exchange_token(self, client_id, client_secret, redirect_uri, code):
+    """Exchange a provided OAuth code for an OAuth access token, 'expires in'
+    value and refresh token."""
+    params = [
+      ('grant_type', 'authorization_code'),
+      ('client_id', client_id),
+      ('client_secret', client_secret),
+      ('redirect_uri', redirect_uri),
+      ('code', code),
+    ]
+    response = self._post('', urllib.urlencode(params),
+      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+    access_token, expires_in, refresh_token = None, None, None
+    r = json_to_py(response)
+    access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
+    return [access_token, expires_in, refresh_token]
 
   def auth(self, auth):
     """Authenticate with the Campaign Monitor API using either OAuth or
@@ -86,6 +103,24 @@ class CreateSendBase(object):
       self.oauth = {
         'access_token': access_token,
         'refresh_token': refresh_token }
+
+  def refresh_token(self, refresh_token=None):
+    """Refresh an OAuth token given a refresh token."""
+    if (not refresh_token and 'refresh_token' in self.authentication):
+      refresh_token = self.authentication['refresh_token']
+    params = [
+      ('grant_type', 'refresh_token'),
+      ('refresh_token', refresh_token)
+    ]
+    response = self._post('', urllib.urlencode(params),
+      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+    new_access_token, new_refresh_token = None, None
+    r = json_to_py(response)
+    new_access_token, new_refresh_token = r.access_token, r.refresh_token
+    self.auth({
+      'access_token': new_access_token,
+      'refresh_token': new_refresh_token})
+    return [new_access_token, new_refresh_token]
 
   def stub_request(self, expected_url, filename, status=None, body=None):
     """Stub a web request for testing."""
@@ -177,21 +212,6 @@ class CreateSendBase(object):
 
   def _delete(self, path, params={}):
     return self.make_request(path=path, method="DELETE", params=params)
-
-  def refresh_token(self, refresh_token=None):
-    """Refresh an OAuth token given a refresh token."""
-    if (not refresh_token and 'refresh_token' in self.authentication):
-      refresh_token = self.authentication['refresh_token']
-    response = self._post(
-      '', "grant_type=refresh_token&refresh_token=%s" % refresh_token,
-      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
-    new_access_token, new_refresh_token = None, None
-    r = json_to_py(response)
-    new_access_token, new_refresh_token = r.access_token, r.refresh_token
-    self.auth({
-      'access_token': new_access_token,
-      'refresh_token': new_refresh_token})
-    return [new_access_token, new_refresh_token]
 
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
