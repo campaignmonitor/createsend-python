@@ -28,7 +28,8 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***client_secret=client_secret,
 ***REMOVED******REMOVED******REMOVED***redirect_uri=redirect_uri,
 ***REMOVED******REMOVED******REMOVED***scope=scope,
-***REMOVED******REMOVED******REMOVED***state=state)
+***REMOVED******REMOVED******REMOVED***state=state
+***REMOVED******REMOVED***)
 ***REMOVED******REMOVED***self.assertEquals(authorize_url,
 ***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
 ***REMOVED******REMOVED***)
@@ -44,10 +45,28 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED******REMOVED***client_id=client_id,
 ***REMOVED******REMOVED******REMOVED***client_secret=client_secret,
 ***REMOVED******REMOVED******REMOVED***redirect_uri=redirect_uri,
-***REMOVED******REMOVED******REMOVED***scope=scope)
+***REMOVED******REMOVED******REMOVED***scope=scope
+***REMOVED******REMOVED***)
 ***REMOVED******REMOVED***self.assertEquals(authorize_url,
 ***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
 ***REMOVED******REMOVED***)
+
+***REMOVED***def test_exchange_token_success(self):
+***REMOVED******REMOVED***client_id = 8998879
+***REMOVED******REMOVED***client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
+***REMOVED******REMOVED***redirect_uri = 'http://example.com/auth'
+***REMOVED******REMOVED***code = '98uqw9d8qu9wdu'
+***REMOVED******REMOVED***self.cs.stub_request("https://api.createsend.com/oauth/token", "oauth_exchange_token.json")
+***REMOVED******REMOVED***access_token, expires_in, refresh_token = self.cs.exchange_token(
+***REMOVED******REMOVED******REMOVED***client_id=client_id,
+***REMOVED******REMOVED******REMOVED***client_secret=client_secret,
+***REMOVED******REMOVED******REMOVED***redirect_uri=redirect_uri,
+***REMOVED******REMOVED******REMOVED***code=code
+***REMOVED******REMOVED***)
+***REMOVED******REMOVED***self.assertEquals(self.cs.faker.actual_body, "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&code=98uqw9d8qu9wdu")
+***REMOVED******REMOVED***self.assertEquals(access_token, "SlAV32hkKG")
+***REMOVED******REMOVED***self.assertEquals(expires_in, 1209600)
+***REMOVED******REMOVED***self.assertEquals(refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
 
 ***REMOVED***def test_can_authenticate_by_calling_auth_with_api_key(self):
 ***REMOVED******REMOVED***self.cs.auth({'api_key': self.api_key})
@@ -72,6 +91,8 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.cs.auth(self.oauth_credentials)
 ***REMOVED******REMOVED***self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
 ***REMOVED******REMOVED***new_access_token, new_refresh_token = self.cs.refresh_token()
+
+***REMOVED******REMOVED***self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=9u09i02e3")
 ***REMOVED******REMOVED***self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
 ***REMOVED******REMOVED***self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
 ***REMOVED******REMOVED***self.assertEquals(self.cs.authentication,

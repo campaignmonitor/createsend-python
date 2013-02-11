@@ -48,15 +48,32 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***scope, state=None):
 ***REMOVED******REMOVED***"""Get the authorization URL for your application, given the application's
 ***REMOVED******REMOVED***client_id, client_secret, redirect_uri, scope, and optional state data."""
-***REMOVED******REMOVED***options = [
+***REMOVED******REMOVED***params = [
 ***REMOVED******REMOVED******REMOVED***('client_id', client_id),
 ***REMOVED******REMOVED******REMOVED***('client_secret', client_secret),
 ***REMOVED******REMOVED******REMOVED***('redirect_uri', redirect_uri),
 ***REMOVED******REMOVED******REMOVED***('scope', scope)
 ***REMOVED******REMOVED***]
 ***REMOVED******REMOVED***if state:
-***REMOVED******REMOVED******REMOVED***options.append(('state', state))
-***REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(options))
+***REMOVED******REMOVED******REMOVED***params.append(('state', state))
+***REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(params))
+
+***REMOVED***def exchange_token(self, client_id, client_secret, redirect_uri, code):
+***REMOVED******REMOVED***"""Exchange a provided OAuth code for an OAuth access token, 'expires in'
+***REMOVED******REMOVED***value and refresh token."""
+***REMOVED******REMOVED***params = [
+***REMOVED******REMOVED******REMOVED***('grant_type', 'authorization_code'),
+***REMOVED******REMOVED******REMOVED***('client_id', client_id),
+***REMOVED******REMOVED******REMOVED***('client_secret', client_secret),
+***REMOVED******REMOVED******REMOVED***('redirect_uri', redirect_uri),
+***REMOVED******REMOVED******REMOVED***('code', code),
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***response = self._post('', urllib.urlencode(params),
+***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+***REMOVED******REMOVED***access_token, expires_in, refresh_token = None, None, None
+***REMOVED******REMOVED***r = json_to_py(response)
+***REMOVED******REMOVED***access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
+***REMOVED******REMOVED***return [access_token, expires_in, refresh_token]
 
 ***REMOVED***def auth(self, auth):
 ***REMOVED******REMOVED***"""Authenticate with the Campaign Monitor API using either OAuth or
@@ -86,6 +103,24 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***self.oauth = {
 ***REMOVED******REMOVED******REMOVED******REMOVED***'access_token': access_token,
 ***REMOVED******REMOVED******REMOVED******REMOVED***'refresh_token': refresh_token }
+
+***REMOVED***def refresh_token(self, refresh_token=None):
+***REMOVED******REMOVED***"""Refresh an OAuth token given a refresh token."""
+***REMOVED******REMOVED***if (not refresh_token and 'refresh_token' in self.authentication):
+***REMOVED******REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
+***REMOVED******REMOVED***params = [
+***REMOVED******REMOVED******REMOVED***('grant_type', 'refresh_token'),
+***REMOVED******REMOVED******REMOVED***('refresh_token', refresh_token)
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***response = self._post('', urllib.urlencode(params),
+***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+***REMOVED******REMOVED***new_access_token, new_refresh_token = None, None
+***REMOVED******REMOVED***r = json_to_py(response)
+***REMOVED******REMOVED***new_access_token, new_refresh_token = r.access_token, r.refresh_token
+***REMOVED******REMOVED***self.auth({
+***REMOVED******REMOVED******REMOVED***'access_token': new_access_token,
+***REMOVED******REMOVED******REMOVED***'refresh_token': new_refresh_token})
+***REMOVED******REMOVED***return [new_access_token, new_refresh_token]
 
 ***REMOVED***def stub_request(self, expected_url, filename, status=None, body=None):
 ***REMOVED******REMOVED***"""Stub a web request for testing."""
@@ -177,21 +212,6 @@ class CreateSendBase(object):
 
 ***REMOVED***def _delete(self, path, params={}):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="DELETE", params=params)
-
-***REMOVED***def refresh_token(self, refresh_token=None):
-***REMOVED******REMOVED***"""Refresh an OAuth token given a refresh token."""
-***REMOVED******REMOVED***if (not refresh_token and 'refresh_token' in self.authentication):
-***REMOVED******REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
-***REMOVED******REMOVED***response = self._post(
-***REMOVED******REMOVED******REMOVED***'', "grant_type=refresh_token&refresh_token=%s" % refresh_token,
-***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
-***REMOVED******REMOVED***new_access_token, new_refresh_token = None, None
-***REMOVED******REMOVED***r = json_to_py(response)
-***REMOVED******REMOVED***new_access_token, new_refresh_token = r.access_token, r.refresh_token
-***REMOVED******REMOVED***self.auth({
-***REMOVED******REMOVED******REMOVED***'access_token': new_access_token,
-***REMOVED******REMOVED******REMOVED***'refresh_token': new_refresh_token})
-***REMOVED******REMOVED***return [new_access_token, new_refresh_token]
 
 class CreateSend(CreateSendBase):
 ***REMOVED***"""Provides high level CreateSend functionality/data you'll probably need."""
