@@ -20,7 +20,7 @@ Depending on the environment you are developing in, you may wish to use a Python
 
 If you don't use an OAuth library, you will need to manually get access tokens for your users by following the instructions included in the Campaign Monitor API [documentation](http://www.campaignmonitor.com/api/getting-started/#authenticating_with_oauth). This package provides functionality to help you do this, as described below.
 
-The first thing your application should do is redirect your user to the Campaign Monitor authorization URL where they will have the opportunity to approve your application to access their Campaign Monitor account. You can get this Authorisation URL by using the `authorize_url()` function, like so:
+The first thing your application should do is redirect your user to the Campaign Monitor authorization URL where they will have the opportunity to approve your application to access their Campaign Monitor account. You can get this authorization URL by using the `authorize_url()` function, like so:
 
 ```python
 ***REMOVED***
@@ -101,8 +101,8 @@ This example of listing all your clients and their campaigns demonstrates basic 
 ***REMOVED***
 
 auth = {
-***REMOVED***'access_token': access_token,
-***REMOVED***'refresh_token': refresh_token }
+***REMOVED***'access_token': 'your access token',
+***REMOVED***'refresh_token': 'your refresh token' }
 cs = CreateSend()
 cs.auth(auth)
 ***REMOVED***
