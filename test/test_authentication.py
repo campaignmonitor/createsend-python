@@ -67,6 +67,17 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(access_token, "SlAV32hkKG")
 ***REMOVED******REMOVED***self.assertEquals(expires_in, 1209600)
 ***REMOVED******REMOVED***self.assertEquals(refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
+***REMOVED***
+***REMOVED***def test_echange_token_failure(self):
+***REMOVED******REMOVED***client_id = 8998879
+***REMOVED******REMOVED***client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
+***REMOVED******REMOVED***redirect_uri = 'http://example.com/auth'
+***REMOVED******REMOVED***code = 'invalidcode'
+***REMOVED******REMOVED***self.cs.stub_request("https://api.createsend.com/oauth/token", "oauth_exchange_token_error.json")
+***REMOVED******REMOVED***self.assertRaisesRegexp(Exception,
+***REMOVED******REMOVED******REMOVED***"Error exchanging code for access token: invalid_grant - Specified code was invalid or expired",
+***REMOVED******REMOVED******REMOVED***self.cs.exchange_token, client_id, client_secret, redirect_uri, code)
+***REMOVED******REMOVED***self.assertEquals(self.cs.faker.actual_body, "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&code=invalidcode")
 
 ***REMOVED***def test_can_authenticate_by_calling_auth_with_api_key(self):
 ***REMOVED******REMOVED***self.cs.auth({'api_key': self.api_key})
@@ -100,7 +111,7 @@ class AuthenticationTestCase(unittest.TestCase):
 
 ***REMOVED***def test_refresh_token_error_when_refresh_token_none(self):
 ***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": None})
-***REMOVED******REMOVED***self.assertRaisesRegexp(Exception, "^authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+***REMOVED******REMOVED***self.assertRaisesRegexp(Exception, "authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
 
 ***REMOVED***def test_refresh_token_error_when_no_refresh_token_passed_in(self):
 ***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw"})

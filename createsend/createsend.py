@@ -72,9 +72,10 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
 ***REMOVED******REMOVED***access_token, expires_in, refresh_token = None, None, None
 ***REMOVED******REMOVED***r = json_to_py(response)
-***REMOVED******REMOVED***
-***REMOVED******REMOVED***# TODO: Handle errors...
-***REMOVED******REMOVED***
+***REMOVED******REMOVED***if hasattr(r, 'error') and hasattr(r, 'error_description'):
+***REMOVED******REMOVED******REMOVED***err = "Error exchanging code for access token: "
+***REMOVED******REMOVED******REMOVED***err += "%s - %s" % (r.error, r.error_description)
+***REMOVED******REMOVED******REMOVED***raise Exception(err)
 ***REMOVED******REMOVED***access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
 ***REMOVED******REMOVED***return [access_token, expires_in, refresh_token]
 
