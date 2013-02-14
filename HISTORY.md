@@ -1,12 +1,49 @@
 # createsend-python history
 
+## v3.0.0 - Whenever this is released
+
+* Added support for authenticating using OAuth. See the [README](README.md#authenticating) for full usage instructions.
+* Refactored authentication so that it is _always_ done at the instance level. This introduces some breaking changes, which are clearly explained below.
+***REMOVED**** Authentication is now _always_ done at the instance level.
+
+***REMOVED******REMOVED******REMOVED***So when you _previously_ would have authenticated using an API key as follows:
+
+***REMOVED******REMOVED******REMOVED***```python
+***REMOVED******REMOVED******REMOVED***CreateSend.api_key = 'your_api_key'
+***REMOVED******REMOVED******REMOVED***cs = CreateSend()
+***REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED******REMOVED***```
+
+***REMOVED******REMOVED******REMOVED***If you want to authenticate using an API key, you should _now_ do this:
+
+***REMOVED******REMOVED******REMOVED***```python
+***REMOVED******REMOVED******REMOVED***cs = CreateSend({'api_key': 'your_api_key'})
+***REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED******REMOVED***```
+
+***REMOVED**** Instances of any subclasses of `CreateSendBase` are now _always_ created by passing an `auth` hash as the first argument.
+
+***REMOVED******REMOVED******REMOVED***So for example, when you _previously_ would have called `Client()` like so:
+
+***REMOVED******REMOVED******REMOVED***```python
+***REMOVED******REMOVED******REMOVED***CreateSend.api_key 'your api key'
+***REMOVED******REMOVED******REMOVED***cl = Client('your client id')
+***REMOVED******REMOVED******REMOVED***```
+
+***REMOVED******REMOVED******REMOVED***You _now_ call `CreateSend::Client.new` like so:
+
+***REMOVED******REMOVED******REMOVED***```python
+***REMOVED******REMOVED******REMOVED***auth = {'api_key': 'your api key'}
+***REMOVED******REMOVED******REMOVED***cl = Client(auth, 'your client id')
+***REMOVED******REMOVED******REMOVED***```
+
 ## v2.6.0 - 17 Dec, 2012***REMOVED*** (df33d50)
 
 * Created objects (clients, campaigns, lists, segments, and templates) now
 retain identifiers they are given when created. This allows the following code
 to be written:
 
-***REMOVED***```
+***REMOVED***```python
 ***REMOVED***client = Client()
 ***REMOVED***client.create("Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney",
 ***REMOVED******REMOVED***"Australia")
@@ -15,7 +52,7 @@ to be written:
 
 ***REMOVED***Previously, this code would have been written as follows:
 
-***REMOVED***```
+***REMOVED***```python
 ***REMOVED***client = Client()
 ***REMOVED***client_id = client.create("Company Name",
 ***REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
