@@ -8,10 +8,10 @@ from utils import json_to_py
 class Person(CreateSendBase):
   """Represents a person and associated functionality."""
 
-  def __init__(self, client_id=None, email_address=None):
+  def __init__(self, auth=None, client_id=None, email_address=None):
     self.client_id = client_id
     self.email_address = email_address
-    super(Person, self).__init__()
+    super(Person, self).__init__(auth)
 
   def get(self, client_id, email_address):
     """Gets a person by client ID and email address."""

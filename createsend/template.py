@@ -8,9 +8,9 @@ from utils import json_to_py
 class Template(CreateSendBase):
   """Represents an email template and associated functionality."""
 
-  def __init__(self, template_id=None):
+  def __init__(self, auth=None, template_id=None):
     self.template_id = template_id
-    super(Template, self).__init__()
+    super(Template, self).__init__(auth)
 
   def create(self, client_id, name, html_url, zip_url):
     """Creates a new email template."""

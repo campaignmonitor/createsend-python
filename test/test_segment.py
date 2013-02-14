@@ -66,12 +66,11 @@ class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
     self.segment_id = "98y2e98y289dh89h938389"
-    self.segment = Segment(self.segment_id)
-    self.segment.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+    self.segment = Segment(
+      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, self.segment_id)
 
 class ApiKeySegmentTestCase(unittest.TestCase, SegmentTestCase):
   """Test when using an API key to authenticate"""
   def setUp(self):
     self.segment_id = "98y2e98y289dh89h938389"
-    self.segment = Segment(self.segment_id)
-    self.segment.auth({'api_key': '123123123123123123123'})
+    self.segment = Segment({'api_key': '123123123123123123123'}, self.segment_id)

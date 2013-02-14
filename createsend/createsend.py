@@ -32,17 +32,11 @@ class ExpiredOAuthToken(Unauthorized):
   pass
 
 class CreateSendBase(object):
-  authentication = None
-  oauth = None
-  api_key = None
+  auth_details = None
 
-  def __init__(self):
+  def __init__(self, auth):
     self.fake_web = False
-
-  def reset_auth(self):
-    """Reset the authentication which was set for this object."""
-    self.oauth = None
-    self.api_key = None
+    self.auth(auth)
 
   def authorize_url(self, client_id, client_secret, redirect_uri,
     scope, state=None):
@@ -83,39 +77,23 @@ class CreateSendBase(object):
     """Authenticate with the Campaign Monitor API using either OAuth or
     an API key.
 
-    :param auth: A dictionary representing the authentication scheme to use.
+    :param auth: A dictionary representing the authentication details to use.
     This dictionary must take either of the following forms:
 
     {'access_token': 'your access token', 'refresh_token': 'your refresh token'}
 
     {'api_key': 'your api key'}
-
-    :returns If no auth is specified, returns the current authentication
-    data as a dictionary.
     """
-    if not auth:
-      return self.authentication
-    self.reset_auth()
-    self.authentication = auth
-    if 'api_key' in auth:
-      self.api_key = auth['api_key']
-    elif 'access_token' in auth:
-      access_token = auth['access_token']
-      refresh_token = None
-      if 'refresh_token' in auth:
-        refresh_token = auth['refresh_token']
-      self.oauth = {
-        'access_token': access_token,
-        'refresh_token': refresh_token }
+    self.auth_details = auth
 
   def refresh_token(self):
     """Refresh an OAuth token given a refresh token."""
-    if (not self.authentication or
-      not 'refresh_token' in self.authentication or
-      not self.authentication['refresh_token']):
-      raise Exception("authentication['refresh_token'] does not contain a refresh token.")
+    if (not self.auth_details or
+      not 'refresh_token' in self.auth_details or
+      not self.auth_details['refresh_token']):
+      raise Exception("auth_details['refresh_token'] does not contain a refresh token.")
 
-    refresh_token = self.authentication['refresh_token']
+    refresh_token = self.auth_details['refresh_token']
     params = [
       ('grant_type', 'refresh_token'),
       ('refresh_token', refresh_token)
@@ -149,11 +127,11 @@ class CreateSendBase(object):
     overridden (e.g. when using the apikey route with username and password)."""
     if username and password:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
-    elif (CreateSend.api_key or self.api_key):
-      # Allow api_key to be set for a CreateSend instance.
-      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
-    elif (self.oauth):
-      headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
+    elif self.auth_details:
+      if 'api_key' in self.auth_details and self.auth_details['api_key']:
+        headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % self.auth_details['api_key'])
+      elif 'access_token' in self.auth_details and self.auth_details['access_token']:
+        headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
     if no_auth:
       del headers['Authorization']
     self.headers = headers
@@ -226,6 +204,9 @@ class CreateSend(CreateSendBase):
   base_uri = "https://api.createsend.com/api/v3"
   oauth_uri = "https://api.createsend.com/oauth"
   oauth_token_uri = "%s/token" % oauth_uri
+
+  def __init__(self, auth=None):
+    super(CreateSend, self).__init__(auth)
 
   def apikey(self, site_url, username, password):
     """Gets your CreateSend API key, given your site url, username and password."""

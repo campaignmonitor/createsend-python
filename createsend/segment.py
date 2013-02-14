@@ -8,9 +8,9 @@ from utils import json_to_py
 class Segment(CreateSendBase):
   """Represents a subscriber list segment and associated functionality."""
 
-  def __init__(self, segment_id=None):
+  def __init__(self, auth=None, segment_id=None):
     self.segment_id = segment_id
-    super(Segment, self).__init__()
+    super(Segment, self).__init__(auth)
 
   def create(self, list_id, title, rules):
     """Creates a new segment."""

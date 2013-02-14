@@ -132,12 +132,14 @@ class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
     self.list_id = "d98h2938d9283d982u3d98u88"
-    self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
-    self.subscriber.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+    self.subscriber = Subscriber(
+      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+      self.list_id, "subscriber@example.com")
 
 class ApiKeySubscriberTestCase(unittest.TestCase, SubscriberTestCase):
   """Test when using an API key to authenticate"""
   def setUp(self):
     self.list_id = "d98h2938d9283d982u3d98u88"
-    self.subscriber = Subscriber(self.list_id, "subscriber@example.com")
-    self.subscriber.auth({'api_key': '123123123123123123123'})
+    self.subscriber = Subscriber(
+      {'api_key': '123123123123123123123'},
+      self.list_id, "subscriber@example.com")

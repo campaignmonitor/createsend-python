@@ -33,11 +33,13 @@ class TemplateTestCase(object):
 class OAuthTemplateTestCase(unittest.TestCase, TemplateTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
-    self.template = Template("98y2e98y289dh89h938389")
-    self.template.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+    self.template = Template(
+      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+      "98y2e98y289dh89h938389")
 
 class ApiKeyTemplateTestCase(unittest.TestCase, TemplateTestCase):
   """Test when using an API key to authenticate"""
   def setUp(self):
-    self.template = Template("98y2e98y289dh89h938389")
-    self.template.auth({'api_key': '123123123123123123123'})
+    self.template = Template(
+      {'api_key': '123123123123123123123'},
+      "98y2e98y289dh89h938389")

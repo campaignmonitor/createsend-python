@@ -8,9 +8,9 @@ from utils import json_to_py
 class Administrator(CreateSendBase):
   """Represents an administrator and associated functionality."""
 
-  def __init__(self, email_address=None):
+  def __init__(self, auth=None, email_address=None):
     self.email_address = email_address
-    super(Administrator, self).__init__()
+    super(Administrator, self).__init__(auth)
 
   def get(self, email_address):
     """Gets an administrator by  email address."""

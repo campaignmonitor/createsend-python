@@ -8,10 +8,10 @@ from utils import json_to_py
 class Subscriber(CreateSendBase):
   """Represents a subscriber and associated functionality."""
 
-  def __init__(self, list_id=None, email_address=None):
+  def __init__(self, auth=None, list_id=None, email_address=None):
     self.list_id = list_id
     self.email_address = email_address
-    super(Subscriber, self).__init__()
+    super(Subscriber, self).__init__(auth)
 
   def get(self, list_id, email_address):
     """Gets a subscriber by list ID and email address."""

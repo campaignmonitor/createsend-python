@@ -53,13 +53,12 @@ access_token, expires_in, refresh_token = cs.exchange_token(
 
 At this point you have an access token and refresh token for your user which you should store somewhere convenient so that your application can look up these values when your user wants to make future Campaign Monitor API calls.
 
-Once you have an access token and refresh token for your user, you can authenticate using the `auth()` method and make further API calls like so:
+Once you have an access token and refresh token for your user, you can authenticate and make further API calls like so:
 
 ```python
 from createsend import *
 
-cs = CreateSend()
-cs.auth({
+cs = CreateSend({
   'access_token': 'your access token',
   'refresh_token': 'your refresh token' })
 clients = cs.clients()
@@ -71,8 +70,7 @@ All OAuth tokens have an expiry time, and can be renewed with a corresponding re
 from createsend import *
 
 try:
-  cs = CreateSend()
-  cs.auth({
+  cs = CreateSend({
     'access_token': 'your access token',
     'refresh_token': 'your refresh token' })
   clients = cs.clients()
@@ -89,8 +87,7 @@ except Exception as e:
 ```python
 from createsend import *
 
-cs = CreateSend()
-cs.auth({'api_key': 'your api key'})
+cs = CreateSend({'api_key': 'your api key'})
 clients = cs.clients()
 ```
 
@@ -103,14 +100,12 @@ from createsend import *
 auth = {
   'access_token': 'your access token',
   'refresh_token': 'your refresh token' }
-cs = CreateSend()
-cs.auth(auth)
+cs = CreateSend(auth)
 clients = cs.clients()
 
 for cl in clients:
   print("Client: %s" % cl.Name)
-  client = Client(cl.ClientID)
-  client.auth(auth)
+  client = Client(auth, cl.ClientID)
   print("- Campaigns:")
   for cm in client.campaigns():
     print("  - %s" % cm.Subject)
@@ -134,8 +129,7 @@ If the Campaign Monitor API returns an error, an exception will be raised. For e
 ```python
 from createsend import *
 
-campaign = Campaign()
-campaign.auth({
+campaign = Campaign({
   'access_token': 'your access token',
   'refresh_token': 'your refresh token' })
 

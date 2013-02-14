@@ -282,12 +282,12 @@ class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
     self.campaign_id = "787y87y87y87y87y87y87"
-    self.campaign = Campaign(self.campaign_id)
-    self.campaign.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+    self.campaign = Campaign(
+      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, self.campaign_id)
 
 class ApiKeyCampaignTestCase(unittest.TestCase, CampaignTestCase):
   """Test when using an API key to authenticate"""
   def setUp(self):
     self.campaign_id = "787y87y87y87y87y87y87"
-    self.campaign = Campaign(self.campaign_id)
-    self.campaign.auth({'api_key': '123123123123123123123'})
+    self.campaign = Campaign(
+      {'api_key': '123123123123123123123'}, self.campaign_id)

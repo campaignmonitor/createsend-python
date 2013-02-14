@@ -8,9 +8,9 @@ from utils import json_to_py
 class Campaign(CreateSendBase):
   """Represents a campaign and provides associated funtionality."""
 
-  def __init__(self, campaign_id=None):
+  def __init__(self, auth=None, campaign_id=None):
     self.campaign_id = campaign_id
-    super(Campaign, self).__init__()
+    super(Campaign, self).__init__(auth)
 
   def create(self, client_id, subject, name, from_name, from_email, reply_to, html_url,
     text_url, list_ids, segment_ids):
