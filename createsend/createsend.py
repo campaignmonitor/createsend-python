@@ -107,10 +107,14 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***'access_token': access_token,
 ***REMOVED******REMOVED******REMOVED******REMOVED***'refresh_token': refresh_token }
 
-***REMOVED***def refresh_token(self, refresh_token=None):
+***REMOVED***def refresh_token(self):
 ***REMOVED******REMOVED***"""Refresh an OAuth token given a refresh token."""
-***REMOVED******REMOVED***if (not refresh_token and 'refresh_token' in self.authentication):
-***REMOVED******REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
+***REMOVED******REMOVED***if (not self.authentication or
+***REMOVED******REMOVED******REMOVED***not 'refresh_token' in self.authentication or
+***REMOVED******REMOVED******REMOVED***not self.authentication['refresh_token']):
+***REMOVED******REMOVED******REMOVED***raise Exception("authentication['refresh_token'] does not contain a refresh token.")
+
+***REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
 ***REMOVED******REMOVED***params = [
 ***REMOVED******REMOVED******REMOVED***('grant_type', 'refresh_token'),
 ***REMOVED******REMOVED******REMOVED***('refresh_token', refresh_token)

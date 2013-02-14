@@ -98,6 +98,17 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.assertEquals(self.cs.authentication,
 ***REMOVED******REMOVED******REMOVED***{ 'access_token': new_access_token, 'refresh_token': new_refresh_token })
 
+***REMOVED***def test_refresh_token_error_when_refresh_token_none(self):
+***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": None})
+***REMOVED******REMOVED***self.assertRaisesRegexp(Exception, "^authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
+***REMOVED***def test_refresh_token_error_when_no_refresh_token_passed_in(self):
+***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw"})
+***REMOVED******REMOVED***self.assertRaisesRegexp(Exception, "authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
+***REMOVED***def test_refresh_token_error_when_no_authentication(self):
+***REMOVED******REMOVED***self.assertRaisesRegexp(Exception, "authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
 ***REMOVED***# Tests for the deprecated method of authenticating.
 ***REMOVED***def test_deprecated_can_authenticate_by_setting_class_api_key(self):
 ***REMOVED******REMOVED***"""The following line demonstrates the deprecated way in which
