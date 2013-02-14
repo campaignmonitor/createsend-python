@@ -282,12 +282,12 @@ class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
-***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
-***REMOVED******REMOVED***self.campaign.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.campaign = Campaign(
+***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, self.campaign_id)
 
 class ApiKeyCampaignTestCase(unittest.TestCase, CampaignTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.campaign_id = "787y87y87y87y87y87y87"
-***REMOVED******REMOVED***self.campaign = Campaign(self.campaign_id)
-***REMOVED******REMOVED***self.campaign.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.campaign = Campaign(
+***REMOVED******REMOVED******REMOVED***{'api_key': '123123123123123123123'}, self.campaign_id)

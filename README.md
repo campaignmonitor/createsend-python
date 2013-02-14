@@ -53,13 +53,12 @@ access_token, expires_in, refresh_token = cs.exchange_token(
 
 At this point you have an access token and refresh token for your user which you should store somewhere convenient so that your application can look up these values when your user wants to make future Campaign Monitor API calls.
 
-Once you have an access token and refresh token for your user, you can authenticate using the `auth()` method and make further API calls like so:
+Once you have an access token and refresh token for your user, you can authenticate and make further API calls like so:
 
 ```python
 ***REMOVED***
 
-cs = CreateSend()
-cs.auth({
+cs = CreateSend({
 ***REMOVED***'access_token': 'your access token',
 ***REMOVED***'refresh_token': 'your refresh token' })
 ***REMOVED***
@@ -71,8 +70,7 @@ All OAuth tokens have an expiry time, and can be renewed with a corresponding re
 ***REMOVED***
 
 try:
-***REMOVED***cs = CreateSend()
-***REMOVED***cs.auth({
+***REMOVED***cs = CreateSend({
 ***REMOVED******REMOVED***'access_token': 'your access token',
 ***REMOVED******REMOVED***'refresh_token': 'your refresh token' })
 ***REMOVED******REMOVED***
@@ -89,8 +87,7 @@ except Exception as e:
 ```python
 ***REMOVED***
 
-cs = CreateSend()
-cs.auth({'api_key': 'your api key'})
+cs = CreateSend({'api_key': 'your api key'})
 ***REMOVED***
 ```
 
@@ -103,14 +100,12 @@ This example of listing all your clients and their campaigns demonstrates basic 
 auth = {
 ***REMOVED***'access_token': 'your access token',
 ***REMOVED***'refresh_token': 'your refresh token' }
-cs = CreateSend()
-cs.auth(auth)
+cs = CreateSend(auth)
 ***REMOVED***
 
 ***REMOVED***
 ***REMOVED***print("Client: %s" % cl.Name)
-***REMOVED***client = Client(cl.ClientID)
-***REMOVED***client.auth(auth)
+***REMOVED***client = Client(auth, cl.ClientID)
 ***REMOVED***print("- Campaigns:")
 ***REMOVED***for cm in client.campaigns():
 ***REMOVED******REMOVED***print("***REMOVED***- %s" % cm.Subject)
@@ -134,8 +129,7 @@ If the Campaign Monitor API returns an error, an exception will be raised. For e
 ```python
 ***REMOVED***
 
-campaign = Campaign()
-campaign.auth({
+campaign = Campaign({
 ***REMOVED***'access_token': 'your access token',
 ***REMOVED***'refresh_token': 'your refresh token' })
 

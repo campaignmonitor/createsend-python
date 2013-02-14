@@ -33,11 +33,13 @@ class TemplateTestCase(object):
 class OAuthTemplateTestCase(unittest.TestCase, TemplateTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.template = Template("98y2e98y289dh89h938389")
-***REMOVED******REMOVED***self.template.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.template = Template(
+***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+***REMOVED******REMOVED******REMOVED***"98y2e98y289dh89h938389")
 
 class ApiKeyTemplateTestCase(unittest.TestCase, TemplateTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.template = Template("98y2e98y289dh89h938389")
-***REMOVED******REMOVED***self.template.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.template = Template(
+***REMOVED******REMOVED******REMOVED***{'api_key': '123123123123123123123'},
+***REMOVED******REMOVED******REMOVED***"98y2e98y289dh89h938389")

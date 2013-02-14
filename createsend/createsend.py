@@ -32,17 +32,11 @@ class ExpiredOAuthToken(Unauthorized):
 ***REMOVED***pass
 
 class CreateSendBase(object):
-***REMOVED***authentication = None
-***REMOVED***oauth = None
-***REMOVED***api_key = None
+***REMOVED***auth_details = None
 
-***REMOVED***def __init__(self):
+***REMOVED***def __init__(self, auth):
 ***REMOVED******REMOVED***self.fake_web = False
-
-***REMOVED***def reset_auth(self):
-***REMOVED******REMOVED***"""Reset the authentication which was set for this object."""
-***REMOVED******REMOVED***self.oauth = None
-***REMOVED******REMOVED***self.api_key = None
+***REMOVED******REMOVED***self.auth(auth)
 
 ***REMOVED***def authorize_url(self, client_id, client_secret, redirect_uri,
 ***REMOVED******REMOVED***scope, state=None):
@@ -83,39 +77,23 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***"""Authenticate with the Campaign Monitor API using either OAuth or
 ***REMOVED******REMOVED***an API key.
 
-***REMOVED******REMOVED***:param auth: A dictionary representing the authentication scheme to use.
+***REMOVED******REMOVED***:param auth: A dictionary representing the authentication details to use.
 ***REMOVED******REMOVED***This dictionary must take either of the following forms:
 
 ***REMOVED******REMOVED***{'access_token': 'your access token', 'refresh_token': 'your refresh token'}
 
 ***REMOVED******REMOVED***{'api_key': 'your api key'}
-
-***REMOVED******REMOVED***:returns If no auth is specified, returns the current authentication
-***REMOVED******REMOVED***data as a dictionary.
 ***REMOVED******REMOVED***"""
-***REMOVED******REMOVED***if not auth:
-***REMOVED******REMOVED******REMOVED***return self.authentication
-***REMOVED******REMOVED***self.reset_auth()
-***REMOVED******REMOVED***self.authentication = auth
-***REMOVED******REMOVED***if 'api_key' in auth:
-***REMOVED******REMOVED******REMOVED***self.api_key = auth['api_key']
-***REMOVED******REMOVED***elif 'access_token' in auth:
-***REMOVED******REMOVED******REMOVED***access_token = auth['access_token']
-***REMOVED******REMOVED******REMOVED***refresh_token = None
-***REMOVED******REMOVED******REMOVED***if 'refresh_token' in auth:
-***REMOVED******REMOVED******REMOVED******REMOVED***refresh_token = auth['refresh_token']
-***REMOVED******REMOVED******REMOVED***self.oauth = {
-***REMOVED******REMOVED******REMOVED******REMOVED***'access_token': access_token,
-***REMOVED******REMOVED******REMOVED******REMOVED***'refresh_token': refresh_token }
+***REMOVED******REMOVED***self.auth_details = auth
 
 ***REMOVED***def refresh_token(self):
 ***REMOVED******REMOVED***"""Refresh an OAuth token given a refresh token."""
-***REMOVED******REMOVED***if (not self.authentication or
-***REMOVED******REMOVED******REMOVED***not 'refresh_token' in self.authentication or
-***REMOVED******REMOVED******REMOVED***not self.authentication['refresh_token']):
-***REMOVED******REMOVED******REMOVED***raise Exception("authentication['refresh_token'] does not contain a refresh token.")
+***REMOVED******REMOVED***if (not self.auth_details or
+***REMOVED******REMOVED******REMOVED***not 'refresh_token' in self.auth_details or
+***REMOVED******REMOVED******REMOVED***not self.auth_details['refresh_token']):
+***REMOVED******REMOVED******REMOVED***raise Exception("auth_details['refresh_token'] does not contain a refresh token.")
 
-***REMOVED******REMOVED***refresh_token = self.authentication['refresh_token']
+***REMOVED******REMOVED***refresh_token = self.auth_details['refresh_token']
 ***REMOVED******REMOVED***params = [
 ***REMOVED******REMOVED******REMOVED***('grant_type', 'refresh_token'),
 ***REMOVED******REMOVED******REMOVED***('refresh_token', refresh_token)
@@ -149,11 +127,11 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
-***REMOVED******REMOVED***elif (CreateSend.api_key or self.api_key):
-***REMOVED******REMOVED******REMOVED***# Allow api_key to be set for a CreateSend instance.
-***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % (CreateSend.api_key or self.api_key))
-***REMOVED******REMOVED***elif (self.oauth):
-***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.oauth["access_token"]
+***REMOVED******REMOVED***elif self.auth_details:
+***REMOVED******REMOVED******REMOVED***if 'api_key' in self.auth_details and self.auth_details['api_key']:
+***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % self.auth_details['api_key'])
+***REMOVED******REMOVED******REMOVED***elif 'access_token' in self.auth_details and self.auth_details['access_token']:
+***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
 ***REMOVED******REMOVED***if no_auth:
 ***REMOVED******REMOVED******REMOVED***del headers['Authorization']
 ***REMOVED******REMOVED***self.headers = headers
@@ -226,6 +204,9 @@ class CreateSend(CreateSendBase):
 ***REMOVED***base_uri = "https://api.createsend.com/api/v3"
 ***REMOVED***oauth_uri = "https://api.createsend.com/oauth"
 ***REMOVED***oauth_token_uri = "%s/token" % oauth_uri
+
+***REMOVED***def __init__(self, auth=None):
+***REMOVED******REMOVED***super(CreateSend, self).__init__(auth)
 
 ***REMOVED***def apikey(self, site_url, username, password):
 ***REMOVED******REMOVED***"""Gets your CreateSend API key, given your site url, username and password."""

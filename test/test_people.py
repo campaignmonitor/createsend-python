@@ -33,12 +33,14 @@ class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.client_id = "d98h2938d9283d982u3d98u88"
-***REMOVED******REMOVED***self.person = Person(self.client_id, "person@example.com")
-***REMOVED******REMOVED***self.person.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.person = Person(
+***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+***REMOVED******REMOVED******REMOVED***self.client_id, "person@example.com")
 
 class ApiKeyPeopleTestCase(unittest.TestCase, PeopleTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.client_id = "d98h2938d9283d982u3d98u88"
-***REMOVED******REMOVED***self.person = Person(self.client_id, "person@example.com")
-***REMOVED******REMOVED***self.person.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.person = Person(
+***REMOVED******REMOVED******REMOVED***{'api_key': '123123123123123123123'},
+***REMOVED******REMOVED******REMOVED***self.client_id, "person@example.com")

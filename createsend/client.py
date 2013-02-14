@@ -8,9 +8,9 @@ from utils import json_to_py
 class Client(CreateSendBase):
 ***REMOVED***"""Represents a client and associated functionality."""
 
-***REMOVED***def __init__(self, client_id=None):
+***REMOVED***def __init__(self, auth=None, client_id=None):
 ***REMOVED******REMOVED***self.client_id = client_id
-***REMOVED******REMOVED***super(Client, self).__init__()
+***REMOVED******REMOVED***super(Client, self).__init__(auth)
 
 ***REMOVED***def create(self, company, timezone, country):
 ***REMOVED******REMOVED***"""Creates a client."""

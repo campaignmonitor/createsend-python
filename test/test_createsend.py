@@ -82,78 +82,77 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], self.cs.countries)
 
 ***REMOVED***def test_bad_request_on_post(self):
-***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', 'custom_api_error.json', status=400)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_unauthorized_on_post(self):
-***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_not_found_on_post(self):
-***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', None, status=404)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], client.create, "Client Company Name",
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_server_error_on_post(self):
-***REMOVED******REMOVED***client = Client("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***client.stub_request('clients.json', None, status=500)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], client.create, "Client Company Name", 
 ***REMOVED******REMOVED******REMOVED***"(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
 ***REMOVED***def test_bad_request_on_put(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=400)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], template.update, "Template One Updated", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
 
 ***REMOVED***def test_unauthorized_on_put(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.update, "Template One Updated", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
 
 ***REMOVED***def test_not_found_on_put(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=404)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], template.update, "Template One Updated", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
 
 ***REMOVED***def test_server_error_on_put(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], template.update, "Template One Updated", "http://templates.org/index.html", 
 ***REMOVED******REMOVED******REMOVED***"http://templates.org/files.zip")
 ***REMOVED***
 ***REMOVED***def test_bad_request_on_delete(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=400)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[400], template.delete)
 
 ***REMOVED***def test_unauthorized_on_delete(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', 'custom_api_error.json', status=401)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[401], template.delete)
 
 ***REMOVED***def test_not_found_on_delete(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=404)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[404], template.delete)
 
 ***REMOVED***def test_server_error_on_delete(self):
-***REMOVED******REMOVED***template = Template("uhiuhiuhiuhiuhiuhiuh")
+***REMOVED******REMOVED***template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
 ***REMOVED******REMOVED***template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
 ***REMOVED******REMOVED***self.assertRaises(self.error_responses[500], template.delete)
 
 class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cs = CreateSend()
-***REMOVED******REMOVED***self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.cs = CreateSend({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
 ***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
 ***REMOVED******REMOVED***self.error_responses = {
 ***REMOVED******REMOVED******REMOVED***400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }
@@ -161,8 +160,7 @@ class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
 class ApiKeyCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cs = CreateSend()
-***REMOVED******REMOVED***self.cs.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.cs = CreateSend({'api_key': '123123123123123123123'})
 ***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
 ***REMOVED******REMOVED***self.error_responses = {
 ***REMOVED******REMOVED******REMOVED***400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }

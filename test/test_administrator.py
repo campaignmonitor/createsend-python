@@ -31,11 +31,11 @@ class AdministratorTestCase(object):
 class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.administrator = Administrator("admin@example.com")
-***REMOVED******REMOVED***self.administrator.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.administrator = Administrator(
+***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, "admin@example.com")
 
 class ApiKeyAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.administrator = Administrator("admin@example.com")
-***REMOVED******REMOVED***self.administrator.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.administrator = Administrator(
+***REMOVED******REMOVED******REMOVED***{'api_key': '123123123123123123123'}, "admin@example.com")

@@ -179,11 +179,11 @@ class ClientTestCase(object):
 class OAuthClientTestCase(unittest.TestCase, ClientTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
-***REMOVED******REMOVED***self.cl.auth({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.cl = Client(
+***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, "4a397ccaaa55eb4e6aa1221e1e2d7122")
 
 class ApiKeyClientTestCase(unittest.TestCase, ClientTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cl = Client("4a397ccaaa55eb4e6aa1221e1e2d7122")
-***REMOVED******REMOVED***self.cl.auth({'api_key': '123123123123123123123'})
+***REMOVED******REMOVED***self.cl = Client(
+***REMOVED******REMOVED******REMOVED***{'api_key': '123123123123123123123'}, "4a397ccaaa55eb4e6aa1221e1e2d7122")
