@@ -1,12 +1,49 @@
 # createsend-python history
 
+## v3.0.0 - Whenever this is released
+
+* Added support for authenticating using OAuth. See the [README](README.md#authenticating) for full usage instructions.
+* Refactored authentication so that it is _always_ done at the instance level. This introduces some breaking changes, which are clearly explained below.
+  * Authentication is now _always_ done at the instance level.
+
+      So when you _previously_ would have authenticated using an API key as follows:
+
+      ```python
+      CreateSend.api_key = 'your_api_key'
+      cs = CreateSend()
+      clients = cs.clients()
+      ```
+
+      If you want to authenticate using an API key, you should _now_ do this:
+
+      ```python
+      cs = CreateSend({'api_key': 'your_api_key'})
+      clients = cs.clients()
+      ```
+
+  * Instances of any subclasses of `CreateSendBase` are now _always_ created by passing an `auth` hash as the first argument.
+
+      So for example, when you _previously_ would have called `Client()` like so:
+
+      ```python
+      CreateSend.api_key 'your api key'
+      cl = Client('your client id')
+      ```
+
+      You _now_ call `CreateSend::Client.new` like so:
+
+      ```python
+      auth = {'api_key': 'your api key'}
+      cl = Client(auth, 'your client id')
+      ```
+
 ## v2.6.0 - 17 Dec, 2012   (df33d50)
 
 * Created objects (clients, campaigns, lists, segments, and templates) now
 retain identifiers they are given when created. This allows the following code
 to be written:
 
-  ```
+  ```python
   client = Client()
   client.create("Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney",
     "Australia")
@@ -15,7 +52,7 @@ to be written:
 
   Previously, this code would have been written as follows:
 
-  ```
+  ```python
   client = Client()
   client_id = client.create("Company Name",
     "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
