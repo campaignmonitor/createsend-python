@@ -98,6 +98,17 @@ class AuthenticationTestCase(unittest.TestCase):
     self.assertEquals(self.cs.authentication,
       { 'access_token': new_access_token, 'refresh_token': new_refresh_token })
 
+  def test_refresh_token_error_when_refresh_token_none(self):
+    self.cs.auth({"access_token": "98u9q8uw9ddw", "refresh_token": None})
+    self.assertRaisesRegexp(Exception, "^authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
+  def test_refresh_token_error_when_no_refresh_token_passed_in(self):
+    self.cs.auth({"access_token": "98u9q8uw9ddw"})
+    self.assertRaisesRegexp(Exception, "authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
+  def test_refresh_token_error_when_no_authentication(self):
+    self.assertRaisesRegexp(Exception, "authentication\['refresh_token'\] does not contain a refresh token.", self.cs.refresh_token)
+
   # Tests for the deprecated method of authenticating.
   def test_deprecated_can_authenticate_by_setting_class_api_key(self):
     """The following line demonstrates the deprecated way in which

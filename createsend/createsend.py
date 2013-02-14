@@ -107,10 +107,14 @@ class CreateSendBase(object):
         'access_token': access_token,
         'refresh_token': refresh_token }
 
-  def refresh_token(self, refresh_token=None):
+  def refresh_token(self):
     """Refresh an OAuth token given a refresh token."""
-    if (not refresh_token and 'refresh_token' in self.authentication):
-      refresh_token = self.authentication['refresh_token']
+    if (not self.authentication or
+      not 'refresh_token' in self.authentication or
+      not self.authentication['refresh_token']):
+      raise Exception("authentication['refresh_token'] does not contain a refresh token.")
+
+    refresh_token = self.authentication['refresh_token']
     params = [
       ('grant_type', 'refresh_token'),
       ('refresh_token', refresh_token)
