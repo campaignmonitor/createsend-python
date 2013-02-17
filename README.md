@@ -75,8 +75,8 @@ try:
 ***REMOVED******REMOVED***'refresh_token': 'your refresh token' })
 ***REMOVED******REMOVED***
 except ExpiredOAuthToken as eot:
-***REMOVED***access_token, refresh_token = cs.refresh_token()
-***REMOVED***# Save your updated access_token and refresh_token.
+***REMOVED***access_token, expires_in, refresh_token = cs.refresh_token()
+***REMOVED***# Save your updated access_token, expires_in, and refresh_token.
 ***REMOVED******REMOVED***
 except Exception as e:
 ***REMOVED***print("Error: %s" % e)

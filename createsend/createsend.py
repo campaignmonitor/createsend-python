@@ -100,13 +100,13 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***]
 ***REMOVED******REMOVED***response = self._post('', urllib.urlencode(params),
 ***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
-***REMOVED******REMOVED***new_access_token, new_refresh_token = None, None
+***REMOVED******REMOVED***new_access_token, new_expires_in, new_refresh_token = None, None, None
 ***REMOVED******REMOVED***r = json_to_py(response)
-***REMOVED******REMOVED***new_access_token, new_refresh_token = r.access_token, r.refresh_token
+***REMOVED******REMOVED***new_access_token, new_expires_in, new_refresh_token = r.access_token, r.expires_in, r.refresh_token
 ***REMOVED******REMOVED***self.auth({
 ***REMOVED******REMOVED******REMOVED***'access_token': new_access_token,
 ***REMOVED******REMOVED******REMOVED***'refresh_token': new_refresh_token})
-***REMOVED******REMOVED***return [new_access_token, new_refresh_token]
+***REMOVED******REMOVED***return [new_access_token, new_expires_in, new_refresh_token]
 
 ***REMOVED***def stub_request(self, expected_url, filename, status=None, body=None):
 ***REMOVED******REMOVED***"""Stub a web request for testing."""

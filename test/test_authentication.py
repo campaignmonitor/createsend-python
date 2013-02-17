@@ -96,10 +96,11 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED***def test_refresh_token(self):
 ***REMOVED******REMOVED***self.cs = CreateSend(self.oauth_auth_details)
 ***REMOVED******REMOVED***self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
-***REMOVED******REMOVED***new_access_token, new_refresh_token = self.cs.refresh_token()
+***REMOVED******REMOVED***new_access_token, new_expires_in, new_refresh_token = self.cs.refresh_token()
 
 ***REMOVED******REMOVED***self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=9u09i02e3")
 ***REMOVED******REMOVED***self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
+***REMOVED******REMOVED***self.assertEquals(new_expires_in, 1209600)
 ***REMOVED******REMOVED***self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
 ***REMOVED******REMOVED***self.assertEquals(self.cs.auth_details,
 ***REMOVED******REMOVED******REMOVED***{ 'access_token': new_access_token, 'refresh_token': new_refresh_token })
