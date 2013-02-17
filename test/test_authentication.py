@@ -96,10 +96,11 @@ class AuthenticationTestCase(unittest.TestCase):
   def test_refresh_token(self):
     self.cs = CreateSend(self.oauth_auth_details)
     self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
-    new_access_token, new_refresh_token = self.cs.refresh_token()
+    new_access_token, new_expires_in, new_refresh_token = self.cs.refresh_token()
 
     self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=9u09i02e3")
     self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
+    self.assertEquals(new_expires_in, 1209600)
     self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
     self.assertEquals(self.cs.auth_details,
       { 'access_token': new_access_token, 'refresh_token': new_refresh_token })

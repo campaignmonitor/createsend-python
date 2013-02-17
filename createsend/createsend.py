@@ -100,13 +100,13 @@ class CreateSendBase(object):
     ]
     response = self._post('', urllib.urlencode(params),
       CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
-    new_access_token, new_refresh_token = None, None
+    new_access_token, new_expires_in, new_refresh_token = None, None, None
     r = json_to_py(response)
-    new_access_token, new_refresh_token = r.access_token, r.refresh_token
+    new_access_token, new_expires_in, new_refresh_token = r.access_token, r.expires_in, r.refresh_token
     self.auth({
       'access_token': new_access_token,
       'refresh_token': new_refresh_token})
-    return [new_access_token, new_refresh_token]
+    return [new_access_token, new_expires_in, new_refresh_token]
 
   def stub_request(self, expected_url, filename, status=None, body=None):
     """Stub a web request for testing."""

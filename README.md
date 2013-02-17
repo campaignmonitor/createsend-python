@@ -75,8 +75,8 @@ try:
     'refresh_token': 'your refresh token' })
   clients = cs.clients()
 except ExpiredOAuthToken as eot:
-  access_token, refresh_token = cs.refresh_token()
-  # Save your updated access_token and refresh_token.
+  access_token, expires_in, refresh_token = cs.refresh_token()
+  # Save your updated access_token, expires_in, and refresh_token.
   clients = cs.clients()
 except Exception as e:
   print("Error: %s" % e)
