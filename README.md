@@ -28,7 +28,6 @@ The first thing your application should do is redirect your user to the Campaign
 cs = CreateSend()
 authorize_url = cs.authorize_url(
 ***REMOVED***client_id='Client ID for your application',
-***REMOVED***client_secret='Client Secret for your application',
 ***REMOVED***redirect_uri='Redirect URI for your application',
 ***REMOVED***scope='The permission level your application requires',
 ***REMOVED***state='Optional state data to be included'

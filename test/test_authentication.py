@@ -12,7 +12,6 @@ class AuthenticationTestCase(unittest.TestCase):
 
 ***REMOVED***def test_authorize_url_with_state(self):
 ***REMOVED******REMOVED***client_id = 8998879
-***REMOVED******REMOVED***client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
 ***REMOVED******REMOVED***redirect_uri = 'http://example.com/auth'
 ***REMOVED******REMOVED***scope = 'ViewReports,CreateCampaigns,SendCampaigns'
 ***REMOVED******REMOVED***state = 89879287
@@ -20,30 +19,27 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.cs = CreateSend(self.oauth_auth_details)
 ***REMOVED******REMOVED***authorize_url = self.cs.authorize_url(
 ***REMOVED******REMOVED******REMOVED***client_id=client_id,
-***REMOVED******REMOVED******REMOVED***client_secret=client_secret,
 ***REMOVED******REMOVED******REMOVED***redirect_uri=redirect_uri,
 ***REMOVED******REMOVED******REMOVED***scope=scope,
 ***REMOVED******REMOVED******REMOVED***state=state
 ***REMOVED******REMOVED***)
 ***REMOVED******REMOVED***self.assertEquals(authorize_url,
-***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
+***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
 ***REMOVED******REMOVED***)
 
 ***REMOVED***def test_authorize_url_without_state(self):
 ***REMOVED******REMOVED***client_id = 8998879
-***REMOVED******REMOVED***client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
 ***REMOVED******REMOVED***redirect_uri = 'http://example.com/auth'
 ***REMOVED******REMOVED***scope = 'ViewReports,CreateCampaigns,SendCampaigns'
 
 ***REMOVED******REMOVED***self.cs = CreateSend(self.oauth_auth_details)
 ***REMOVED******REMOVED***authorize_url = self.cs.authorize_url(
 ***REMOVED******REMOVED******REMOVED***client_id=client_id,
-***REMOVED******REMOVED******REMOVED***client_secret=client_secret,
 ***REMOVED******REMOVED******REMOVED***redirect_uri=redirect_uri,
 ***REMOVED******REMOVED******REMOVED***scope=scope
 ***REMOVED******REMOVED***)
 ***REMOVED******REMOVED***self.assertEquals(authorize_url,
-***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
+***REMOVED******REMOVED******REMOVED***"https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
 ***REMOVED******REMOVED***)
 
 ***REMOVED***def test_exchange_token_success(self):

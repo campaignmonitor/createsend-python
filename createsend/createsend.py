@@ -38,13 +38,11 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***self.fake_web = False
 ***REMOVED******REMOVED***self.auth(auth)
 
-***REMOVED***def authorize_url(self, client_id, client_secret, redirect_uri,
-***REMOVED******REMOVED***scope, state=None):
+***REMOVED***def authorize_url(self, client_id, redirect_uri, scope, state=None):
 ***REMOVED******REMOVED***"""Get the authorization URL for your application, given the application's
-***REMOVED******REMOVED***client_id, client_secret, redirect_uri, scope, and optional state data."""
+***REMOVED******REMOVED***client_id, redirect_uri, scope, and optional state data."""
 ***REMOVED******REMOVED***params = [
 ***REMOVED******REMOVED******REMOVED***('client_id', client_id),
-***REMOVED******REMOVED******REMOVED***('client_secret', client_secret),
 ***REMOVED******REMOVED******REMOVED***('redirect_uri', redirect_uri),
 ***REMOVED******REMOVED******REMOVED***('scope', scope)
 ***REMOVED******REMOVED***]
