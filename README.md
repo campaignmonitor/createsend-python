@@ -28,7 +28,6 @@ from createsend import *
 cs = CreateSend()
 authorize_url = cs.authorize_url(
   client_id='Client ID for your application',
-  client_secret='Client Secret for your application',
   redirect_uri='Redirect URI for your application',
   scope='The permission level your application requires',
   state='Optional state data to be included'

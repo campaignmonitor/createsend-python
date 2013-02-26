@@ -38,13 +38,11 @@ class CreateSendBase(object):
     self.fake_web = False
     self.auth(auth)
 
-  def authorize_url(self, client_id, client_secret, redirect_uri,
-    scope, state=None):
+  def authorize_url(self, client_id, redirect_uri, scope, state=None):
     """Get the authorization URL for your application, given the application's
-    client_id, client_secret, redirect_uri, scope, and optional state data."""
+    client_id, redirect_uri, scope, and optional state data."""
     params = [
       ('client_id', client_id),
-      ('client_secret', client_secret),
       ('redirect_uri', redirect_uri),
       ('scope', scope)
     ]

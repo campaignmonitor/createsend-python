@@ -12,7 +12,6 @@ class AuthenticationTestCase(unittest.TestCase):
 
   def test_authorize_url_with_state(self):
     client_id = 8998879
-    client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
     redirect_uri = 'http://example.com/auth'
     scope = 'ViewReports,CreateCampaigns,SendCampaigns'
     state = 89879287
@@ -20,30 +19,27 @@ class AuthenticationTestCase(unittest.TestCase):
     self.cs = CreateSend(self.oauth_auth_details)
     authorize_url = self.cs.authorize_url(
       client_id=client_id,
-      client_secret=client_secret,
       redirect_uri=redirect_uri,
       scope=scope,
       state=state
     )
     self.assertEquals(authorize_url,
-      "https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
+      "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
     )
 
   def test_authorize_url_without_state(self):
     client_id = 8998879
-    client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
     redirect_uri = 'http://example.com/auth'
     scope = 'ViewReports,CreateCampaigns,SendCampaigns'
 
     self.cs = CreateSend(self.oauth_auth_details)
     authorize_url = self.cs.authorize_url(
       client_id=client_id,
-      client_secret=client_secret,
       redirect_uri=redirect_uri,
       scope=scope
     )
     self.assertEquals(authorize_url,
-      "https://api.createsend.com/oauth?client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
+      "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
     )
 
   def test_exchange_token_success(self):
