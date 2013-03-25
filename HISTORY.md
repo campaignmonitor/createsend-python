@@ -1,6 +1,6 @@
 # createsend-python history
 
-## v3.0.0 - Whenever this is released
+## v3.0.0 - 25 Mar, 2013 (e9eab00)
 
 * Added support for authenticating using OAuth. See the [README](README.md#authenticating) for full usage instructions.
 * Refactored authentication so that it is _always_ done at the instance level. This introduces some breaking changes, which are clearly explained below.
