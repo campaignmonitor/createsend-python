@@ -63,7 +63,38 @@ class CreateSendTestCase(object):
     self.cs.stub_request('primarycontact.json?email=%s' % urllib.quote(email, ''), 'admin_set_primary_contact.json')
     result = self.cs.set_primary_contact(email)
     self.assertEquals(email, result.EmailAddress)
-  	
+
+  # Test fake web mode
+  def test_make_request_fails_when_unexpected_request_url_is_faked(self):
+    self.cs.stub_request("unexpected/url.json", "clients.json")
+    self.assertRaises(Exception, self.cs.clients)
+
+  def test_make_request_fails_when_unexpected_request_body_is_faked(self):
+    c = Client()
+    c.stub_request("clients.json", "create_client.json", 201, "unexpected request body")
+    self.assertRaises(Exception, c.create, "Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  # Test functionality of exceptions inheriting from CreateSendError
+  def test_bad_request(self):
+    c = Client()
+    c.stub_request("clients.json", "custom_api_error.json", 400)
+    try:
+      c.create("", "", "")
+    except BadRequest as br:
+      self.assertEquals(98798, br.data.Code)
+      self.assertEquals('A crazy API error', br.data.Message)
+      self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % br)
+
+  def test_unauthorized(self):
+    c = Client()
+    c.stub_request("clients.json", "custom_api_error.json", 401)
+    try:
+      c.create("", "", "")
+    except Unauthorized as ua:
+      self.assertEquals(98798, ua.data.Code)
+      self.assertEquals('A crazy API error', ua.data.Message)
+      self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % ua)
+
   # Test that the corresponding exceptions are raised according to the returned http status code
   def test_bad_request_on_get(self):
     self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)
@@ -76,6 +107,10 @@ class CreateSendTestCase(object):
   def test_not_found_on_get(self):
     self.cs.stub_request('countries.json', None, status=404)
     self.assertRaises(self.error_responses[404], self.cs.countries)
+
+  def test_other_client_error_on_get(self):
+    self.cs.stub_request('countries.json', None, status=418)
+    self.assertRaises(self.error_responses[418], self.cs.countries)
 
   def test_server_error_on_get(self):
     self.cs.stub_request('countries.json', None, status=500)
@@ -97,6 +132,12 @@ class CreateSendTestCase(object):
     client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
     client.stub_request('clients.json', None, status=404)
     self.assertRaises(self.error_responses[404], client.create, "Client Company Name",
+      "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
+  def test_other_client_error_on_post(self):
+    client = Client(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
+    client.stub_request('clients.json', None, status=418)
+    self.assertRaises(self.error_responses[418], client.create, "Client Company Name",
       "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
   def test_server_error_on_post(self):
@@ -123,6 +164,12 @@ class CreateSendTestCase(object):
     self.assertRaises(self.error_responses[404], template.update, "Template One Updated", "http://templates.org/index.html", 
       "http://templates.org/files.zip")
 
+  def test_other_client_error_on_put(self):
+    template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=418)
+    self.assertRaises(self.error_responses[418], template.update, "Template One Updated", "http://templates.org/index.html", 
+      "http://templates.org/files.zip")
+
   def test_server_error_on_put(self):
     template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
@@ -144,6 +191,11 @@ class CreateSendTestCase(object):
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=404)
     self.assertRaises(self.error_responses[404], template.delete)
 
+  def test_other_client_error_on_delete(self):
+    template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
+    template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=418)
+    self.assertRaises(self.error_responses[418], template.delete)
+
   def test_server_error_on_delete(self):
     template = Template(self.cs.auth_details, "uhiuhiuhiuhiuhiuhiuh")
     template.stub_request('templates/uhiuhiuhiuhiuhiuhiuh.json', None, status=500)
@@ -155,7 +207,8 @@ class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
     self.cs = CreateSend({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
     # Mapping of http status codes to the exceptions expected to be raised
     self.error_responses = {
-      400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }
+      400: BadRequest, 401: Unauthorized, 404: NotFound, 418: ClientError,
+      500: ServerError }
 
 class ApiKeyCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
   """Test when using an API key to authenticate"""
@@ -163,4 +216,5 @@ class ApiKeyCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
     self.cs = CreateSend({'api_key': '123123123123123123123'})
     # Mapping of http status codes to the exceptions expected to be raised
     self.error_responses = {
-      400: BadRequest, 401: Unauthorized, 404: NotFound, 500: ServerError }
+      400: BadRequest, 401: Unauthorized, 404: NotFound, 418: ClientError,
+      500: ServerError }

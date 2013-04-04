@@ -61,7 +61,7 @@ class CreateSendBase(object):
       ('code', code),
     ]
     response = self._post('', urllib.urlencode(params),
-      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
     access_token, expires_in, refresh_token = None, None, None
     r = json_to_py(response)
     if hasattr(r, 'error') and hasattr(r, 'error_description'):
@@ -97,7 +97,7 @@ class CreateSendBase(object):
       ('refresh_token', refresh_token)
     ]
     response = self._post('', urllib.urlencode(params),
-      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded", True)
+      CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
     new_access_token, new_expires_in, new_refresh_token = None, None, None
     r = json_to_py(response)
     new_access_token, new_expires_in, new_refresh_token = r.access_token, r.expires_in, r.refresh_token
@@ -112,7 +112,7 @@ class CreateSendBase(object):
     self.faker = get_faker(expected_url, filename, status, body)
 
   def make_request(self, method, path, params={}, body="", username=None,
-    password=None, base_uri=None, content_type=None, no_auth=None):
+    password=None, base_uri=None, content_type=None):
     headers = {
       'User-Agent': 'createsend-python-%s' % __version__,
       'Content-Type': 'application/json; charset=utf-8',
@@ -130,8 +130,6 @@ class CreateSendBase(object):
         headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % self.auth_details['api_key'])
       elif 'access_token' in self.auth_details and self.auth_details['access_token']:
         headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
-    if no_auth:
-      del headers['Authorization']
     self.headers = headers
 
     """If in fake web mode (i.e. self.stub_request has been called), 
@@ -187,7 +185,7 @@ class CreateSendBase(object):
   def _get(self, path, params={}, username=None, password=None):
     return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
-  def _post(self, path, body="", base_uri=None, content_type=None, no_auth=None):
+  def _post(self, path, body="", base_uri=None, content_type=None):
     return self.make_request(path=path, method="POST", body=body, 
       base_uri=base_uri, content_type=content_type)
 

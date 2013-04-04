@@ -130,7 +130,7 @@ class ListTestCase(object):
     self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
     self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
-  def test_active(self):
+  def test_unconfirmed(self):
     min_date = "2010-01-01"
     self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
     res = self.list.unconfirmed(min_date)
