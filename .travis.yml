@@ -7,4 +7,4 @@ install:
 ***REMOVED***- if [ $TRAVIS_PYTHON_VERSION == '2.5' ]; then pip install -r python25-requirements.txt --use-mirrors; else pip install -r requirements.txt --use-mirrors; fi
 script: nosetests --with-coverage --cover-erase --cover-package=createsend --cover-html
 after_script:
-***REMOVED***- if [ $TRAVIS_PYTHON_VERSION != '2.5' ]; then coveralls --verbose; fi
+***REMOVED***- if [ $TRAVIS_PYTHON_VERSION != '2.5' ]; then coveralls; fi
