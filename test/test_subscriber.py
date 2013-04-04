@@ -121,7 +121,7 @@ class SubscriberTestCase(object):
     ]
     self.assertRaises(BadRequest, self.subscriber.import_subscribers, self.list_id, subscribers, True)
 
-  def test_ubsubscribe(self):
+  def test_unsubscribe(self):
     self.subscriber.stub_request("subscribers/%s/unsubscribe.json" % self.list_id, None)
     self.subscriber.unsubscribe()
 
@@ -137,6 +137,10 @@ class SubscriberTestCase(object):
     self.assertEquals(history[0].Actions[0].Date, "2010-10-12 13:18:00")
     self.assertEquals(history[0].Actions[0].IPAddress, "192.168.126.87")
     self.assertEquals(history[0].Actions[0].Detail, "")
+
+  def test_delete(self):
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+    self.subscriber.delete()
 
 class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):
   """Test when using OAuth to authenticate"""

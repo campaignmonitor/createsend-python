@@ -78,6 +78,6 @@ class Subscriber(CreateSendBase):
     return json_to_py(response)
 
   def delete(self):
-    """Moves this subscriber to the Deleted state in the associated list."""
+    """Moves this subscriber to the deleted state in the associated list."""
     params = { "email": self.email_address }
     response = self._delete("/subscribers/%s.json" % self.list_id, params=params)
