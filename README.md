@@ -1,7 +1,7 @@
 # createsend
 [![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-python.png)][travis] [![Coverage Status](https://coveralls.io/repos/campaignmonitor/createsend-python/badge.png?branch=master)][coveralls]
 
-A python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
+A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
 
 [travis]: http://travis-ci.org/campaignmonitor/createsend-python
 [coveralls]: https://coveralls.io/r/campaignmonitor/createsend-python
