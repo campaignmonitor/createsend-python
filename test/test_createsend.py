@@ -74,6 +74,27 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED***c.stub_request("clients.json", "create_client.json", 201, "unexpected request body")
 ***REMOVED******REMOVED***self.assertRaises(Exception, c.create, "Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
+***REMOVED***# Test functionality of exceptions inheriting from CreateSendError
+***REMOVED***def test_bad_request(self):
+***REMOVED******REMOVED***c = Client()
+***REMOVED******REMOVED***c.stub_request("clients.json", "custom_api_error.json", 400)
+***REMOVED******REMOVED***try:
+***REMOVED******REMOVED******REMOVED***c.create("", "", "")
+***REMOVED******REMOVED***except BadRequest as br:
+***REMOVED******REMOVED******REMOVED***self.assertEquals(98798, br.data.Code)
+***REMOVED******REMOVED******REMOVED***self.assertEquals('A crazy API error', br.data.Message)
+***REMOVED******REMOVED******REMOVED***self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % br)
+
+***REMOVED***def test_unauthorized(self):
+***REMOVED******REMOVED***c = Client()
+***REMOVED******REMOVED***c.stub_request("clients.json", "custom_api_error.json", 401)
+***REMOVED******REMOVED***try:
+***REMOVED******REMOVED******REMOVED***c.create("", "", "")
+***REMOVED******REMOVED***except Unauthorized as ua:
+***REMOVED******REMOVED******REMOVED***self.assertEquals(98798, ua.data.Code)
+***REMOVED******REMOVED******REMOVED***self.assertEquals('A crazy API error', ua.data.Message)
+***REMOVED******REMOVED******REMOVED***self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % ua)
+
 ***REMOVED***# Test that the corresponding exceptions are raised according to the returned http status code
 ***REMOVED***def test_bad_request_on_get(self):
 ***REMOVED******REMOVED***self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)
