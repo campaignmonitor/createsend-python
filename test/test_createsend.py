@@ -74,6 +74,27 @@ class CreateSendTestCase(object):
     c.stub_request("clients.json", "create_client.json", 201, "unexpected request body")
     self.assertRaises(Exception, c.create, "Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
 
+  # Test functionality of exceptions inheriting from CreateSendError
+  def test_bad_request(self):
+    c = Client()
+    c.stub_request("clients.json", "custom_api_error.json", 400)
+    try:
+      c.create("", "", "")
+    except BadRequest as br:
+      self.assertEquals(98798, br.data.Code)
+      self.assertEquals('A crazy API error', br.data.Message)
+      self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % br)
+
+  def test_unauthorized(self):
+    c = Client()
+    c.stub_request("clients.json", "custom_api_error.json", 401)
+    try:
+      c.create("", "", "")
+    except Unauthorized as ua:
+      self.assertEquals(98798, ua.data.Code)
+      self.assertEquals('A crazy API error', ua.data.Message)
+      self.assertEquals('The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % ua)
+
   # Test that the corresponding exceptions are raised according to the returned http status code
   def test_bad_request_on_get(self):
     self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)
