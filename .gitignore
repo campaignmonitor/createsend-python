@@ -6,4 +6,5 @@ dist
 venv
 .coverage
 cover
+htmlcov
 
