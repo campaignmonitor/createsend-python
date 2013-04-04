@@ -111,6 +111,16 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(import_result.TotalNewSubscribers, 0)
 ***REMOVED******REMOVED***self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
 
+***REMOVED***def test_import_subscribers_complete_failure_because_of_bad_request(self):
+***REMOVED******REMOVED***# Stub request with 400 Bad Request as the expected response status
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/import.json" % self.list_id, "custom_api_error.json", 400)
+***REMOVED******REMOVED***subscribers = [
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+1@example", "Name": "Example One" },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+2@example.com", "Name": "Example Two" },
+***REMOVED******REMOVED******REMOVED***{ "EmailAddress": "example+3@example.com", "Name": "Example Three" },
+***REMOVED******REMOVED***]
+***REMOVED******REMOVED***self.assertRaises(BadRequest, self.subscriber.import_subscribers, self.list_id, subscribers, True)
+
 ***REMOVED***def test_ubsubscribe(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/unsubscribe.json" % self.list_id, None)
 ***REMOVED******REMOVED***self.subscriber.unsubscribe()
