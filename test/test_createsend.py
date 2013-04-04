@@ -63,7 +63,17 @@ class CreateSendTestCase(object):
     self.cs.stub_request('primarycontact.json?email=%s' % urllib.quote(email, ''), 'admin_set_primary_contact.json')
     result = self.cs.set_primary_contact(email)
     self.assertEquals(email, result.EmailAddress)
-  	
+
+  # Test fake web mode
+  def test_make_request_fails_when_unexpected_request_url_is_faked(self):
+    self.cs.stub_request("unexpected/url.json", "clients.json")
+    self.assertRaises(Exception, self.cs.clients)
+
+  def test_make_request_fails_when_unexpected_request_body_is_faked(self):
+    c = Client()
+    c.stub_request("clients.json", "create_client.json", 201, "unexpected request body")
+    self.assertRaises(Exception, c.create, "Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
+
   # Test that the corresponding exceptions are raised according to the returned http status code
   def test_bad_request_on_get(self):
     self.cs.stub_request('countries.json', 'custom_api_error.json', status=400)
