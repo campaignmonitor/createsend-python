@@ -2,7 +2,7 @@
 desc "Run tests"
 task :test do
 ***REMOVED***# Depends on nose being installed: pip install nose
-***REMOVED***system "nosetests"
+***REMOVED***system "nosetests --with-coverage --cover-erase --cover-package=createsend --cover-html"
 end
 
 desc "Build a source distribution"

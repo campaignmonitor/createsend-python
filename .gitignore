@@ -3,6 +3,7 @@
 example.py
 build
 dist
-/.buildpath
-/.project
 venv
+.coverage
+cover
+

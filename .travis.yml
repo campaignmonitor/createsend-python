@@ -5,4 +5,4 @@ python:
 ***REMOVED***- 2.7
 install:
 ***REMOVED***- if [ $TRAVIS_PYTHON_VERSION == '2.5' ]; then pip install -r python25-requirements.txt --use-mirrors; fi
-script: nosetests
+script: nosetests --with-coverage --cover-erase --cover-package=createsend --cover-html
