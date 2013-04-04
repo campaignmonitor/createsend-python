@@ -1,4 +1,3 @@
 simplejson
 nose==1.2.1
 coverage
-coveralls
