@@ -7,7 +7,7 @@ from createsend import *
 class AuthenticationTestCase(unittest.TestCase):
 
   def setUp(self):
-    self.oauth_auth_details = {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}
+    self.oauth_auth_details = {"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}
     self.api_key_auth_details = {'api_key': '123123123123123123123'}
 
   def test_authorize_url_with_state(self):
@@ -94,7 +94,7 @@ class AuthenticationTestCase(unittest.TestCase):
     self.cs.stub_request("https://api.createsend.com/oauth/token", "refresh_oauth_token.json")
     new_access_token, new_expires_in, new_refresh_token = self.cs.refresh_token()
 
-    self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=9u09i02e3")
+    self.assertEquals(self.cs.faker.actual_body, "grant_type=refresh_token&refresh_token=5S4aASP9R%2B9KsgfHB0dapTYxNA%3D%3D")
     self.assertEquals(new_access_token, "SlAV32hkKG2e12e")
     self.assertEquals(new_expires_in, 1209600)
     self.assertEquals(new_refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
@@ -102,11 +102,11 @@ class AuthenticationTestCase(unittest.TestCase):
       { 'access_token': new_access_token, 'refresh_token': new_refresh_token })
 
   def test_refresh_token_error_when_refresh_token_none(self):
-    self.cs = CreateSend({"access_token": "98u9q8uw9ddw", "refresh_token": None})
+    self.cs = CreateSend({"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": None})
     self.assertRaises(Exception, self.cs.refresh_token)
 
   def test_refresh_token_error_when_no_refresh_token_passed_in(self):
-    self.cs = CreateSend({"access_token": "98u9q8uw9ddw"})
+    self.cs = CreateSend({"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA=="})
     self.assertRaises(Exception, self.cs.refresh_token)
 
   def test_refresh_token_error_when_no_authentication(self):

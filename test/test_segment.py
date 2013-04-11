@@ -67,7 +67,7 @@ class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):
   def setUp(self):
     self.segment_id = "98y2e98y289dh89h938389"
     self.segment = Segment(
-      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, self.segment_id)
+      {"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}, self.segment_id)
 
 class ApiKeySegmentTestCase(unittest.TestCase, SegmentTestCase):
   """Test when using an API key to authenticate"""

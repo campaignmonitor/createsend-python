@@ -32,7 +32,7 @@ class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
     self.administrator = Administrator(
-      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, "admin@example.com")
+      {"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}, "admin@example.com")
 
 class ApiKeyAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
   """Test when using an API key to authenticate"""

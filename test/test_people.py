@@ -34,7 +34,7 @@ class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):
   def setUp(self):
     self.client_id = "d98h2938d9283d982u3d98u88"
     self.person = Person(
-      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+      {"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="},
       self.client_id, "person@example.com")
 
 class ApiKeyPeopleTestCase(unittest.TestCase, PeopleTestCase):

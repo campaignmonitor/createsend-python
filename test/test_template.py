@@ -34,7 +34,7 @@ class OAuthTemplateTestCase(unittest.TestCase, TemplateTestCase):
   """Test when using OAuth to authenticate"""
   def setUp(self):
     self.template = Template(
-      {"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+      {"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="},
       "98y2e98y289dh89h938389")
 
 class ApiKeyTemplateTestCase(unittest.TestCase, TemplateTestCase):
