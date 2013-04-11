@@ -244,7 +244,7 @@ class OAuthListTestCase(unittest.TestCase, ListTestCase):
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.client_id = "87y8d7qyw8d7yq8w7ydwqwd"
 ***REMOVED******REMOVED***self.list_id = "e3c5f034d68744f7881fdccf13c2daee"
-***REMOVED******REMOVED***self.list = List({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, self.list_id)
+***REMOVED******REMOVED***self.list = List({"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}, self.list_id)
 
 class ApiKeyListTestCase(unittest.TestCase, ListTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""

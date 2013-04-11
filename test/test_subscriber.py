@@ -147,7 +147,7 @@ class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.list_id = "d98h2938d9283d982u3d98u88"
 ***REMOVED******REMOVED***self.subscriber = Subscriber(
-***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"},
+***REMOVED******REMOVED******REMOVED***{"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="},
 ***REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com")
 
 class ApiKeySubscriberTestCase(unittest.TestCase, SubscriberTestCase):

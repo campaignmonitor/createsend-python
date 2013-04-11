@@ -180,7 +180,7 @@ class OAuthClientTestCase(unittest.TestCase, ClientTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
 ***REMOVED******REMOVED***self.cl = Client(
-***REMOVED******REMOVED******REMOVED***{"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"}, "4a397ccaaa55eb4e6aa1221e1e2d7122")
+***REMOVED******REMOVED******REMOVED***{"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}, "4a397ccaaa55eb4e6aa1221e1e2d7122")
 
 class ApiKeyClientTestCase(unittest.TestCase, ClientTestCase):
 ***REMOVED***"""Test when using an API key to authenticate"""

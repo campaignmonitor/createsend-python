@@ -204,7 +204,7 @@ class CreateSendTestCase(object):
 class OAuthCreateSendTestCase(unittest.TestCase, CreateSendTestCase):
 ***REMOVED***"""Test when using OAuth to authenticate"""
 ***REMOVED***def setUp(self):
-***REMOVED******REMOVED***self.cs = CreateSend({"access_token": "98u9q8uw9ddw", "refresh_token": "9u09i02e3"})
+***REMOVED******REMOVED***self.cs = CreateSend({"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="})
 ***REMOVED******REMOVED***# Mapping of http status codes to the exceptions expected to be raised
 ***REMOVED******REMOVED***self.error_responses = {
 ***REMOVED******REMOVED******REMOVED***400: BadRequest, 401: Unauthorized, 404: NotFound, 418: ClientError,
