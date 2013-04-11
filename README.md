@@ -167,8 +167,5 @@ def test_add_with_custom_fields(self):
 ```
 
 ## Contributing
-1. Fork the repository
-2. Make your changes, including tests for your changes which maintain [coverage][coveralls].
-3. Ensure that the build passes, by running `rake` (CI runs on: `2.5`, `2.6`, and `2.7`)
-4. It should go without saying, but do not increment the version number in your commits.
-5. Submit a pull request.
+
+Please check the [guidelines for contributing](CONTRIBUTING.md) to this repository.
