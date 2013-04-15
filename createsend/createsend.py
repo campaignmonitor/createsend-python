@@ -11,7 +11,7 @@ except ImportError:
   import simplejson as json
 from utils import json_to_py, get_faker
 
-__version_info__ = ('3', '0', '0')
+__version_info__ = ('3', '1', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
