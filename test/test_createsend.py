@@ -64,6 +64,16 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED***result = self.cs.set_primary_contact(email)
 ***REMOVED******REMOVED***self.assertEquals(email, result.EmailAddress)
 
+***REMOVED***def test_external_session_url(self):
+***REMOVED******REMOVED***email = "exammple@example.com"
+***REMOVED******REMOVED***chrome = "None"
+***REMOVED******REMOVED***url = "/subscribers"
+***REMOVED******REMOVED***integrator_id = "qw989q8wud98qwyd"
+***REMOVED******REMOVED***client_id = "9q8uw9d8u9wud"
+***REMOVED******REMOVED***self.cs.stub_request('externalsession.json', 'external_session.json')
+***REMOVED******REMOVED***result = self.cs.external_session_url(email, chrome, url, integrator_id, client_id)
+***REMOVED******REMOVED***self.assertEquals("https://external1.createsend.com/cd/create/ABCDEF12/DEADBEEF?url=FEEDDAD1", result.SessionUrl)
+
 ***REMOVED***# Test fake web mode
 ***REMOVED***def test_make_request_fails_when_unexpected_request_url_is_faked(self):
 ***REMOVED******REMOVED***self.cs.stub_request("unexpected/url.json", "clients.json")

@@ -5,6 +5,10 @@ import base64
 import gzip
 from StringIO import StringIO
 from urlparse import urlparse
+try:
+***REMOVED***import json
+except ImportError:
+***REMOVED***import simplejson as json
 from utils import json_to_py, get_faker
 
 __version_info__ = ('3', '0', '0')
@@ -237,17 +241,46 @@ class CreateSend(CreateSendBase):
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def administrators(self):
-***REMOVED***	"""gets administrators associated with the account"""
+***REMOVED***	"""Gets administrators associated with the account"""
 ***REMOVED***	response = self._get('/admins.json')
 ***REMOVED***	return json_to_py(response)
 ***REMOVED***
 ***REMOVED***def get_primary_contact(self):
-***REMOVED***	"""retrieves the primary contact for this account"""
+***REMOVED***	"""Retrieves the primary contact for this account"""
 ***REMOVED***	response = self._get('/primarycontact.json')
 ***REMOVED***	return json_to_py(response)
 
 ***REMOVED***def set_primary_contact(self, email):
-***REMOVED******REMOVED***"""assigns the primary contact for this account"""
+***REMOVED******REMOVED***"""Assigns the primary contact for this account"""
 ***REMOVED******REMOVED***params = { "email": email }
 ***REMOVED******REMOVED***response = self._put('/primarycontact.json', params = params)
+***REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED***def external_session_url(self, email, chrome, url, integrator_id, client_id):
+***REMOVED******REMOVED***"""
+***REMOVED******REMOVED***Get a URL which initiates a new external session for the user with the
+***REMOVED******REMOVED***given email.
+***REMOVED******REMOVED***Full details: http://www.campaignmonitor.com/api/account/#single_sign_on
+
+***REMOVED******REMOVED***:param email: String The representing the email address of the
+***REMOVED******REMOVED******REMOVED***Campaign Monitor user for whom the login session should be created.
+***REMOVED******REMOVED***:param chrome: String representing which 'chrome' to display - Must be
+***REMOVED******REMOVED******REMOVED***either "all", "tabs", or "none".
+***REMOVED******REMOVED***:param url: String representing the URL to display once logged in.
+***REMOVED******REMOVED******REMOVED***e.g. "/subscribers/"
+***REMOVED******REMOVED***:param integrator_id: String representing the Integrator ID. You need to
+***REMOVED******REMOVED******REMOVED***contact Campaign Monitor support to get an Integrator ID.
+***REMOVED******REMOVED***:param client_id: String representing the Client ID of the client which
+***REMOVED******REMOVED******REMOVED***should be active once logged in to the Campaign Monitor account.
+
+***REMOVED******REMOVED***:returns Object containing a single field SessionUrl which represents
+***REMOVED******REMOVED***the URL to initiate the external Campaign Monitor session.
+***REMOVED******REMOVED***"""
+***REMOVED******REMOVED***body = {
+***REMOVED******REMOVED******REMOVED***"Email": email, 
+***REMOVED******REMOVED******REMOVED***"Chrome": chrome,
+***REMOVED******REMOVED******REMOVED***"Url": url,
+***REMOVED******REMOVED******REMOVED***"IntegratorID": integrator_id,
+***REMOVED******REMOVED******REMOVED***"ClientID": client_id }
+***REMOVED******REMOVED***response = self._put('/externalsession.json', json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
