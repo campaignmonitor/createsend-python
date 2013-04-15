@@ -5,6 +5,10 @@ import base64
 import gzip
 from StringIO import StringIO
 from urlparse import urlparse
+try:
+  import json
+except ImportError:
+  import simplejson as json
 from utils import json_to_py, get_faker
 
 __version_info__ = ('3', '0', '0')
@@ -237,17 +241,46 @@ class CreateSend(CreateSendBase):
     return json_to_py(response)
 
   def administrators(self):
-  	"""gets administrators associated with the account"""
+  	"""Gets administrators associated with the account"""
   	response = self._get('/admins.json')
   	return json_to_py(response)
   
   def get_primary_contact(self):
-  	"""retrieves the primary contact for this account"""
+  	"""Retrieves the primary contact for this account"""
   	response = self._get('/primarycontact.json')
   	return json_to_py(response)
 
   def set_primary_contact(self, email):
-    """assigns the primary contact for this account"""
+    """Assigns the primary contact for this account"""
     params = { "email": email }
     response = self._put('/primarycontact.json', params = params)
+    return json_to_py(response)
+
+  def external_session_url(self, email, chrome, url, integrator_id, client_id):
+    """
+    Get a URL which initiates a new external session for the user with the
+    given email.
+    Full details: http://www.campaignmonitor.com/api/account/#single_sign_on
+
+    :param email: String The representing the email address of the
+      Campaign Monitor user for whom the login session should be created.
+    :param chrome: String representing which 'chrome' to display - Must be
+      either "all", "tabs", or "none".
+    :param url: String representing the URL to display once logged in.
+      e.g. "/subscribers/"
+    :param integrator_id: String representing the Integrator ID. You need to
+      contact Campaign Monitor support to get an Integrator ID.
+    :param client_id: String representing the Client ID of the client which
+      should be active once logged in to the Campaign Monitor account.
+
+    :returns Object containing a single field SessionUrl which represents
+    the URL to initiate the external Campaign Monitor session.
+    """
+    body = {
+      "Email": email, 
+      "Chrome": chrome,
+      "Url": url,
+      "IntegratorID": integrator_id,
+      "ClientID": client_id }
+    response = self._put('/externalsession.json', json.dumps(body))
     return json_to_py(response)
