@@ -6,7 +6,7 @@ from createsend import CreateSendBase
 from utils import json_to_py
 
 class Campaign(CreateSendBase):
-  """Represents a campaign and provides associated funtionality."""
+  """Represents a campaign and provides associated functionality."""
 
   def __init__(self, auth=None, campaign_id=None):
     self.campaign_id = campaign_id
