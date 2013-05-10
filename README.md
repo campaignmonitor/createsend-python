@@ -169,3 +169,7 @@ def test_add_with_custom_fields(self):
 ## Contributing
 
 Please check the [guidelines for contributing](https://github.com/campaignmonitor/createsend-python/blob/master/CONTRIBUTING.md) to this repository.
+
+## Releasing
+
+Please check the [instructions for releasing](https://github.com/campaignmonitor/createsend-python/blob/master/RELEASE.md) the `createsend` package.
