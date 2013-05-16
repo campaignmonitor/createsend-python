@@ -1,3 +1,5 @@
+***REMOVED***
+import platform
 import urllib
 import urllib2
 import httplib
@@ -118,7 +120,7 @@ class CreateSendBase(object):
 ***REMOVED***def make_request(self, method, path, params={}, body="", username=None,
 ***REMOVED******REMOVED***password=None, base_uri=None, content_type=None):
 ***REMOVED******REMOVED***headers = {
-***REMOVED******REMOVED******REMOVED***'User-Agent': 'createsend-python-%s' % __version__,
+***REMOVED******REMOVED******REMOVED***'User-Agent': CreateSend.user_agent,
 ***REMOVED******REMOVED******REMOVED***'Content-Type': 'application/json; charset=utf-8',
 ***REMOVED******REMOVED******REMOVED***'Accept-Encoding' : 'gzip, deflate' }
 ***REMOVED******REMOVED***if content_type:
@@ -204,6 +206,13 @@ class CreateSend(CreateSendBase):
 ***REMOVED***base_uri = "https://api.createsend.com/api/v3"
 ***REMOVED***oauth_uri = "https://api.createsend.com/oauth"
 ***REMOVED***oauth_token_uri = "%s/token" % oauth_uri
+***REMOVED***default_user_agent = 'createsend-python-%s-%d.%d.%d-%s' % (
+***REMOVED******REMOVED***__version__, sys.version_info[0], sys.version_info[1],
+***REMOVED******REMOVED***sys.version_info[2], platform.platform())
+***REMOVED***# You can use `CreateSend.user_agent = "my user agent"` to override the
+***REMOVED***# default user agent string (CreateSend.default_user_agent) used when
+***REMOVED***# making API calls.
+***REMOVED***user_agent = default_user_agent
 
 ***REMOVED***def __init__(self, auth=None):
 ***REMOVED******REMOVED***super(CreateSend, self).__init__(auth)
