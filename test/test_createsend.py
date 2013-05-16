@@ -8,6 +8,20 @@ class CreateSendTestCase(object):
 ***REMOVED***"""CreateSend tests to be run in the context of both using an API key 
 ***REMOVED***and using OAuth."""
 
+***REMOVED***def test_that_default_user_agent_is_set(self):
+***REMOVED******REMOVED***self.cs.stub_request("clients.json", "clients.json")
+***REMOVED******REMOVED***cl = self.cs.clients()
+***REMOVED******REMOVED***self.assertEquals(self.cs.headers['User-Agent'], CreateSend.default_user_agent)
+***REMOVED******REMOVED***self.assertEquals(2, len(cl))
+
+***REMOVED***def test_that_custom_user_agent_can_be_set(self):
+***REMOVED******REMOVED***CreateSend.user_agent = "custom user agent"
+***REMOVED******REMOVED***self.cs.stub_request("clients.json", "clients.json")
+***REMOVED******REMOVED***cl = self.cs.clients()
+***REMOVED******REMOVED***self.assertEquals(self.cs.headers['User-Agent'], "custom user agent")
+***REMOVED******REMOVED***self.assertEquals(2, len(cl))
+***REMOVED******REMOVED***CreateSend.user_agent = CreateSend.default_user_agent
+
 ***REMOVED***def test_apikey(self):
 ***REMOVED******REMOVED***site_url = "http://iamadesigner.createsend.com"
 ***REMOVED******REMOVED***username = "myusername"
