@@ -5,6 +5,7 @@ import urllib2
 import httplib
 import base64
 import gzip
+import socket, ssl
 from StringIO import StringIO
 from urlparse import urlparse
 try:
@@ -155,7 +156,23 @@ class CreateSendBase(object):
       data = self.faker.open() if self.faker else ''
       status = self.faker.status if (self.faker and self.faker.status) else 200
       return self.handle_response(status, data)
-
+    
+    if (parsed_base_uri.scheme == 'https'):
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.connect((parsed_base_uri.netloc, 443))
+		sslsock = ssl.wrap_socket(sock, cert_reqs=ssl.CERT_REQUIRED, ca_certs='cacert.pem')		
+		cert = sslsock.getpeercert()
+		
+		for field in cert['subject']:
+		  if field[0][0] == 'commonName':
+			certhost = field[0][1]
+			certhost = certhost.replace('*.', '')
+			netloc = parsed_base_uri.netloc
+			requestdomain = '.'.join(netloc.split('.')[-2:])
+			if certhost != requestdomain:			
+			  raise ssl.SSLError("Host name '%s' doesn't match certificate host '%s'"
+							 % (requestdomain, certhost))    
+    
     c = httplib.HTTPConnection(parsed_base_uri.netloc)
     c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
