@@ -5,6 +5,7 @@ import urllib2
 import httplib
 import base64
 import gzip
+import socket, ssl
 from StringIO import StringIO
 from urlparse import urlparse
 try:
@@ -155,7 +156,22 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
 ***REMOVED******REMOVED******REMOVED***status = self.faker.status if (self.faker and self.faker.status) else 200
 ***REMOVED******REMOVED******REMOVED***return self.handle_response(status, data)
+***REMOVED******REMOVED***
+***REMOVED******REMOVED***if (parsed_base_uri.scheme == 'https'):
+***REMOVED******REMOVED******REMOVED***sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+***REMOVED******REMOVED******REMOVED***sock.connect((parsed_base_uri.netloc, 443))
+***REMOVED******REMOVED******REMOVED***sslsock = ssl.wrap_socket(sock, cert_reqs=ssl.CERT_REQUIRED, ca_certs='cacert.pem')		
+***REMOVED******REMOVED******REMOVED***cert = sslsock.getpeercert()
 
+***REMOVED******REMOVED******REMOVED***for field in cert['subject']:
+***REMOVED******REMOVED******REMOVED******REMOVED***if field[0][0] == 'commonName':
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***certhost = field[0][1]
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***certhost = certhost.replace('*.', '')
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***netloc = parsed_base_uri.netloc
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***requestdomain = '.'.join(netloc.split('.')[-2:])
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if certhost != requestdomain:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise ssl.SSLError("Host name '%s' doesn't match certificate host '%s'" % (requestdomain, certhost))***REMOVED******REMOVED***
+***REMOVED******REMOVED***
 ***REMOVED******REMOVED***c = httplib.HTTPConnection(parsed_base_uri.netloc)
 ***REMOVED******REMOVED***c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
 ***REMOVED******REMOVED***response = c.getresponse()
