@@ -161,7 +161,8 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***if (parsed_base_uri.scheme == 'https'):
 ***REMOVED******REMOVED******REMOVED***sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ***REMOVED******REMOVED******REMOVED***sock.connect((parsed_base_uri.netloc, 443))
-***REMOVED******REMOVED******REMOVED***sslsock = ssl.wrap_socket(sock, cert_reqs=ssl.CERT_REQUIRED, ca_certs=os.path.dirname(__file__)+ '\cacert.pem')		
+***REMOVED******REMOVED******REMOVED***sslsock = ssl.wrap_socket(sock, cert_reqs=ssl.CERT_REQUIRED,
+***REMOVED******REMOVED******REMOVED******REMOVED***ca_certs=os.path.join(os.path.dirname(__file__), 'cacert.pem'))
 ***REMOVED******REMOVED******REMOVED***cert = sslsock.getpeercert()
 
 ***REMOVED******REMOVED******REMOVED***for field in cert['subject']:
