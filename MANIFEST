@@ -1,6 +1,7 @@
 setup.py
 createsend/__init__.py
 createsend/administrator.py
+createsend/cacert.pem
 createsend/campaign.py
 createsend/client.py
 createsend/createsend.py
@@ -20,3 +21,4 @@ test/test_people.py
 test/test_segment.py
 test/test_subscriber.py
 test/test_template.py
+test/test_verifiedhttpsconnection.py
