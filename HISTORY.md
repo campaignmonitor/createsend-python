@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v3.3.0 - 13 Jul, 2013
+
+* Added support for validating SSL certificates to avoid man-in-the-middle attacks.
+
 ## v3.2.0 - 16 May, 2013
 
 * Added Python version and platform details to default user agent string.
