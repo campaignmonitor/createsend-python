@@ -13,7 +13,7 @@ except ImportError:
 ***REMOVED***import simplejson as json
 from utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('3', '2', '0')
+__version_info__ = ('3', '3', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
