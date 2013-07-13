@@ -12,4 +12,5 @@ setup(name = "createsend",
 ***REMOVED******REMOVED******REMOVED***url = "http://campaignmonitor.github.io/createsend-python/",
 ***REMOVED******REMOVED******REMOVED***license = "MIT",
 ***REMOVED******REMOVED******REMOVED***keywords = "createsend campaign monitor email",
-***REMOVED******REMOVED******REMOVED***packages = ['createsend'])
+***REMOVED******REMOVED******REMOVED***packages = ['createsend'],
+***REMOVED******REMOVED******REMOVED***package_data = {'createsend': ['cacert.pem']})
