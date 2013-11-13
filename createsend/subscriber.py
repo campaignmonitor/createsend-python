@@ -77,6 +77,11 @@ class Subscriber(CreateSendBase):
     response = self._get("/subscribers/%s/history.json" % self.list_id, params=params)
     return json_to_py(response)
 
+  def details(self):
+    """Gets the details of the subscriber."""
+    response = self._get("/subscribers/{0}.json?email={1}".format(self.list_id, self.email_address))
+    return json_to_py(response)
+
   def delete(self):
     """Moves this subscriber to the deleted state in the associated list."""
     params = { "email": self.email_address }
