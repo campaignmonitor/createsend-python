@@ -15,8 +15,8 @@ class Subscriber(CreateSendBase):
 
   def get(self, list_id, email_address):
     """Gets a subscriber by list ID and email address."""
-    params = { "email": email_address }
-    response = self._get("/subscribers/%s.json" % list_id, params=params)
+    params = { "email": email_address or self.email_address }
+    response = self._get("/subscribers/%s.json" % list_id or self.list_id, params=params)
     return json_to_py(response)
 
   def add(self, list_id, email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
@@ -75,11 +75,6 @@ class Subscriber(CreateSendBase):
     """Gets the historical record of this subscriber's trackable actions."""
     params = { "email": self.email_address }
     response = self._get("/subscribers/%s/history.json" % self.list_id, params=params)
-    return json_to_py(response)
-
-  def details(self):
-    """Gets the details of the subscriber."""
-    response = self._get("/subscribers/{0}.json?email={1}".format(self.list_id, self.email_address))
     return json_to_py(response)
 
   def delete(self):
