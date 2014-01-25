@@ -18,7 +18,7 @@
   Now you can write:
 
   ```python
-  subscriber = Subscriber(auth, 'listid', 'me@test.com').get('listid', 'me@test.com')
+  subscriber = Subscriber(auth, 'listid', 'me@test.com').get()
   ```
 
 ## v3.3.0 - 13 Jul, 2013
