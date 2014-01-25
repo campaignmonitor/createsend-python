@@ -12,13 +12,22 @@ class PeopleTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(person.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(person.Name, "Person One")
 ***REMOVED******REMOVED***self.assertEquals(person.AccessLevel, 1023)
-***REMOVED******REMOVED***self.assertEquals(person.Status, "Active")***REMOVED******REMOVED***
+***REMOVED******REMOVED***self.assertEquals(person.Status, "Active")
+
+***REMOVED***def test_get_without_args(self):
+***REMOVED******REMOVED***email = "person@example.com"
+***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+***REMOVED******REMOVED***person = self.person.get()
+***REMOVED******REMOVED***self.assertEquals(person.EmailAddress, email)
+***REMOVED******REMOVED***self.assertEquals(person.Name, "Person One")
+***REMOVED******REMOVED***self.assertEquals(person.AccessLevel, 1023)
+***REMOVED******REMOVED***self.assertEquals(person.Status, "Active")
 
 ***REMOVED***def test_add(self):
 ***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json" % self.client_id, "add_person.json")
 ***REMOVED******REMOVED***result = self.person.add(self.client_id, "person@example.com", "Person Name", 1023, "Password")
 ***REMOVED******REMOVED***self.assertEquals(result.EmailAddress, "person@example.com")
-***REMOVED***
+
 ***REMOVED***def test_update(self):
 ***REMOVED******REMOVED***new_email = "new_email_address@example.com"
 ***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)

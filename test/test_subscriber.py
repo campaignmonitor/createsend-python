@@ -18,6 +18,19 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
 ***REMOVED******REMOVED***self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
 
+***REMOVED***def test_get_without_arguments(self):
+***REMOVED******REMOVED***email = "subscriber@example.com"
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+***REMOVED******REMOVED***subscriber = self.subscriber.get()
+***REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
+***REMOVED******REMOVED***self.assertEquals(subscriber.Name, "Subscriber One")
+***REMOVED******REMOVED***self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
+***REMOVED******REMOVED***self.assertEquals(subscriber.State, "Active")
+***REMOVED******REMOVED***self.assertEquals(len(subscriber.CustomFields), 3)
+***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Key, 'website')
+***REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
+***REMOVED******REMOVED***self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+
 ***REMOVED***def test_add_without_custom_fields(self):
 ***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED***email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", [], True)

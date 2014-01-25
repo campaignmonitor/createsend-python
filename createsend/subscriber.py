@@ -13,10 +13,10 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***self.email_address = email_address
 ***REMOVED******REMOVED***super(Subscriber, self).__init__(auth)
 
-***REMOVED***def get(self, list_id, email_address):
+***REMOVED***def get(self, list_id=None, email_address=None):
 ***REMOVED******REMOVED***"""Gets a subscriber by list ID and email address."""
-***REMOVED******REMOVED***params = { "email": email_address }
-***REMOVED******REMOVED***response = self._get("/subscribers/%s.json" % list_id, params=params)
+***REMOVED******REMOVED***params = { "email": email_address or self.email_address }
+***REMOVED******REMOVED***response = self._get("/subscribers/%s.json" % (list_id or self.list_id), params=params)
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def add(self, list_id, email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
@@ -29,9 +29,9 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
 ***REMOVED******REMOVED***response = self._post("/subscribers/%s.json" % list_id, json.dumps(body))
 ***REMOVED******REMOVED***return json_to_py(response)
-***REMOVED***
+
 ***REMOVED***def update(self, new_email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
-***REMOVED******REMOVED***"""Updates any aspect of a subscriber, including email address, name, and 
+***REMOVED******REMOVED***"""Updates any aspect of a subscriber, including email address, name, and
 ***REMOVED******REMOVED***custom field data if supplied."""
 ***REMOVED******REMOVED***params = { "email": self.email_address }
 ***REMOVED******REMOVED***body = {
@@ -40,7 +40,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"CustomFields": custom_fields,
 ***REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe,
 ***REMOVED******REMOVED******REMOVED***"RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
-***REMOVED******REMOVED***response = self._put("/subscribers/%s.json" % self.list_id, 
+***REMOVED******REMOVED***response = self._put("/subscribers/%s.json" % self.list_id,
 ***REMOVED******REMOVED******REMOVED***body=json.dumps(body), params=params)
 ***REMOVED******REMOVED***# Update self.email_address, so this object can continue to be used reliably
 ***REMOVED******REMOVED***self.email_address = new_email_address
@@ -57,7 +57,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***except BadRequest, br:
 ***REMOVED******REMOVED******REMOVED***# Subscriber import will throw BadRequest if some subscribers are not imported
 ***REMOVED******REMOVED******REMOVED***# successfully. If this occurs, we want to return the ResultData property of
-***REMOVED******REMOVED******REMOVED***# the BadRequest exception (which is of the same "form" as the response we'd 
+***REMOVED******REMOVED******REMOVED***# the BadRequest exception (which is of the same "form" as the response we'd
 ***REMOVED******REMOVED******REMOVED***# receive upon a completely successful import)
 ***REMOVED******REMOVED******REMOVED***if hasattr(br.data, 'ResultData'):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return br.data.ResultData
