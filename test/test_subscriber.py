@@ -18,6 +18,19 @@ class SubscriberTestCase(object):
     self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
     self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
 
+  def test_get_without_arguments(self):
+    email = "subscriber@example.com"
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+    subscriber = self.subscriber.get()
+    self.assertEquals(subscriber.EmailAddress, email)
+    self.assertEquals(subscriber.Name, "Subscriber One")
+    self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
+    self.assertEquals(subscriber.State, "Active")
+    self.assertEquals(len(subscriber.CustomFields), 3)
+    self.assertEquals(subscriber.CustomFields[0].Key, 'website')
+    self.assertEquals(subscriber.CustomFields[0].Value, 'http://example.com')
+    self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+
   def test_add_without_custom_fields(self):
     self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
     email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", [], True)

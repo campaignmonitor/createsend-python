@@ -11,13 +11,21 @@ class AdministratorTestCase(object):
     administrator = self.administrator.get(email)
     self.assertEquals(administrator.EmailAddress, email)
     self.assertEquals(administrator.Name, "Admin One")
-    self.assertEquals(administrator.Status, "Active")    
+    self.assertEquals(administrator.Status, "Active")
+
+  def test_get_without_args(self):
+    email = "admin@example.com"
+    self.administrator.stub_request("admins.json?email=%s" %urllib.quote(email), "admin_details.json")
+    administrator = self.administrator.get()
+    self.assertEquals(administrator.EmailAddress, email)
+    self.assertEquals(administrator.Name, "Admin One")
+    self.assertEquals(administrator.Status, "Active")
 
   def test_add(self):
     self.administrator.stub_request("admins.json", "add_admin.json")
     result = self.administrator.add("admin@example.com", "Admin Name")
     self.assertEquals(result.EmailAddress, "admin@example.com")
-  
+
   def test_update(self):
     new_email = "new_email_address@example.com"
     self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
