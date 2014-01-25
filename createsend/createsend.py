@@ -13,7 +13,7 @@ except ImportError:
 ***REMOVED***import simplejson as json
 from utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('3', '3', '0')
+__version_info__ = ('3', '4', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
@@ -127,7 +127,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***headers['Content-Type'] = content_type
 ***REMOVED******REMOVED***parsed_base_uri = urlparse(CreateSend.base_uri if not base_uri else base_uri)
 ***REMOVED******REMOVED***"""username and password should only be set when it is intended that
-***REMOVED******REMOVED***the default basic authentication mechanism using the API key be 
+***REMOVED******REMOVED***the default basic authentication mechanism using the API key be
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
@@ -138,10 +138,10 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
 ***REMOVED******REMOVED***self.headers = headers
 
-***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called), 
+***REMOVED******REMOVED***"""If in fake web mode (i.e. self.stub_request has been called),
 ***REMOVED******REMOVED***self.faker should be set, and this request should be treated as a fake."""
 ***REMOVED******REMOVED***if self.fake_web:
-***REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches self.faker.url. 
+***REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches self.faker.url.
 ***REMOVED******REMOVED******REMOVED***actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
 ***REMOVED******REMOVED******REMOVED***self.faker.actual_url = actual_url
 ***REMOVED******REMOVED******REMOVED***if self.faker.url != actual_url:
@@ -192,7 +192,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
 ***REMOVED***def _post(self, path, body="", base_uri=None, content_type=None):
-***REMOVED******REMOVED***return self.make_request(path=path, method="POST", body=body, 
+***REMOVED******REMOVED***return self.make_request(path=path, method="POST", body=body,
 ***REMOVED******REMOVED******REMOVED***base_uri=base_uri, content_type=content_type)
 
 ***REMOVED***def _put(self, path, body="", params={}):
@@ -253,7 +253,7 @@ class CreateSend(CreateSendBase):
 ***REMOVED***	"""Gets administrators associated with the account"""
 ***REMOVED***	response = self._get('/admins.json')
 ***REMOVED***	return json_to_py(response)
-***REMOVED***
+
 ***REMOVED***def get_primary_contact(self):
 ***REMOVED***	"""Retrieves the primary contact for this account"""
 ***REMOVED***	response = self._get('/primarycontact.json')
@@ -286,7 +286,7 @@ class CreateSend(CreateSendBase):
 ***REMOVED******REMOVED***the URL to initiate the external Campaign Monitor session.
 ***REMOVED******REMOVED***"""
 ***REMOVED******REMOVED***body = {
-***REMOVED******REMOVED******REMOVED***"Email": email, 
+***REMOVED******REMOVED******REMOVED***"Email": email,
 ***REMOVED******REMOVED******REMOVED***"Chrome": chrome,
 ***REMOVED******REMOVED******REMOVED***"Url": url,
 ***REMOVED******REMOVED******REMOVED***"IntegratorID": integrator_id,

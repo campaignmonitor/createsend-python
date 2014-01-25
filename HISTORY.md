@@ -1,5 +1,26 @@
 # createsend-python history
 
+## v3.4.0 - 25 Jan, 2014
+
+* Modified several methods so that unnecessary arguments are no longer needed.
+
+***REMOVED***The following methods were updated:
+***REMOVED***- `Administrator.get()`
+***REMOVED***- `Person.get()`
+***REMOVED***- `Subscriber.get()`
+
+***REMOVED***As an example using, previously you would write:
+
+***REMOVED***```python
+***REMOVED***subscriber = Subscriber(auth, 'listid', 'me@test.com').get('listid', 'me@test.com')
+***REMOVED***```
+
+***REMOVED***Now you can write:
+
+***REMOVED***```python
+***REMOVED***subscriber = Subscriber(auth, 'listid', 'me@test.com').get('listid', 'me@test.com')
+***REMOVED***```
+
 ## v3.3.0 - 13 Jul, 2013
 
 * Added support for validating SSL certificates to avoid man-in-the-middle attacks.
