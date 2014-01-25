@@ -12,13 +12,22 @@ class PeopleTestCase(object):
     self.assertEquals(person.EmailAddress, email)
     self.assertEquals(person.Name, "Person One")
     self.assertEquals(person.AccessLevel, 1023)
-    self.assertEquals(person.Status, "Active")    
+    self.assertEquals(person.Status, "Active")
+
+  def test_get_without_args(self):
+    email = "person@example.com"
+    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+    person = self.person.get()
+    self.assertEquals(person.EmailAddress, email)
+    self.assertEquals(person.Name, "Person One")
+    self.assertEquals(person.AccessLevel, 1023)
+    self.assertEquals(person.Status, "Active")
 
   def test_add(self):
     self.person.stub_request("clients/%s/people.json" % self.client_id, "add_person.json")
     result = self.person.add(self.client_id, "person@example.com", "Person Name", 1023, "Password")
     self.assertEquals(result.EmailAddress, "person@example.com")
-  
+
   def test_update(self):
     new_email = "new_email_address@example.com"
     self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
