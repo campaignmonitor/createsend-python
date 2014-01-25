@@ -1,12 +1,7 @@
 language: python
 python:
-***REMOVED***- 2.5
 ***REMOVED***- 2.6
 ***REMOVED***- 2.7
-install:
-***REMOVED***- if [ $TRAVIS_PYTHON_VERSION == '2.5' ]; then pip install -r python25-requirements.txt --use-mirrors; else pip install -r requirements.txt --use-mirrors; fi
 script:
 ***REMOVED***- coverage run --source=createsend nosetests.py
 ***REMOVED***- coverage report
-after_script:
-***REMOVED***- if [ $TRAVIS_PYTHON_VERSION != '2.5' ]; then coveralls --verbose; fi
