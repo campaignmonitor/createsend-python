@@ -13,7 +13,7 @@ except ImportError:
   import simplejson as json
 from utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('3', '3', '0')
+__version_info__ = ('3', '4', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
@@ -127,7 +127,7 @@ class CreateSendBase(object):
       headers['Content-Type'] = content_type
     parsed_base_uri = urlparse(CreateSend.base_uri if not base_uri else base_uri)
     """username and password should only be set when it is intended that
-    the default basic authentication mechanism using the API key be 
+    the default basic authentication mechanism using the API key be
     overridden (e.g. when using the apikey route with username and password)."""
     if username and password:
       headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
@@ -138,10 +138,10 @@ class CreateSendBase(object):
         headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
     self.headers = headers
 
-    """If in fake web mode (i.e. self.stub_request has been called), 
+    """If in fake web mode (i.e. self.stub_request has been called),
     self.faker should be set, and this request should be treated as a fake."""
     if self.fake_web:
-      # Check that the actual url which would be requested matches self.faker.url. 
+      # Check that the actual url which would be requested matches self.faker.url.
       actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
       self.faker.actual_url = actual_url
       if self.faker.url != actual_url:
@@ -192,7 +192,7 @@ class CreateSendBase(object):
     return self.make_request(path=path, method="GET", params=params, username=username, password=password)
 
   def _post(self, path, body="", base_uri=None, content_type=None):
-    return self.make_request(path=path, method="POST", body=body, 
+    return self.make_request(path=path, method="POST", body=body,
       base_uri=base_uri, content_type=content_type)
 
   def _put(self, path, body="", params={}):
@@ -253,7 +253,7 @@ class CreateSend(CreateSendBase):
   	"""Gets administrators associated with the account"""
   	response = self._get('/admins.json')
   	return json_to_py(response)
-  
+
   def get_primary_contact(self):
   	"""Retrieves the primary contact for this account"""
   	response = self._get('/primarycontact.json')
@@ -286,7 +286,7 @@ class CreateSend(CreateSendBase):
     the URL to initiate the external Campaign Monitor session.
     """
     body = {
-      "Email": email, 
+      "Email": email,
       "Chrome": chrome,
       "Url": url,
       "IntegratorID": integrator_id,
