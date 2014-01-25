@@ -18,7 +18,7 @@
 ***REMOVED***Now you can write:
 
 ***REMOVED***```python
-***REMOVED***subscriber = Subscriber(auth, 'listid', 'me@test.com').get('listid', 'me@test.com')
+***REMOVED***subscriber = Subscriber(auth, 'listid', 'me@test.com').get()
 ***REMOVED***```
 
 ## v3.3.0 - 13 Jul, 2013
