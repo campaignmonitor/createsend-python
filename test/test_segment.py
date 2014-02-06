@@ -7,22 +7,22 @@ class SegmentTestCase(object):
 
 ***REMOVED***def test_create(self):
 ***REMOVED******REMOVED***list_id = "2983492834987394879837498"
-***REMOVED******REMOVED***rules = [ { "Subject": "EmailAddress", "Clauses": [ "CONTAINS example.com" ] } ]
+***REMOVED******REMOVED***rulegroups =***REMOVED***[ { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS example.com" },***REMOVED***{ "RuleType": "Name", "Clause": "EQUALS subscriber" } ] } ]
 ***REMOVED******REMOVED***s = Segment()
-***REMOVED******REMOVED***s.stub_request("segments/%s.json" % list_id, "create_segment.json")
-***REMOVED******REMOVED***segment_id = s.create(list_id, "new segment title", rules)
+***REMOVED******REMOVED***s.stub_request("segments/%s.json" % list_id, "create_segment.json", None, "{\"RuleGroups\": [{\"Rules\": [{\"Clause\": \"CONTAINS example.com\", \"RuleType\": \"EmailAddress\"}, {\"Clause\": \"EQUALS subscriber\", \"RuleType\": \"Name\"}]}], \"Title\": \"new segment title\"}")
+***REMOVED******REMOVED***segment_id = s.create(list_id, "new segment title", rulegroups)
 ***REMOVED******REMOVED***self.assertEquals(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
 ***REMOVED******REMOVED***self.assertEquals(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
 
 ***REMOVED***def test_update(self):
-***REMOVED******REMOVED***rules = [ { "Subject": "Name", "Clauses": [ "EQUALS subscriber" ] } ]
-***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % self.segment.segment_id, None)
-***REMOVED******REMOVED***self.segment.update("new title for segment", rules)
+***REMOVED******REMOVED***rulegroups = [ { "Rules": [ { "RuleType": "Name", "Clause": "EQUALS subscriber" } ] } ]
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % self.segment.segment_id, None, "{\"Rules\": [{\"Clause\": \"EQUALS subscriber\", \"RuleType\": \"Name\"}], \"Title\": \"new title for segment\"}")
+***REMOVED******REMOVED***self.segment.update("new title for segment", rulegroups)
 
-***REMOVED***def test_add_rule(self):
-***REMOVED******REMOVED***clauses = [ "CONTAINS example.com" ]
-***REMOVED******REMOVED***self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None)
-***REMOVED******REMOVED***self.segment.add_rule("EmailAddress", clauses)
+***REMOVED***def test_add_rulegroup(self):
+***REMOVED******REMOVED***rulegroup = { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS example.com" } ] }
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s/rules.json" % self.segment.segment_id, None, None, "{\"Rules\": [{\"Clause\": \"CONTAINS example.com\", \"RuleType\": \"EmailAddress\"}]}")
+***REMOVED******REMOVED***self.segment.add_rulegroup(rulegroup)
 
 ***REMOVED***def test_subscribers(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
@@ -54,10 +54,11 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" % self.segment.segment_id, "segment_details.json")
 ***REMOVED******REMOVED***res = self.segment.details()
 ***REMOVED******REMOVED***self.assertEquals(res.ActiveSubscribers, 0)
-***REMOVED******REMOVED***self.assertEquals(len(res.Rules), 2)
-***REMOVED******REMOVED***self.assertEquals(res.Rules[0].Subject, "EmailAddress")
-***REMOVED******REMOVED***self.assertEquals(len(res.Rules[0].Clauses), 1)
-***REMOVED******REMOVED***self.assertEquals(res.Rules[0].Clauses[0], "CONTAINS @hello.com")
+***REMOVED******REMOVED***self.assertEquals(len(res.RuleGroups), 2)
+***REMOVED******REMOVED***self.assertEquals(res.RuleGroups[0].Rules[0].RuleType, "EmailAddress")
+***REMOVED******REMOVED***self.assertEquals(res.RuleGroups[0].Rules[0].Clause, "CONTAINS @hello.com")
+***REMOVED******REMOVED***self.assertEquals(res.RuleGroups[1].Rules[0].RuleType, "Name")
+***REMOVED******REMOVED***self.assertEquals(res.RuleGroups[1].Rules[0].Clause, "PROVIDED")
 ***REMOVED******REMOVED***self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
 ***REMOVED******REMOVED***self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
 ***REMOVED******REMOVED***self.assertEquals(res.Title, "My Segment")
