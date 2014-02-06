@@ -13,7 +13,7 @@ except ImportError:
   import simplejson as json
 from utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('3', '4', '0')
+__version_info__ = ('4', '0', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
@@ -203,7 +203,7 @@ class CreateSendBase(object):
 
 class CreateSend(CreateSendBase):
   """Provides high level CreateSend functionality/data you'll probably need."""
-  base_uri = "https://api.createsend.com/api/v3"
+  base_uri = "https://api.createsend.com/api/v3.1"
   oauth_uri = "https://api.createsend.com/oauth"
   oauth_token_uri = "%s/token" % oauth_uri
   default_user_agent = 'createsend-python-%s-%d.%d.%d-%s' % (
@@ -216,13 +216,6 @@ class CreateSend(CreateSendBase):
 
   def __init__(self, auth=None):
     super(CreateSend, self).__init__(auth)
-
-  def apikey(self, site_url, username, password):
-    """Gets your CreateSend API key, given your site url, username and password."""
-    # The only case in which username and password are passed to self.get
-    params = { "SiteUrl": site_url }
-    response = self._get("/apikey.json", params, username, password)
-    return json_to_py(response).ApiKey
 
   def clients(self):
     """Gets your clients."""

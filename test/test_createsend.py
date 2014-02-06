@@ -22,14 +22,6 @@ class CreateSendTestCase(object):
     self.assertEquals(2, len(cl))
     CreateSend.user_agent = CreateSend.default_user_agent
 
-  def test_apikey(self):
-    site_url = "http://iamadesigner.createsend.com"
-    username = "myusername"
-    password = "mypassword"
-    self.cs.stub_request("apikey.json?SiteUrl=%s" % urllib.quote(site_url, ''), "apikey.json")
-    apikey = self.cs.apikey(site_url, username, password)
-    self.assertEquals(apikey, "981298u298ue98u219e8u2e98u2")
-
   def test_clients(self):
     self.cs.stub_request("clients.json", "clients.json")
     cl = self.cs.clients()

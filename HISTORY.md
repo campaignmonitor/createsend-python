@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v4.0.0 - 6 Feb, 2014
+
+* Updated to v3.1 API
+
 ## v3.4.0 - 25 Jan, 2014
 
 * Modified several methods so that unnecessary arguments are no longer needed.
