@@ -28,6 +28,8 @@
 
 - Ensure that all [tests](https://travis-ci.org/campaignmonitor/createsend-python) pass, and that [coverage](https://coveralls.io/r/campaignmonitor/createsend-python) is maintained or improved.
 
+- Add a new [GitHub Release](https://github.com/campaignmonitor/createsend-python/releases) using the newly created tag.
+
 ## Build the package
 
 ```
