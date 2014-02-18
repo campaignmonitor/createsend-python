@@ -3,6 +3,38 @@
 ## v4.0.0 - 6 Feb, 2014
 
 * Updated to v3.1 API
+* Added support for new segments structure
+  * Segments now includes a new `RuleGroups` member, instead of a `Rules` member.
+
+	    So for example, when you _previously_ would have created a segment like so:
+
+	    ```python
+		segment.create(list.ListID, 'Python API Segment', [ { "Subject": "EmailAddress", "Clauses": ["CONTAINS pyapi.com"] } ])
+	    ```
+	
+	    You would _now_ do this:
+	
+	    ```python
+		segment.create(list.ListID, 'Python API Segment', [ { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } ])
+	    ```
+    
+  * The Add Rule call is now Add Rule Group, taking a `rulegroup` argument instead of a `subject` & `clauses` argument.
+
+    ```python
+    Segment.add_rulegroup(self, rulegroup):
+    ```
+
+    So for example, when you _previously_ would have added a rule like so:
+
+    ```python
+	segment.add_rule( "EmailAddress", ["CONTAINS pyapi.com"] )
+    ```
+
+    You would _now_ do this:
+
+    ```python
+	segment.add_rulegroup( { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } )
+    ```
 
 ## v3.4.0 - 25 Jan, 2014
 
