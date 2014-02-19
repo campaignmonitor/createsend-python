@@ -1,23 +1,24 @@
 # createsend-python history
 
-## v4.0.0 - 6 Feb, 2014
+## v4.0.0 - 19 Feb, 2014
 
-* Updated to v3.1 API
-* Added support for new segments structure
+* Removed `CreateSend.apikey` to promote using OAuth rather than basic auth with an API key.
+* Started using the `https://api.createsend.com/api/v3.1/` API endpoint.
+* Added support for new segments structure.
   * Segments now includes a new `RuleGroups` member, instead of a `Rules` member.
-
-	    So for example, when you _previously_ would have created a segment like so:
-
-	    ```python
-		segment.create(list.ListID, 'Python API Segment', [ { "Subject": "EmailAddress", "Clauses": ["CONTAINS pyapi.com"] } ])
-	    ```
-	
-	    You would _now_ do this:
-	
-	    ```python
-		segment.create(list.ListID, 'Python API Segment', [ { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } ])
-	    ```
+  
+    So for example, when you _previously_ would have created a segment like so:
     
+    ```python
+    segment.create(list.ListID, 'Python API Segment', [ { "Subject": "EmailAddress", "Clauses": ["CONTAINS pyapi.com"] } ])
+    ```
+    
+    You would _now_ do this:
+
+    ```python
+    segment.create(list.ListID, 'Python API Segment', [ { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } ])
+    ```
+
   * The Add Rule call is now Add Rule Group, taking a `rulegroup` argument instead of a `subject` & `clauses` argument.
 
     ```python
@@ -27,15 +28,14 @@
     So for example, when you _previously_ would have added a rule like so:
 
     ```python
-	segment.add_rule( "EmailAddress", ["CONTAINS pyapi.com"] )
+    segment.add_rule( "EmailAddress", ["CONTAINS pyapi.com"] )
     ```
 
     You would _now_ do this:
 
     ```python
-	segment.add_rulegroup( { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } )
+    segment.add_rulegroup( { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } )
     ```
-* Removed the apikey method to promote usage of oAuth authentication    
 
 ## v3.4.0 - 25 Jan, 2014
 
