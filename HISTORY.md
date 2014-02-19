@@ -35,6 +35,7 @@
 ***REMOVED******REMOVED***```python
 	segment.add_rulegroup( { "Rules": [ { "RuleType": "EmailAddress", "Clause": "CONTAINS pyapi.com" } ] } )
 ***REMOVED******REMOVED***```
+* Removed the apikey method to promote usage of oAuth authentication***REMOVED******REMOVED***
 
 ## v3.4.0 - 25 Jan, 2014
 
