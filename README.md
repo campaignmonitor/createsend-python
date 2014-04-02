@@ -3,7 +3,7 @@
 
 A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
 
-Requires Pyhthon 2.6 or 2.7.
+Requires Python 2.6 or 2.7.
 
 [travis]: http://travis-ci.org/campaignmonitor/createsend-python
 [coveralls]: https://coveralls.io/r/campaignmonitor/createsend-python
