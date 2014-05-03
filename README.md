@@ -1,12 +1,6 @@
 # createsend
-[![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-python.png)][travis] [![Coverage Status](https://coveralls.io/repos/campaignmonitor/createsend-python/badge.png?branch=master)][coveralls]
 
-A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/).
-
-Requires Python 2.5, 2.6, or 2.7.
-
-[travis]: http://travis-ci.org/campaignmonitor/createsend-python
-[coveralls]: https://coveralls.io/r/campaignmonitor/createsend-python
+A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 2.5, 2.6, or 2.7.
 
 ## Installation
 
@@ -158,7 +152,7 @@ Error Message: Campaign Subject Required
 ## Expected input and output
 The best way of finding out the expected input and output of a particular method in a particular class is to use the unit tests as a reference.
 
-For example, if you wanted to find out how to call the Subscriber.add() method, you would look at the file test/test_subscriber.py
+For example, if you wanted to find out how to call the `Subscriber.add()` method, you would look at the file [test/test_subscriber.py](https://github.com/campaignmonitor/createsend-python/blob/master/test/test_subscriber.py)
 
 ```python
 def test_add_with_custom_fields(self):
@@ -175,3 +169,10 @@ Please check the [guidelines for contributing](https://github.com/campaignmonito
 ## Releasing
 
 Please check the [instructions for releasing](https://github.com/campaignmonitor/createsend-python/blob/master/RELEASE.md) the `createsend` package.
+
+## This stuff should be green
+
+[![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-python.png)][travis] [![Coverage Status](https://coveralls.io/repos/campaignmonitor/createsend-python/badge.png?branch=master)][coveralls]
+
+[travis]: http://travis-ci.org/campaignmonitor/createsend-python
+[coveralls]: https://coveralls.io/r/campaignmonitor/createsend-python
