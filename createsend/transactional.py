@@ -16,7 +16,7 @@ class Transactional(CreateSendBase):
     """Gets the smart email list."""
     if client_id is None:
       response = self._get("/transactional/smartEmail?status=%s" % status)
-    else: 
+    else:
       response = self._get("/transactional/smartEmail?status=%s&clientID=%s" % (status, client_id))
     return json_to_py(response)
 
@@ -27,8 +27,8 @@ class Transactional(CreateSendBase):
 
   def smart_email_send(self, smart_email_id, to, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
      """Sends the smart email."""
-     body = { 
-      "To": to, 
+     body = {
+      "To": to,
       "CC": cc,
       "BCC": bcc,
       "Attachments": attachments,
@@ -37,12 +37,12 @@ class Transactional(CreateSendBase):
      response = self._post("/transactional/smartEmail/%s/send" % smart_email_id, json.dumps(body))
      return json_to_py(response)
 
-  def basic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, basic_group=None, add_recipients_to_list=None):
+  def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
      """Sends the basic email."""
-     body = { 
-      "Subject": subject, 
+     body = {
+      "Subject": subject,
       "From": from_address,
-      "To": to, 
+      "To": to,
       "CC": cc,
       "BCC": bcc,
       "HTML": html,
@@ -51,20 +51,20 @@ class Transactional(CreateSendBase):
       "TrackOpens": track_opens,
       "TrackClicks": track_clicks,
       "InlineCSS": inline_css,
-      "BasicGroup": basic_group,
+      "Group": group,
       "AddRecipientsToList": add_recipients_to_list }
      if client_id is None:
-       response = self._post("/transactional/basicEmail/send", json.dumps(body))
+       response = self._post("/transactional/classicEmail/send", json.dumps(body))
      else:
-       response = self._post("/transactional/basicEmail/send?clientID=%s" % client_id, json.dumps(body))     
+       response = self._post("/transactional/classicEmail/send?clientID=%s" % client_id, json.dumps(body))
      return json_to_py(response)
 
-  def basic_email_list(self, client_id=None):
-    """Gets the list of basic email groups."""
+  def classic_email_groups(self, client_id=None):
+    """Gets the list of classic email groups."""
     if client_id is None:
-      response = self._get("/transactional/basicEmail/groups")
-    else: 
-      response = self._get("/transactional/basicEmail/groups?clientID=%s" % client_id)
+      response = self._get("/transactional/classicEmail/groups")
+    else:
+      response = self._get("/transactional/classicEmail/groups?clientID=%s" % client_id)
     return json_to_py(response)
 
   def statistics(self, params={}):
