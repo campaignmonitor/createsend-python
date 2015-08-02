@@ -16,7 +16,7 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED***"""Gets the smart email list."""
 ***REMOVED******REMOVED***if client_id is None:
 ***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/smartEmail?status=%s" % status)
-***REMOVED******REMOVED***else: 
+***REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/smartEmail?status=%s&clientID=%s" % (status, client_id))
 ***REMOVED******REMOVED***return json_to_py(response)
 
@@ -27,8 +27,8 @@ class Transactional(CreateSendBase):
 
 ***REMOVED***def smart_email_send(self, smart_email_id, to, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
 ***REMOVED******REMOVED*** """Sends the smart email."""
-***REMOVED******REMOVED*** body = { 
-***REMOVED******REMOVED******REMOVED***"To": to, 
+***REMOVED******REMOVED*** body = {
+***REMOVED******REMOVED******REMOVED***"To": to,
 ***REMOVED******REMOVED******REMOVED***"CC": cc,
 ***REMOVED******REMOVED******REMOVED***"BCC": bcc,
 ***REMOVED******REMOVED******REMOVED***"Attachments": attachments,
@@ -37,12 +37,12 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED*** response = self._post("/transactional/smartEmail/%s/send" % smart_email_id, json.dumps(body))
 ***REMOVED******REMOVED*** return json_to_py(response)
 
-***REMOVED***def basic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, basic_group=None, add_recipients_to_list=None):
+***REMOVED***def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
 ***REMOVED******REMOVED*** """Sends the basic email."""
-***REMOVED******REMOVED*** body = { 
-***REMOVED******REMOVED******REMOVED***"Subject": subject, 
+***REMOVED******REMOVED*** body = {
+***REMOVED******REMOVED******REMOVED***"Subject": subject,
 ***REMOVED******REMOVED******REMOVED***"From": from_address,
-***REMOVED******REMOVED******REMOVED***"To": to, 
+***REMOVED******REMOVED******REMOVED***"To": to,
 ***REMOVED******REMOVED******REMOVED***"CC": cc,
 ***REMOVED******REMOVED******REMOVED***"BCC": bcc,
 ***REMOVED******REMOVED******REMOVED***"HTML": html,
@@ -51,20 +51,20 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED***"TrackOpens": track_opens,
 ***REMOVED******REMOVED******REMOVED***"TrackClicks": track_clicks,
 ***REMOVED******REMOVED******REMOVED***"InlineCSS": inline_css,
-***REMOVED******REMOVED******REMOVED***"BasicGroup": basic_group,
+***REMOVED******REMOVED******REMOVED***"Group": group,
 ***REMOVED******REMOVED******REMOVED***"AddRecipientsToList": add_recipients_to_list }
 ***REMOVED******REMOVED*** if client_id is None:
-***REMOVED******REMOVED******REMOVED*** response = self._post("/transactional/basicEmail/send", json.dumps(body))
+***REMOVED******REMOVED******REMOVED*** response = self._post("/transactional/classicEmail/send", json.dumps(body))
 ***REMOVED******REMOVED*** else:
-***REMOVED******REMOVED******REMOVED*** response = self._post("/transactional/basicEmail/send?clientID=%s" % client_id, json.dumps(body))***REMOVED******REMOVED*** 
+***REMOVED******REMOVED******REMOVED*** response = self._post("/transactional/classicEmail/send?clientID=%s" % client_id, json.dumps(body))
 ***REMOVED******REMOVED*** return json_to_py(response)
 
-***REMOVED***def basic_email_list(self, client_id=None):
-***REMOVED******REMOVED***"""Gets the list of basic email groups."""
+***REMOVED***def classic_email_groups(self, client_id=None):
+***REMOVED******REMOVED***"""Gets the list of classic email groups."""
 ***REMOVED******REMOVED***if client_id is None:
-***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/basicEmail/groups")
-***REMOVED******REMOVED***else: 
-***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/basicEmail/groups?clientID=%s" % client_id)
+***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/classicEmail/groups")
+***REMOVED******REMOVED***else:
+***REMOVED******REMOVED******REMOVED***response = self._get("/transactional/classicEmail/groups?clientID=%s" % client_id)
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def statistics(self, params={}):
