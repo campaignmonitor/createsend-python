@@ -38,7 +38,7 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED*** return json_to_py(response)
 
 ***REMOVED***def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
-***REMOVED******REMOVED*** """Sends the basic email."""
+***REMOVED******REMOVED*** """Sends a classic email."""
 ***REMOVED******REMOVED*** body = {
 ***REMOVED******REMOVED******REMOVED***"Subject": subject,
 ***REMOVED******REMOVED******REMOVED***"From": from_address,
