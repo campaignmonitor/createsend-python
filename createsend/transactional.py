@@ -38,7 +38,7 @@ class Transactional(CreateSendBase):
      return json_to_py(response)
 
   def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
-     """Sends the basic email."""
+     """Sends a classic email."""
      body = {
       "Subject": subject,
       "From": from_address,
