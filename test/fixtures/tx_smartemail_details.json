@@ -1,0 +1,23 @@
+{
+***REMOVED******REMOVED***"SmartEmailID": "bb4a6ebb-663d-42a0-bdbe-60512cf30a01",
+***REMOVED******REMOVED***"Name": "Reset Password",
+***REMOVED******REMOVED***"CreatedAt": "2015-03-31T16:06:35+11:00",
+***REMOVED******REMOVED***"Status": "active",
+***REMOVED******REMOVED***"Properties": {
+***REMOVED******REMOVED******REMOVED******REMOVED***"From": "\"Team\" <team@example.com>",
+***REMOVED******REMOVED******REMOVED******REMOVED***"ReplyTo": "joe@example.com",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Subject": "[username], your password has been reset!",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Content": {
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"HTML": "Content managed in Email Builder",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Text": "Content managed in Email Builder",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"EmailVariables": [
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"username",
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"reset_token"
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***],
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"InlineCss": true
+***REMOVED******REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED******REMOVED***"TextPreviewUrl": "https://philoye.devcreatesend.com/t/r-9A7A28EE76054977/T",
+***REMOVED******REMOVED******REMOVED******REMOVED***"HtmlPreviewUrl": "https://philoye.devcreatesend.com/t/r-9A7A28EE76054977/"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***"AddRecipientsToList": true
+}
