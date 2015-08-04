@@ -1,18 +1,22 @@
 # createsend-python history
 
+## v4.1.0 - 4 Aug, 2015
+
+* Added support for Transactional Email
+
 ## v4.0.0 - 19 Feb, 2014
 
 * Removed `CreateSend.apikey` to promote using OAuth rather than basic auth with an API key.
 * Started using the `https://api.createsend.com/api/v3.1/` API endpoint.
 * Added support for new segments structure.
   * Segments now includes a new `RuleGroups` member, instead of a `Rules` member.
-  
+
     So for example, when you _previously_ would have created a segment like so:
-    
+
     ```python
     segment.create(list.ListID, 'Python API Segment', [ { "Subject": "EmailAddress", "Clauses": ["CONTAINS pyapi.com"] } ])
     ```
-    
+
     You would _now_ do this:
 
     ```python
