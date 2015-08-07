@@ -10,6 +10,7 @@ createsend/person.py
 createsend/segment.py
 createsend/subscriber.py
 createsend/template.py
+createsend/transactional.py
 createsend/utils.py
 test/test_administrator.py
 test/test_authentication.py
@@ -21,4 +22,5 @@ test/test_people.py
 test/test_segment.py
 test/test_subscriber.py
 test/test_template.py
+test/test_transactional.py
 test/test_verifiedhttpsconnection.py
