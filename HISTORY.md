@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v4.1.1 - 7 Aug, 2015
+
+* Fixed the MANIFEST file so that it includes new Transactional files (#25).
+
 ## v4.1.0 - 4 Aug, 2015
 
 * Added support for Transactional Email
