@@ -5,3 +5,4 @@ python:
 script:
   - coverage run --source=createsend nosetests.py
   - coverage report
+sudo: false
