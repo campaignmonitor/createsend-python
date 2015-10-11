@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -7,7 +7,7 @@ class PeopleTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "person@example.com"
-***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(email)), "person_details.json")
 ***REMOVED******REMOVED***person = self.person.get(self.client_id, email)
 ***REMOVED******REMOVED***self.assertEquals(person.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(person.Name, "Person One")
@@ -16,7 +16,7 @@ class PeopleTestCase(object):
 
 ***REMOVED***def test_get_without_args(self):
 ***REMOVED******REMOVED***email = "person@example.com"
-***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(email)), "person_details.json")
 ***REMOVED******REMOVED***person = self.person.get()
 ***REMOVED******REMOVED***self.assertEquals(person.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(person.Name, "Person One")
@@ -30,12 +30,12 @@ class PeopleTestCase(object):
 
 ***REMOVED***def test_update(self):
 ***REMOVED******REMOVED***new_email = "new_email_address@example.com"
-***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
+***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(self.person.email_address)), None)
 ***REMOVED******REMOVED***self.person.update(new_email, "Person New Name", 31, 'blah')
 ***REMOVED******REMOVED***self.assertEquals(self.person.email_address, new_email)
 
 ***REMOVED***def test_delete(self):
-***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
+***REMOVED******REMOVED***self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(self.person.email_address)), None)
 ***REMOVED******REMOVED***email_address = self.person.delete()
 
 class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):

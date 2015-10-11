@@ -2,8 +2,8 @@ try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class Template(CreateSendBase):
 ***REMOVED***"""Represents an email template and associated functionality."""

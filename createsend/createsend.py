@@ -1,17 +1,15 @@
 ***REMOVED***
 import platform
-import urllib
-import urllib2
 import base64
 import gzip
 ***REMOVED***
-from StringIO import StringIO
-from urlparse import urlparse
+from six import StringIO
+from six.moves.urllib.parse import parse_qs, urlencode, urlparse
 try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from utils import VerifiedHTTPSConnection, json_to_py, get_faker
+from .utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
 __version_info__ = ('4', '1', '1')
 __version__ = '.'.join(__version_info__)
@@ -54,7 +52,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***]
 ***REMOVED******REMOVED***if state:
 ***REMOVED******REMOVED******REMOVED***params.append(('state', state))
-***REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(params))
+***REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urlencode(params))
 
 ***REMOVED***def exchange_token(self, client_id, client_secret, redirect_uri, code):
 ***REMOVED******REMOVED***"""Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -66,7 +64,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***('redirect_uri', redirect_uri),
 ***REMOVED******REMOVED******REMOVED***('code', code),
 ***REMOVED******REMOVED***]
-***REMOVED******REMOVED***response = self._post('', urllib.urlencode(params),
+***REMOVED******REMOVED***response = self._post('', urlencode(params),
 ***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
 ***REMOVED******REMOVED***access_token, expires_in, refresh_token = None, None, None
 ***REMOVED******REMOVED***r = json_to_py(response)
@@ -102,7 +100,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***('grant_type', 'refresh_token'),
 ***REMOVED******REMOVED******REMOVED***('refresh_token', refresh_token)
 ***REMOVED******REMOVED***]
-***REMOVED******REMOVED***response = self._post('', urllib.urlencode(params),
+***REMOVED******REMOVED***response = self._post('', urlencode(params),
 ***REMOVED******REMOVED******REMOVED***CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
 ***REMOVED******REMOVED***new_access_token, new_expires_in, new_refresh_token = None, None, None
 ***REMOVED******REMOVED***r = json_to_py(response)
@@ -130,10 +128,10 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***the default basic authentication mechanism using the API key be
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED***if username and password:
-***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
+***REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(("%s:%s" % (username, password)).encode()).decode()
 ***REMOVED******REMOVED***elif self.auth_details:
 ***REMOVED******REMOVED******REMOVED***if 'api_key' in self.auth_details and self.auth_details['api_key']:
-***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % self.auth_details['api_key'])
+***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(("%s:x" % self.auth_details['api_key']).encode()).decode()
 ***REMOVED******REMOVED******REMOVED***elif 'access_token' in self.auth_details and self.auth_details['access_token']:
 ***REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
 ***REMOVED******REMOVED***self.headers = headers
@@ -144,12 +142,24 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches self.faker.url.
 ***REMOVED******REMOVED******REMOVED***actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
 ***REMOVED******REMOVED******REMOVED***self.faker.actual_url = actual_url
-***REMOVED******REMOVED******REMOVED***if self.faker.url != actual_url:
+***REMOVED******REMOVED******REMOVED***def same_urls(url_a, url_b):
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a = urlparse(url_a)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***b = urlparse(url_b)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return (a.scheme == b.scheme and
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a.netloc == b.netloc and
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a.path == b.path and
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a.params == b.params and
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***parse_qs(a.query) == parse_qs(b.query) and
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a.fragment == b.fragment
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***)
+***REMOVED******REMOVED******REMOVED***if not same_urls(self.faker.url, actual_url):
 ***REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
 
 ***REMOVED******REMOVED******REMOVED***self.faker.actual_body = body
+***REMOVED******REMOVED******REMOVED***def same_bodies(body_a, body_b):
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return json.loads(body_a) == json.loads(body_b)
 ***REMOVED******REMOVED******REMOVED***if self.faker.body is not None:
-***REMOVED******REMOVED******REMOVED******REMOVED***if self.faker.body != body:
+***REMOVED******REMOVED******REMOVED******REMOVED***if not same_bodies(self.faker.body, body):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
 
 ***REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
@@ -169,7 +179,7 @@ class CreateSendBase(object):
 ***REMOVED***def build_url(self, parsed_base_uri, path, params):
 ***REMOVED******REMOVED***url = parsed_base_uri.path + path
 ***REMOVED******REMOVED***if params and len(params) > 0:
-***REMOVED******REMOVED******REMOVED***url = (url + "?%s" % urllib.urlencode(params))
+***REMOVED******REMOVED******REMOVED***url = (url + "?%s" % urlencode(params))
 ***REMOVED******REMOVED***return url
 
 ***REMOVED***def handle_response(self, status, data):

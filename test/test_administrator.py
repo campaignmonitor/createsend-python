@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -7,7 +7,7 @@ class AdministratorTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "admin@example.com"
-***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" %urllib.quote(email), "admin_details.json")
+***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(email), "admin_details.json")
 ***REMOVED******REMOVED***administrator = self.administrator.get(email)
 ***REMOVED******REMOVED***self.assertEquals(administrator.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(administrator.Name, "Admin One")
@@ -15,7 +15,7 @@ class AdministratorTestCase(object):
 
 ***REMOVED***def test_get_without_args(self):
 ***REMOVED******REMOVED***email = "admin@example.com"
-***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" %urllib.quote(email), "admin_details.json")
+***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(email), "admin_details.json")
 ***REMOVED******REMOVED***administrator = self.administrator.get()
 ***REMOVED******REMOVED***self.assertEquals(administrator.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(administrator.Name, "Admin One")
@@ -28,12 +28,12 @@ class AdministratorTestCase(object):
 
 ***REMOVED***def test_update(self):
 ***REMOVED******REMOVED***new_email = "new_email_address@example.com"
-***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
+***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(self.administrator.email_address), None)
 ***REMOVED******REMOVED***self.administrator.update(new_email, "Admin New Name")
 ***REMOVED******REMOVED***self.assertEquals(self.administrator.email_address, new_email)
 
 ***REMOVED***def test_delete(self):
-***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
+***REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(self.administrator.email_address), None)
 ***REMOVED******REMOVED***email_address = self.administrator.delete()
 
 class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):

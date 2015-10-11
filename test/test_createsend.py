@@ -1,6 +1,5 @@
+from six.moves.urllib.parse import quote, urlparse
 import unittest
-import urllib
-from urlparse import urlparse
 
 ***REMOVED***
 
@@ -66,7 +65,7 @@ class CreateSendTestCase(object):
 ***REMOVED***	
 ***REMOVED***def test_set_primary_contact(self):
 ***REMOVED******REMOVED***email = 'admin@blackhole.com'
-***REMOVED******REMOVED***self.cs.stub_request('primarycontact.json?email=%s' % urllib.quote(email, ''), 'admin_set_primary_contact.json')
+***REMOVED******REMOVED***self.cs.stub_request('primarycontact.json?email=%s' % quote(email, ''), 'admin_set_primary_contact.json')
 ***REMOVED******REMOVED***result = self.cs.set_primary_contact(email)
 ***REMOVED******REMOVED***self.assertEquals(email, result.EmailAddress)
 
