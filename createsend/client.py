@@ -2,8 +2,8 @@ try:
   import json
 except ImportError:
   import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class Client(CreateSendBase):
   """Represents a client and associated functionality."""
@@ -145,20 +145,20 @@ class Client(CreateSendBase):
     return json_to_py(response)
 
   def people(self):
-  	"""gets people associated with the client"""
-  	response = self._get(self.uri_for('people'))
-  	return json_to_py(response)
-  
+    """gets people associated with the client"""
+    response = self._get(self.uri_for('people'))
+    return json_to_py(response)
+
   def get_primary_contact(self):
-  	"""retrieves the primary contact for this client"""
-  	response = self._get(self.uri_for('primarycontact'))
-  	return json_to_py(response)
-  
+    """retrieves the primary contact for this client"""
+    response = self._get(self.uri_for('primarycontact'))
+    return json_to_py(response)
+
   def set_primary_contact(self, email):
-  	"""assigns the primary contact for this client"""
-	params = { "email": email }
-	response = self._put(self.uri_for('primarycontact'), params = params)
-	return json_to_py(response)    
+    """assigns the primary contact for this client"""
+    params = { "email": email }
+    response = self._put(self.uri_for('primarycontact'), params = params)
+    return json_to_py(response)
 
   def delete(self):
     """Deletes this client."""

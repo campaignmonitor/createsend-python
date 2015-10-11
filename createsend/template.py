@@ -2,8 +2,8 @@ try:
   import json
 except ImportError:
   import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class Template(CreateSendBase):
   """Represents an email template and associated functionality."""

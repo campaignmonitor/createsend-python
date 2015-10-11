@@ -2,8 +2,8 @@ try:
   import json
 except ImportError:
   import simplejson as json
-from createsend import CreateSendBase, BadRequest
-from utils import json_to_py
+from .createsend import CreateSendBase, BadRequest
+from .utils import json_to_py
 
 class Person(CreateSendBase):
   """Represents a person and associated functionality."""

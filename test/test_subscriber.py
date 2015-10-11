@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 from createsend import *
 
@@ -7,7 +7,7 @@ class SubscriberTestCase(object):
 
   def test_get(self):
     email = "subscriber@example.com"
-    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(email)), "subscriber_details.json")
     subscriber = self.subscriber.get(self.list_id, email)
     self.assertEquals(subscriber.EmailAddress, email)
     self.assertEquals(subscriber.Name, "Subscriber One")
@@ -20,7 +20,7 @@ class SubscriberTestCase(object):
 
   def test_get_without_arguments(self):
     email = "subscriber@example.com"
-    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(email)), "subscriber_details.json")
     subscriber = self.subscriber.get()
     self.assertEquals(subscriber.EmailAddress, email)
     self.assertEquals(subscriber.Name, "Subscriber One")
@@ -52,14 +52,14 @@ class SubscriberTestCase(object):
 
   def test_update_with_custom_fields(self):
     new_email = "new_email_address@example.com"
-    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
     custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
     self.subscriber.update(new_email, "Subscriber", custom_fields, True)
     self.assertEquals(self.subscriber.email_address, new_email)
 
   def test_update_with_custom_fields_including_clear_option(self):
     new_email = "new_email_address@example.com"
-    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
     custom_fields = [ { "Key": 'website', "Value": 'http://example.com/', "Clear": True } ]
     self.subscriber.update(new_email, "Subscriber", custom_fields, True)
     self.assertEquals(self.subscriber.email_address, new_email)
@@ -139,7 +139,7 @@ class SubscriberTestCase(object):
     self.subscriber.unsubscribe()
 
   def test_history(self):
-    self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), "subscriber_history.json")
+    self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), "subscriber_history.json")
     history = self.subscriber.history()
     self.assertEquals(len(history), 1)
     self.assertEquals(history[0].Name, "Campaign One")
@@ -152,7 +152,7 @@ class SubscriberTestCase(object):
     self.assertEquals(history[0].Actions[0].Detail, "")
 
   def test_delete(self):
-    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+    self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
     self.subscriber.delete()
 
 class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):
