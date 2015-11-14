@@ -2,7 +2,7 @@ import sys
 import os
 from distutils.core import setup
 
-from createsend import __version__
+from createsend.createsend import __version__
 
 setup(name = "createsend",
       version = __version__,
