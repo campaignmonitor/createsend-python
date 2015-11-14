@@ -2,7 +2,7 @@
 ***REMOVED***
 from distutils.core import setup
 
-from createsend import __version__
+from createsend.createsend import __version__
 
 setup(name = "createsend",
 ***REMOVED******REMOVED******REMOVED***version = __version__,
