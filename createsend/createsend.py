@@ -3,7 +3,7 @@ import platform
 import base64
 import gzip
 ***REMOVED***
-from six import StringIO
+from six import BytesIO
 from six.moves.urllib.parse import parse_qs, urlencode, urlparse
 try:
 ***REMOVED***import json
@@ -170,7 +170,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
 ***REMOVED******REMOVED***response = c.getresponse()
 ***REMOVED******REMOVED***if response.getheader('content-encoding', '') == 'gzip':
-***REMOVED******REMOVED******REMOVED***data = gzip.GzipFile(fileobj=StringIO(response.read())).read()
+***REMOVED******REMOVED******REMOVED***data = gzip.GzipFile(fileobj=BytesIO(response.read())).read()
 ***REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED***data = response.read()
 ***REMOVED******REMOVED***c.close()
