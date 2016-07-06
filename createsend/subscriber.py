@@ -2,8 +2,8 @@ try:
   import json
 except ImportError:
   import simplejson as json
-from createsend import CreateSendBase, BadRequest
-from utils import json_to_py
+from .createsend import CreateSendBase, BadRequest
+from .utils import json_to_py
 
 class Subscriber(CreateSendBase):
   """Represents a subscriber and associated functionality."""
@@ -54,7 +54,7 @@ class Subscriber(CreateSendBase):
       "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders }
     try:
       response = self._post("/subscribers/%s/import.json" % list_id, json.dumps(body))
-    except BadRequest, br:
+    except BadRequest as br:
       # Subscriber import will throw BadRequest if some subscribers are not imported
       # successfully. If this occurs, we want to return the ResultData property of
       # the BadRequest exception (which is of the same "form" as the response we'd

@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 from createsend import *
 
@@ -7,7 +7,7 @@ class AdministratorTestCase(object):
 
   def test_get(self):
     email = "admin@example.com"
-    self.administrator.stub_request("admins.json?email=%s" %urllib.quote(email), "admin_details.json")
+    self.administrator.stub_request("admins.json?email=%s" % quote(email), "admin_details.json")
     administrator = self.administrator.get(email)
     self.assertEquals(administrator.EmailAddress, email)
     self.assertEquals(administrator.Name, "Admin One")
@@ -15,7 +15,7 @@ class AdministratorTestCase(object):
 
   def test_get_without_args(self):
     email = "admin@example.com"
-    self.administrator.stub_request("admins.json?email=%s" %urllib.quote(email), "admin_details.json")
+    self.administrator.stub_request("admins.json?email=%s" % quote(email), "admin_details.json")
     administrator = self.administrator.get()
     self.assertEquals(administrator.EmailAddress, email)
     self.assertEquals(administrator.Name, "Admin One")
@@ -28,12 +28,12 @@ class AdministratorTestCase(object):
 
   def test_update(self):
     new_email = "new_email_address@example.com"
-    self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
+    self.administrator.stub_request("admins.json?email=%s" % quote(self.administrator.email_address), None)
     self.administrator.update(new_email, "Admin New Name")
     self.assertEquals(self.administrator.email_address, new_email)
 
   def test_delete(self):
-    self.administrator.stub_request("admins.json?email=%s" % urllib.quote(self.administrator.email_address), None)
+    self.administrator.stub_request("admins.json?email=%s" % quote(self.administrator.email_address), None)
     email_address = self.administrator.delete()
 
 class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):

@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 from createsend import *
 
@@ -26,7 +26,7 @@ class SegmentTestCase(object):
 
   def test_subscribers(self):
     min_date = "2010-01-01"
-    self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, urllib.quote(min_date)), "segment_subscribers.json")
+    self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, quote(min_date)), "segment_subscribers.json")
     res = self.segment.subscribers(min_date)
     self.assertEquals(res.ResultsOrderedBy, "email")
     self.assertEquals(res.OrderDirection, "asc")

@@ -1,6 +1,6 @@
 import os
 import re
-import httplib
+from six.moves.http_client import HTTPSConnection
 import socket
 import ssl
 try:
@@ -69,7 +69,7 @@ def match_hostname(cert, hostname):
     raise CertificateError("no appropriate commonName or "
       "subjectAltName fields were found")
 
-class VerifiedHTTPSConnection(httplib.HTTPSConnection):
+class VerifiedHTTPSConnection(HTTPSConnection):
   """
   A connection that includes SSL certificate verification.
   """
@@ -107,7 +107,7 @@ class VerifiedHTTPSConnection(httplib.HTTPSConnection):
       raise
 
 def json_to_py(j):
-  o = json.loads(j)
+  o = json.loads(j.decode())
   if isinstance(o, dict):
   	return dict_to_object(o)
   else:
@@ -140,7 +140,7 @@ def get_faker(expected_url, filename, status=None, body = None):
 
     def open(self):
       if self.filename:
-        return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+        return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename), mode='rb').read()
       else:
         return ''
 

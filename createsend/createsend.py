@@ -1,17 +1,15 @@
 import sys
 import platform
-import urllib
-import urllib2
 import base64
 import gzip
 import os
-from StringIO import StringIO
-from urlparse import urlparse
+from six import BytesIO
+from six.moves.urllib.parse import parse_qs, urlencode, urlparse
 try:
   import json
 except ImportError:
   import simplejson as json
-from utils import VerifiedHTTPSConnection, json_to_py, get_faker
+from .utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
 __version_info__ = ('4', '1', '1')
 __version__ = '.'.join(__version_info__)
@@ -54,7 +52,7 @@ class CreateSendBase(object):
     ]
     if state:
       params.append(('state', state))
-    return "%s?%s" % (CreateSend.oauth_uri, urllib.urlencode(params))
+    return "%s?%s" % (CreateSend.oauth_uri, urlencode(params))
 
   def exchange_token(self, client_id, client_secret, redirect_uri, code):
     """Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -66,7 +64,7 @@ class CreateSendBase(object):
       ('redirect_uri', redirect_uri),
       ('code', code),
     ]
-    response = self._post('', urllib.urlencode(params),
+    response = self._post('', urlencode(params),
       CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
     access_token, expires_in, refresh_token = None, None, None
     r = json_to_py(response)
@@ -102,7 +100,7 @@ class CreateSendBase(object):
       ('grant_type', 'refresh_token'),
       ('refresh_token', refresh_token)
     ]
-    response = self._post('', urllib.urlencode(params),
+    response = self._post('', urlencode(params),
       CreateSend.oauth_token_uri, "application/x-www-form-urlencoded")
     new_access_token, new_expires_in, new_refresh_token = None, None, None
     r = json_to_py(response)
@@ -130,10 +128,10 @@ class CreateSendBase(object):
     the default basic authentication mechanism using the API key be
     overridden (e.g. when using the apikey route with username and password)."""
     if username and password:
-      headers['Authorization'] = "Basic %s" % base64.b64encode("%s:%s" % (username, password))
+      headers['Authorization'] = "Basic %s" % base64.b64encode(("%s:%s" % (username, password)).encode()).decode()
     elif self.auth_details:
       if 'api_key' in self.auth_details and self.auth_details['api_key']:
-        headers['Authorization'] = "Basic %s" % base64.b64encode("%s:x" % self.auth_details['api_key'])
+        headers['Authorization'] = "Basic %s" % base64.b64encode(("%s:x" % self.auth_details['api_key']).encode()).decode()
       elif 'access_token' in self.auth_details and self.auth_details['access_token']:
         headers['Authorization'] = "Bearer %s" % self.auth_details['access_token']
     self.headers = headers
@@ -144,12 +142,24 @@ class CreateSendBase(object):
       # Check that the actual url which would be requested matches self.faker.url.
       actual_url = "https://%s%s" % (parsed_base_uri.netloc, self.build_url(parsed_base_uri, path, params))
       self.faker.actual_url = actual_url
-      if self.faker.url != actual_url:
+      def same_urls(url_a, url_b):
+          a = urlparse(url_a)
+          b = urlparse(url_b)
+          return (a.scheme == b.scheme and
+                  a.netloc == b.netloc and
+                  a.path == b.path and
+                  a.params == b.params and
+                  parse_qs(a.query) == parse_qs(b.query) and
+                  a.fragment == b.fragment
+                  )
+      if not same_urls(self.faker.url, actual_url):
         raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (self.faker.url, actual_url))
 
       self.faker.actual_body = body
+      def same_bodies(body_a, body_b):
+          return json.loads(body_a) == json.loads(body_b)
       if self.faker.body is not None:
-        if self.faker.body != body:
+        if not same_bodies(self.faker.body, body):
           raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (self.faker.body, body))
 
       data = self.faker.open() if self.faker else ''
@@ -160,7 +170,7 @@ class CreateSendBase(object):
     c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
     if response.getheader('content-encoding', '') == 'gzip':
-      data = gzip.GzipFile(fileobj=StringIO(response.read())).read()
+      data = gzip.GzipFile(fileobj=BytesIO(response.read())).read()
     else:
       data = response.read()
     c.close()
@@ -169,7 +179,7 @@ class CreateSendBase(object):
   def build_url(self, parsed_base_uri, path, params):
     url = parsed_base_uri.path + path
     if params and len(params) > 0:
-      url = (url + "?%s" % urllib.urlencode(params))
+      url = (url + "?%s" % urlencode(params))
     return url
 
   def handle_response(self, status, data):

@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 from createsend import *
 
@@ -182,7 +182,7 @@ class CampaignTestCase(object):
 
   def test_opens(self):
     min_date = "2010-01-01"
-    self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_opens.json")
+    self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_opens.json")
     opens = self.campaign.opens(min_date)
     self.assertEquals(len(opens.Results), 5)
     self.assertEquals(opens.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -205,7 +205,7 @@ class CampaignTestCase(object):
 
   def test_clicks(self):
     min_date = "2010-01-01"
-    self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_clicks.json")
+    self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_clicks.json")
     clicks = self.campaign.clicks(min_date)
     self.assertEquals(len(clicks.Results), 3)
     self.assertEquals(clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -229,7 +229,7 @@ class CampaignTestCase(object):
 
   def test_unsubscribes(self):
     min_date = "2010-01-01"
-    self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_unsubscribes.json")
+    self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_unsubscribes.json")
     unsubscribes = self.campaign.unsubscribes(min_date)
     self.assertEquals(len(unsubscribes.Results), 1)
     self.assertEquals(unsubscribes.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -246,7 +246,7 @@ class CampaignTestCase(object):
 
   def test_spam(self):
     min_date = "2010-01-01"
-    self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+    self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_spam.json")
     spam = self.campaign.spam(min_date)
     self.assertEquals(len(spam.Results), 1)
     self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -262,7 +262,7 @@ class CampaignTestCase(object):
 
   def test_bounces(self):
     min_date = "2010-01-01"
-    self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_bounces.json")
+    self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_bounces.json")
     bounces = self.campaign.bounces(min_date)
     self.assertEquals(len(bounces.Results), 2)
     self.assertEquals(bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")

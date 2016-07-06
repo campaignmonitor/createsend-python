@@ -1,10 +1,10 @@
-import urllib
+from six.moves.urllib.parse import quote
 try:
   import json
 except ImportError:
   import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class List(CreateSendBase):
   """Represents a subscriber list and associated functionality."""
@@ -44,7 +44,7 @@ class List(CreateSendBase):
   def update_custom_field(self, custom_field_key, field_name,
     visible_in_preference_center):
     """Updates a custom field belonging to this list."""
-    custom_field_key = urllib.quote(custom_field_key, '')
+    custom_field_key = quote(custom_field_key, '')
     body = {
       "FieldName": field_name,
       "VisibleInPreferenceCenter": visible_in_preference_center }
@@ -53,14 +53,14 @@ class List(CreateSendBase):
 
   def delete_custom_field(self, custom_field_key):
     """Deletes a custom field associated with this list."""
-    custom_field_key = urllib.quote(custom_field_key, '')
+    custom_field_key = quote(custom_field_key, '')
     response = self._delete("/lists/%s/customfields/%s.json" %
     (self.list_id, custom_field_key))
 
   def update_custom_field_options(self, custom_field_key, new_options,
     keep_existing_options):
     """Updates the options of a multi-optioned custom field on this list."""
-    custom_field_key = urllib.quote(custom_field_key, '')
+    custom_field_key = quote(custom_field_key, '')
     body = {
       "Options": new_options,
       "KeepExistingOptions": keep_existing_options }

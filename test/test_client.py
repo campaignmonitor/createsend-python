@@ -1,3 +1,4 @@
+from six.moves.urllib.parse import quote
 import unittest
 
 from createsend import *
@@ -75,7 +76,7 @@ class ClientTestCase(object):
 
   def test_lists_for_email(self):
     email = "valid@example.com"
-    self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, urllib.quote(email)), "listsforemail.json")
+    self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, quote(email)), "listsforemail.json")
     lists = self.cl.lists_for_email(email)
     self.assertEquals(len(lists), 2)
     self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
@@ -117,7 +118,7 @@ class ClientTestCase(object):
 
   def test_unsuppress(self):
     email = "example@example.com"
-    self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, urllib.quote(email)), None)
+    self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, quote(email)), None)
     res = self.cl.unsuppress(email)
 
   def test_templates(self):
@@ -159,19 +160,19 @@ class ClientTestCase(object):
     self.assertEquals(2, len(people))
     self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
     self.assertEquals('Person One', people[0].Name)
-    self.assertEquals('Active', people[0].Status)  
+    self.assertEquals('Active', people[0].Status)
 
   def test_get_primary_contact(self):
   	self.cl.stub_request("clients/%s/primarycontact.json" % self.cl.client_id, "client_get_primary_contact.json")
   	primary_contact = self.cl.get_primary_contact()
   	self.assertEquals('person@blackhole.com', primary_contact.EmailAddress)
-  	
+
   def test_set_primary_contact(self):
     email = 'person@blackhole.com'
-    self.cl.stub_request("clients/%s/primarycontact.json?email=%s" % (self.cl.client_id, urllib.quote(email, '')), 'client_set_primary_contact.json')
+    self.cl.stub_request("clients/%s/primarycontact.json?email=%s" % (self.cl.client_id, quote(email, '')), 'client_set_primary_contact.json')
     result = self.cl.set_primary_contact(email)
     self.assertEquals(email, result.EmailAddress)
-      
+
   def test_delete(self):
     self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
     self.cl.delete()

@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 from createsend import *
 
@@ -7,7 +7,7 @@ class PeopleTestCase(object):
 
   def test_get(self):
     email = "person@example.com"
-    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(email)), "person_details.json")
     person = self.person.get(self.client_id, email)
     self.assertEquals(person.EmailAddress, email)
     self.assertEquals(person.Name, "Person One")
@@ -16,7 +16,7 @@ class PeopleTestCase(object):
 
   def test_get_without_args(self):
     email = "person@example.com"
-    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(email)), "person_details.json")
+    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(email)), "person_details.json")
     person = self.person.get()
     self.assertEquals(person.EmailAddress, email)
     self.assertEquals(person.Name, "Person One")
@@ -30,12 +30,12 @@ class PeopleTestCase(object):
 
   def test_update(self):
     new_email = "new_email_address@example.com"
-    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
+    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(self.person.email_address)), None)
     self.person.update(new_email, "Person New Name", 31, 'blah')
     self.assertEquals(self.person.email_address, new_email)
 
   def test_delete(self):
-    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, urllib.quote(self.person.email_address)), None)
+    self.person.stub_request("clients/%s/people.json?email=%s" % (self.client_id, quote(self.person.email_address)), None)
     email_address = self.person.delete()
 
 class OAuthPeopleTestCase(unittest.TestCase, PeopleTestCase):
