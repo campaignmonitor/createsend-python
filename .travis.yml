@@ -2,6 +2,9 @@ language: python
 python:
 ***REMOVED***- 2.6
 ***REMOVED***- 2.7
+***REMOVED***- 3.3
+***REMOVED***- 3.4
+***REMOVED***- 3.5
 script:
 ***REMOVED***- coverage run --source=createsend nosetests.py
 ***REMOVED***- coverage report

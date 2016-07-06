@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -26,7 +26,7 @@ class SegmentTestCase(object):
 
 ***REMOVED***def test_subscribers(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, urllib.quote(min_date)), "segment_subscribers.json")
+***REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.segment.segment_id, quote(min_date)), "segment_subscribers.json")
 ***REMOVED******REMOVED***res = self.segment.subscribers(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")

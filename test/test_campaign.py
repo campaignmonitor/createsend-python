@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -182,7 +182,7 @@ class CampaignTestCase(object):
 
 ***REMOVED***def test_opens(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_opens.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_opens.json")
 ***REMOVED******REMOVED***opens = self.campaign.opens(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(opens.Results), 5)
 ***REMOVED******REMOVED***self.assertEquals(opens.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -205,7 +205,7 @@ class CampaignTestCase(object):
 
 ***REMOVED***def test_clicks(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_clicks.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_clicks.json")
 ***REMOVED******REMOVED***clicks = self.campaign.clicks(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(clicks.Results), 3)
 ***REMOVED******REMOVED***self.assertEquals(clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -229,7 +229,7 @@ class CampaignTestCase(object):
 
 ***REMOVED***def test_unsubscribes(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_unsubscribes.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_unsubscribes.json")
 ***REMOVED******REMOVED***unsubscribes = self.campaign.unsubscribes(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(unsubscribes.Results), 1)
 ***REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -246,7 +246,7 @@ class CampaignTestCase(object):
 
 ***REMOVED***def test_spam(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_spam.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_spam.json")
 ***REMOVED******REMOVED***spam = self.campaign.spam(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(spam.Results), 1)
 ***REMOVED******REMOVED***self.assertEquals(spam.Results[0].EmailAddress, "subs+6576576576@example.com")
@@ -262,7 +262,7 @@ class CampaignTestCase(object):
 
 ***REMOVED***def test_bounces(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, urllib.quote(min_date, '')), "campaign_bounces.json")
+***REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" % (self.campaign_id, quote(min_date, '')), "campaign_bounces.json")
 ***REMOVED******REMOVED***bounces = self.campaign.bounces(min_date)
 ***REMOVED******REMOVED***self.assertEquals(len(bounces.Results), 2)
 ***REMOVED******REMOVED***self.assertEquals(bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")

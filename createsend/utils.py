@@ -1,6 +1,6 @@
 ***REMOVED***
 import re
-import httplib
+from six.moves.http_client import HTTPSConnection
 import socket
 import ssl
 try:
@@ -69,7 +69,7 @@ def match_hostname(cert, hostname):
 ***REMOVED******REMOVED***raise CertificateError("no appropriate commonName or "
 ***REMOVED******REMOVED******REMOVED***"subjectAltName fields were found")
 
-class VerifiedHTTPSConnection(httplib.HTTPSConnection):
+class VerifiedHTTPSConnection(HTTPSConnection):
 ***REMOVED***"""
 ***REMOVED***A connection that includes SSL certificate verification.
 ***REMOVED***"""
@@ -107,7 +107,7 @@ class VerifiedHTTPSConnection(httplib.HTTPSConnection):
 ***REMOVED******REMOVED******REMOVED***raise
 
 def json_to_py(j):
-***REMOVED***o = json.loads(j)
+***REMOVED***o = json.loads(j.decode())
 ***REMOVED***if isinstance(o, dict):
 ***REMOVED***	return dict_to_object(o)
 ***REMOVED***else:
@@ -140,7 +140,7 @@ def get_faker(expected_url, filename, status=None, body = None):
 
 ***REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED***if self.filename:
-***REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename)).read()
+***REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename), mode='rb').read()
 ***REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return ''
 

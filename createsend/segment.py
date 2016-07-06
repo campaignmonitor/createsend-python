@@ -2,8 +2,8 @@ try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class Segment(CreateSendBase):
 ***REMOVED***"""Represents a subscriber list segment and associated functionality."""

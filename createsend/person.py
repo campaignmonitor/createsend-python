@@ -2,8 +2,8 @@ try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from createsend import CreateSendBase, BadRequest
-from utils import json_to_py
+from .createsend import CreateSendBase, BadRequest
+from .utils import json_to_py
 
 class Person(CreateSendBase):
 ***REMOVED***"""Represents a person and associated functionality."""

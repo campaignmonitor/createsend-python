@@ -1,6 +1,5 @@
+from six.moves.urllib.parse import urlparse
 import unittest
-import urllib
-from urlparse import urlparse
 
 ***REMOVED***
 
@@ -74,7 +73,7 @@ class AuthenticationTestCase(unittest.TestCase):
 ***REMOVED******REMOVED***self.cs = CreateSend(self.api_key_auth_details)
 ***REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
 ***REMOVED******REMOVED***systemdate = self.cs.systemdate()
-***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode("%s:x" % self.api_key_auth_details['api_key']))
+***REMOVED******REMOVED***self.assertEquals(self.cs.headers['Authorization'], "Basic %s" % base64.b64encode(("%s:x" % self.api_key_auth_details['api_key']).encode()).decode())
 ***REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
 
 ***REMOVED***def test_can_authenticate_by_calling_auth_with_oauth_credentials(self):

@@ -1,3 +1,4 @@
+from six.moves.urllib.parse import quote
 import unittest
 
 ***REMOVED***
@@ -75,7 +76,7 @@ class ClientTestCase(object):
 
 ***REMOVED***def test_lists_for_email(self):
 ***REMOVED******REMOVED***email = "valid@example.com"
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, urllib.quote(email)), "listsforemail.json")
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/listsforemail.json?email=%s" % (self.cl.client_id, quote(email)), "listsforemail.json")
 ***REMOVED******REMOVED***lists = self.cl.lists_for_email(email)
 ***REMOVED******REMOVED***self.assertEquals(len(lists), 2)
 ***REMOVED******REMOVED***self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
@@ -117,7 +118,7 @@ class ClientTestCase(object):
 
 ***REMOVED***def test_unsuppress(self):
 ***REMOVED******REMOVED***email = "example@example.com"
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, urllib.quote(email)), None)
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/unsuppress.json?email=%s" % (self.cl.client_id, quote(email)), None)
 ***REMOVED******REMOVED***res = self.cl.unsuppress(email)
 
 ***REMOVED***def test_templates(self):
@@ -159,19 +160,19 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(2, len(people))
 ***REMOVED******REMOVED***self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
 ***REMOVED******REMOVED***self.assertEquals('Person One', people[0].Name)
-***REMOVED******REMOVED***self.assertEquals('Active', people[0].Status)***REMOVED***
+***REMOVED******REMOVED***self.assertEquals('Active', people[0].Status)
 
 ***REMOVED***def test_get_primary_contact(self):
 ***REMOVED***	self.cl.stub_request("clients/%s/primarycontact.json" % self.cl.client_id, "client_get_primary_contact.json")
 ***REMOVED***	primary_contact = self.cl.get_primary_contact()
 ***REMOVED***	self.assertEquals('person@blackhole.com', primary_contact.EmailAddress)
-***REMOVED***	
+
 ***REMOVED***def test_set_primary_contact(self):
 ***REMOVED******REMOVED***email = 'person@blackhole.com'
-***REMOVED******REMOVED***self.cl.stub_request("clients/%s/primarycontact.json?email=%s" % (self.cl.client_id, urllib.quote(email, '')), 'client_set_primary_contact.json')
+***REMOVED******REMOVED***self.cl.stub_request("clients/%s/primarycontact.json?email=%s" % (self.cl.client_id, quote(email, '')), 'client_set_primary_contact.json')
 ***REMOVED******REMOVED***result = self.cl.set_primary_contact(email)
 ***REMOVED******REMOVED***self.assertEquals(email, result.EmailAddress)
-***REMOVED******REMOVED******REMOVED***
+
 ***REMOVED***def test_delete(self):
 ***REMOVED******REMOVED***self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
 ***REMOVED******REMOVED***self.cl.delete()

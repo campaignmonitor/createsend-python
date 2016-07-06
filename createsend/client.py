@@ -2,8 +2,8 @@ try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class Client(CreateSendBase):
 ***REMOVED***"""Represents a client and associated functionality."""
@@ -145,20 +145,20 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def people(self):
-***REMOVED***	"""gets people associated with the client"""
-***REMOVED***	response = self._get(self.uri_for('people'))
-***REMOVED***	return json_to_py(response)
-***REMOVED***
+***REMOVED******REMOVED***"""gets people associated with the client"""
+***REMOVED******REMOVED***response = self._get(self.uri_for('people'))
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def get_primary_contact(self):
-***REMOVED***	"""retrieves the primary contact for this client"""
-***REMOVED***	response = self._get(self.uri_for('primarycontact'))
-***REMOVED***	return json_to_py(response)
-***REMOVED***
+***REMOVED******REMOVED***"""retrieves the primary contact for this client"""
+***REMOVED******REMOVED***response = self._get(self.uri_for('primarycontact'))
+***REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED***def set_primary_contact(self, email):
-***REMOVED***	"""assigns the primary contact for this client"""
-	params = { "email": email }
-	response = self._put(self.uri_for('primarycontact'), params = params)
-	return json_to_py(response)***REMOVED******REMOVED***
+***REMOVED******REMOVED***"""assigns the primary contact for this client"""
+***REMOVED******REMOVED***params = { "email": email }
+***REMOVED******REMOVED***response = self._put(self.uri_for('primarycontact'), params = params)
+***REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED***def delete(self):
 ***REMOVED******REMOVED***"""Deletes this client."""

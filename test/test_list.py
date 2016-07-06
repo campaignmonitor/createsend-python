@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -53,7 +53,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_update_custom_field(self):
 ***REMOVED******REMOVED***key = "[mycustomfield]"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(key)),
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, quote(key)),
 ***REMOVED******REMOVED***"update_custom_field.json", None,
 ***REMOVED******REMOVED***"{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
 ***REMOVED******REMOVED***personalisation_tag = self.list.update_custom_field(key, "my renamed custom field", True)
@@ -61,13 +61,13 @@ class ListTestCase(object):
 
 ***REMOVED***def test_delete_custom_field(self):
 ***REMOVED******REMOVED***custom_field_key = "[newdatefield]"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, urllib.quote(custom_field_key)), None)
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, quote(custom_field_key)), None)
 ***REMOVED******REMOVED***self.list.delete_custom_field(custom_field_key)
 
 ***REMOVED***def test_update_custom_field_options(self):
 ***REMOVED******REMOVED***custom_field_key = "[newdatefield]"
 ***REMOVED******REMOVED***new_options = [ "one", "two", "three" ]
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s/options.json" % (self.list.list_id, urllib.quote(custom_field_key)), None)
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields/%s/options.json" % (self.list.list_id, quote(custom_field_key)), None)
 ***REMOVED******REMOVED***self.list.update_custom_field_options(custom_field_key, new_options, True)
 
 ***REMOVED***def test_details(self):
@@ -107,7 +107,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_active(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "active_subscribers.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, quote(min_date)), "active_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.active(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
@@ -132,7 +132,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_unconfirmed(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unconfirmed_subscribers.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, quote(min_date)), "unconfirmed_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.unconfirmed(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
@@ -148,7 +148,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_unsubscribed(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "unsubscribed_subscribers.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, quote(min_date)), "unsubscribed_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.unsubscribed(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
@@ -167,7 +167,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_deleted(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "deleted_subscribers.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, quote(min_date)), "deleted_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.deleted(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
@@ -186,7 +186,7 @@ class ListTestCase(object):
 
 ***REMOVED***def test_bounced(self):
 ***REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED***self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, urllib.quote(min_date)), "bounced_subscribers.json")
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" % (self.list.list_id, quote(min_date)), "bounced_subscribers.json")
 ***REMOVED******REMOVED***res = self.list.bounced(min_date)
 ***REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
 ***REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")

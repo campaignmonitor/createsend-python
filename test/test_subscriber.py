@@ -1,5 +1,5 @@
+from six.moves.urllib.parse import quote
 import unittest
-import urllib
 
 ***REMOVED***
 
@@ -7,7 +7,7 @@ class SubscriberTestCase(object):
 
 ***REMOVED***def test_get(self):
 ***REMOVED******REMOVED***email = "subscriber@example.com"
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(email)), "subscriber_details.json")
 ***REMOVED******REMOVED***subscriber = self.subscriber.get(self.list_id, email)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.Name, "Subscriber One")
@@ -20,7 +20,7 @@ class SubscriberTestCase(object):
 
 ***REMOVED***def test_get_without_arguments(self):
 ***REMOVED******REMOVED***email = "subscriber@example.com"
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(email)), "subscriber_details.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(email)), "subscriber_details.json")
 ***REMOVED******REMOVED***subscriber = self.subscriber.get()
 ***REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
 ***REMOVED******REMOVED***self.assertEquals(subscriber.Name, "Subscriber One")
@@ -52,14 +52,14 @@ class SubscriberTestCase(object):
 
 ***REMOVED***def test_update_with_custom_fields(self):
 ***REMOVED******REMOVED***new_email = "new_email_address@example.com"
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
 ***REMOVED******REMOVED***custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
 ***REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
 ***REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
 
 ***REMOVED***def test_update_with_custom_fields_including_clear_option(self):
 ***REMOVED******REMOVED***new_email = "new_email_address@example.com"
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
 ***REMOVED******REMOVED***custom_fields = [ { "Key": 'website', "Value": 'http://example.com/', "Clear": True } ]
 ***REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
 ***REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
@@ -139,7 +139,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED***self.subscriber.unsubscribe()
 
 ***REMOVED***def test_history(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), "subscriber_history.json")
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), "subscriber_history.json")
 ***REMOVED******REMOVED***history = self.subscriber.history()
 ***REMOVED******REMOVED***self.assertEquals(len(history), 1)
 ***REMOVED******REMOVED***self.assertEquals(history[0].Name, "Campaign One")
@@ -152,7 +152,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(history[0].Actions[0].Detail, "")
 
 ***REMOVED***def test_delete(self):
-***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, urllib.quote(self.subscriber.email_address)), None)
+***REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" % (self.list_id, quote(self.subscriber.email_address)), None)
 ***REMOVED******REMOVED***self.subscriber.delete()
 
 class OAuthSubscriberTestCase(unittest.TestCase, SubscriberTestCase):

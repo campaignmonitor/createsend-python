@@ -1,10 +1,10 @@
-import urllib
+from six.moves.urllib.parse import quote
 try:
 ***REMOVED***import json
 except ImportError:
 ***REMOVED***import simplejson as json
-from createsend import CreateSendBase
-from utils import json_to_py
+from .createsend import CreateSendBase
+from .utils import json_to_py
 
 class List(CreateSendBase):
 ***REMOVED***"""Represents a subscriber list and associated functionality."""
@@ -44,7 +44,7 @@ class List(CreateSendBase):
 ***REMOVED***def update_custom_field(self, custom_field_key, field_name,
 ***REMOVED******REMOVED***visible_in_preference_center):
 ***REMOVED******REMOVED***"""Updates a custom field belonging to this list."""
-***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
+***REMOVED******REMOVED***custom_field_key = quote(custom_field_key, '')
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"FieldName": field_name,
 ***REMOVED******REMOVED******REMOVED***"VisibleInPreferenceCenter": visible_in_preference_center }
@@ -53,14 +53,14 @@ class List(CreateSendBase):
 
 ***REMOVED***def delete_custom_field(self, custom_field_key):
 ***REMOVED******REMOVED***"""Deletes a custom field associated with this list."""
-***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
+***REMOVED******REMOVED***custom_field_key = quote(custom_field_key, '')
 ***REMOVED******REMOVED***response = self._delete("/lists/%s/customfields/%s.json" %
 ***REMOVED******REMOVED***(self.list_id, custom_field_key))
 
 ***REMOVED***def update_custom_field_options(self, custom_field_key, new_options,
 ***REMOVED******REMOVED***keep_existing_options):
 ***REMOVED******REMOVED***"""Updates the options of a multi-optioned custom field on this list."""
-***REMOVED******REMOVED***custom_field_key = urllib.quote(custom_field_key, '')
+***REMOVED******REMOVED***custom_field_key = quote(custom_field_key, '')
 ***REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED***"Options": new_options,
 ***REMOVED******REMOVED******REMOVED***"KeepExistingOptions": keep_existing_options }
