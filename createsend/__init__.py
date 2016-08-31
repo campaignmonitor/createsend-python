@@ -8,4 +8,5 @@ from .campaign import Campaign
 from .person import Person
 from .administrator import Administrator
 from .transactional import Transactional
+from .version import __version__
 from . import utils
