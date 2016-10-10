@@ -11,7 +11,7 @@ except ImportError:
   import simplejson as json
 from .utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('4', '1', '1')
+__version_info__ = ('4', '2', '0')
 __version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
