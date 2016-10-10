@@ -1,5 +1,10 @@
 # createsend-python history
 
+## v4.2.0 - 10 Oct, 2016
+
+* Support Python 3: ([#27](https://github.com/campaignmonitor/createsend-python/pull/27))
+* Use CGI SERVER_NAME in UA string: ([#32](https://github.com/campaignmonitor/createsend-python/pull/32))
+
 ## v4.1.1 - 7 Aug, 2015
 
 * Fixed the MANIFEST file so that it includes new Transactional files (#25).
