@@ -214,9 +214,10 @@ class CreateSend(CreateSendBase):
   base_uri = "https://api.createsend.com/api/v3.1"
   oauth_uri = "https://api.createsend.com/oauth"
   oauth_token_uri = "%s/token" % oauth_uri
+  platform = os.getenv('SERVER_SOFTWARE') or platform.platform()
   default_user_agent = 'createsend-python-%s-%d.%d.%d-%s' % (
     __version__, sys.version_info[0], sys.version_info[1],
-    sys.version_info[2], platform.platform())
+    sys.version_info[2], platform)
   # You can use `CreateSend.user_agent = "my user agent"` to override the
   # default user agent string (CreateSend.default_user_agent) used when
   # making API calls.
