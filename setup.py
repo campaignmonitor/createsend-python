@@ -2,7 +2,7 @@ import sys
 import os
 from distutils.core import setup
 
-execfile('createsend/version.py')
+exec(open('createsend/version.py').read())
 
 setup(name = "createsend",
       version = __version__,
