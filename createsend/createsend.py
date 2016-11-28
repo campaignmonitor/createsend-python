@@ -10,6 +10,7 @@ try:
 except ImportError:
   import simplejson as json
 from .utils import VerifiedHTTPSConnection, json_to_py, get_faker
+from .version import __version__
 
 
 class CreateSendError(Exception):
