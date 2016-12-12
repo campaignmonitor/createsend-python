@@ -107,7 +107,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 ***REMOVED******REMOVED******REMOVED***raise
 
 def json_to_py(j):
-***REMOVED***o = json.loads(j.decode())
+***REMOVED***o = json.loads(j.decode('utf-8'))
 ***REMOVED***if isinstance(o, dict):
 ***REMOVED***	return dict_to_object(o)
 ***REMOVED***else:
