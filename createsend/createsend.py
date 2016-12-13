@@ -10,9 +10,8 @@ try:
 except ImportError:
   import simplejson as json
 from .utils import VerifiedHTTPSConnection, json_to_py, get_faker
+from .version import __version__
 
-__version_info__ = ('4', '2', '0')
-__version__ = '.'.join(__version_info__)
 
 class CreateSendError(Exception):
   """Represents a CreateSend API error and contains specific data about the error."""

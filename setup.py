@@ -2,7 +2,8 @@ import sys
 import os
 from distutils.core import setup
 
-from createsend.createsend import __version__
+with open('createsend/version.py') as fp:
+    exec(fp.read())
 
 setup(name = "createsend",
       version = __version__,
@@ -13,4 +14,6 @@ setup(name = "createsend",
       license = "MIT",
       keywords = "createsend campaign monitor email",
       packages = ['createsend'],
-      package_data = {'createsend': ['cacert.pem']})
+      package_data = {'createsend': ['cacert.pem']},
+      install_requires = ['six'],
+      )
