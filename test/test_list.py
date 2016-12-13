@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from six.moves.urllib.parse import quote
 import unittest
 
@@ -88,6 +90,14 @@ class ListTestCase(object):
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].DataType, "Text")
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].FieldOptions, [])
 ***REMOVED******REMOVED***self.assertEquals(cfs[0].VisibleInPreferenceCenter, True)
+***REMOVED***
+***REMOVED***def test_custom_fields_utf8(self):
+***REMOVED******REMOVED***self.list.stub_request("lists/%s/customfields.json" % self.list.list_id, "custom_fields_utf8.json")
+***REMOVED******REMOVED***cfs = self.list.custom_fields()
+***REMOVED******REMOVED***self.assertEquals(len(cfs), 2)
+***REMOVED******REMOVED***self.assertEquals(cfs[0].FieldName, "salary_range")
+***REMOVED******REMOVED***self.assertEquals(cfs[0].FieldOptions, [u"£0-20k", u"£20-30k", u"£30k+"])
+
 
 ***REMOVED***def test_segments(self):
 ***REMOVED******REMOVED***self.list.stub_request("lists/%s/segments.json" % self.list.list_id, "segments.json")
