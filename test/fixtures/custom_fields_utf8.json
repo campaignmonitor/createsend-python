@@ -1,0 +1,16 @@
+[
+***REMOVED***{
+***REMOVED******REMOVED***"FieldName": "salary_range",
+***REMOVED******REMOVED***"Key": "[]",
+***REMOVED******REMOVED***"DataType": "MultiSelectOne",
+***REMOVED******REMOVED***"FieldOptions": ["£0-20k", "£20-30k", "£30k+"],
+***REMOVED******REMOVED***"VisibleInPreferenceCenter": true
+***REMOVED***},
+***REMOVED***{
+***REMOVED******REMOVED***"FieldName": "age",
+***REMOVED******REMOVED***"Key": "[age]",
+***REMOVED******REMOVED***"DataType": "Number",
+***REMOVED******REMOVED***"FieldOptions": [],
+***REMOVED******REMOVED***"VisibleInPreferenceCenter": true
+***REMOVED***}
+]
