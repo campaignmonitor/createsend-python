@@ -1,0 +1,16 @@
+[
+  {
+    "FieldName": "salary_range",
+    "Key": "[]",
+    "DataType": "MultiSelectOne",
+    "FieldOptions": ["£0-20k", "£20-30k", "£30k+"],
+    "VisibleInPreferenceCenter": true
+  },
+  {
+    "FieldName": "age",
+    "Key": "[age]",
+    "DataType": "Number",
+    "FieldOptions": [],
+    "VisibleInPreferenceCenter": true
+  }
+]
