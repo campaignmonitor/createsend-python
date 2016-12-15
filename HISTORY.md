@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v4.2.1 - 15 Dec, 2016
+
+* Support Unicode when decoding json responses from createsend API
+
 ## v4.2.0 - 10 Oct, 2016
 
 * Support Python 3: ([#27](https://github.com/campaignmonitor/createsend-python/pull/27))
