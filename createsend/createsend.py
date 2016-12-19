@@ -37,10 +37,14 @@ class ExpiredOAuthToken(Unauthorized):
 
 class CreateSendBase(object):
   auth_details = None
+  timeout = 5
 
   def __init__(self, auth):
     self.fake_web = False
     self.auth(auth)
+
+  def setTimeout(self, timeout):
+    self.timeout = timeout
 
   def authorize_url(self, client_id, redirect_uri, scope, state=None):
     """Get the authorization URL for your application, given the application's
@@ -166,7 +170,7 @@ class CreateSendBase(object):
       status = self.faker.status if (self.faker and self.faker.status) else 200
       return self.handle_response(status, data)
 
-    c = VerifiedHTTPSConnection(parsed_base_uri.netloc)
+    c = VerifiedHTTPSConnection(parsed_base_uri.netloc, timeout=self.timeout)
     c.request(method, self.build_url(parsed_base_uri, path, params), body, headers)
     response = c.getresponse()
     if response.getheader('content-encoding', '') == 'gzip':
