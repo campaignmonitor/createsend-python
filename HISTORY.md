@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v4.2.1 - 19 Dec, 2016
+
+* Decode JSON API responses using UTF-8: ([#38](https://github.com/campaignmonitor/createsend-python/pull/38))
+
 ## v4.2.0 - 10 Oct, 2016
 
 * Support Python 3: ([#27](https://github.com/campaignmonitor/createsend-python/pull/27))
