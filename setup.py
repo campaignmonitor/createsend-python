@@ -1,8 +1,15 @@
+import re
 import sys
 import os
 from distutils.core import setup
 
-from createsend.createsend import __version__
+# avoid importing createsend which blows up if six isn't installed...
+__version__ = '.'.join(
+    re.search(
+        "__version_info__ = \('(\d+)', '(\d+)', '(\d+)'\)",
+        open(os.path.join('createsend', 'createsend.py')).read()
+    ).groups()
+)
 
 setup(name = "createsend",
       version = __version__,
@@ -12,6 +19,5 @@ setup(name = "createsend",
       url = "http://campaignmonitor.github.io/createsend-python/",
       license = "MIT",
       keywords = "createsend campaign monitor email",
-      install_requires = ['six'],
       packages = ['createsend'],
       package_data = {'createsend': ['cacert.pem']})
