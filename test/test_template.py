@@ -1,6 +1,6 @@
 import unittest
 
-from createsend.createsend import Template
+from createsend.template import Template
 
 
 class TemplateTestCase(object):

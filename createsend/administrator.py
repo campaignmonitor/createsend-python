@@ -2,8 +2,8 @@ try:
     import json
 except ImportError:
     import simplejson as json
-from creatsend.createsend import CreateSendBase
-from createsnd.utils import json_to_py
+from createsend.createsend import CreateSendBase
+from createsend.utils import json_to_py
 
 
 class Administrator(CreateSendBase):

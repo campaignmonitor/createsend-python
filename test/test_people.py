@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import Person
+from createsend.person import Person
 
 
 class PeopleTestCase(object):

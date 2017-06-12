@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import Segment
+from createsend.segment import Segment
 
 
 class SegmentTestCase(object):

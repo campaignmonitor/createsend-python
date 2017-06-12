@@ -1,7 +1,16 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import CreateSend, Client
+from createsend.createsend import (
+    CreateSend,
+    BadRequest,
+    Unauthorized,
+    NotFound,
+    ClientError,
+    ServerError
+)
+from createsend.client import Client
+from createsend.template import Template
 
 
 class CreateSendTestCase(object):

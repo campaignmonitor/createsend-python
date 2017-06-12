@@ -1,7 +1,7 @@
 import unittest
 
 from createsend.createsend import CreateSend, Unauthorized
-from createsend.createsend.utils import match_hostname
+from createsend.utils import match_hostname
 
 
 class VerifiedHTTPSConnectionTestCase(unittest.TestCase):

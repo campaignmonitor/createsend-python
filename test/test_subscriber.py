@@ -1,7 +1,8 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import BadRequest, Subscriber
+from createsend.createsend import BadRequest
+from createsend.subscriber import Subscriber
 
 
 class SubscriberTestCase(object):

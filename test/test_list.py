@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import List
+from createsend.list import List
 
 
 class ListTestCase(object):

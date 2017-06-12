@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import Campaign
+from createsend.campaign import Campaign
 
 
 class CampaignTestCase(object):

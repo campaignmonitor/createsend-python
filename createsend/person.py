@@ -2,7 +2,7 @@ try:
     import json
 except ImportError:
     import simplejson as json
-from creatsend.createsend import CreateSendBase
+from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 
 

@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import Client
+from createsend.client import Client
 
 
 class ClientTestCase(object):
