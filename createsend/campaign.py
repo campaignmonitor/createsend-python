@@ -3,7 +3,7 @@ try:
 except ImportError:
 ***REMOVED******REMOVED***import simplejson as json
 from createsend.createsend import CreateSendBase
-from utils.utils import json_to_py
+from createsend.utils import json_to_py
 
 
 class Campaign(CreateSendBase):

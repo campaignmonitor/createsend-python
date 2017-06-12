@@ -1,6 +1,6 @@
 import unittest
 
-from createsend.createsend import Transactional
+from createsend.transactional import Transactional
 
 
 class TransactionalTestCase(object):

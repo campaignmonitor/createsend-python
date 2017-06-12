@@ -2,7 +2,7 @@ try:
 ***REMOVED******REMOVED***import json
 except ImportError:
 ***REMOVED******REMOVED***import simplejson as json
-from creatsend.createsend import CreateSendBase
+from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 
 

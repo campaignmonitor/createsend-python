@@ -1,7 +1,7 @@
 from six.moves.urllib.parse import quote
 import unittest
 
-from createsend.createsend import Administrator
+from createsend.administrator import Administrator
 
 
 class AdministratorTestCase(object):
