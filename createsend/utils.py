@@ -117,7 +117,7 @@ def dict_to_object(d):
 	"""Recursively converts a dict to an object"""
 	top = type('CreateSendModel', (object,), d)
 	seqs = tuple, list, set, frozenset
-	for i, j in d.items():
+	for i, j in list(d.items()):
 	  if isinstance(j, dict):
 	    setattr(top, i, dict_to_object(j))
 	  elif isinstance(j, seqs):
