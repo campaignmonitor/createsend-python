@@ -1,5 +1,15 @@
 # createsend-python history
 
+## v4.2.2 - 1 Jul, 2017
+
+* Fix bug where the six module was not set as a installation dependency.
+* Remove relative imports.
+* Improve Python 3 support.
+* Use PEP 8 formatting.
+* See [#43](https://github.com/campaignmonitor/createsend-python/pull/43) for details.
+
+Support for Python 3. Leaving my name as author on this branch due to possibility it will never get merged and it being used in our production.
+
 ## v4.2.1 - 19 Dec, 2016
 
 * Decode JSON API responses using UTF-8: ([#38](https://github.com/campaignmonitor/createsend-python/pull/38))
