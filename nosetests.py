@@ -1,4 +1,3 @@
 import nose
 
 nose.run()
-
