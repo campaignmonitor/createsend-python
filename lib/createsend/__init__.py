@@ -31,4 +31,3 @@ from createsend.segment import Segment
 from createsend.subscriber import Subscriber
 from createsend.template import Template
 from createsend.transactional import Transactional
-from createsend.version import __version__

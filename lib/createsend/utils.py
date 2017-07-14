@@ -151,7 +151,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
         def open(self):
             if self.filename:
-                return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename), mode='rb').read()
+                return open("%s/../test/fixtures/%s" % (os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
             else:
                 return ''
 

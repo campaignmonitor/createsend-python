@@ -1,5 +1,7 @@
 """
 To change the version of entire package, just edit this one location.
+Release needed to be moved out of overall createsend folder because
+use of importing ALL METHODS IN THE INIT PY FILE IS NOT A GOOD IDEA
 """
 __title__ = 'createsend-python'
 __author__ = 'Dylan Stein'
