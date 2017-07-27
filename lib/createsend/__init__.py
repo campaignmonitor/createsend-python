@@ -1,4 +1,6 @@
-﻿# -*- coding: utf-8 -*-
+﻿from __future__ import absolute_import
+
+# -*- coding: utf-8 -*-
 __title__ = 'createsend-python'
 __author__ = 'Dylan Stein'
 __license__ = 'MIT'
