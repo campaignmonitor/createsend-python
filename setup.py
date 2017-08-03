@@ -23,7 +23,7 @@ setup(
     version=__version__,
     description="A library which implements the complete functionality of the Campaign Monitor API.",
     author=__author__,
-    author_email='djstein@ncsu.edu',
+    author_email='support@campaignmonitor.com',
     url="http://campaignmonitor.github.io/createsend-python/",
     license="MIT",
     keywords="createsend campaign monitor email",
