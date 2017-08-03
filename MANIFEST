@@ -1,26 +1,27 @@
-setup.py
-createsend/__init__.py
-createsend/administrator.py
-createsend/cacert.pem
-createsend/campaign.py
-createsend/client.py
-createsend/createsend.py
-createsend/list.py
-createsend/person.py
-createsend/segment.py
-createsend/subscriber.py
-createsend/template.py
-createsend/transactional.py
-createsend/utils.py
-test/test_administrator.py
-test/test_authentication.py
-test/test_campaign.py
-test/test_client.py
-test/test_createsend.py
-test/test_list.py
-test/test_people.py
-test/test_segment.py
-test/test_subscriber.py
-test/test_template.py
-test/test_transactional.py
-test/test_verifiedhttpsconnection.py
+import setup.py
+import lib/release.py
+import lib/createsend/__init__.py
+import lib/createsend/administrator.py
+import lib/createsend/cacert.pem
+import lib/createsend/campaign.py
+import lib/createsend/client.py
+import lib/createsend/createsend.py
+import lib/createsend/list.py
+import lib/createsend/person.py
+import lib/createsend/segment.py
+import lib/createsend/subscriber.py
+import lib/createsend/template.py
+import lib/createsend/transactional.py
+import lib/createsend/utils.py
+import lib/test/test_administrator.py
+import lib/test/test_authentication.py
+import lib/test/test_campaign.py
+import lib/test/test_client.py
+import lib/test/test_createsend.py
+import lib/test/test_list.py
+import lib/test/test_people.py
+import lib/test/test_segment.py
+import lib/test/test_subscriber.py
+import lib/test/test_template.py
+import lib/test/test_transactional.py
+import lib/test/test_verifiedhttpsconnection.py
