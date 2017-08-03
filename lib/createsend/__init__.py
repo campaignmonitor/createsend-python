@@ -1,6 +1,8 @@
-﻿# -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
+# -*- coding: utf-8 -*-
 __title__ = 'createsend-python'
-__author__ = 'Dylan Stein'
+__author__ = 'Campaign Monitor'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2017'
 
@@ -31,4 +33,3 @@ from createsend.segment import Segment
 from createsend.subscriber import Subscriber
 from createsend.template import Template
 from createsend.transactional import Transactional
-from createsend.version import __version__

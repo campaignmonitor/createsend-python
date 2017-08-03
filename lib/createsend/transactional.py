@@ -1,4 +1,6 @@
-﻿try:
+from __future__ import absolute_import
+
+try:
 ***REMOVED******REMOVED***import json
 except ImportError:
 ***REMOVED******REMOVED***import simplejson as json

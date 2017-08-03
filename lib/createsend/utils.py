@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 ***REMOVED***
 import re
 from six.moves.http_client import HTTPSConnection
@@ -151,7 +153,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if self.filename:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(__file__), self.filename), mode='rb').read()
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return ''
 
