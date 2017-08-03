@@ -1,5 +1,9 @@
 # createsend-python history
 
+## v4.2.3 - 3 Aug, 2017
+
+* Fix circular dependency issue in import. [#45](https://github.com/campaignmonitor/createsend-python/issues/45), [#47](https://github.com/campaignmonitor/createsend-python/pull/47), [#48](https://github.com/campaignmonitor/createsend-python/pull/48)
+
 ## v4.2.2 - 1 Jul, 2017
 
 * Fix bug where the six module was not set as a installation dependency.
