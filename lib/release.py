@@ -8,5 +8,5 @@ __author__ = 'Campaign Monitor'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2017'
 
-version_info = (4, 2, 4)
+version_info = (4, 2, 6)
 __version__ = ".".join(map(str, version_info))

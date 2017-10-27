@@ -1,0 +1,5 @@
+include *.md
+include *.py
+include *.txt
+include LICENSE
+recursive-include lib *.py
