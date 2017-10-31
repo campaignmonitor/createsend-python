@@ -1,34 +1,54 @@
-from os import path
-from codecs import open
-import sys
-
-try:
-    from setuptools import setup, find_packages
-except ImportError:
-    print("Please install setuptools: pip install setuptools")
-    sys.exit(1)
-
-from lib.release import __version__, __author__
-
-here = path.abspath(path.dirname(__file__))
-
-with open(path.join(here, 'requirements.txt'), encoding='utf-8') as requirements_file:
-    install_requirements = requirements_file.read().splitlines()
-    if not install_requirements:
-        print("Unable to read requirements from the requirements.txt file.")
-        sys.exit(2)
+from setuptools import setup, find_packages
 
 setup(
     name="createsend",
-    version=__version__,
+    version='4.2.6',
     description="A library which implements the complete functionality of the Campaign Monitor API.",
-    author=__author__,
+    author='Campaign Monitor',
     author_email='support@campaignmonitor.com',
     url="http://campaignmonitor.github.io/createsend-python/",
     license="MIT",
     keywords="createsend campaign monitor email",
-    install_requires=install_requirements,
+    install_requires=[
+        'six>=1.10',
+    ],
+    test_suite='test',
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
     package_data={'': ['cacert.pem']},
+
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+
+        # Who and what the project is for
+        "Intended Audience :: Developers",
+        "Topic :: Communications",
+        "Topic :: Communications :: Email",
+        "Topic :: Communications :: Email :: Mailing List Servers",
+        "Topic :: Internet",
+        "Topic :: Software Development :: Libraries",
+
+        # License classifiers
+        "License :: OSI Approved :: MIT License",
+        "License :: DFSG approved",
+        "License :: OSI Approved",
+
+        # Generally, we support the following.
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
+
+        # Specifically, we support the following releases.
+        "Programming Language :: Python :: 2.3",
+        "Programming Language :: Python :: 2.4",
+        "Programming Language :: Python :: 2.5",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.0",
+        "Programming Language :: Python :: 3.1",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+    ]
 )

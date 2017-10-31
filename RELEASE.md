@@ -6,7 +6,7 @@
 
 ## Prepare the release
 
-- Increment `__version_info__` in the `createsend/createsend.py` file, ensuring that you use [Semantic Versioning](http://semver.org/).
+- Increment `version` in the `setup.py` file, ensuring that you use [Semantic Versioning](http://semver.org/).
 - Add an entry to `HISTORY.md` which clearly explains the new release.
 - Commit your changes:
 
