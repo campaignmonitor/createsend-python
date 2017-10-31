@@ -6,7 +6,9 @@ python:
   - 3.4
   - 3.5
   - 3.6
+install:
+  - pip install coverage
 script:
-  - coverage run --source=createsend nosetests.py
+  - coverage run --source=lib setup.py test
   - coverage report
 sudo: false
