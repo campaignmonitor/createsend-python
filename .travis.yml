@@ -6,7 +6,10 @@ python:
 ***REMOVED***- 3.4
 ***REMOVED***- 3.5
 ***REMOVED***- 3.6
+install:
+***REMOVED***- pip install coverage coveralls
 script:
-***REMOVED***- coverage run --source=createsend nosetests.py
+***REMOVED***- coverage run --source=lib setup.py test
 ***REMOVED***- coverage report
+***REMOVED***- coveralls
 sudo: false

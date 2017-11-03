@@ -1,18 +1,20 @@
 
 desc "Run tests"
 task :test do
-***REMOVED***# Depends on nose being installed: pip install nose
-***REMOVED***system "nosetests --with-coverage --cover-erase --cover-package=createsend --cover-html"
+***REMOVED***system "pip install tox"
+***REMOVED***system "tox --skip-missing-interpreters"
 end
 
-desc "Build a source distribution"
+desc "Build source and wheel distributions"
 task :build do
 ***REMOVED***system "python setup.py sdist"
+***REMOVED***system "python setup.py bdist_wheel"
 end
 
 desc "Build and release a source distribution"
 task :release do
 ***REMOVED***system "python setup.py sdist upload"
+***REMOVED***system "python setup.py bdist_wheel upload"
 end
 
 task :default => :test
