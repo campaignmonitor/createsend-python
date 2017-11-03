@@ -7,4 +7,6 @@ venv
 .coverage
 cover
 htmlcov
-
+.tox
+lib/createsend.egg-info
+.rake_tasks~
