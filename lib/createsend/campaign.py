@@ -1,9 +1,7 @@
 from __future__ import absolute_import
 
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
+
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 

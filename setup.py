@@ -39,9 +39,6 @@ setup(
         "Programming Language :: Python :: 3",
 
         # Specifically, we support the following releases.
-        "Programming Language :: Python :: 2.3",
-        "Programming Language :: Python :: 2.4",
-        "Programming Language :: Python :: 2.5",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3.0",
@@ -49,6 +46,5 @@ setup(
         "Programming Language :: Python :: 3.3",
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
     ]
 )

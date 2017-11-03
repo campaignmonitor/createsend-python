@@ -5,10 +5,7 @@ import re
 from six.moves.http_client import HTTPSConnection
 import socket
 import ssl
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
 
 
 class CertificateError(ValueError):

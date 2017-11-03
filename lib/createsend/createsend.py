@@ -5,12 +5,10 @@ import platform
 import base64
 import gzip
 import os
+import json
 from six import BytesIO
 from six.moves.urllib.parse import parse_qs, urlencode, urlparse
-try:
-    import json
-except ImportError:
-    import simplejson as json
+
 from createsend.utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
 __version_info__ = ('4', '2', '4')

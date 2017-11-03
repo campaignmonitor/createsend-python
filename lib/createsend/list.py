@@ -1,10 +1,8 @@
 from __future__ import absolute_import
 
+import json
 from six.moves.urllib.parse import quote
-try:
-    import json
-except ImportError:
-    import simplejson as json
+
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 
