@@ -1,11 +1,11 @@
 # createsend-python history
 
-## v4.2.6 - 3 Nov, 2017
+## v4.2.7 - 3 Nov, 2017
 
 * Removes test dependencies from install package. (#53)
 * Build and upload universal wheels alongside source dists.
 
-## v4.2.5 - 27 Oct, 2017
+## v4.2.6 - 27 Oct, 2017
 
 * Fix bug where necessary files were not included in the source distribution. (#45, #50)
 
