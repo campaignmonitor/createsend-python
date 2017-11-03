@@ -1,9 +1,7 @@
 from __future__ import absolute_import
 
-try:
-***REMOVED******REMOVED***import json
-except ImportError:
-***REMOVED******REMOVED***import simplejson as json
+import json
+
 from createsend.createsend import CreateSendBase, BadRequest
 from createsend.utils import json_to_py
 
