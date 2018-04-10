@@ -66,6 +66,10 @@ class CreateSendBase(object):
     def __init__(self, auth):
         self.fake_web = False
         self.auth(auth)
+        self.timeout = 5
+
+    def set_timeout(self, seconds):
+        self.timeout = seconds
 
     def authorize_url(self, client_id, redirect_uri, scope, state=None):
         """Get the authorization URL for your application, given the application's

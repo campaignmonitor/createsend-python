@@ -55,6 +55,10 @@ class CreateSendTestCase(object):
         systemdate = self.cs.systemdate()
         self.assertEquals(systemdate, "2010-10-15 09:27:00")
 
+    def test_timeout(self):
+        self.cs.set_timeout(100)
+        self.assertEquals(self.cs.timeout, 100)
+
     def test_timezones(self):
         self.cs.stub_request("timezones.json", "timezones.json")
         timezones = self.cs.timezones()
