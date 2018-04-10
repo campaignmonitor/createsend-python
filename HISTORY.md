@@ -1,5 +1,11 @@
 # createsend-python history
 
+## v5.0.0 - 10 Apr, 2018
+
+* Drop offical support for Python 2.6
+* Add a client-side timeout setting to `CreateSend`
+* No breaking changes for Python2.7 or Python3.x
+
 ## v4.2.7 - 3 Nov, 2017
 
 * Removes test dependencies from install package. (#53)
