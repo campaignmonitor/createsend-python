@@ -64,6 +64,10 @@ class CreateSendBase(object):
     def __init__(self, auth):
         self.fake_web = False
         self.auth(auth)
+        self.timeout = 5
+
+    def set_timeout(self, seconds):
+        self.timeout = seconds
 
     def authorize_url(self, client_id, redirect_uri, scope, state=None):
         """Get the authorization URL for your application, given the application's
@@ -201,7 +205,7 @@ class CreateSendBase(object):
                 self.faker and self.faker.status) else 200
             return self.handle_response(status, data)
 
-        c = VerifiedHTTPSConnection(parsed_base_uri.netloc)
+        c = VerifiedHTTPSConnection(parsed_base_uri.netloc, timeout=self.timeout)
         c.request(method, self.build_url(
             parsed_base_uri, path, params), body, headers)
         response = c.getresponse()
