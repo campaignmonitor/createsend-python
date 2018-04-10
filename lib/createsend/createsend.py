@@ -5,6 +5,7 @@ import platform
 import base64
 import gzip
 import os
+import socket
 import json
 from six import BytesIO
 from six.moves.urllib.parse import parse_qs, urlencode, urlparse
@@ -60,6 +61,7 @@ class ExpiredOAuthToken(Unauthorized):
 
 class CreateSendBase(object):
     auth_details = None
+    timeout = socket._GLOBAL_DEFAULT_TIMEOUT  # passed to VerifiedHTTPSConnection
 
     def __init__(self, auth):
         self.fake_web = False
@@ -201,7 +203,7 @@ class CreateSendBase(object):
                 self.faker and self.faker.status) else 200
             return self.handle_response(status, data)
 
-        c = VerifiedHTTPSConnection(parsed_base_uri.netloc)
+        c = VerifiedHTTPSConnection(parsed_base_uri.netloc, timeout=self.timeout)
         c.request(method, self.build_url(
             parsed_base_uri, path, params), body, headers)
         response = c.getresponse()
