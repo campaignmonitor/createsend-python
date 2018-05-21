@@ -14,26 +14,30 @@ class Subscriber(CreateSendBase):
         self.email_address = email_address
         super(Subscriber, self).__init__(auth)
 
-    def get(self, list_id=None, email_address=None):
+    def get(self, list_id=None, email_address=None, include_tracking_preference=False):
         """Gets a subscriber by list ID and email address."""
-        params = {"email": email_address or self.email_address}
+        params = {
+            "email": email_address or self.email_address,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get("/subscribers/%s.json" %
                              (list_id or self.list_id), params=params)
         return json_to_py(response)
 
-    def add(self, list_id, email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
+    def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
         """Adds a subscriber to a subscriber list."""
         body = {
             "EmailAddress": email_address,
             "Name": name,
             "CustomFields": custom_fields,
             "Resubscribe": resubscribe,
+            "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
         response = self._post("/subscribers/%s.json" %
                               list_id, json.dumps(body))
         return json_to_py(response)
 
-    def update(self, new_email_address, name, custom_fields, resubscribe, restart_subscription_based_autoresponders=False):
+    def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
         """Updates any aspect of a subscriber, including email address, name, and
         custom field data if supplied."""
         params = {"email": self.email_address}
@@ -42,6 +46,7 @@ class Subscriber(CreateSendBase):
             "Name": name,
             "CustomFields": custom_fields,
             "Resubscribe": resubscribe,
+            "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
         response = self._put("/subscribers/%s.json" % self.list_id,
                              body=json.dumps(body), params=params)
