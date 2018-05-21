@@ -8,6 +8,10 @@ import ssl
 import json
 
 
+
+VALID_CONSENT_TO_TRACK_VALUES = ("yes", "no", "unchanged")
+
+
 class CertificateError(ValueError):
     """
     Raised when an error occurs when attempting to verify an SSL certificate.
@@ -133,6 +137,15 @@ def dict_to_object(d):
         else:
             setattr(top, i, j)
     return top
+
+
+def validate_consent_to_track(user_input):
+    from createsend import ClientError
+    if hasattr(user_input, 'lower'):
+        user_input = user_input.lower()
+    if user_input in VALID_CONSENT_TO_TRACK_VALUES:
+        return
+    raise ClientError("Consent to track value must be one of %s" % (VALID_CONSENT_TO_TRACK_VALUES,))
 
 
 def get_faker(expected_url, filename, status=None, body=None):
