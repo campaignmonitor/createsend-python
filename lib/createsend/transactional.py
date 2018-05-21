@@ -28,7 +28,7 @@ class Transactional(CreateSendBase):
         response = self._get("/transactional/smartEmail/%s" % smart_email_id)
         return json_to_py(response)
 
-    def smart_email_send(self, smart_email_id, to, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
+    def smart_email_send(self, smart_email_id, to, consent_to_track, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
         """Sends the smart email."""
         body = {
             "To": to,
@@ -36,12 +36,14 @@ class Transactional(CreateSendBase):
             "BCC": bcc,
             "Attachments": attachments,
             "Data": data,
-            "AddRecipientsToList": add_recipients_to_list}
+            "AddRecipientsToList": add_recipients_to_list,
+            "ConsentToTrack": consent_to_track,
+        }
         response = self._post("/transactional/smartEmail/%s/send" %
                               smart_email_id, json.dumps(body))
         return json_to_py(response)
 
-    def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
+    def classic_email_send(self, subject, from_address, to, consent_to_track, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
         """Sends a classic email."""
         body = {
             "Subject": subject,
@@ -56,7 +58,9 @@ class Transactional(CreateSendBase):
             "TrackClicks": track_clicks,
             "InlineCSS": inline_css,
             "Group": group,
-            "AddRecipientsToList": add_recipients_to_list}
+            "AddRecipientsToList": add_recipients_to_list,
+            "ConsentToTrack": consent_to_track,
+        }
         if client_id is None:
             response = self._post(
                 "/transactional/classicEmail/send", json.dumps(body))

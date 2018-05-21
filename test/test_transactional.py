@@ -34,21 +34,21 @@ class TransactionalTestCase(object):
         self.tx.stub_request("transactional/smartEmail/%s/send" %
                              self.smart_email_id, "tx_send_single.json")
         send = self.tx.smart_email_send(
-            self.smart_email_id,  "\"Bob Sacamano\" <bob@example.com>")
+            self.smart_email_id,  "\"Bob Sacamano\" <bob@example.com>", "Yes")
         self.assertEqual(send[0].Status, "Received")
 
     def test_smart_email_send_multiple(self):
         self.tx.stub_request("transactional/smartEmail/%s/send" %
                              self.smart_email_id, "tx_send_multiple.json")
         send = self.tx.smart_email_send(self.smart_email_id,  [
-                                        "\"Bob Sacamano\" <bob@example.com>", "\"Newman\" <newman@example.com>"])
+                                        "\"Bob Sacamano\" <bob@example.com>", "\"Newman\" <newman@example.com>"], "No")
         self.assertEqual(send[1].Recipient, "\"Newman\" <newman@example.com>")
 
     def test_classic_email_send(self):
         self.tx.stub_request(
             "transactional/classicEmail/send", "tx_send_single.json")
         send = self.tx.classic_email_send(
-            "This is the subject", "from@example.com", "\"Bob Sacamano\" <bob@example.com>")
+            "This is the subject", "from@example.com", "\"Bob Sacamano\" <bob@example.com>", "Yes")
         self.assertEqual(send[0].Recipient,
                          "\"Bob Sacamano\" <bob@example.com>")
 
