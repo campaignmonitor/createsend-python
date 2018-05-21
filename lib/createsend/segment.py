@@ -36,14 +36,16 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._post("/segments/%s/rules.json" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.segment_id, json.dumps(body))
 
-***REMOVED******REMOVED***def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_information=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the active subscribers in this segment."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackinginformation": include_tracking_information
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("active"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 

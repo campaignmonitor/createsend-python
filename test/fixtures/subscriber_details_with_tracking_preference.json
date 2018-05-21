@@ -1,0 +1,22 @@
+{
+***REMOVED***"EmailAddress": "subscriber@example.com",
+***REMOVED***"Name": "Subscriber One",
+***REMOVED***"Date": "2010-10-25 10:28:00",
+***REMOVED***"State": "Active",
+***REMOVED***"CustomFields": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"Key": "website",
+***REMOVED******REMOVED******REMOVED***"Value": "http://example.com"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"Key": "age",
+***REMOVED******REMOVED******REMOVED***"Value": "24"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"Key": "subscription date",
+***REMOVED******REMOVED******REMOVED***"Value": "2010-03-09"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ReadsEmailWith": "Gmail",
+***REMOVED***"ConsentToTrack": "Yes"
+}

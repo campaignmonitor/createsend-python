@@ -33,7 +33,7 @@ class SegmentTestCase(object):
 
 ***REMOVED******REMOVED***def test_subscribers(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(self.segment.segment_id, quote(min_date)), "segment_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.segment.subscribers(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -49,6 +49,26 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
+
+***REMOVED******REMOVED***def test_subscribers_with_tracking_information_included(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=True" %
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(self.segment.segment_id, quote(min_date)), "segment_subscribers_with_tracking_preference.json")
+***REMOVED******REMOVED******REMOVED******REMOVED***res = self.segment.subscribers(min_date, include_tracking_information=True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
 
 ***REMOVED******REMOVED***def test_delete(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" %

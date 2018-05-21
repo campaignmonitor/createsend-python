@@ -9,7 +9,7 @@ class SubscriberTestCase(object):
 
 ***REMOVED******REMOVED***def test_get(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***email = "subscriber@example.com"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list_id, quote(email)), "subscriber_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***subscriber = self.subscriber.get(self.list_id, email)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
@@ -24,7 +24,7 @@ class SubscriberTestCase(object):
 
 ***REMOVED******REMOVED***def test_get_without_arguments(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***email = "subscriber@example.com"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list_id, quote(email)), "subscriber_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***subscriber = self.subscriber.get()
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
@@ -37,11 +37,27 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].Value, 'http://example.com')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
 
+***REMOVED******REMOVED***def test_get_with_tracking_preference_included(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***email = "subscriber@example.com"
+***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=True" %
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list_id, quote(email)), "subscriber_details_with_tracking_preference.json")
+***REMOVED******REMOVED******REMOVED******REMOVED***subscriber = self.subscriber.get(self.list_id, email, include_tracking_preference=True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.EmailAddress, email)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.Name, "Subscriber One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.State, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(subscriber.CustomFields), 3)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[0].Key, 'website')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.CustomFields[
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].Value, 'http://example.com')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(subscriber.ConsentToTrack, "Yes")
+
 ***REMOVED******REMOVED***def test_add_without_custom_fields(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***email_address = self.subscriber.add(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", [], True)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", [], True, "Yes")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED******REMOVED***def test_add_with_custom_fields(self):
@@ -49,7 +65,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
 ***REMOVED******REMOVED******REMOVED******REMOVED***email_address = self.subscriber.add(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "No")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED******REMOVED***def test_add_with_custom_fields_including_multioption(self):
@@ -59,7 +75,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** {"Key": 'multioptionselectmany', "Value": 'firstoption'},
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** {"Key": 'multioptionselectmany', "Value": 'secondoption'}]
 ***REMOVED******REMOVED******REMOVED******REMOVED***email_address = self.subscriber.add(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "Yes")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED******REMOVED***def test_update_with_custom_fields(self):
@@ -67,7 +83,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request("subscribers/%s.json?email=%s" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list_id, quote(self.subscriber.email_address)), None)
 ***REMOVED******REMOVED******REMOVED******REMOVED***custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
-***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True, "Yes")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
 
 ***REMOVED******REMOVED***def test_update_with_custom_fields_including_clear_option(self):
@@ -76,7 +92,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list_id, quote(self.subscriber.email_address)), None)
 ***REMOVED******REMOVED******REMOVED******REMOVED***custom_fields = [
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{"Key": 'website', "Value": 'http://example.com/', "Clear": True}]
-***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.update(new_email, "Subscriber", custom_fields, True, "No")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(self.subscriber.email_address, new_email)
 
 ***REMOVED******REMOVED***def test_import_subscribers(self):

@@ -89,58 +89,68 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("stats"))
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def active(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def active(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the active subscribers for this list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackingpreference": include_tracking_preference,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("active"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def unconfirmed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def unconfirmed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the unconfirmed subscribers for this list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackingpreference": include_tracking_preference,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("unconfirmed"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def bounced(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def bounced(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the bounced subscribers for this list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackingpreference": include_tracking_preference,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("bounced"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def unsubscribed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def unsubscribed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the unsubscribed subscribers for this list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackingpreference": include_tracking_preference,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("unsubscribed"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def deleted(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+***REMOVED******REMOVED***def deleted(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the deleted subscribers for this list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"date": date,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderfield": order_field,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"includetrackingpreference": include_tracking_preference,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("deleted"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 

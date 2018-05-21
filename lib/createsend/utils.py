@@ -158,6 +158,6 @@ def get_faker(expected_url, filename, status=None, body=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if url.startswith("http"):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return url
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***else:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return "https://api.createsend.com/api/v3.1/%s" % url
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return "https://api.createsend.com/api/v3.2/%s" % url
 
 ***REMOVED******REMOVED***return Faker(expected_url, filename, status, body)

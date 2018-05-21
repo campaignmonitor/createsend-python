@@ -132,7 +132,7 @@ class ListTestCase(object):
 
 ***REMOVED******REMOVED***def test_active(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "active_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.active(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -160,9 +160,40 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
+***REMOVED******REMOVED***def test_active_with_tracking_preference_included(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=True" %
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "active_subscribers_with_tracking_preference.json")
+***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.active(min_date, include_tracking_preference=True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results), 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+7t8787Y@example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[0].Key, "website")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].Value, "http://example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***1].Key, "multi select field")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***2].Key, "multi select field")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
+
 ***REMOVED******REMOVED***def test_unconfirmed(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "unconfirmed_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.unconfirmed(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -180,7 +211,7 @@ class ListTestCase(object):
 
 ***REMOVED******REMOVED***def test_unsubscribed(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "unsubscribed_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.unsubscribed(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -201,7 +232,7 @@ class ListTestCase(object):
 
 ***REMOVED******REMOVED***def test_deleted(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "deleted_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.deleted(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
@@ -222,7 +253,7 @@ class ListTestCase(object):
 
 ***REMOVED******REMOVED***def test_bounced(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.list.list_id, quote(min_date)), "bounced_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.list.bounced(min_date)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
