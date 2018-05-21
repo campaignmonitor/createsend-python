@@ -132,7 +132,7 @@ class ListTestCase(object):
 
     def test_active(self):
         min_date = "2010-01-01"
-        self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+        self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
                                (self.list.list_id, quote(min_date)), "active_subscribers.json")
         res = self.list.active(min_date)
         self.assertEquals(res.ResultsOrderedBy, "email")
@@ -160,9 +160,40 @@ class ListTestCase(object):
         self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
         self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
 
+    def test_active_with_tracking_preference_included(self):
+        min_date = "2010-01-01"
+        self.list.stub_request("lists/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=True" %
+                               (self.list.list_id, quote(min_date)), "active_subscribers_with_tracking_preference.json")
+        res = self.list.active(min_date, include_tracking_preference=True)
+        self.assertEquals(res.ResultsOrderedBy, "email")
+        self.assertEquals(res.OrderDirection, "asc")
+        self.assertEquals(res.PageNumber, 1)
+        self.assertEquals(res.PageSize, 1000)
+        self.assertEquals(res.RecordsOnThisPage, 5)
+        self.assertEquals(res.TotalNumberOfRecords, 5)
+        self.assertEquals(res.NumberOfPages, 1)
+        self.assertEquals(len(res.Results), 5)
+        self.assertEquals(res.Results[0].EmailAddress,
+                          "subs+7t8787Y@example.com")
+        self.assertEquals(res.Results[0].Name, "Person One")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
+        self.assertEquals(res.Results[0].State, "Active")
+        self.assertEquals(len(res.Results[0].CustomFields), 5)
+        self.assertEquals(res.Results[0].CustomFields[0].Key, "website")
+        self.assertEquals(res.Results[0].CustomFields[
+                          0].Value, "http://example.com")
+        self.assertEquals(res.Results[0].CustomFields[
+                          1].Key, "multi select field")
+        self.assertEquals(res.Results[0].CustomFields[1].Value, "option one")
+        self.assertEquals(res.Results[0].CustomFields[
+                          2].Key, "multi select field")
+        self.assertEquals(res.Results[0].CustomFields[2].Value, "option two")
+        self.assertEquals(res.Results[0].ReadsEmailWith, "Gmail")
+        self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
+
     def test_unconfirmed(self):
         min_date = "2010-01-01"
-        self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+        self.list.stub_request("lists/%s/unconfirmed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
                                (self.list.list_id, quote(min_date)), "unconfirmed_subscribers.json")
         res = self.list.unconfirmed(min_date)
         self.assertEquals(res.ResultsOrderedBy, "email")
@@ -180,7 +211,7 @@ class ListTestCase(object):
 
     def test_unsubscribed(self):
         min_date = "2010-01-01"
-        self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+        self.list.stub_request("lists/%s/unsubscribed.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
                                (self.list.list_id, quote(min_date)), "unsubscribed_subscribers.json")
         res = self.list.unsubscribed(min_date)
         self.assertEquals(res.ResultsOrderedBy, "email")
@@ -201,7 +232,7 @@ class ListTestCase(object):
 
     def test_deleted(self):
         min_date = "2010-01-01"
-        self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+        self.list.stub_request("lists/%s/deleted.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
                                (self.list.list_id, quote(min_date)), "deleted_subscribers.json")
         res = self.list.deleted(min_date)
         self.assertEquals(res.ResultsOrderedBy, "email")
@@ -222,7 +253,7 @@ class ListTestCase(object):
 
     def test_bounced(self):
         min_date = "2010-01-01"
-        self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
+        self.list.stub_request("lists/%s/bounced.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackingpreference=False" %
                                (self.list.list_id, quote(min_date)), "bounced_subscribers.json")
         res = self.list.bounced(min_date)
         self.assertEquals(res.ResultsOrderedBy, "email")

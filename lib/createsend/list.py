@@ -89,58 +89,68 @@ class List(CreateSendBase):
         response = self._get(self.uri_for("stats"))
         return json_to_py(response)
 
-    def active(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def active(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
         """Gets the active subscribers for this list."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get(self.uri_for("active"), params=params)
         return json_to_py(response)
 
-    def unconfirmed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def unconfirmed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
         """Gets the unconfirmed subscribers for this list."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get(self.uri_for("unconfirmed"), params=params)
         return json_to_py(response)
 
-    def bounced(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def bounced(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
         """Gets the bounced subscribers for this list."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get(self.uri_for("bounced"), params=params)
         return json_to_py(response)
 
-    def unsubscribed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def unsubscribed(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
         """Gets the unsubscribed subscribers for this list."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get(self.uri_for("unsubscribed"), params=params)
         return json_to_py(response)
 
-    def deleted(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def deleted(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_preference=False):
         """Gets the deleted subscribers for this list."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackingpreference": include_tracking_preference,
+        }
         response = self._get(self.uri_for("deleted"), params=params)
         return json_to_py(response)
 

@@ -36,14 +36,16 @@ class Segment(CreateSendBase):
         response = self._post("/segments/%s/rules.json" %
                               self.segment_id, json.dumps(body))
 
-    def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc"):
+    def subscribers(self, date="", page=1, page_size=1000, order_field="email", order_direction="asc", include_tracking_information=False):
         """Gets the active subscribers in this segment."""
         params = {
             "date": date,
             "page": page,
             "pagesize": page_size,
             "orderfield": order_field,
-            "orderdirection": order_direction}
+            "orderdirection": order_direction,
+            "includetrackinginformation": include_tracking_information
+        }
         response = self._get(self.uri_for("active"), params=params)
         return json_to_py(response)
 

@@ -9,7 +9,7 @@ class SubscriberTestCase(object):
 
     def test_get(self):
         email = "subscriber@example.com"
-        self.subscriber.stub_request("subscribers/%s.json?email=%s" %
+        self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
                                      (self.list_id, quote(email)), "subscriber_details.json")
         subscriber = self.subscriber.get(self.list_id, email)
         self.assertEquals(subscriber.EmailAddress, email)
@@ -24,7 +24,7 @@ class SubscriberTestCase(object):
 
     def test_get_without_arguments(self):
         email = "subscriber@example.com"
-        self.subscriber.stub_request("subscribers/%s.json?email=%s" %
+        self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
                                      (self.list_id, quote(email)), "subscriber_details.json")
         subscriber = self.subscriber.get()
         self.assertEquals(subscriber.EmailAddress, email)
@@ -37,11 +37,27 @@ class SubscriberTestCase(object):
                           0].Value, 'http://example.com')
         self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
 
+    def test_get_with_tracking_preference_included(self):
+        email = "subscriber@example.com"
+        self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=True" %
+                                     (self.list_id, quote(email)), "subscriber_details_with_tracking_preference.json")
+        subscriber = self.subscriber.get(self.list_id, email, include_tracking_preference=True)
+        self.assertEquals(subscriber.EmailAddress, email)
+        self.assertEquals(subscriber.Name, "Subscriber One")
+        self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
+        self.assertEquals(subscriber.State, "Active")
+        self.assertEquals(len(subscriber.CustomFields), 3)
+        self.assertEquals(subscriber.CustomFields[0].Key, 'website')
+        self.assertEquals(subscriber.CustomFields[
+                          0].Value, 'http://example.com')
+        self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+        self.assertEquals(subscriber.ConsentToTrack, "Yes")
+
     def test_add_without_custom_fields(self):
         self.subscriber.stub_request(
             "subscribers/%s.json" % self.list_id, "add_subscriber.json")
         email_address = self.subscriber.add(
-            self.list_id, "subscriber@example.com", "Subscriber", [], True)
+            self.list_id, "subscriber@example.com", "Subscriber", [], True, "Yes")
         self.assertEquals(email_address, "subscriber@example.com")
 
     def test_add_with_custom_fields(self):
@@ -49,7 +65,7 @@ class SubscriberTestCase(object):
             "subscribers/%s.json" % self.list_id, "add_subscriber.json")
         custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
         email_address = self.subscriber.add(
-            self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+            self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "No")
         self.assertEquals(email_address, "subscriber@example.com")
 
     def test_add_with_custom_fields_including_multioption(self):
@@ -59,7 +75,7 @@ class SubscriberTestCase(object):
                          {"Key": 'multioptionselectmany', "Value": 'firstoption'},
                          {"Key": 'multioptionselectmany', "Value": 'secondoption'}]
         email_address = self.subscriber.add(
-            self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
+            self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "Yes")
         self.assertEquals(email_address, "subscriber@example.com")
 
     def test_update_with_custom_fields(self):
@@ -67,7 +83,7 @@ class SubscriberTestCase(object):
         self.subscriber.stub_request("subscribers/%s.json?email=%s" %
                                      (self.list_id, quote(self.subscriber.email_address)), None)
         custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
-        self.subscriber.update(new_email, "Subscriber", custom_fields, True)
+        self.subscriber.update(new_email, "Subscriber", custom_fields, True, "Yes")
         self.assertEquals(self.subscriber.email_address, new_email)
 
     def test_update_with_custom_fields_including_clear_option(self):
@@ -76,7 +92,7 @@ class SubscriberTestCase(object):
                                      (self.list_id, quote(self.subscriber.email_address)), None)
         custom_fields = [
             {"Key": 'website', "Value": 'http://example.com/', "Clear": True}]
-        self.subscriber.update(new_email, "Subscriber", custom_fields, True)
+        self.subscriber.update(new_email, "Subscriber", custom_fields, True, "No")
         self.assertEquals(self.subscriber.email_address, new_email)
 
     def test_import_subscribers(self):
