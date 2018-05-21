@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import json
 
 from createsend.createsend import CreateSendBase
-from createsend.utils import json_to_py
+from createsend.utils import json_to_py, validate_consent_to_track
 
 
 class Transactional(CreateSendBase):
@@ -30,6 +30,7 @@ class Transactional(CreateSendBase):
 
     def smart_email_send(self, smart_email_id, to, consent_to_track, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
         """Sends the smart email."""
+        validate_consent_to_track(consent_to_track)
         body = {
             "To": to,
             "CC": cc,
@@ -45,6 +46,7 @@ class Transactional(CreateSendBase):
 
     def classic_email_send(self, subject, from_address, to, consent_to_track, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
         """Sends a classic email."""
+        validate_consent_to_track(consent_to_track)
         body = {
             "Subject": subject,
             "From": from_address,

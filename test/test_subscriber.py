@@ -57,7 +57,7 @@ class SubscriberTestCase(object):
         self.subscriber.stub_request(
             "subscribers/%s.json" % self.list_id, "add_subscriber.json")
         email_address = self.subscriber.add(
-            self.list_id, "subscriber@example.com", "Subscriber", [], True, "Yes")
+            self.list_id, "subscriber@example.com", "Subscriber", [], True, "Unchanged")
         self.assertEquals(email_address, "subscriber@example.com")
 
     def test_add_with_custom_fields(self):
