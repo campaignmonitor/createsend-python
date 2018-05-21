@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import json
 
 from createsend.createsend import CreateSendBase, BadRequest
-from createsend.utils import json_to_py
+from createsend.utils import json_to_py, validate_consent_to_track
 
 
 class Subscriber(CreateSendBase):
@@ -26,6 +26,7 @@ class Subscriber(CreateSendBase):
 
 ***REMOVED******REMOVED***def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Adds a subscriber to a subscriber list."""
+***REMOVED******REMOVED******REMOVED******REMOVED***validate_consent_to_track(consent_to_track)
 ***REMOVED******REMOVED******REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"EmailAddress": email_address,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Name": name,
@@ -40,6 +41,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED***def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Updates any aspect of a subscriber, including email address, name, and
 ***REMOVED******REMOVED******REMOVED******REMOVED***custom field data if supplied."""
+***REMOVED******REMOVED******REMOVED******REMOVED***validate_consent_to_track(consent_to_track)
 ***REMOVED******REMOVED******REMOVED******REMOVED***params = {"email": self.email_address}
 ***REMOVED******REMOVED******REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"EmailAddress": new_email_address,

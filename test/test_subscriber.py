@@ -57,7 +57,7 @@ class SubscriberTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.subscriber.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subscribers/%s.json" % self.list_id, "add_subscriber.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***email_address = self.subscriber.add(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", [], True, "Yes")
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.list_id, "subscriber@example.com", "Subscriber", [], True, "Unchanged")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(email_address, "subscriber@example.com")
 
 ***REMOVED******REMOVED***def test_add_with_custom_fields(self):
