@@ -28,7 +28,7 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get("/transactional/smartEmail/%s" % smart_email_id)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def smart_email_send(self, smart_email_id, to, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
+***REMOVED******REMOVED***def smart_email_send(self, smart_email_id, to, consent_to_track, cc=None, bcc=None, attachments=None, data=None, add_recipients_to_list=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Sends the smart email."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"To": to,
@@ -36,12 +36,14 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"BCC": bcc,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Attachments": attachments,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Data": data,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"AddRecipientsToList": add_recipients_to_list}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"AddRecipientsToList": add_recipients_to_list,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"ConsentToTrack": consent_to_track,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._post("/transactional/smartEmail/%s/send" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***smart_email_id, json.dumps(body))
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def classic_email_send(self, subject, from_address, to, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
+***REMOVED******REMOVED***def classic_email_send(self, subject, from_address, to, consent_to_track, client_id=None, cc=None, bcc=None, html=None, text=None, attachments=None, track_opens=True, track_clicks=True, inline_css=True, group=None, add_recipients_to_list=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Sends a classic email."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***body = {
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Subject": subject,
@@ -56,7 +58,9 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"TrackClicks": track_clicks,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"InlineCSS": inline_css,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Group": group,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"AddRecipientsToList": add_recipients_to_list}
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"AddRecipientsToList": add_recipients_to_list,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"ConsentToTrack": consent_to_track,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
 ***REMOVED******REMOVED******REMOVED******REMOVED***if client_id is None:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***response = self._post(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/classicEmail/send", json.dumps(body))

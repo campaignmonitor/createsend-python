@@ -34,21 +34,21 @@ class TransactionalTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request("transactional/smartEmail/%s/send" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.smart_email_id, "tx_send_single.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***send = self.tx.smart_email_send(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.smart_email_id,***REMOVED***"\"Bob Sacamano\" <bob@example.com>")
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.smart_email_id,***REMOVED***"\"Bob Sacamano\" <bob@example.com>", "Yes")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(send[0].Status, "Received")
 
 ***REMOVED******REMOVED***def test_smart_email_send_multiple(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request("transactional/smartEmail/%s/send" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.smart_email_id, "tx_send_multiple.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***send = self.tx.smart_email_send(self.smart_email_id,***REMOVED***[
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"\"Bob Sacamano\" <bob@example.com>", "\"Newman\" <newman@example.com>"])
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"\"Bob Sacamano\" <bob@example.com>", "\"Newman\" <newman@example.com>"], "No")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(send[1].Recipient, "\"Newman\" <newman@example.com>")
 
 ***REMOVED******REMOVED***def test_classic_email_send(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"transactional/classicEmail/send", "tx_send_single.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***send = self.tx.classic_email_send(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"This is the subject", "from@example.com", "\"Bob Sacamano\" <bob@example.com>")
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"This is the subject", "from@example.com", "\"Bob Sacamano\" <bob@example.com>", "Yes")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(send[0].Recipient,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "\"Bob Sacamano\" <bob@example.com>")
 
