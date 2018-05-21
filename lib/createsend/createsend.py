@@ -12,7 +12,7 @@ from six.moves.urllib.parse import parse_qs, urlencode, urlparse
 
 from createsend.utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
-__version_info__ = ('4', '2', '4')
+__version_info__ = ('6', '0', '0')
 __version__ = '.'.join(__version_info__)
 
 
