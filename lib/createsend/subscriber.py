@@ -34,7 +34,6 @@ class Subscriber(CreateSendBase):
             "Resubscribe": resubscribe,
             "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
-        print(body)
         response = self._post("/subscribers/%s.json" %
                               list_id, json.dumps(body))
         return json_to_py(response)
