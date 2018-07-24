@@ -9,7 +9,11 @@ import json
 
 
 
-VALID_CONSENT_TO_TRACK_VALUES = ("yes", "no", "unchanged")
+VALID_CONSENT_TO_TRACK_VALUES = {
+    True: "yes",
+    False: "no",
+    None: "unchanged",
+}
 
 
 class CertificateError(ValueError):
@@ -140,18 +144,25 @@ def dict_to_object(d):
 
 
 def validate_consent_to_track(user_input):
+    """
+    Accept both a nullable bool, and the strings the Campaign Monitor API expects
+    Returns a 'cleaned' value that the API will accept
+    """
     from createsend import ClientError
+    if user_input in VALID_CONSENT_TO_TRACK_VALUES.keys():
+        return VALID_CONSENT_TO_TRACK_VALUES[user_input]
     if hasattr(user_input, 'lower'):
         user_input = user_input.lower()
-    if user_input in VALID_CONSENT_TO_TRACK_VALUES:
-        return
-    raise ClientError("Consent to track value must be one of %s" % (VALID_CONSENT_TO_TRACK_VALUES,))
+    if user_input in VALID_CONSENT_TO_TRACK_VALUES.values():
+        return user_input
+    flattened_values = list(VALID_CONSENT_TO_TRACK_VALUES.keys()) + list(VALID_CONSENT_TO_TRACK_VALUES.values())
+    raise ClientError("Consent to track value must be one of %s" % flattened_values)
 
 
 def get_faker(expected_url, filename, status=None, body=None):
 
     class Faker(object):
-        """Represents a fake web request, including the expected URL, an open 
+        """Represents a fake web request, including the expected URL, an open
         function which reads the expected response from a fixture file, and the
         expected response status code."""
 
