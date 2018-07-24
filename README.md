@@ -8,6 +8,10 @@ A Python library which implements the complete functionality of the [Campaign Mo
 pip install createsend
 ```
 
+## Upgrading to 6.0.0 from an earlier version
+
+Please note there is a breaking change in the API; the ``consent_to_track`` parameter is now mandatory for sending smart and classic transactional emails, and adding or updating subscribers.  You can read more about this [in the Campaign Monitor docs](https://help.campaignmonitor.com/consent-to-track).
+
 ## Authenticating
 
 The Campaign Monitor API supports authentication using either OAuth or an API key.

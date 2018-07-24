@@ -1,10 +1,14 @@
 # createsend-python history
 
+## v6.0.1 - 24 July, 2018
+
+* Changes ``consent_to_track`` parameter to also accept a nullable boolean
+* Updates README.md with information about breaking changes in v6.0.x
 
 ## v6.0.0 - 21 May, 2018
 
 * Upgrades to Createsend API v3.2 which includes new breaking changes
-* Breaking: 'Consent to track' field is now mandatory for sending smart and classic transactionl emails
+* Breaking: 'Consent to track' field is now mandatory for sending smart and classic transactional emails
 * Breaking: 'Consent to track' field is now mandatory when adding or updating subscribers
 * Optional 'Include tracking preference' field when retrieving lists of subscribers
 

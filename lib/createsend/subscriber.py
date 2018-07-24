@@ -26,7 +26,7 @@ class Subscriber(CreateSendBase):
 
     def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
         """Adds a subscriber to a subscriber list."""
-        validate_consent_to_track(consent_to_track)
+        consent_to_track = validate_consent_to_track(consent_to_track)
         body = {
             "EmailAddress": email_address,
             "Name": name,
@@ -34,6 +34,7 @@ class Subscriber(CreateSendBase):
             "Resubscribe": resubscribe,
             "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
+        print(body)
         response = self._post("/subscribers/%s.json" %
                               list_id, json.dumps(body))
         return json_to_py(response)
@@ -41,7 +42,7 @@ class Subscriber(CreateSendBase):
     def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
         """Updates any aspect of a subscriber, including email address, name, and
         custom field data if supplied."""
-        validate_consent_to_track(consent_to_track)
+        consent_to_track = validate_consent_to_track(consent_to_track)
         params = {"email": self.email_address}
         body = {
             "EmailAddress": new_email_address,
