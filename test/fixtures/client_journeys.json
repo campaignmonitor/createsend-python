@@ -1,0 +1,14 @@
+[
+  {
+    "ListID": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+    "JourneyID": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+    "Name": "Journey 1",
+    "Status": "Active"
+  },
+  {
+    "ListID": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+    "JourneyID": "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+    "Name": "New journey",
+    "Status": "Active"
+  }
+]

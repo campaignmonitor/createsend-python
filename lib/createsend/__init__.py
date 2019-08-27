@@ -27,6 +27,8 @@ from createsend.createsend import (
     ExpiredOAuthToken,
     CreateSendBase,
     CreateSend)
+from createsend.journey_email import JourneyEmail
+from createsend.journey import Journey
 from createsend.list import List
 from createsend.person import Person
 from createsend.segment import Segment
