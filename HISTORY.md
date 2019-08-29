@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v6.1.0 - 29 August, 2019
+* Added support for Journeys endpoints
+* This includes client/journeys, journeys/summary and the journeys/email/... endpoints
 
 ## v6.0.0 - 21 May, 2018
 
