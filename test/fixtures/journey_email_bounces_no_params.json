@@ -1,0 +1,23 @@
+{
+  "Results": [
+    {
+      "EmailAddress": "asdf@softbouncemyemail.comX",
+      "BounceType": "Soft",
+      "Date": "2019-08-20 14:24:00",
+      "Reason": "Soft Bounce - Dns Failure"
+    },
+    {
+      "EmailAddress": "asdf@hardbouncemyemail.com",
+      "BounceType": "Hard",
+      "Date": "2019-08-21 04:26:00",
+      "Reason": "Hard Bounce"
+    }
+  ],
+  "ResultsOrderedBy": "Date",
+  "OrderDirection": "ASC",
+  "PageNumber": 1,
+  "PageSize": 1000,
+  "RecordsOnThisPage": 2,
+  "TotalNumberOfRecords": 2,
+  "NumberOfPages": 1
+}

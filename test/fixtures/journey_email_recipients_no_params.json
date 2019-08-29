@@ -1,0 +1,27 @@
+{
+  "Results": [
+    {
+      "EmailAddress": "asdf@example.com",
+      "SentDate": "2019-08-19 10:23:00"
+    },
+    {
+      "EmailAddress": "asdf+2@example.com",
+      "SentDate": "2019-08-19 10:23:00"
+    },
+    {
+      "EmailAddress": "asdf@softbouncemyemail.comX",
+      "SentDate": "2019-08-20 14:24:00"
+    },
+    {
+      "EmailAddress": "asdf@hardbouncemyemail.com",
+      "SentDate": "2019-08-21 04:26:00"
+    }
+  ],
+  "ResultsOrderedBy": "SentDate",
+  "OrderDirection": "ASC",
+  "PageNumber": 1,
+  "PageSize": 1000,
+  "RecordsOnThisPage": 4,
+  "TotalNumberOfRecords": 4,
+  "NumberOfPages": 1
+}
