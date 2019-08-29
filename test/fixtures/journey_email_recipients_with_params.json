@@ -1,0 +1,27 @@
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@hardbouncemyemail.com",
+***REMOVED******REMOVED******REMOVED***"SentDate": "2019-08-21 04:26:00"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@softbouncemyemail.comX",
+***REMOVED******REMOVED******REMOVED***"SentDate": "2019-08-20 14:24:00"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf+2@example.com",
+***REMOVED******REMOVED******REMOVED***"SentDate": "2019-08-19 10:23:00"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@example.com",
+***REMOVED******REMOVED******REMOVED***"SentDate": "2019-08-19 10:23:00"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "SentDate",
+***REMOVED***"OrderDirection": "DESC",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 10,
+***REMOVED***"RecordsOnThisPage": 4,
+***REMOVED***"TotalNumberOfRecords": 4,
+***REMOVED***"NumberOfPages": 1
+}

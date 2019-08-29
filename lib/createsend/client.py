@@ -167,5 +167,10 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Deletes this client."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._delete("/clients/%s.json" % self.client_id)
 
+***REMOVED******REMOVED***def journeys(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***"""Retrieves the journeys associated with the client"""
+***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for('journeys'))
+***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
+
 ***REMOVED******REMOVED***def uri_for(self, action):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return "/clients/%s/%s.json" % (self.client_id, action)

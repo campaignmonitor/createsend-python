@@ -1,10 +1,10 @@
 language: python
 python:
 ***REMOVED***- 2.7
-***REMOVED***- 3.3
 ***REMOVED***- 3.4
 ***REMOVED***- 3.5
 ***REMOVED***- 3.6
+***REMOVED***- 3.7
 install:
 ***REMOVED***- pip install coverage coveralls
 script:

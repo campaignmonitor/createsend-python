@@ -216,6 +216,15 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.delete()
 
+***REMOVED******REMOVED***def test_journeys(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/journeys.json" % self.cl.client_id, "client_journeys.json")
+***REMOVED******REMOVED******REMOVED******REMOVED***journeys = self.cl.journeys()
+***REMOVED******REMOVED******REMOVED******REMOVED***journey_one = journeys[0]
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(journey_one.JourneyID, "b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(journey_one.ListID, "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(journey_one.Name, "Journey 1")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(journey_one.Status, "Active")
+
 
 class OAuthClientTestCase(unittest.TestCase, ClientTestCase):
 ***REMOVED******REMOVED***"""Test when using OAuth to authenticate"""

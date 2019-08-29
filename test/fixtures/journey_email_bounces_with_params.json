@@ -1,0 +1,23 @@
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@hardbouncemyemail.com",
+***REMOVED******REMOVED******REMOVED***"BounceType": "Hard",
+***REMOVED******REMOVED******REMOVED***"Date": "2019-08-21 04:26:00",
+***REMOVED******REMOVED******REMOVED***"Reason": "Hard Bounce"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@softbouncemyemail.comX",
+***REMOVED******REMOVED******REMOVED***"BounceType": "Soft",
+***REMOVED******REMOVED******REMOVED***"Date": "2019-08-20 14:24:00",
+***REMOVED******REMOVED******REMOVED***"Reason": "Soft Bounce - Dns Failure"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "Date",
+***REMOVED***"OrderDirection": "DESC",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 10,
+***REMOVED***"RecordsOnThisPage": 2,
+***REMOVED***"TotalNumberOfRecords": 2,
+***REMOVED***"NumberOfPages": 1
+}

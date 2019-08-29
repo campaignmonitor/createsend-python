@@ -1,0 +1,33 @@
+{
+***REMOVED***"Results": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf+2@example.com",
+***REMOVED******REMOVED******REMOVED***"Date": "2019-08-19 10:24:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "198.148.196.144",
+***REMOVED******REMOVED******REMOVED***"Latitude": -33.8591,
+***REMOVED******REMOVED******REMOVED***"Longitude": 151.200195,
+***REMOVED******REMOVED******REMOVED***"City": "Sydney",
+***REMOVED******REMOVED******REMOVED***"Region": "New South Wales",
+***REMOVED******REMOVED******REMOVED***"CountryCode": "AU",
+***REMOVED******REMOVED******REMOVED***"CountryName": "Australia"
+***REMOVED******REMOVED***},
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailAddress": "asdf@example.com",
+***REMOVED******REMOVED******REMOVED***"Date": "2019-08-19 10:23:00",
+***REMOVED******REMOVED******REMOVED***"IPAddress": "198.148.196.144",
+***REMOVED******REMOVED******REMOVED***"Latitude": -33.8591,
+***REMOVED******REMOVED******REMOVED***"Longitude": 151.200195,
+***REMOVED******REMOVED******REMOVED***"City": "Sydney",
+***REMOVED******REMOVED******REMOVED***"Region": "New South Wales",
+***REMOVED******REMOVED******REMOVED***"CountryCode": "AU",
+***REMOVED******REMOVED******REMOVED***"CountryName": "Australia"
+***REMOVED******REMOVED***}
+***REMOVED***],
+***REMOVED***"ResultsOrderedBy": "Date",
+***REMOVED***"OrderDirection": "DESC",
+***REMOVED***"PageNumber": 1,
+***REMOVED***"PageSize": 10,
+***REMOVED***"RecordsOnThisPage": 2,
+***REMOVED***"TotalNumberOfRecords": 2,
+***REMOVED***"NumberOfPages": 1
+}

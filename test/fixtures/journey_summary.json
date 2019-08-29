@@ -1,0 +1,18 @@
+{
+***REMOVED***"JourneyID": "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+***REMOVED***"Name": "New journey",
+***REMOVED***"TriggerType": "On Subscription",
+***REMOVED***"Status": "Active",
+***REMOVED***"Emails": [
+***REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED***"EmailID": "b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1b1",
+***REMOVED******REMOVED******REMOVED***"Name": "1",
+***REMOVED******REMOVED******REMOVED***"Bounced": 7,
+***REMOVED******REMOVED******REMOVED***"Clicked": 1,
+***REMOVED******REMOVED******REMOVED***"Opened": 12,
+***REMOVED******REMOVED******REMOVED***"Sent": 11,
+***REMOVED******REMOVED******REMOVED***"UniqueOpened": 4,
+***REMOVED******REMOVED******REMOVED***"Unsubscribed": 1
+***REMOVED******REMOVED***}
+***REMOVED***]
+}
