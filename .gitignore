@@ -10,4 +10,3 @@ htmlcov
 .tox
 lib/createsend.egg-info
 .rake_tasks~
-.idea
