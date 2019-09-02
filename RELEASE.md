@@ -3,6 +3,7 @@
 ## Requirements
 
 - You must have a [PyPI](https://pypi.python.org/pypi) account and must be an owner or maintainer of the [createsend](https://pypi.python.org/pypi/createsend/) package.
+- You must have the 'twine' and 'wheel' packages installed
 
 ## Prepare the release
 
@@ -33,15 +34,15 @@
 ## Build the package
 
 ```
-rake build
+python setup.py sdist bdist_wheel
 ```
 
-This builds a source distribution of the package locally to a file named something like `dist/createsend-X.Y.Z.tar.gz`. You're now ready to release the package.
+This will create a 'dist' directory. It should contain 2 files: a '.tar.gz' file and a '.whl' file. This is what will be published to PyPI
 
 ## Release the package
 
 ```
-rake release
+twine upload dist/*
 ```
 
 This publishes the package to [PyPI](https://pypi.python.org/pypi/createsend/). You should see the newly published version of the package there. All done!
