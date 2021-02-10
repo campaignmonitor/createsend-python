@@ -1,6 +1,6 @@
 # createsend-python history
 
-## v6.1.1 - 10 Feb, 2021
+## v6.1.2 - 10 Feb, 2021
 * Add `excludemessagebody` parameter for Transactional message details endpoint
   and update tests.
 * Update README with sample code for using message details and timeline endpoint.
