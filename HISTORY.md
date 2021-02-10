@@ -1,5 +1,11 @@
 # createsend-python history
 
+## v6.1.2 - 10 Feb, 2021
+* Add `excludemessagebody` parameter for Transactional message details endpoint
+***REMOVED***and update tests.
+* Update README with sample code for using message details and timeline endpoint.
+* Add Python 3.8 to `tox.ini`.
+
 ## v6.1.0 - 29 August, 2019
 * Added support for Journeys endpoints
 * This includes client/journeys, journeys/summary and the journeys/email/... endpoints
