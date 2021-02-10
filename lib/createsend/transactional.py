@@ -90,10 +90,10 @@ class Transactional(CreateSendBase):
         response = self._get("/transactional/messages", params)
         return json_to_py(response)
 
-    def message_details(self, message_id, statistics=False):
+    def message_details(self, message_id, statistics=False, exclude_message_body=False):
         """Gets the details of this message."""
         response = self._get(
-            "/transactional/messages/%s?statistics=%s" % (message_id, statistics))
+            "/transactional/messages/%s?statistics=%s&excludemessagebody=%s" % (message_id, statistics, exclude_message_body))
         return json_to_py(response)
 
     def message_resend(self, message_id):
