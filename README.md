@@ -144,8 +144,9 @@ if len(msg_id) == 0:
 
 tx = Transactional(auth)
 
-# Get message details using message id
-msg_details = tx.message_details(msg_id, statistics=True, exclude_message_body=False)
+# Get message details using message id. 
+# We can optionally disable loading the body by setting exclude_message_body to `True`.
+msg_details = tx.message_details(msg_id, statistics=False, exclude_message_body=True)
 print(f'smart email id: {msg_details.SmartEmailID}')
 print(f'bounce type: {msg_details.BounceType}')
 print(f'bounce category: {msg_details.BounceCategory}')
