@@ -100,15 +100,15 @@ class TransactionalTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(timeline[0].SmartEmailID, self.smart_email_id)
 
 ***REMOVED******REMOVED***def test_message_details(self):
-***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request('transactional/messages/%s?statistics=False' %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request('transactional/messages/%s?statistics=False&excludemessagebody=False' %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.message_id), "tx_message_details.json")
-***REMOVED******REMOVED******REMOVED******REMOVED***msg = self.tx.message_details(self.message_id, statistics=False)
+***REMOVED******REMOVED******REMOVED******REMOVED***msg = self.tx.message_details(self.message_id, statistics=False, exclude_message_body=False)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(msg.MessageID, self.message_id)
 
 ***REMOVED******REMOVED***def test_message_details_with_stats(self):
-***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request('transactional/messages/%s?statistics=True' %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.tx.stub_request('transactional/messages/%s?statistics=True&excludemessagebody=False' %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.message_id), "tx_message_details_with_statistics.json")
-***REMOVED******REMOVED******REMOVED******REMOVED***msg = self.tx.message_details(self.message_id, statistics=True)
+***REMOVED******REMOVED******REMOVED******REMOVED***msg = self.tx.message_details(self.message_id, statistics=True, exclude_message_body=False)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(msg.Opens), 1)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(msg.Clicks), 1)
 

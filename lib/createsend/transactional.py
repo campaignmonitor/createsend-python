@@ -90,10 +90,10 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get("/transactional/messages", params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def message_details(self, message_id, statistics=False):
+***REMOVED******REMOVED***def message_details(self, message_id, statistics=False, exclude_message_body=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the details of this message."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/messages/%s?statistics=%s" % (message_id, statistics))
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/messages/%s?statistics=%s&excludemessagebody=%s" % (message_id, statistics, exclude_message_body))
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def message_resend(self, message_id):
