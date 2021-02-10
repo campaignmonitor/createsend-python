@@ -120,6 +120,53 @@ Client: Second Client
   - News for January 2013
 ```
 
+## Transactional
+
+Sample code that uses Transactional message detail and timeline endpoint API.
+```python
+from createsend import Transactional
+import os
+import sys
+
+auth = {'api_key': os.getenv('CREATESEND_API_KEY', '')}
+msg_id = os.getenv('MESSAGE_ID', '')
+
+if len(auth) == 0:
+    print("API Key Not Provided")
+    sys.exit(1)
+
+if len(msg_id) == 0:
+    print("Message ID Not Provided")
+    sys.exit(1)
+
+#auth = {'api_key': '[api_key]'}
+#msg_id = "[message id]" # e.g., becd8473-6a19-1feb-84c5-28d16948a5fc
+
+tx = Transactional(auth)
+
+# Get message details using message id. 
+# We can optionally disable loading the body by setting exclude_message_body to `True`.
+msg_details = tx.message_details(msg_id, statistics=False, exclude_message_body=True)
+print(f'smart email id: {msg_details.SmartEmailID}')
+print(f'bounce type: {msg_details.BounceType}')
+print(f'bounce category: {msg_details.BounceCategory}')
+print(f'html: {msg_details.Message.Body.Html}')
+print('--')
+
+# Count the number of bounced mail using message timeline
+msg_timeline = tx.message_timeline()
+num_bounced = 0
+for m in msg_timeline:
+    print('--')
+    print(f'message id: {m.MessageID}')
+    if str.lower(m.Status) == 'bounced':
+        num_bounced += 1
+        print(f'bounce type: {m.BounceType}')
+        print(f'bounce category: {m.BounceCategory}')
+print('--')
+print(f"total bounces: {num_bounced}")
+```
+
 ## Handling errors
 If the Campaign Monitor API returns an error, an exception will be raised. For example, if you attempt to create a campaign and enter empty values for subject and other required fields:
 

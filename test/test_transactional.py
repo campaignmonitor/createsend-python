@@ -100,15 +100,15 @@ class TransactionalTestCase(object):
         self.assertEqual(timeline[0].SmartEmailID, self.smart_email_id)
 
     def test_message_details(self):
-        self.tx.stub_request('transactional/messages/%s?statistics=False' %
+        self.tx.stub_request('transactional/messages/%s?statistics=False&excludemessagebody=False' %
                              (self.message_id), "tx_message_details.json")
-        msg = self.tx.message_details(self.message_id, statistics=False)
+        msg = self.tx.message_details(self.message_id, statistics=False, exclude_message_body=False)
         self.assertEqual(msg.MessageID, self.message_id)
 
     def test_message_details_with_stats(self):
-        self.tx.stub_request('transactional/messages/%s?statistics=True' %
+        self.tx.stub_request('transactional/messages/%s?statistics=True&excludemessagebody=False' %
                              (self.message_id), "tx_message_details_with_statistics.json")
-        msg = self.tx.message_details(self.message_id, statistics=True)
+        msg = self.tx.message_details(self.message_id, statistics=True, exclude_message_body=False)
         self.assertEqual(len(msg.Opens), 1)
         self.assertEqual(len(msg.Clicks), 1)
 
