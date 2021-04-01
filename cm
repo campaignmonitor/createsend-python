@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[
+    {
+        "ClientID": "4a397ccaaa55eb4e6aa1221e1e2d7122",
+        "Name": "Client One"
+    },
+    {
+        "ClientID": "a206def0582eec7dae47d937a4109cb2",
+        "Name": "Client Two"
+    }
+]
