@@ -1,5 +1,12 @@
 # createsend-python history
 
+## v7.0.0 - 19 Nov, 2021
+* Upgrades to Createsend API v3.3 which includes new breaking changes
+* Breaking: 'client.campaigns', getting sent campaigns returned an object to support pagination
+* Add support for pagination, filtering and sorting to 'client.campaigns'
+* Add new 'client.tags', getting list of tags for the client
+* Add Python 3.10 to `tox.ini`.
+
 ## v6.1.2 - 10 Feb, 2021
 * Add `excludemessagebody` parameter for Transactional message details endpoint
   and update tests.

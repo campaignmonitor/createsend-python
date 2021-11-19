@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="createsend",
-    version='6.1.2',
+    version='7.0.0',
     description="A library which implements the complete functionality of the Campaign Monitor API.",
     author='Campaign Monitor',
     author_email='support@campaignmonitor.com',
@@ -48,5 +48,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
     ]
 )

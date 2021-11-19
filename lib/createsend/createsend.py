@@ -252,7 +252,7 @@ class CreateSendBase(object):
 
 class CreateSend(CreateSendBase):
     """Provides high level CreateSend functionality/data you'll probably need."""
-    base_uri = "https://api.createsend.com/api/v3.2"
+    base_uri = "https://api.createsend.com/api/v3.3"
     oauth_uri = "https://api.createsend.com/oauth"
     oauth_token_uri = "%s/token" % oauth_uri
     platform = os.getenv('SERVER_SOFTWARE') or platform.platform()

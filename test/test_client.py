@@ -28,9 +28,10 @@ class ClientTestCase(object):
         self.assertEquals(cl.BillingDetails.Credits, 500)
 
     def test_campaigns(self):
-        self.cl.stub_request("clients/%s/campaigns.json" %
+        self.cl.stub_request("clients/%s/campaigns.json?sentfromdate=&senttodate=&page=1&tags=&pagesize=1000&orderdirection=desc" %
                              self.cl.client_id, "campaigns.json")
-        campaigns = self.cl.campaigns()
+        sentCampaigns = self.cl.campaigns()
+        campaigns = sentCampaigns.Results
         self.assertEquals(len(campaigns), 2)
         self.assertEquals(campaigns[0].CampaignID,
                           'fc0ce7105baeaf97f47c99be31d02a91')
@@ -45,6 +46,14 @@ class ClientTestCase(object):
         self.assertEquals(campaigns[0].FromName, 'My Name')
         self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
         self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
+        self.assertEquals(campaigns[0].Tags, ["Tag1", "Tag2"])
+        self.assertEquals(sentCampaigns.ResultsOrderedBy, "SentDate")
+        self.assertEquals(sentCampaigns.OrderDirection, "desc")
+        self.assertEquals(sentCampaigns.PageNumber, 1)
+        self.assertEquals(sentCampaigns.PageSize, 2)
+        self.assertEquals(sentCampaigns.RecordsOnThisPage, 2)
+        self.assertEquals(sentCampaigns.TotalNumberOfRecords, 49)
+        self.assertEquals(sentCampaigns.NumberOfPages, 25)
 
     def test_scheduled(self):
         self.cl.stub_request("clients/%s/scheduled.json" %
@@ -66,6 +75,7 @@ class ClientTestCase(object):
         self.assertEquals(campaigns[0].FromName, 'My Name')
         self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
         self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
+        self.assertEquals(campaigns[0].Tags, [])
 
     def test_drafts(self):
         self.cl.stub_request("clients/%s/drafts.json" %
@@ -84,6 +94,17 @@ class ClientTestCase(object):
         self.assertEquals(drafts[0].FromName, 'My Name')
         self.assertEquals(drafts[0].FromEmail, 'myemail@example.com')
         self.assertEquals(drafts[0].ReplyTo, 'myemail@example.com')
+        self.assertEquals(drafts[0].Tags, ["Tags5"])
+    
+    def test_tags(self):
+        self.cl.stub_request("clients/%s/tags.json" %
+                             self.cl.client_id, "tags.json")
+        tags = self.cl.tags()
+        self.assertEquals(len(tags), 2)
+        self.assertEquals(tags[0].Name, 'Happy')
+        self.assertEquals(tags[0].NumberOfCampaigns, 3)
+        self.assertEquals(tags[1].Name, 'Sad')
+        self.assertEquals(tags[1].NumberOfCampaigns, 1)
 
     def test_lists(self):
         self.cl.stub_request("clients/%s/lists.json" %
