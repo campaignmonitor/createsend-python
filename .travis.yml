@@ -6,6 +6,8 @@ python:
 ***REMOVED***- 3.6
 ***REMOVED***- 3.7
 ***REMOVED***- 3.8
+***REMOVED***- 3.9
+***REMOVED***- 3.10
 install:
 ***REMOVED***- pip install coverage coveralls
 script:

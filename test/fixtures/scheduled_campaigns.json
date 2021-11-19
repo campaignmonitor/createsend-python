@@ -10,7 +10,8 @@
 ***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2011-05-24 10:37:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-DD543521A87C9B8B",
-***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-DD543521A87C9B8B/t"
+***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-DD543521A87C9B8B/t",
+***REMOVED******REMOVED***"Tags": []
 ***REMOVED***},
 ***REMOVED***{
 ***REMOVED******REMOVED***"DateScheduled": "2011-05-29 11:20:00",
@@ -23,6 +24,7 @@
 ***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2011-05-24 10:39:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-DD913521A87C9B8B",
-***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-DD913521A87C9B8B/t"
+***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-DD913521A87C9B8B/t",
+***REMOVED******REMOVED***"Tags": ["Tags3", "Tags4"]
 ***REMOVED***}
 ]

@@ -145,6 +145,7 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"campaigns/%s/summary.json" % self.campaign_id, "campaign_summary.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***summary = self.campaign.summary()
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Name, "Last Campaign")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Recipients, 5)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.TotalOpened, 10)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Clicks, 0)

@@ -1,6 +1,6 @@
 # createsend
 
-A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 2.7, 3.4, 3.5, 3.6 or 3.7.
+A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 2.7, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9 or 3.10.
 
 ## Installation
 

@@ -28,9 +28,10 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(cl.BillingDetails.Credits, 500)
 
 ***REMOVED******REMOVED***def test_campaigns(self):
-***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/campaigns.json" %
+***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/campaigns.json?sentfromdate=&senttodate=&page=1&tags=&pagesize=1000&orderdirection=desc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.cl.client_id, "campaigns.json")
-***REMOVED******REMOVED******REMOVED******REMOVED***campaigns = self.cl.campaigns()
+***REMOVED******REMOVED******REMOVED******REMOVED***sentCampaigns = self.cl.campaigns()
+***REMOVED******REMOVED******REMOVED******REMOVED***campaigns = sentCampaigns.Results
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(campaigns), 2)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].CampaignID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***'fc0ce7105baeaf97f47c99be31d02a91')
@@ -45,6 +46,14 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].FromName, 'My Name')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].Tags, ["Tag1", "Tag2"])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.ResultsOrderedBy, "SentDate")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.OrderDirection, "desc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.PageSize, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.RecordsOnThisPage, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.TotalNumberOfRecords, 49)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(sentCampaigns.NumberOfPages, 25)
 
 ***REMOVED******REMOVED***def test_scheduled(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/scheduled.json" %
@@ -66,6 +75,7 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].FromName, 'My Name')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaigns[0].Tags, [])
 
 ***REMOVED******REMOVED***def test_drafts(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/drafts.json" %
@@ -84,6 +94,17 @@ class ClientTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(drafts[0].FromName, 'My Name')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(drafts[0].FromEmail, 'myemail@example.com')
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(drafts[0].ReplyTo, 'myemail@example.com')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(drafts[0].Tags, ["Tags5"])
+***REMOVED******REMOVED***
+***REMOVED******REMOVED***def test_tags(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/tags.json" %
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.cl.client_id, "tags.json")
+***REMOVED******REMOVED******REMOVED******REMOVED***tags = self.cl.tags()
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(tags), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(tags[0].Name, 'Happy')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(tags[0].NumberOfCampaigns, 3)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(tags[1].Name, 'Sad')
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(tags[1].NumberOfCampaigns, 1)
 
 ***REMOVED******REMOVED***def test_lists(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cl.stub_request("clients/%s/lists.json" %

@@ -29,9 +29,17 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get("/clients/%s.json" % self.client_id)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def campaigns(self):
+***REMOVED******REMOVED***def campaigns(self, sent_from_date="", sent_to_date="", tags="", page=1, page_size=1000, order_direction="desc"):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the sent campaigns belonging to this client."""
-***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("campaigns"))
+***REMOVED******REMOVED******REMOVED******REMOVED***params = {
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"sentfromdate": sent_from_date,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"senttodate": sent_to_date,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"page": page,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"tags": tags,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"pagesize": page_size,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"orderdirection": order_direction,
+***REMOVED******REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("campaigns"), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def scheduled(self):
@@ -42,6 +50,11 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED***def drafts(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the draft campaigns belonging to this client."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("drafts"))
+***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
+
+***REMOVED******REMOVED***def tags(self):
+***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the list of tags belonging to this client."""
+***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(self.uri_for("tags"))
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def lists(self):
