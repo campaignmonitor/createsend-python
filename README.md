@@ -104,7 +104,7 @@ cs = CreateSend(auth)
 ***REMOVED***print("Client: %s" % cl.Name)
 ***REMOVED***client = Client(auth, cl.ClientID)
 ***REMOVED***print("- Campaigns:")
-***REMOVED***for cm in client.campaigns():
+***REMOVED***for cm in client.campaigns().Results:
 ***REMOVED******REMOVED***print("***REMOVED***- %s" % cm.Subject)
 ```
 
