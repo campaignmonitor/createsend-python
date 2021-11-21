@@ -104,7 +104,7 @@ for cl in clients:
   print("Client: %s" % cl.Name)
   client = Client(auth, cl.ClientID)
   print("- Campaigns:")
-  for cm in client.campaigns():
+  for cm in client.campaigns().Results:
     print("  - %s" % cm.Subject)
 ```
 
