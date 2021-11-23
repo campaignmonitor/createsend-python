@@ -4,7 +4,7 @@
 * Upgrades to Createsend API v3.3 which includes new breaking changes
 * Breaking: 'client.campaigns' now returned an object to support pagination (use .Results to get the array of campaigns)
 * Added 'Tags' as another field that is returned in 'client.scheduled', 'client.drafts' and client.campaigns'
-* Added 'Name' as another filed that is returned in 'campaign.summary'
+* Added 'Name' as another field that is returned in 'campaign.summary'
 * Add new support for 'client.tags' endpoint (ie: getting list of tags for the client)
 * Add support for pagination, filtering and sorting to 'client.campaigns' endpoint
 * Add Python 3.10 to `tox.ini`
