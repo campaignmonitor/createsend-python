@@ -89,7 +89,7 @@ clients = cs.clients()
 ```
 
 ## Basic usage
-This example of listing all your clients and their campaigns demonstrates basic usage of the library and the data returned from the API:
+This example of listing all your clients and their draft campaigns demonstrates basic usage of the library and the data returned from the API:
 
 ```python
 from createsend import *
@@ -104,7 +104,7 @@ for cl in clients:
   print("Client: %s" % cl.Name)
   client = Client(auth, cl.ClientID)
   print("- Campaigns:")
-  for cm in client.campaigns().Results:
+  for cm in client.drafts():
     print("  - %s" % cm.Subject)
 ```
 
