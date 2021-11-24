@@ -89,7 +89,7 @@ cs = CreateSend({'api_key': 'your api key'})
 ```
 
 ## Basic usage
-This example of listing all your clients and their campaigns demonstrates basic usage of the library and the data returned from the API:
+This example of listing all your clients and their draft campaigns demonstrates basic usage of the library and the data returned from the API:
 
 ```python
 ***REMOVED***
@@ -104,7 +104,7 @@ cs = CreateSend(auth)
 ***REMOVED***print("Client: %s" % cl.Name)
 ***REMOVED***client = Client(auth, cl.ClientID)
 ***REMOVED***print("- Campaigns:")
-***REMOVED***for cm in client.campaigns().Results:
+***REMOVED***for cm in client.drafts():
 ***REMOVED******REMOVED***print("***REMOVED***- %s" % cm.Subject)
 ```
 
