@@ -5,18 +5,34 @@ auth = {
 ***REMOVED***'refresh_token': 'YOUR_REFRESH_TOKEN' }
 clientId = 'YOUR_CLIENT_ID'
 
+
 cs = CreateSend(auth)
 client = Client(auth, clientId)
 
 # Get list of sent campaigns
 print("List of sent campaigns:")
-campaigns = []
 pageNumber = 1
 pagedCampaigns = client.campaigns(page = 1)
 numberOfPages = pagedCampaigns.NumberOfPages
 while pageNumber <= numberOfPages:
 ***REMOVED***if (pageNumber > 1):
 ***REMOVED******REMOVED***pagedCampaigns = client.campaigns(page = pageNumber)
+***REMOVED***
+***REMOVED***print("***REMOVED***Page: %d" % pageNumber)
+***REMOVED***for cm in pagedCampaigns.Results:
+***REMOVED******REMOVED***print("***REMOVED******REMOVED***- %s" % cm.Subject)
+***REMOVED***
+***REMOVED***pageNumber = pageNumber + 1
+
+***REMOVED***
+# Get list of sent campaigns filtered by tags and date
+print("List of sent campaigns at 2021 with ABTest tag:")
+pageNumber = 1
+pagedCampaigns = client.campaigns(page = 1, sent_from_date="2021-01-01", sent_to_date="2022-01-01", tags="ABTest")
+numberOfPages = pagedCampaigns.NumberOfPages
+while pageNumber <= numberOfPages:
+***REMOVED***if (pageNumber > 1):
+***REMOVED******REMOVED***pagedCampaigns = client.campaigns(page = pageNumber, sent_from_date="2021-01-01", sent_to_date="2022-01-01", tags="ABTest")
 ***REMOVED***
 ***REMOVED***print("***REMOVED***Page: %d" % pageNumber)
 ***REMOVED***for cm in pagedCampaigns.Results:
