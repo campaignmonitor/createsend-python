@@ -146,7 +146,8 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+7t8787Y@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[0].Key, "website")
@@ -176,7 +177,8 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+7t8787Y@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields[0].Key, "website")

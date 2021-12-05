@@ -3,14 +3,16 @@
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "personone@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person One",
-***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"StateChangedDate": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": []
 ***REMOVED******REMOVED***},
 ***REMOVED******REMOVED***{
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "persontwo@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Two",
-***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"StateChangedDate": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": []
 ***REMOVED******REMOVED***}

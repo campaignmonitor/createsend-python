@@ -1,7 +1,8 @@
 {
 ***REMOVED***"EmailAddress": "subscriber@example.com",
 ***REMOVED***"Name": "Subscriber One",
-***REMOVED***"Date": "2010-10-25 10:28:00",
+***REMOVED***"StateChangedDate": "2010-10-25 10:28:00",
+***REMOVED***"ListJoinedDate": "2010-10-25 10:28:00",
 ***REMOVED***"State": "Active",
 ***REMOVED***"CustomFields": [
 ***REMOVED******REMOVED***{

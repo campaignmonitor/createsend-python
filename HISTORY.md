@@ -3,6 +3,7 @@
 ## v7.0.0 - 19 Nov, 2021
 * Upgrades to Createsend API v3.3 which includes new breaking changes
 * Breaking: 'client.campaigns' now returned an object to support pagination (use .Results to get the array of campaigns)
+* Breaking: various subscribers related endpoints now returned listJoinedDate along with stateChangedDate (previously known as Date)
 * Added 'Tags' as another field that is returned in 'client.scheduled', 'client.drafts' and client.campaigns'
 * Added 'Name' as another field that is returned in 'campaign.summary'
 * Add new support for 'client.tags' endpoint (ie: getting list of tags for the client)
