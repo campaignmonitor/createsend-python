@@ -3,9 +3,8 @@
     {
       "EmailAddress": "subscriber@example.com",
       "Name": "Unsub One",
-      "Date": "2010-10-25 13:11:00",
-      "StateChangedDate": "2010-10-27 13:13:00",
-      "ListJoinedDate": "2010-10-27 13:13:00",
+      "StateChangedDate": "2010-10-25 13:11:00",
+      "ListJoinedDate": "2010-10-25 13:11:00",
       "State": "Unsubscribed",
       "CustomFields": [],
       "ReadsEmailWith": "Gmail"
@@ -13,9 +12,8 @@
     {
       "EmailAddress": "subscriberone@example.com",
       "Name": "Subscriber",
-      "Date": "2010-10-25 13:04:00",
-      "StateChangedDate": "2010-10-27 13:13:00",
-      "ListJoinedDate": "2010-10-27 13:13:00",
+      "StateChangedDate": "2010-10-25 13:04:00",
+      "ListJoinedDate": "2010-10-25 13:04:00",
       "State": "Unsubscribed",
       "CustomFields": [
         {
