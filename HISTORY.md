@@ -1,14 +1,21 @@
 # createsend-python history
 
-## v7.0.0 - 19 Nov, 2021
+## v7.0.0 - 15 Dec, 2021
 * Upgrades to Createsend API v3.3 which includes new breaking changes
 * Breaking: 'client.campaigns' now returned an object to support pagination (use .Results to get the array of campaigns)
-* Breaking: various subscribers related endpoints now returned listJoinedDate along with stateChangedDate (previously known as Date)
 * Added 'Tags' as another field that is returned in 'client.scheduled', 'client.drafts' and client.campaigns'
 * Added 'Name' as another field that is returned in 'campaign.summary'
 * Add new support for 'client.tags' endpoint (ie: getting list of tags for the client)
 * Add support for pagination, filtering and sorting to 'client.campaigns' endpoint
 * Add Python 3.10 to `tox.ini`
+* Breaking: Following endpoints now return ListJoinedDate for each subscriber.  Also, Date has been renamed to StateChangedDate:
+  * List.Active()
+  * List.Bounced()
+  * List.Unsubscribed()
+  * List.Unconfirmed()
+  * List.Deleted()
+  * Segment.Subscribers()
+  * Subscriber.Get()
 
 ## v6.1.2 - 10 Feb, 2021
 * Add `excludemessagebody` parameter for Transactional message details endpoint
