@@ -146,7 +146,7 @@ class ListTestCase(object):
         self.assertEquals(res.Results[0].EmailAddress,
                           "subs+7t8787Y@example.com")
         self.assertEquals(res.Results[0].Name, "Person One")
-        self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
         self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
         self.assertEquals(res.Results[0].State, "Active")
         self.assertEquals(len(res.Results[0].CustomFields), 5)
@@ -177,7 +177,7 @@ class ListTestCase(object):
         self.assertEquals(res.Results[0].EmailAddress,
                           "subs+7t8787Y@example.com")
         self.assertEquals(res.Results[0].Name, "Person One")
-        self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
         self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
         self.assertEquals(res.Results[0].State, "Active")
         self.assertEquals(len(res.Results[0].CustomFields), 5)
@@ -227,7 +227,7 @@ class ListTestCase(object):
         self.assertEquals(
             res.Results[0].EmailAddress, "subscriber@example.com")
         self.assertEquals(res.Results[0].Name, "Unsub One")
-        self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].State, "Unsubscribed")
         self.assertEquals(len(res.Results[0].CustomFields), 0)
@@ -249,7 +249,7 @@ class ListTestCase(object):
         self.assertEquals(
             res.Results[0].EmailAddress, "subscriber@example.com")
         self.assertEquals(res.Results[0].Name, "Deleted One")
-        self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].State, "Deleted")
         self.assertEquals(len(res.Results[0].CustomFields), 0)
@@ -271,7 +271,7 @@ class ListTestCase(object):
         self.assertEquals(res.Results[0].EmailAddress,
                           "bouncedsubscriber@example.com")
         self.assertEquals(res.Results[0].Name, "Bounced One")
-        self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+        self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
         self.assertEquals(res.Results[0].State, "Bounced")
         self.assertEquals(len(res.Results[0].CustomFields), 0)
