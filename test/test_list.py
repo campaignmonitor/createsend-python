@@ -146,7 +146,7 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+7t8787Y@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
@@ -177,7 +177,7 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+7t8787Y@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 10:28:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-24 10:28:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 5)
@@ -227,7 +227,7 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***res.Results[0].EmailAddress, "subscriber@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Unsub One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Unsubscribed")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
@@ -249,7 +249,7 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***res.Results[0].EmailAddress, "subscriber@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Deleted One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Deleted")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
@@ -271,7 +271,7 @@ class ListTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"bouncedsubscriber@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Bounced One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].StateChangedDate, "2010-10-25 13:11:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-25 13:11:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Bounced")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results[0].CustomFields), 0)
