@@ -1,26 +1,36 @@
-[
-***REMOVED***{
-***REMOVED******REMOVED***"WebVersionURL": "http://createsend.com/t/r-765E86829575EE2C",
-***REMOVED******REMOVED***"WebVersionTextURL": "http://createsend.com/t/r-765E86829575EE2C/t",
-***REMOVED******REMOVED***"CampaignID": "fc0ce7105baeaf97f47c99be31d02a91",
-***REMOVED******REMOVED***"Subject": "Campaign One",
-***REMOVED******REMOVED***"Name": "Campaign One",
-***REMOVED******REMOVED***"FromName": "My Name",
-***REMOVED******REMOVED***"FromEmail": "myemail@example.com",
-***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
-***REMOVED******REMOVED***"SentDate": "2010-10-12 12:58:00",
-***REMOVED******REMOVED***"TotalRecipients": 2245
-***REMOVED***},
-***REMOVED***{
-***REMOVED******REMOVED***"WebVersionURL": "http://createsend.com/t/r-DD543566A87C9B8B",
-***REMOVED******REMOVED***"WebVersionTextURL": "http://createsend.com/t/r-DD543566A87C9B8B/t",
-***REMOVED******REMOVED***"CampaignID": "072472b88c853ae5dedaeaf549a8d607",
-***REMOVED******REMOVED***"Subject": "Campaign Two",
-***REMOVED******REMOVED***"Name": "Campaign Two",
-***REMOVED******REMOVED***"FromName": "My Name",
-***REMOVED******REMOVED***"FromEmail": "myemail@example.com",
-***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
-***REMOVED******REMOVED***"SentDate": "2010-10-06 16:20:00",
-***REMOVED******REMOVED***"TotalRecipients": 11222
-***REMOVED***}
-]
+{
+***REMOVED******REMOVED***"Results": [
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"WebVersionURL": "http://createsend.com/t/r-765E86829575EE2C",
+***REMOVED******REMOVED******REMOVED******REMOVED***"WebVersionTextURL": "http://createsend.com/t/r-765E86829575EE2C/t",
+***REMOVED******REMOVED******REMOVED******REMOVED***"CampaignID": "fc0ce7105baeaf97f47c99be31d02a91",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Subject": "Campaign One",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Name": "Campaign One",
+***REMOVED******REMOVED******REMOVED******REMOVED***"FromName": "My Name",
+***REMOVED******REMOVED******REMOVED******REMOVED***"FromEmail": "myemail@example.com",
+***REMOVED******REMOVED******REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
+***REMOVED******REMOVED******REMOVED******REMOVED***"SentDate": "2010-10-12 12:58:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"TotalRecipients": 2245,
+***REMOVED******REMOVED******REMOVED******REMOVED***"Tags": ["Tag1", "Tag2"]
+***REMOVED******REMOVED******REMOVED***},
+***REMOVED******REMOVED******REMOVED***{
+***REMOVED******REMOVED******REMOVED******REMOVED***"WebVersionURL": "http://createsend.com/t/r-DD543566A87C9B8B",
+***REMOVED******REMOVED******REMOVED******REMOVED***"WebVersionTextURL": "http://createsend.com/t/r-DD543566A87C9B8B/t",
+***REMOVED******REMOVED******REMOVED******REMOVED***"CampaignID": "072472b88c853ae5dedaeaf549a8d607",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Subject": "Campaign Two",
+***REMOVED******REMOVED******REMOVED******REMOVED***"Name": "Campaign Two",
+***REMOVED******REMOVED******REMOVED******REMOVED***"FromName": "My Name",
+***REMOVED******REMOVED******REMOVED******REMOVED***"FromEmail": "myemail@example.com",
+***REMOVED******REMOVED******REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
+***REMOVED******REMOVED******REMOVED******REMOVED***"SentDate": "2010-10-06 16:20:00",
+***REMOVED******REMOVED******REMOVED******REMOVED***"TotalRecipients": 11222
+***REMOVED******REMOVED******REMOVED***}
+***REMOVED******REMOVED***],
+***REMOVED******REMOVED***"ResultsOrderedBy": "SentDate",
+***REMOVED******REMOVED***"OrderDirection": "desc",
+***REMOVED******REMOVED***"PageNumber": 1,
+***REMOVED******REMOVED***"PageSize": 2,
+***REMOVED******REMOVED***"RecordsOnThisPage": 2,
+***REMOVED******REMOVED***"TotalNumberOfRecords": 49,
+***REMOVED******REMOVED***"NumberOfPages": 25
+}

@@ -8,7 +8,8 @@
 ***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2010-08-19 16:08:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-E97A7BB2E6983DA1",
-***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t"
+***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t",
+***REMOVED******REMOVED***"Tags": ["Tags5"]
 ***REMOVED***},
 ***REMOVED***{
 ***REMOVED******REMOVED***"CampaignID": "2e928e982065d92627139208c8c01db1",
@@ -19,6 +20,7 @@
 ***REMOVED******REMOVED***"ReplyTo": "myemail@example.com",
 ***REMOVED******REMOVED***"DateCreated": "2010-08-19 16:08:00",
 ***REMOVED******REMOVED***"PreviewURL": "http://createsend.com/t/r-E97A7BB2E6983DA1",
-***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t"
+***REMOVED******REMOVED***"PreviewTextURL": "http://createsend.com/t/r-E97A7BB2E6983DA1/t",
+***REMOVED******REMOVED***"Tags": []
 ***REMOVED***}
 ]
