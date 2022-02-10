@@ -29,9 +29,17 @@ class Client(CreateSendBase):
         response = self._get("/clients/%s.json" % self.client_id)
         return json_to_py(response)
 
-    def campaigns(self):
+    def campaigns(self, sent_from_date="", sent_to_date="", tags="", page=1, page_size=1000, order_direction="desc"):
         """Gets the sent campaigns belonging to this client."""
-        response = self._get(self.uri_for("campaigns"))
+        params = {
+            "sentfromdate": sent_from_date,
+            "senttodate": sent_to_date,
+            "page": page,
+            "tags": tags,
+            "pagesize": page_size,
+            "orderdirection": order_direction,
+        }
+        response = self._get(self.uri_for("campaigns"), params=params)
         return json_to_py(response)
 
     def scheduled(self):
@@ -42,6 +50,11 @@ class Client(CreateSendBase):
     def drafts(self):
         """Gets the draft campaigns belonging to this client."""
         response = self._get(self.uri_for("drafts"))
+        return json_to_py(response)
+
+    def tags(self):
+        """Gets the list of tags belonging to this client."""
+        response = self._get(self.uri_for("tags"))
         return json_to_py(response)
 
     def lists(self):

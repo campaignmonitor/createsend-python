@@ -145,6 +145,7 @@ class CampaignTestCase(object):
         self.campaign.stub_request(
             "campaigns/%s/summary.json" % self.campaign_id, "campaign_summary.json")
         summary = self.campaign.summary()
+        self.assertEquals(summary.Name, "Last Campaign")
         self.assertEquals(summary.Recipients, 5)
         self.assertEquals(summary.TotalOpened, 10)
         self.assertEquals(summary.Clicks, 0)

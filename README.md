@@ -1,6 +1,6 @@
 # createsend
 
-A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 2.7, 3.4, 3.5, 3.6 or 3.7.
+A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 2.7, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9 or 3.10.
 
 ## Installation
 
@@ -89,7 +89,7 @@ clients = cs.clients()
 ```
 
 ## Basic usage
-This example of listing all your clients and their campaigns demonstrates basic usage of the library and the data returned from the API:
+This example of listing all your clients and their draft campaigns demonstrates basic usage of the library and the data returned from the API:
 
 ```python
 from createsend import *
@@ -104,7 +104,7 @@ for cl in clients:
   print("Client: %s" % cl.Name)
   client = Client(auth, cl.ClientID)
   print("- Campaigns:")
-  for cm in client.campaigns():
+  for cm in client.drafts():
     print("  - %s" % cm.Subject)
 ```
 
