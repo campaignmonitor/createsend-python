@@ -47,6 +47,7 @@ class SegmentTestCase(object):
         self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
         self.assertEquals(res.Results[0].Name, "Person One")
         self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
+        self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
         self.assertEquals(res.Results[0].State, "Active")
         self.assertEquals(res.Results[0].CustomFields, [])
 
@@ -66,6 +67,7 @@ class SegmentTestCase(object):
         self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
         self.assertEquals(res.Results[0].Name, "Person One")
         self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
+        self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
         self.assertEquals(res.Results[0].State, "Active")
         self.assertEquals(res.Results[0].CustomFields, [])
         self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
