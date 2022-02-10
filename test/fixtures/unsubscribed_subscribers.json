@@ -4,6 +4,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subscriber@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Unsub One",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:11:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-25 13:11:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"
@@ -12,6 +13,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subscriberone@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Subscriber",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 13:04:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-25 13:04:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
@@ -25,6 +27,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+1@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example One",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
@@ -33,6 +36,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+2@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example Two",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": ""
@@ -41,6 +45,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "example+3@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Example Three",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-26 10:56:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-26 10:56:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Unsubscribed",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail"

@@ -47,6 +47,7 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
 
@@ -66,6 +67,7 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ConsentToTrack, "Yes")

@@ -4,6 +4,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+7t8787Y@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person One",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 10:28:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-24 10:28:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
@@ -34,6 +35,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+7878787y8ggg@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Two",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 12:17:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-25 12:17:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
@@ -48,6 +50,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs+7890909i0ggg@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Three",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-25 12:52:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-25 12:52:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [
 ***REMOVED******REMOVED******REMOVED******REMOVED***{
@@ -62,6 +65,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "subs@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Four",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "",
@@ -71,6 +75,7 @@
 ***REMOVED******REMOVED******REMOVED***"EmailAddress": "joey@example.com",
 ***REMOVED******REMOVED******REMOVED***"Name": "Person Five",
 ***REMOVED******REMOVED******REMOVED***"Date": "2010-10-27 13:13:00",
+***REMOVED******REMOVED******REMOVED***"ListJoinedDate": "2010-10-27 13:13:00",
 ***REMOVED******REMOVED******REMOVED***"State": "Active",
 ***REMOVED******REMOVED******REMOVED***"CustomFields": [],
 ***REMOVED******REMOVED******REMOVED***"ReadsEmailWith": "Gmail",
