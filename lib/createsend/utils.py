@@ -106,7 +106,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
             context = ssl.SSLContext()
             context.verify_mode = ssl.CERT_REQUIRED
             context.load_verify_locations(cert_path)
-            if self.cert_file and self.key_file:
+            if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
                 context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
             self.sock = context.wrap_socket(sock)
         else:
