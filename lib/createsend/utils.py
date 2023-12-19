@@ -106,7 +106,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext()
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.verify_mode = ssl.CERT_REQUIRED
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_verify_locations(cert_path)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if self.cert_file and self.key_file:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.sock = context.wrap_socket(sock)
 ***REMOVED******REMOVED******REMOVED******REMOVED***else:
