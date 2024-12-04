@@ -3,6 +3,10 @@
 ## Requirements
 
 - You must have a [PyPI](https://pypi.python.org/pypi) account and must be an owner or maintainer of the [createsend](https://pypi.python.org/pypi/createsend/) package.
+- You must install [Twine](https://pypi.org/project/twine/)
+```
+pip install twine
+```
 
 ## Prepare the release
 
