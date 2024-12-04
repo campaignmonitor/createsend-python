@@ -1,5 +1,9 @@
 # createsend-python history
 
+# v8.0.0 - 4 Dec, 2024
+* Upgrades to allow this wrapper to be used with Python 3.12 and beyond.
+* Breaking: Python versions 3.5 and prior will no longer work with this version of the wrapper.
+
 ## v7.0.0 - 15 Dec, 2021
 * Upgrades to Createsend API v3.3 which includes new breaking changes
 * Breaking: 'client.campaigns' now returned an object to support pagination (use .Results to get the array of campaigns)
