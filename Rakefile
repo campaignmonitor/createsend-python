@@ -13,11 +13,11 @@ end
 
 desc "Build and release a source distribution"
 task :release do
-***REMOVED******REMOVED***# Create source and wheel distributions
-***REMOVED******REMOVED***system "python setup.py sdist bdist_wheel"
+***REMOVED***# Create source and wheel distributions
+***REMOVED***system "python setup.py sdist bdist_wheel"
 
-***REMOVED******REMOVED***# Upload using Twine
-***REMOVED******REMOVED***system "python -m twine upload dist/*"
+***REMOVED***# Upload using Twine
+***REMOVED***system "python -m twine upload dist/*"
 end
 
 task :default => :test
