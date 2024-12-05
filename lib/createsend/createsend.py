@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import sys
 import platform
 import base64
@@ -7,8 +5,8 @@ import gzip
 import os
 import socket
 import json
-from six import BytesIO
-from six.moves.urllib.parse import parse_qs, urlencode, urlparse
+from io import BytesIO
+from urllib.parse import parse_qs, urlencode, urlparse
 
 from createsend.utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
@@ -26,7 +24,7 @@ class CreateSendError(Exception):
         # self.data should contain Code, Message and optionally ResultData
         extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(
             self.data, 'ResultData') else ""
-        return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
+        return "The CreateSend API responded with the following error - {}: {}{}".format(self.data.Code, self.data.Message, extra)
 
 
 class ClientError(Exception):
@@ -59,7 +57,7 @@ class ExpiredOAuthToken(Unauthorized):
     pass
 
 
-class CreateSendBase(object):
+class CreateSendBase:
     auth_details = None
     timeout = socket._GLOBAL_DEFAULT_TIMEOUT  # passed to VerifiedHTTPSConnection
 
@@ -77,7 +75,7 @@ class CreateSendBase(object):
         ]
         if state:
             params.append(('state', state))
-        return "%s?%s" % (CreateSend.oauth_uri, urlencode(params))
+        return "{}?{}".format(CreateSend.oauth_uri, urlencode(params))
 
     def exchange_token(self, client_id, client_secret, redirect_uri, code):
         """Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -95,7 +93,7 @@ class CreateSendBase(object):
         r = json_to_py(response)
         if hasattr(r, 'error') and hasattr(r, 'error_description'):
             err = "Error exchanging code for access token: "
-            err += "%s - %s" % (r.error, r.error_description)
+            err += "{} - {}".format(r.error, r.error_description)
             raise Exception(err)
         access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
         return [access_token, expires_in, refresh_token]
@@ -156,7 +154,7 @@ class CreateSendBase(object):
     overridden (e.g. when using the apikey route with username and password)."""
         if username and password:
             headers['Authorization'] = "Basic %s" % base64.b64encode(
-                ("%s:%s" % (username, password)).encode()).decode()
+                ("{}:{}".format(username, password)).encode()).decode()
         elif self.auth_details:
             if 'api_key' in self.auth_details and self.auth_details['api_key']:
                 headers['Authorization'] = "Basic %s" % base64.b64encode(
@@ -171,7 +169,7 @@ class CreateSendBase(object):
         if self.fake_web:
             # Check that the actual url which would be requested matches
             # self.faker.url.
-            actual_url = "https://%s%s" % (parsed_base_uri.netloc,
+            actual_url = "https://{}{}".format(parsed_base_uri.netloc,
                                            self.build_url(parsed_base_uri, path, params))
             self.faker.actual_url = actual_url
 
@@ -186,7 +184,7 @@ class CreateSendBase(object):
                         a.fragment == b.fragment
                         )
             if not same_urls(self.faker.url, actual_url):
-                raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (
+                raise Exception("Faker's expected URL ({}) doesn't match actual URL ({})".format(
                     self.faker.url, actual_url))
 
             self.faker.actual_body = body
@@ -195,7 +193,7 @@ class CreateSendBase(object):
                 return json.loads(body_a) == json.loads(body_b)
             if self.faker.body is not None:
                 if not same_bodies(self.faker.body, body):
-                    raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (
+                    raise Exception("Faker's expected body ({}) doesn't match actual body ({})".format(
                         self.faker.body, body))
 
             data = self.faker.open() if self.faker else ''
@@ -265,7 +263,7 @@ class CreateSend(CreateSendBase):
     user_agent = default_user_agent
 
     def __init__(self, auth=None):
-        super(CreateSend, self).__init__(auth)
+        super().__init__(auth)
 
     def clients(self):
         """Gets your clients."""

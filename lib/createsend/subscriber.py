@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase, BadRequest
@@ -12,7 +10,7 @@ class Subscriber(CreateSendBase):
     def __init__(self, auth=None, list_id=None, email_address=None):
         self.list_id = list_id
         self.email_address = email_address
-        super(Subscriber, self).__init__(auth)
+        super().__init__(auth)
 
     def get(self, list_id=None, email_address=None, include_tracking_preference=False):
         """Gets a subscriber by list ID and email address."""

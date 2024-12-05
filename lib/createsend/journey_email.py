@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 
@@ -9,7 +7,7 @@ class JourneyEmail(CreateSendBase):
 
     def __init__(self, auth=None, journey_email_id=None):
         self.journey_email_id = journey_email_id
-        super(JourneyEmail, self).__init__(auth)
+        super().__init__(auth)
 
     def bounces(self, date=None, page=None, page_size=None, order_direction=None):
         """Retrieves the bounces for this journey email."""
@@ -46,5 +44,5 @@ class JourneyEmail(CreateSendBase):
         return json_to_py(response)
 
     def uri_for(self, action):
-        return "/journeys/email/%s/%s.json" % (self.journey_email_id, action)
+        return "/journeys/email/{}/{}.json".format(self.journey_email_id, action)
 

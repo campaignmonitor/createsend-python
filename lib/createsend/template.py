@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Template(CreateSendBase):
 
     def __init__(self, auth=None, template_id=None):
         self.template_id = template_id
-        super(Template, self).__init__(auth)
+        super().__init__(auth)
 
     def create(self, client_id, name, html_url, zip_url):
         """Creates a new email template."""

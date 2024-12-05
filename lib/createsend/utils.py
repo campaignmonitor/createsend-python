@@ -1,8 +1,6 @@
-from __future__ import absolute_import
-
 import os
 import re
-from six.moves.http_client import HTTPSConnection
+from http.client import HTTPSConnection
 import socket
 import ssl
 import json
@@ -154,12 +152,12 @@ def validate_consent_to_track(user_input):
         user_input = user_input.lower()
     if user_input in VALID_CONSENT_TO_TRACK_VALUES:
         return
-    raise ClientError("Consent to track value must be one of %s" % (VALID_CONSENT_TO_TRACK_VALUES,))
+    raise ClientError("Consent to track value must be one of {}".format(VALID_CONSENT_TO_TRACK_VALUES))
 
 
 def get_faker(expected_url, filename, status=None, body=None):
 
-    class Faker(object):
+    class Faker:
         """Represents a fake web request, including the expected URL, an open 
         function which reads the expected response from a fixture file, and the
         expected response status code."""
@@ -172,7 +170,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
         def open(self):
             if self.filename:
-                return open("%s/../test/fixtures/%s" % (os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
+                return open("{}/../test/fixtures/{}".format(os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
             else:
                 return ''
 

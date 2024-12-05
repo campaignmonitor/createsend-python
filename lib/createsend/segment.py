@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Segment(CreateSendBase):
 
     def __init__(self, auth=None, segment_id=None):
         self.segment_id = segment_id
-        super(Segment, self).__init__(auth)
+        super().__init__(auth)
 
     def create(self, list_id, title, rulegroups):
         """Creates a new segment."""
@@ -63,4 +61,4 @@ class Segment(CreateSendBase):
         response = self._delete("/segments/%s.json" % self.segment_id)
 
     def uri_for(self, action):
-        return "/segments/%s/%s.json" % (self.segment_id, action)
+        return "/segments/{}/{}.json".format(self.segment_id, action)
