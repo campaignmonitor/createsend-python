@@ -57,7 +57,7 @@ class ListTestCase:
 
 ***REMOVED******REMOVED***def test_update_custom_field(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***key = "[mycustomfield]"
-***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request("lists/{}/customfields/{}.json".format(self.list.list_id, quote(key)),
+***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request(f"lists/{self.list.list_id}/customfields/{quote(key)}.json",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "update_custom_field.json", None,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
 ***REMOVED******REMOVED******REMOVED******REMOVED***personalisation_tag = self.list.update_custom_field(
@@ -315,7 +315,7 @@ class ListTestCase:
 ***REMOVED******REMOVED***def test_deactivate_webhook(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***webhook_id = "jiuweoiwueoiwueowiueo"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.list.stub_request(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"lists/{}/webhooks/{}/deactivate.json".format(self.list.list_id, webhook_id), None)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***f"lists/{self.list.list_id}/webhooks/{webhook_id}/deactivate.json", None)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.list.deactivate_webhook(webhook_id)
 
 
