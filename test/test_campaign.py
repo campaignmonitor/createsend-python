@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.campaign import Campaign
 
 
-class CampaignTestCase(object):
+class CampaignTestCase:
 
     def test_create(self):
         client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -15,10 +15,10 @@ class CampaignTestCase(object):
                                    '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
                                ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
-        self.assertEquals(
+        self.assertEqual(
             "\"TextUrl\": \"http://example.com/campaign.txt\"" in c.faker.actual_body, True)
-        self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-        self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
     def test_create_with_none_text_url(self):
         client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -29,9 +29,9 @@ class CampaignTestCase(object):
                                    '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
                                ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
-        self.assertEquals("\"TextUrl\": null" in c.faker.actual_body, True)
-        self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-        self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual("\"TextUrl\": null" in c.faker.actual_body, True)
+        self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
     def test_create_from_template(self):
         template_content = {
@@ -112,8 +112,8 @@ class CampaignTestCase(object):
                                              ['7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'], [
                                                  'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'],
                                              "7j8uw98udowy12989e8298u2e", template_content)
-        self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-        self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+        self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
     def test_send_preview_with_single_recipient(self):
         self.campaign.stub_request(
@@ -145,23 +145,23 @@ class CampaignTestCase(object):
         self.campaign.stub_request(
             "campaigns/%s/summary.json" % self.campaign_id, "campaign_summary.json")
         summary = self.campaign.summary()
-        self.assertEquals(summary.Name, "Last Campaign")
-        self.assertEquals(summary.Recipients, 5)
-        self.assertEquals(summary.TotalOpened, 10)
-        self.assertEquals(summary.Clicks, 0)
-        self.assertEquals(summary.Unsubscribed, 0)
-        self.assertEquals(summary.Bounced, 0)
-        self.assertEquals(summary.UniqueOpened, 5)
-        self.assertEquals(summary.Mentions, 23)
-        self.assertEquals(summary.Forwards, 11)
-        self.assertEquals(summary.Likes, 32)
-        self.assertEquals(summary.WebVersionURL,
+        self.assertEqual(summary.Name, "Last Campaign")
+        self.assertEqual(summary.Recipients, 5)
+        self.assertEqual(summary.TotalOpened, 10)
+        self.assertEqual(summary.Clicks, 0)
+        self.assertEqual(summary.Unsubscribed, 0)
+        self.assertEqual(summary.Bounced, 0)
+        self.assertEqual(summary.UniqueOpened, 5)
+        self.assertEqual(summary.Mentions, 23)
+        self.assertEqual(summary.Forwards, 11)
+        self.assertEqual(summary.Likes, 32)
+        self.assertEqual(summary.WebVersionURL,
                           "http://createsend.com/t/r-3A433FC72FFE3B8B")
-        self.assertEquals(summary.WebVersionTextURL,
+        self.assertEqual(summary.WebVersionTextURL,
                           "http://createsend.com/t/r-3A433FC72FFE3B8B/t")
-        self.assertEquals(
+        self.assertEqual(
             summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
-        self.assertEquals(summary.SpamComplaints, 23)
+        self.assertEqual(summary.SpamComplaints, 23)
 
     def test_email_client_usage(self):
         self.campaign.stub_request(
@@ -177,32 +177,32 @@ class CampaignTestCase(object):
         self.campaign.stub_request("campaigns/%s/listsandsegments.json" %
                                    self.campaign_id, "campaign_listsandsegments.json")
         ls = self.campaign.lists_and_segments()
-        self.assertEquals(len(ls.Lists), 1)
-        self.assertEquals(len(ls.Segments), 1)
-        self.assertEquals(ls.Lists[0].Name, "List One")
-        self.assertEquals(ls.Lists[0].ListID,
+        self.assertEqual(len(ls.Lists), 1)
+        self.assertEqual(len(ls.Segments), 1)
+        self.assertEqual(ls.Lists[0].Name, "List One")
+        self.assertEqual(ls.Lists[0].ListID,
                           "a58ee1d3039b8bec838e6d1482a8a965")
-        self.assertEquals(ls.Segments[0].Title, "Segment for campaign")
-        self.assertEquals(ls.Segments[0].ListID,
+        self.assertEqual(ls.Segments[0].Title, "Segment for campaign")
+        self.assertEqual(ls.Segments[0].ListID,
                           "2bea949d0bf96148c3e6a209d2e82060")
-        self.assertEquals(ls.Segments[0].SegmentID,
+        self.assertEqual(ls.Segments[0].SegmentID,
                           "dba84a225d5ce3d19105d7257baac46f")
 
     def test_recipients(self):
         self.campaign.stub_request("campaigns/%s/recipients.json?orderfield=email&page=1&pagesize=20&orderdirection=asc" %
                                    self.campaign_id, "campaign_recipients.json")
         res = self.campaign.recipients(page=1, page_size=20)
-        self.assertEquals(res.ResultsOrderedBy, "email")
-        self.assertEquals(res.OrderDirection, "asc")
-        self.assertEquals(res.PageNumber, 1)
-        self.assertEquals(res.PageSize, 20)
-        self.assertEquals(res.RecordsOnThisPage, 20)
-        self.assertEquals(res.TotalNumberOfRecords, 2200)
-        self.assertEquals(res.NumberOfPages, 110)
-        self.assertEquals(len(res.Results), 20)
-        self.assertEquals(res.Results[0].EmailAddress,
+        self.assertEqual(res.ResultsOrderedBy, "email")
+        self.assertEqual(res.OrderDirection, "asc")
+        self.assertEqual(res.PageNumber, 1)
+        self.assertEqual(res.PageSize, 20)
+        self.assertEqual(res.RecordsOnThisPage, 20)
+        self.assertEqual(res.TotalNumberOfRecords, 2200)
+        self.assertEqual(res.NumberOfPages, 110)
+        self.assertEqual(len(res.Results), 20)
+        self.assertEqual(res.Results[0].EmailAddress,
                           "subs+6g76t7t0@example.com")
-        self.assertEquals(res.Results[0].ListID,
+        self.assertEqual(res.Results[0].ListID,
                           "a994a3caf1328a16af9a69a730eaa706")
 
     def test_opens(self):
@@ -210,115 +210,115 @@ class CampaignTestCase(object):
         self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
                                    (self.campaign_id, quote(min_date, '')), "campaign_opens.json")
         opens = self.campaign.opens(min_date)
-        self.assertEquals(len(opens.Results), 5)
-        self.assertEquals(
+        self.assertEqual(len(opens.Results), 5)
+        self.assertEqual(
             opens.Results[0].EmailAddress, "subs+6576576576@example.com")
-        self.assertEquals(opens.Results[0].ListID,
+        self.assertEqual(opens.Results[0].ListID,
                           "512a3bc577a58fdf689c654329b50fa0")
-        self.assertEquals(opens.Results[0].Date, "2010-10-11 08:29:00")
-        self.assertEquals(opens.Results[0].IPAddress, "192.168.126.87")
-        self.assertEquals(opens.Results[0].Latitude, -33.8683)
-        self.assertEquals(opens.Results[0].Longitude, 151.2086)
-        self.assertEquals(opens.Results[0].City, "Sydney")
-        self.assertEquals(opens.Results[0].Region, "New South Wales")
-        self.assertEquals(opens.Results[0].CountryCode, "AU")
-        self.assertEquals(opens.Results[0].CountryName, "Australia")
-        self.assertEquals(opens.ResultsOrderedBy, "date")
-        self.assertEquals(opens.OrderDirection, "asc")
-        self.assertEquals(opens.PageNumber, 1)
-        self.assertEquals(opens.PageSize, 1000)
-        self.assertEquals(opens.RecordsOnThisPage, 5)
-        self.assertEquals(opens.TotalNumberOfRecords, 5)
-        self.assertEquals(opens.NumberOfPages, 1)
+        self.assertEqual(opens.Results[0].Date, "2010-10-11 08:29:00")
+        self.assertEqual(opens.Results[0].IPAddress, "192.168.126.87")
+        self.assertEqual(opens.Results[0].Latitude, -33.8683)
+        self.assertEqual(opens.Results[0].Longitude, 151.2086)
+        self.assertEqual(opens.Results[0].City, "Sydney")
+        self.assertEqual(opens.Results[0].Region, "New South Wales")
+        self.assertEqual(opens.Results[0].CountryCode, "AU")
+        self.assertEqual(opens.Results[0].CountryName, "Australia")
+        self.assertEqual(opens.ResultsOrderedBy, "date")
+        self.assertEqual(opens.OrderDirection, "asc")
+        self.assertEqual(opens.PageNumber, 1)
+        self.assertEqual(opens.PageSize, 1000)
+        self.assertEqual(opens.RecordsOnThisPage, 5)
+        self.assertEqual(opens.TotalNumberOfRecords, 5)
+        self.assertEqual(opens.NumberOfPages, 1)
 
     def test_clicks(self):
         min_date = "2010-01-01"
         self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
                                    (self.campaign_id, quote(min_date, '')), "campaign_clicks.json")
         clicks = self.campaign.clicks(min_date)
-        self.assertEquals(len(clicks.Results), 3)
-        self.assertEquals(
+        self.assertEqual(len(clicks.Results), 3)
+        self.assertEqual(
             clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
-        self.assertEquals(
+        self.assertEqual(
             clicks.Results[0].URL, "http://video.google.com.au/?hl=en&tab=wv")
-        self.assertEquals(
+        self.assertEqual(
             clicks.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
-        self.assertEquals(clicks.Results[0].Date, "2010-10-11 08:29:00")
-        self.assertEquals(clicks.Results[0].IPAddress, "192.168.126.87")
-        self.assertEquals(clicks.Results[0].Latitude, -33.8683)
-        self.assertEquals(clicks.Results[0].Longitude, 151.2086)
-        self.assertEquals(clicks.Results[0].City, "Sydney")
-        self.assertEquals(clicks.Results[0].Region, "New South Wales")
-        self.assertEquals(clicks.Results[0].CountryCode, "AU")
-        self.assertEquals(clicks.Results[0].CountryName, "Australia")
-        self.assertEquals(clicks.ResultsOrderedBy, "date")
-        self.assertEquals(clicks.OrderDirection, "asc")
-        self.assertEquals(clicks.PageNumber, 1)
-        self.assertEquals(clicks.PageSize, 1000)
-        self.assertEquals(clicks.RecordsOnThisPage, 3)
-        self.assertEquals(clicks.TotalNumberOfRecords, 3)
-        self.assertEquals(clicks.NumberOfPages, 1)
+        self.assertEqual(clicks.Results[0].Date, "2010-10-11 08:29:00")
+        self.assertEqual(clicks.Results[0].IPAddress, "192.168.126.87")
+        self.assertEqual(clicks.Results[0].Latitude, -33.8683)
+        self.assertEqual(clicks.Results[0].Longitude, 151.2086)
+        self.assertEqual(clicks.Results[0].City, "Sydney")
+        self.assertEqual(clicks.Results[0].Region, "New South Wales")
+        self.assertEqual(clicks.Results[0].CountryCode, "AU")
+        self.assertEqual(clicks.Results[0].CountryName, "Australia")
+        self.assertEqual(clicks.ResultsOrderedBy, "date")
+        self.assertEqual(clicks.OrderDirection, "asc")
+        self.assertEqual(clicks.PageNumber, 1)
+        self.assertEqual(clicks.PageSize, 1000)
+        self.assertEqual(clicks.RecordsOnThisPage, 3)
+        self.assertEqual(clicks.TotalNumberOfRecords, 3)
+        self.assertEqual(clicks.NumberOfPages, 1)
 
     def test_unsubscribes(self):
         min_date = "2010-01-01"
         self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
                                    (self.campaign_id, quote(min_date, '')), "campaign_unsubscribes.json")
         unsubscribes = self.campaign.unsubscribes(min_date)
-        self.assertEquals(len(unsubscribes.Results), 1)
-        self.assertEquals(unsubscribes.Results[
+        self.assertEqual(len(unsubscribes.Results), 1)
+        self.assertEqual(unsubscribes.Results[
                           0].EmailAddress, "subs+6576576576@example.com")
-        self.assertEquals(unsubscribes.Results[
+        self.assertEqual(unsubscribes.Results[
                           0].ListID, "512a3bc577a58fdf689c654329b50fa0")
-        self.assertEquals(unsubscribes.Results[0].Date, "2010-10-11 08:29:00")
-        self.assertEquals(unsubscribes.Results[0].IPAddress, "192.168.126.87")
-        self.assertEquals(unsubscribes.ResultsOrderedBy, "date")
-        self.assertEquals(unsubscribes.OrderDirection, "asc")
-        self.assertEquals(unsubscribes.PageNumber, 1)
-        self.assertEquals(unsubscribes.PageSize, 1000)
-        self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
-        self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
-        self.assertEquals(unsubscribes.NumberOfPages, 1)
+        self.assertEqual(unsubscribes.Results[0].Date, "2010-10-11 08:29:00")
+        self.assertEqual(unsubscribes.Results[0].IPAddress, "192.168.126.87")
+        self.assertEqual(unsubscribes.ResultsOrderedBy, "date")
+        self.assertEqual(unsubscribes.OrderDirection, "asc")
+        self.assertEqual(unsubscribes.PageNumber, 1)
+        self.assertEqual(unsubscribes.PageSize, 1000)
+        self.assertEqual(unsubscribes.RecordsOnThisPage, 1)
+        self.assertEqual(unsubscribes.TotalNumberOfRecords, 1)
+        self.assertEqual(unsubscribes.NumberOfPages, 1)
 
     def test_spam(self):
         min_date = "2010-01-01"
         self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
                                    (self.campaign_id, quote(min_date, '')), "campaign_spam.json")
         spam = self.campaign.spam(min_date)
-        self.assertEquals(len(spam.Results), 1)
-        self.assertEquals(
+        self.assertEqual(len(spam.Results), 1)
+        self.assertEqual(
             spam.Results[0].EmailAddress, "subs+6576576576@example.com")
-        self.assertEquals(spam.Results[0].ListID,
+        self.assertEqual(spam.Results[0].ListID,
                           "512a3bc577a58fdf689c654329b50fa0")
-        self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
-        self.assertEquals(spam.ResultsOrderedBy, "date")
-        self.assertEquals(spam.OrderDirection, "asc")
-        self.assertEquals(spam.PageNumber, 1)
-        self.assertEquals(spam.PageSize, 1000)
-        self.assertEquals(spam.RecordsOnThisPage, 1)
-        self.assertEquals(spam.TotalNumberOfRecords, 1)
-        self.assertEquals(spam.NumberOfPages, 1)
+        self.assertEqual(spam.Results[0].Date, "2010-10-11 08:29:00")
+        self.assertEqual(spam.ResultsOrderedBy, "date")
+        self.assertEqual(spam.OrderDirection, "asc")
+        self.assertEqual(spam.PageNumber, 1)
+        self.assertEqual(spam.PageSize, 1000)
+        self.assertEqual(spam.RecordsOnThisPage, 1)
+        self.assertEqual(spam.TotalNumberOfRecords, 1)
+        self.assertEqual(spam.NumberOfPages, 1)
 
     def test_bounces(self):
         min_date = "2010-01-01"
         self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
                                    (self.campaign_id, quote(min_date, '')), "campaign_bounces.json")
         bounces = self.campaign.bounces(min_date)
-        self.assertEquals(len(bounces.Results), 2)
-        self.assertEquals(
+        self.assertEqual(len(bounces.Results), 2)
+        self.assertEqual(
             bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")
-        self.assertEquals(
+        self.assertEqual(
             bounces.Results[0].ListID, "654523a5855b4a440bae3fb295641546")
-        self.assertEquals(bounces.Results[0].BounceType, "Soft")
-        self.assertEquals(bounces.Results[0].Date, "2010-07-02 16:46:00")
-        self.assertEquals(
+        self.assertEqual(bounces.Results[0].BounceType, "Soft")
+        self.assertEqual(bounces.Results[0].Date, "2010-07-02 16:46:00")
+        self.assertEqual(
             bounces.Results[0].Reason, "Bounce - But No Email Address Returned ")
-        self.assertEquals(bounces.ResultsOrderedBy, "date")
-        self.assertEquals(bounces.OrderDirection, "asc")
-        self.assertEquals(bounces.PageNumber, 1)
-        self.assertEquals(bounces.PageSize, 1000)
-        self.assertEquals(bounces.RecordsOnThisPage, 2)
-        self.assertEquals(bounces.TotalNumberOfRecords, 2)
-        self.assertEquals(bounces.NumberOfPages, 1)
+        self.assertEqual(bounces.ResultsOrderedBy, "date")
+        self.assertEqual(bounces.OrderDirection, "asc")
+        self.assertEqual(bounces.PageNumber, 1)
+        self.assertEqual(bounces.PageSize, 1000)
+        self.assertEqual(bounces.RecordsOnThisPage, 2)
+        self.assertEqual(bounces.TotalNumberOfRecords, 2)
+        self.assertEqual(bounces.NumberOfPages, 1)
 
 
 class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):

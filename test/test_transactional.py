@@ -3,7 +3,7 @@ import unittest
 from createsend.transactional import Transactional
 
 
-class TransactionalTestCase(object):
+class TransactionalTestCase:
 
     def test_smart_email_list(self):
         status = "all"

@@ -1,4 +1,4 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.createsend import (
@@ -13,75 +13,75 @@ from createsend.client import Client
 from createsend.template import Template
 
 
-class CreateSendTestCase(object):
+class CreateSendTestCase:
     """CreateSend tests to be run in the context of both using an API key 
     and using OAuth."""
 
     def test_that_default_user_agent_is_set(self):
         self.cs.stub_request("clients.json", "clients.json")
         cl = self.cs.clients()
-        self.assertEquals(
+        self.assertEqual(
             self.cs.headers['User-Agent'], CreateSend.default_user_agent)
-        self.assertEquals(2, len(cl))
+        self.assertEqual(2, len(cl))
 
     def test_that_custom_user_agent_can_be_set(self):
         CreateSend.user_agent = "custom user agent"
         self.cs.stub_request("clients.json", "clients.json")
         cl = self.cs.clients()
-        self.assertEquals(self.cs.headers['User-Agent'], "custom user agent")
-        self.assertEquals(2, len(cl))
+        self.assertEqual(self.cs.headers['User-Agent'], "custom user agent")
+        self.assertEqual(2, len(cl))
         CreateSend.user_agent = CreateSend.default_user_agent
 
     def test_clients(self):
         self.cs.stub_request("clients.json", "clients.json")
         cl = self.cs.clients()
-        self.assertEquals(2, len(cl))
-        self.assertEquals("4a397ccaaa55eb4e6aa1221e1e2d7122", cl[0].ClientID)
-        self.assertEquals("Client One", cl[0].Name)
+        self.assertEqual(2, len(cl))
+        self.assertEqual("4a397ccaaa55eb4e6aa1221e1e2d7122", cl[0].ClientID)
+        self.assertEqual("Client One", cl[0].Name)
 
     def test_billing_details(self):
         self.cs.stub_request("billingdetails.json", "billingdetails.json")
         bd = self.cs.billing_details()
-        self.assertEquals(3021, bd.Credits)
+        self.assertEqual(3021, bd.Credits)
 
     def test_countries(self):
         self.cs.stub_request("countries.json", "countries.json")
         countries = self.cs.countries()
-        self.assertEquals(245, len(countries))
-        self.assertEquals("Australia", countries[11])
+        self.assertEqual(245, len(countries))
+        self.assertEqual("Australia", countries[11])
 
     def test_systemdate(self):
         self.cs.stub_request("systemdate.json", "systemdate.json")
         systemdate = self.cs.systemdate()
-        self.assertEquals(systemdate, "2010-10-15 09:27:00")
+        self.assertEqual(systemdate, "2010-10-15 09:27:00")
 
     def test_timezones(self):
         self.cs.stub_request("timezones.json", "timezones.json")
         timezones = self.cs.timezones()
-        self.assertEquals(97, len(timezones))
-        self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+        self.assertEqual(97, len(timezones))
+        self.assertEqual("(GMT+12:00) Fiji", timezones[61])
 
     def test_administrators(self):
         self.cs.stub_request("admins.json", "administrators.json")
         administrators = self.cs.administrators()
-        self.assertEquals(2, len(administrators))
-        self.assertEquals('admin1@blackhole.com',
+        self.assertEqual(2, len(administrators))
+        self.assertEqual('admin1@blackhole.com',
                           administrators[0].EmailAddress)
-        self.assertEquals('Admin One', administrators[0].Name)
-        self.assertEquals('Active', administrators[0].Status)
+        self.assertEqual('Admin One', administrators[0].Name)
+        self.assertEqual('Active', administrators[0].Status)
 
     def test_get_primary_contact(self):
         self.cs.stub_request("primarycontact.json",
                              "admin_get_primary_contact.json")
         primary_contact = self.cs.get_primary_contact()
-        self.assertEquals('admin@blackhole.com', primary_contact.EmailAddress)
+        self.assertEqual('admin@blackhole.com', primary_contact.EmailAddress)
 
     def test_set_primary_contact(self):
         email = 'admin@blackhole.com'
         self.cs.stub_request('primarycontact.json?email=%s' %
                              quote(email, ''), 'admin_set_primary_contact.json')
         result = self.cs.set_primary_contact(email)
-        self.assertEquals(email, result.EmailAddress)
+        self.assertEqual(email, result.EmailAddress)
 
     def test_external_session_url(self):
         email = "exammple@example.com"
@@ -92,7 +92,7 @@ class CreateSendTestCase(object):
         self.cs.stub_request('externalsession.json', 'external_session.json')
         result = self.cs.external_session_url(
             email, chrome, url, integrator_id, client_id)
-        self.assertEquals(
+        self.assertEqual(
             "https://external1.createsend.com/cd/create/ABCDEF12/DEADBEEF?url=FEEDDAD1", result.SessionUrl)
 
     # Test fake web mode
@@ -114,9 +114,9 @@ class CreateSendTestCase(object):
         try:
             c.create("", "", "")
         except BadRequest as br:
-            self.assertEquals(98798, br.data.Code)
-            self.assertEquals('A crazy API error', br.data.Message)
-            self.assertEquals(
+            self.assertEqual(98798, br.data.Code)
+            self.assertEqual('A crazy API error', br.data.Message)
+            self.assertEqual(
                 'The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % br)
 
     def test_unauthorized(self):
@@ -125,9 +125,9 @@ class CreateSendTestCase(object):
         try:
             c.create("", "", "")
         except Unauthorized as ua:
-            self.assertEquals(98798, ua.data.Code)
-            self.assertEquals('A crazy API error', ua.data.Message)
-            self.assertEquals(
+            self.assertEqual(98798, ua.data.Code)
+            self.assertEqual('A crazy API error', ua.data.Message)
+            self.assertEqual(
                 'The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % ua)
 
     # Test that the corresponding exceptions are raised according to the

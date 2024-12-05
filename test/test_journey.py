@@ -3,7 +3,7 @@ import unittest
 from createsend.journey import Journey
 
 
-class JourneyTestCase(object):
+class JourneyTestCase:
 
     def test_summary(self):
         self.journey.stub_request(
