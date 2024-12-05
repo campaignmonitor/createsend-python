@@ -1,7 +1,5 @@
-from __future__ import absolute_import
-
 import json
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
@@ -12,7 +10,7 @@ class List(CreateSendBase):
 
 ***REMOVED******REMOVED***def __init__(self, auth=None, list_id=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.list_id = list_id
-***REMOVED******REMOVED******REMOVED******REMOVED***super(List, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def create(self, client_id, title, unsubscribe_page, confirmed_opt_in,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** confirmation_success_page, unsubscribe_setting="AllClientLists"):
@@ -206,4 +204,4 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"webhooks/%s/deactivate" % webhook_id), ' ')
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/lists/%s/%s.json" % (self.list_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return "/lists/{}/{}.json".format(self.list_id, action)

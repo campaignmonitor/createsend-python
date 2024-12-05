@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 ***REMOVED***
 import platform
 import base64
@@ -7,8 +5,8 @@ import gzip
 ***REMOVED***
 import socket
 import json
-from six import BytesIO
-from six.moves.urllib.parse import parse_qs, urlencode, urlparse
+from io import BytesIO
+from urllib.parse import parse_qs, urlencode, urlparse
 
 from createsend.utils import VerifiedHTTPSConnection, json_to_py, get_faker
 
@@ -26,7 +24,7 @@ class CreateSendError(Exception):
 ***REMOVED******REMOVED******REMOVED******REMOVED***# self.data should contain Code, Message and optionally ResultData
 ***REMOVED******REMOVED******REMOVED******REMOVED***extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.data, 'ResultData') else ""
-***REMOVED******REMOVED******REMOVED******REMOVED***return "The CreateSend API responded with the following error - %s: %s%s" % (self.data.Code, self.data.Message, extra)
+***REMOVED******REMOVED******REMOVED******REMOVED***return "The CreateSend API responded with the following error - {}: {}{}".format(self.data.Code, self.data.Message, extra)
 
 
 class ClientError(Exception):
@@ -59,7 +57,7 @@ class ExpiredOAuthToken(Unauthorized):
 ***REMOVED******REMOVED***pass
 
 
-class CreateSendBase(object):
+class CreateSendBase:
 ***REMOVED******REMOVED***auth_details = None
 ***REMOVED******REMOVED***timeout = socket._GLOBAL_DEFAULT_TIMEOUT***REMOVED***# passed to VerifiedHTTPSConnection
 
@@ -77,7 +75,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***]
 ***REMOVED******REMOVED******REMOVED******REMOVED***if state:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***params.append(('state', state))
-***REMOVED******REMOVED******REMOVED******REMOVED***return "%s?%s" % (CreateSend.oauth_uri, urlencode(params))
+***REMOVED******REMOVED******REMOVED******REMOVED***return "{}?{}".format(CreateSend.oauth_uri, urlencode(params))
 
 ***REMOVED******REMOVED***def exchange_token(self, client_id, client_secret, redirect_uri, code):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -95,7 +93,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***r = json_to_py(response)
 ***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(r, 'error') and hasattr(r, 'error_description'):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err = "Error exchanging code for access token: "
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err += "%s - %s" % (r.error, r.error_description)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err += "{} - {}".format(r.error, r.error_description)
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception(err)
 ***REMOVED******REMOVED******REMOVED******REMOVED***access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
 ***REMOVED******REMOVED******REMOVED******REMOVED***return [access_token, expires_in, refresh_token]
@@ -156,7 +154,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***("%s:%s" % (username, password)).encode()).decode()
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***("{}:{}".format(username, password)).encode()).decode()
 ***REMOVED******REMOVED******REMOVED******REMOVED***elif self.auth_details:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if 'api_key' in self.auth_details and self.auth_details['api_key']:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(
@@ -171,7 +169,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***if self.fake_web:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***# Check that the actual url which would be requested matches
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***# self.faker.url.
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***actual_url = "https://%s%s" % (parsed_base_uri.netloc,
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***actual_url = "https://{}{}".format(parsed_base_uri.netloc,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.build_url(parsed_base_uri, path, params))
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.faker.actual_url = actual_url
 
@@ -186,7 +184,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***a.fragment == b.fragment
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***)
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if not same_urls(self.faker.url, actual_url):
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL (%s) doesn't match actual URL (%s)" % (
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected URL ({}) doesn't match actual URL ({})".format(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.faker.url, actual_url))
 
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.faker.actual_body = body
@@ -195,7 +193,7 @@ class CreateSendBase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return json.loads(body_a) == json.loads(body_b)
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if self.faker.body is not None:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if not same_bodies(self.faker.body, body):
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected body (%s) doesn't match actual body (%s)" % (
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception("Faker's expected body ({}) doesn't match actual body ({})".format(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.faker.body, body))
 
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***data = self.faker.open() if self.faker else ''
@@ -265,7 +263,7 @@ class CreateSend(CreateSendBase):
 ***REMOVED******REMOVED***user_agent = default_user_agent
 
 ***REMOVED******REMOVED***def __init__(self, auth=None):
-***REMOVED******REMOVED******REMOVED******REMOVED***super(CreateSend, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def clients(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets your clients."""

@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Segment(CreateSendBase):
 
 ***REMOVED******REMOVED***def __init__(self, auth=None, segment_id=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment_id = segment_id
-***REMOVED******REMOVED******REMOVED******REMOVED***super(Segment, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def create(self, list_id, title, rulegroups):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Creates a new segment."""
@@ -63,4 +61,4 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._delete("/segments/%s.json" % self.segment_id)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/segments/%s/%s.json" % (self.segment_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return "/segments/{}/{}.json".format(self.segment_id, action)

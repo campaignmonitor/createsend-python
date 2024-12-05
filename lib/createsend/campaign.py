@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Campaign(CreateSendBase):
 
 ***REMOVED******REMOVED***def __init__(self, auth=None, campaign_id=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign_id = campaign_id
-***REMOVED******REMOVED******REMOVED******REMOVED***super(Campaign, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def create(self, client_id, subject, name, from_name, from_email, reply_to, html_url,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** text_url, list_ids, segment_ids):
@@ -190,4 +188,4 @@ class Campaign(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/campaigns/%s/%s.json" % (self.campaign_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return "/campaigns/{}/{}.json".format(self.campaign_id, action)
