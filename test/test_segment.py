@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.segment import Segment
 
 
-class SegmentTestCase(object):
+class SegmentTestCase:
 
 ***REMOVED******REMOVED***def test_create(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***list_id = "2983492834987394879837498"
@@ -14,8 +14,8 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***s.stub_request("segments/%s.json" % list_id, "create_segment.json", None,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "{\"RuleGroups\": [{\"Rules\": [{\"Clause\": \"CONTAINS example.com\", \"RuleType\": \"EmailAddress\"}, {\"Clause\": \"EQUALS subscriber\", \"RuleType\": \"Name\"}]}], \"Title\": \"new segment title\"}")
 ***REMOVED******REMOVED******REMOVED******REMOVED***segment_id = s.create(list_id, "new segment title", rulegroups)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
 
 ***REMOVED******REMOVED***def test_update(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***rulegroups = [
@@ -36,41 +36,41 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=False" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(self.segment.segment_id, quote(min_date)), "segment_subscribers.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.segment.subscribers(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results), 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RecordsOnThisPage, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(res.Results), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].EmailAddress, "personone@example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].Name, "Person One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].Date, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].State, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].CustomFields, [])
 
 ***REMOVED******REMOVED***def test_subscribers_with_tracking_information_included(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=True" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(self.segment.segment_id, quote(min_date)), "segment_subscribers_with_tracking_preference.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.segment.subscribers(min_date, include_tracking_information=True)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results), 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Name, "Person One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].State, "Active")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].CustomFields, [])
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RecordsOnThisPage, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(res.Results), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].EmailAddress, "personone@example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].Name, "Person One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].Date, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].State, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].CustomFields, [])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].ConsentToTrack, "Yes")
 
 ***REMOVED******REMOVED***def test_delete(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" %
@@ -86,16 +86,16 @@ class SegmentTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.segment.stub_request("segments/%s.json" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.segment.segment_id, "segment_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.segment.details()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ActiveSubscribers, 0)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.RuleGroups), 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RuleGroups[0].Rules[0].RuleType, "EmailAddress")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RuleGroups[0].Rules[
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.ActiveSubscribers, 0)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(res.RuleGroups), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RuleGroups[0].Rules[0].RuleType, "EmailAddress")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RuleGroups[0].Rules[
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].Clause, "CONTAINS @hello.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RuleGroups[1].Rules[0].RuleType, "Name")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RuleGroups[1].Rules[0].Clause, "PROVIDED")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Title, "My Segment")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RuleGroups[1].Rules[0].RuleType, "Name")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RuleGroups[1].Rules[0].Clause, "PROVIDED")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Title, "My Segment")
 
 
 class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):
