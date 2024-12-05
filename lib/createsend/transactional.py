@@ -18,7 +18,7 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/smartEmail?status=%s" % status)
 ***REMOVED******REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/smartEmail?status={}&clientID={}".format(status, client_id))
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***f"/transactional/smartEmail?status={status}&clientID={client_id}")
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def smart_email_details(self, smart_email_id):
@@ -91,7 +91,7 @@ class Transactional(CreateSendBase):
 ***REMOVED******REMOVED***def message_details(self, message_id, statistics=False, exclude_message_body=False):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets the details of this message."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._get(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"/transactional/messages/{}?statistics={}&excludemessagebody={}".format(message_id, statistics, exclude_message_body))
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***f"/transactional/messages/{message_id}?statistics={statistics}&excludemessagebody={exclude_message_body}")
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def message_resend(self, message_id):

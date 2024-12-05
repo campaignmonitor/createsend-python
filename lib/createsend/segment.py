@@ -61,4 +61,4 @@ class Segment(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._delete("/segments/%s.json" % self.segment_id)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/segments/{}/{}.json".format(self.segment_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"/segments/{self.segment_id}/{action}.json"

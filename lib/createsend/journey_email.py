@@ -44,5 +44,5 @@ class JourneyEmail(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/journeys/email/{}/{}.json".format(self.journey_email_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"/journeys/email/{self.journey_email_id}/{action}.json"
 

@@ -204,4 +204,4 @@ class List(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"webhooks/%s/deactivate" % webhook_id), ' ')
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/lists/{}/{}.json".format(self.list_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"/lists/{self.list_id}/{action}.json"

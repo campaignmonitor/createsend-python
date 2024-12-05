@@ -184,4 +184,4 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/clients/{}/{}.json".format(self.client_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"/clients/{self.client_id}/{action}.json"

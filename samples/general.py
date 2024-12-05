@@ -9,4 +9,4 @@ cs = CreateSend(auth)
 
 # Get list of clients 
 ***REMOVED***
-***REMOVED***print("Client: {} - Id: {}".format(cl.Name, cl.ClientID))
+***REMOVED***print(f"Client: {cl.Name} - Id: {cl.ClientID}")

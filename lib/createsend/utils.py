@@ -143,7 +143,7 @@ def validate_consent_to_track(user_input):
 ***REMOVED******REMOVED******REMOVED******REMOVED***user_input = user_input.lower()
 ***REMOVED******REMOVED***if user_input in VALID_CONSENT_TO_TRACK_VALUES:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return
-***REMOVED******REMOVED***raise ClientError("Consent to track value must be one of {}".format(VALID_CONSENT_TO_TRACK_VALUES))
+***REMOVED******REMOVED***raise ClientError(f"Consent to track value must be one of {VALID_CONSENT_TO_TRACK_VALUES}")
 
 
 def get_faker(expected_url, filename, status=None, body=None):
@@ -161,7 +161,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if self.filename:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open("{}/../test/fixtures/{}".format(os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open(f"{os.path.dirname(os.path.dirname(__file__))}/../test/fixtures/{self.filename}", mode='rb').read()
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return ''
 

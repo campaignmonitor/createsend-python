@@ -24,7 +24,7 @@ class CreateSendError(Exception):
 ***REMOVED******REMOVED******REMOVED******REMOVED***# self.data should contain Code, Message and optionally ResultData
 ***REMOVED******REMOVED******REMOVED******REMOVED***extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.data, 'ResultData') else ""
-***REMOVED******REMOVED******REMOVED******REMOVED***return "The CreateSend API responded with the following error - {}: {}{}".format(self.data.Code, self.data.Message, extra)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"The CreateSend API responded with the following error - {self.data.Code}: {self.data.Message}{extra}"
 
 
 class ClientError(Exception):
@@ -75,7 +75,7 @@ class CreateSendBase:
 ***REMOVED******REMOVED******REMOVED******REMOVED***]
 ***REMOVED******REMOVED******REMOVED******REMOVED***if state:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***params.append(('state', state))
-***REMOVED******REMOVED******REMOVED******REMOVED***return "{}?{}".format(CreateSend.oauth_uri, urlencode(params))
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"{CreateSend.oauth_uri}?{urlencode(params)}"
 
 ***REMOVED******REMOVED***def exchange_token(self, client_id, client_secret, redirect_uri, code):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -93,7 +93,7 @@ class CreateSendBase:
 ***REMOVED******REMOVED******REMOVED******REMOVED***r = json_to_py(response)
 ***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(r, 'error') and hasattr(r, 'error_description'):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err = "Error exchanging code for access token: "
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err += "{} - {}".format(r.error, r.error_description)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***err += f"{r.error} - {r.error_description}"
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***raise Exception(err)
 ***REMOVED******REMOVED******REMOVED******REMOVED***access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
 ***REMOVED******REMOVED******REMOVED******REMOVED***return [access_token, expires_in, refresh_token]
@@ -154,7 +154,7 @@ class CreateSendBase:
 ***REMOVED******REMOVED***overridden (e.g. when using the apikey route with username and password)."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***if username and password:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***("{}:{}".format(username, password)).encode()).decode()
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(f"{username}:{password}").encode()).decode()
 ***REMOVED******REMOVED******REMOVED******REMOVED***elif self.auth_details:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if 'api_key' in self.auth_details and self.auth_details['api_key']:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***headers['Authorization'] = "Basic %s" % base64.b64encode(
