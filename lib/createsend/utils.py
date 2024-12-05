@@ -99,21 +99,12 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
 
-***REMOVED******REMOVED******REMOVED******REMOVED***# for >= py3.7, mandatory since 3.12
-***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(ssl.SSLContext, 'wrap_socket'):
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext()
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.verify_mode = ssl.CERT_REQUIRED
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_verify_locations(cert_path)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.sock = context.wrap_socket(sock)
-***REMOVED******REMOVED******REMOVED******REMOVED***else:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.sock = ssl.wrap_socket(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***sock,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.key_file,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.cert_file,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***cert_reqs=ssl.CERT_REQUIRED,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***ca_certs=cert_path)
+***REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext()
+***REMOVED******REMOVED******REMOVED******REMOVED***context.verify_mode = ssl.CERT_REQUIRED
+***REMOVED******REMOVED******REMOVED******REMOVED***context.load_verify_locations(cert_path)
+***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.sock = context.wrap_socket(sock)
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***match_hostname(self.sock.getpeercert(), self.host)
