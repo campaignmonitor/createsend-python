@@ -9,7 +9,7 @@ jobs:
 ***REMOVED******REMOVED***runs-on: ubuntu-latest
 ***REMOVED******REMOVED***strategy:
 ***REMOVED******REMOVED******REMOVED***matrix:
-***REMOVED******REMOVED******REMOVED******REMOVED***python-version: ['3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+***REMOVED******REMOVED******REMOVED******REMOVED***python-version: ['3.6', '3.7', '3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
 
 ***REMOVED******REMOVED***steps:
 ***REMOVED******REMOVED***- uses: actions/checkout@v4
@@ -20,4 +20,4 @@ jobs:
 ***REMOVED******REMOVED***- name: Install dependencies
 ***REMOVED******REMOVED******REMOVED***run: pip install tox tox-gh
 ***REMOVED******REMOVED***- name: Test with tox
-***REMOVED******REMOVED******REMOVED***run: tox --skip-missing-interpreters
+***REMOVED******REMOVED******REMOVED***run: tox
