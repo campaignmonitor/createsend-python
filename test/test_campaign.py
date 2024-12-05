@@ -15,10 +15,10 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"\"TextUrl\": \"http://example.com/campaign.txt\"" in c.faker.actual_body, True)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED******REMOVED***def test_create_with_none_text_url(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -29,9 +29,9 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals("\"TextUrl\": null" in c.faker.actual_body, True)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual("\"TextUrl\": null" in c.faker.actual_body, True)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED******REMOVED***def test_create_from_template(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***template_content = {
@@ -112,8 +112,8 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** ['7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'], [
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** 'y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'],
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "7j8uw98udowy12989e8298u2e", template_content)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(c.campaign_id, "787y87y87y87y87y87y8712341234")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
 ***REMOVED******REMOVED***def test_send_preview_with_single_recipient(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request(
@@ -145,23 +145,23 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"campaigns/%s/summary.json" % self.campaign_id, "campaign_summary.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***summary = self.campaign.summary()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Name, "Last Campaign")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Recipients, 5)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.TotalOpened, 10)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Clicks, 0)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Unsubscribed, 0)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Bounced, 0)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.UniqueOpened, 5)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Mentions, 23)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Forwards, 11)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.Likes, 32)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.WebVersionURL,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Name, "Last Campaign")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Recipients, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.TotalOpened, 10)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Clicks, 0)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Unsubscribed, 0)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Bounced, 0)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.UniqueOpened, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Mentions, 23)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Forwards, 11)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.Likes, 32)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.WebVersionURL,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"http://createsend.com/t/r-3A433FC72FFE3B8B")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.WebVersionTextURL,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.WebVersionTextURL,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"http://createsend.com/t/r-3A433FC72FFE3B8B/t")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(summary.SpamComplaints, 23)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(summary.SpamComplaints, 23)
 
 ***REMOVED******REMOVED***def test_email_client_usage(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request(
@@ -177,32 +177,32 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/listsandsegments.json" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.campaign_id, "campaign_listsandsegments.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***ls = self.campaign.lists_and_segments()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(ls.Lists), 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(ls.Segments), 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(ls.Lists[0].Name, "List One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(ls.Lists[0].ListID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(ls.Lists), 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(ls.Segments), 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(ls.Lists[0].Name, "List One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(ls.Lists[0].ListID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"a58ee1d3039b8bec838e6d1482a8a965")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(ls.Segments[0].Title, "Segment for campaign")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(ls.Segments[0].ListID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(ls.Segments[0].Title, "Segment for campaign")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(ls.Segments[0].ListID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"2bea949d0bf96148c3e6a209d2e82060")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(ls.Segments[0].SegmentID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(ls.Segments[0].SegmentID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"dba84a225d5ce3d19105d7257baac46f")
 
 ***REMOVED******REMOVED***def test_recipients(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/recipients.json?orderfield=email&page=1&pagesize=20&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** self.campaign_id, "campaign_recipients.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***res = self.campaign.recipients(page=1, page_size=20)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.ResultsOrderedBy, "email")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.PageSize, 20)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.RecordsOnThisPage, 20)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.TotalNumberOfRecords, 2200)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.NumberOfPages, 110)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(res.Results), 20)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].EmailAddress,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.ResultsOrderedBy, "email")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.PageSize, 20)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.RecordsOnThisPage, 20)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.TotalNumberOfRecords, 2200)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.NumberOfPages, 110)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(res.Results), 20)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].EmailAddress,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"subs+6g76t7t0@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(res.Results[0].ListID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(res.Results[0].ListID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"a994a3caf1328a16af9a69a730eaa706")
 
 ***REMOVED******REMOVED***def test_opens(self):
@@ -210,115 +210,115 @@ class CampaignTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/opens.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.campaign_id, quote(min_date, '')), "campaign_opens.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***opens = self.campaign.opens(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(opens.Results), 5)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(opens.Results), 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***opens.Results[0].EmailAddress, "subs+6576576576@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].ListID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].ListID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"512a3bc577a58fdf689c654329b50fa0")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].Date, "2010-10-11 08:29:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].IPAddress, "192.168.126.87")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].Latitude, -33.8683)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].Longitude, 151.2086)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].City, "Sydney")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].Region, "New South Wales")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].CountryCode, "AU")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.Results[0].CountryName, "Australia")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.ResultsOrderedBy, "date")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.RecordsOnThisPage, 5)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.TotalNumberOfRecords, 5)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(opens.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].IPAddress, "192.168.126.87")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].Latitude, -33.8683)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].Longitude, 151.2086)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].City, "Sydney")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].Region, "New South Wales")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].CountryCode, "AU")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.Results[0].CountryName, "Australia")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.ResultsOrderedBy, "date")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.RecordsOnThisPage, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.TotalNumberOfRecords, 5)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(opens.NumberOfPages, 1)
 
 ***REMOVED******REMOVED***def test_clicks(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/clicks.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.campaign_id, quote(min_date, '')), "campaign_clicks.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***clicks = self.campaign.clicks(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(clicks.Results), 3)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(clicks.Results), 3)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***clicks.Results[0].URL, "http://video.google.com.au/?hl=en&tab=wv")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***clicks.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].Date, "2010-10-11 08:29:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].IPAddress, "192.168.126.87")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].Latitude, -33.8683)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].Longitude, 151.2086)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].City, "Sydney")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].Region, "New South Wales")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].CountryCode, "AU")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.Results[0].CountryName, "Australia")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.ResultsOrderedBy, "date")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.RecordsOnThisPage, 3)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.TotalNumberOfRecords, 3)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(clicks.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].IPAddress, "192.168.126.87")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].Latitude, -33.8683)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].Longitude, 151.2086)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].City, "Sydney")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].Region, "New South Wales")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].CountryCode, "AU")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.Results[0].CountryName, "Australia")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.ResultsOrderedBy, "date")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.RecordsOnThisPage, 3)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.TotalNumberOfRecords, 3)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(clicks.NumberOfPages, 1)
 
 ***REMOVED******REMOVED***def test_unsubscribes(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/unsubscribes.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.campaign_id, quote(min_date, '')), "campaign_unsubscribes.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***unsubscribes = self.campaign.unsubscribes(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(unsubscribes.Results), 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(unsubscribes.Results), 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.Results[
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].EmailAddress, "subs+6576576576@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.Results[
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***0].ListID, "512a3bc577a58fdf689c654329b50fa0")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[0].Date, "2010-10-11 08:29:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.Results[0].IPAddress, "192.168.126.87")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.ResultsOrderedBy, "date")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.RecordsOnThisPage, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.TotalNumberOfRecords, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(unsubscribes.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.Results[0].IPAddress, "192.168.126.87")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.ResultsOrderedBy, "date")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.RecordsOnThisPage, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.TotalNumberOfRecords, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(unsubscribes.NumberOfPages, 1)
 
 ***REMOVED******REMOVED***def test_spam(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/spam.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.campaign_id, quote(min_date, '')), "campaign_spam.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***spam = self.campaign.spam(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(spam.Results), 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(spam.Results), 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***spam.Results[0].EmailAddress, "subs+6576576576@example.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.Results[0].ListID,
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.Results[0].ListID,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"512a3bc577a58fdf689c654329b50fa0")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.Results[0].Date, "2010-10-11 08:29:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.ResultsOrderedBy, "date")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.RecordsOnThisPage, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.TotalNumberOfRecords, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(spam.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.Results[0].Date, "2010-10-11 08:29:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.ResultsOrderedBy, "date")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.RecordsOnThisPage, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.TotalNumberOfRecords, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(spam.NumberOfPages, 1)
 
 ***REMOVED******REMOVED***def test_bounces(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***min_date = "2010-01-01"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.campaign.stub_request("campaigns/%s/bounces.json?date=%s&orderfield=date&page=1&pagesize=1000&orderdirection=asc" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (self.campaign_id, quote(min_date, '')), "campaign_bounces.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***bounces = self.campaign.bounces(min_date)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(len(bounces.Results), 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(len(bounces.Results), 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***bounces.Results[0].EmailAddress, "asdf@softbouncemyemail.com")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***bounces.Results[0].ListID, "654523a5855b4a440bae3fb295641546")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.Results[0].BounceType, "Soft")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.Results[0].Date, "2010-07-02 16:46:00")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.Results[0].BounceType, "Soft")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.Results[0].Date, "2010-07-02 16:46:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***bounces.Results[0].Reason, "Bounce - But No Email Address Returned ")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.ResultsOrderedBy, "date")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.OrderDirection, "asc")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.PageNumber, 1)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.PageSize, 1000)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.RecordsOnThisPage, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.TotalNumberOfRecords, 2)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(bounces.NumberOfPages, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.ResultsOrderedBy, "date")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.OrderDirection, "asc")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.PageNumber, 1)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.PageSize, 1000)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.RecordsOnThisPage, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.TotalNumberOfRecords, 2)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(bounces.NumberOfPages, 1)
 
 
 class OAuthCampaignTestCase(unittest.TestCase, CampaignTestCase):

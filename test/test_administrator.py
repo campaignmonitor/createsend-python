@@ -11,30 +11,30 @@ class AdministratorTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"admins.json?email=%s" % quote(email), "admin_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***administrator = self.administrator.get(email)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.EmailAddress, email)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.Name, "Admin One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.Status, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.EmailAddress, email)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.Name, "Admin One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.Status, "Active")
 
 ***REMOVED******REMOVED***def test_get_without_args(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***email = "admin@example.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"admins.json?email=%s" % quote(email), "admin_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***administrator = self.administrator.get()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.EmailAddress, email)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.Name, "Admin One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(administrator.Status, "Active")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.EmailAddress, email)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.Name, "Admin One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(administrator.Status, "Active")
 
 ***REMOVED******REMOVED***def test_add(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.stub_request("admins.json", "add_admin.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***result = self.administrator.add("admin@example.com", "Admin Name")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(result.EmailAddress, "admin@example.com")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(result.EmailAddress, "admin@example.com")
 
 ***REMOVED******REMOVED***def test_update(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***new_email = "new_email_address@example.com"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.email_address), None)
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.update(new_email, "Admin New Name")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(self.administrator.email_address, new_email)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(self.administrator.email_address, new_email)
 
 ***REMOVED******REMOVED***def test_delete(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.administrator.stub_request("admins.json?email=%s" % quote(
