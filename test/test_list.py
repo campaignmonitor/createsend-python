@@ -57,7 +57,7 @@ class ListTestCase:
 
     def test_update_custom_field(self):
         key = "[mycustomfield]"
-        self.list.stub_request("lists/{}/customfields/{}.json".format(self.list.list_id, quote(key)),
+        self.list.stub_request(f"lists/{self.list.list_id}/customfields/{quote(key)}.json",
                                "update_custom_field.json", None,
                                "{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
         personalisation_tag = self.list.update_custom_field(
@@ -315,7 +315,7 @@ class ListTestCase:
     def test_deactivate_webhook(self):
         webhook_id = "jiuweoiwueoiwueowiueo"
         self.list.stub_request(
-            "lists/{}/webhooks/{}/deactivate.json".format(self.list.list_id, webhook_id), None)
+            f"lists/{self.list.list_id}/webhooks/{webhook_id}/deactivate.json", None)
         self.list.deactivate_webhook(webhook_id)
 
 
