@@ -184,4 +184,4 @@ class Client(CreateSendBase):
         return json_to_py(response)
 
     def uri_for(self, action):
-        return "/clients/{}/{}.json".format(self.client_id, action)
+        return f"/clients/{self.client_id}/{action}.json"

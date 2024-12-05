@@ -24,7 +24,7 @@ class CreateSendError(Exception):
         # self.data should contain Code, Message and optionally ResultData
         extra = ("\nExtra result data: %s" % self.data.ResultData) if hasattr(
             self.data, 'ResultData') else ""
-        return "The CreateSend API responded with the following error - {}: {}{}".format(self.data.Code, self.data.Message, extra)
+        return f"The CreateSend API responded with the following error - {self.data.Code}: {self.data.Message}{extra}"
 
 
 class ClientError(Exception):
@@ -75,7 +75,7 @@ class CreateSendBase:
         ]
         if state:
             params.append(('state', state))
-        return "{}?{}".format(CreateSend.oauth_uri, urlencode(params))
+        return f"{CreateSend.oauth_uri}?{urlencode(params)}"
 
     def exchange_token(self, client_id, client_secret, redirect_uri, code):
         """Exchange a provided OAuth code for an OAuth access token, 'expires in'
@@ -93,7 +93,7 @@ class CreateSendBase:
         r = json_to_py(response)
         if hasattr(r, 'error') and hasattr(r, 'error_description'):
             err = "Error exchanging code for access token: "
-            err += "{} - {}".format(r.error, r.error_description)
+            err += f"{r.error} - {r.error_description}"
             raise Exception(err)
         access_token, expires_in, refresh_token = r.access_token, r.expires_in, r.refresh_token
         return [access_token, expires_in, refresh_token]
@@ -154,7 +154,7 @@ class CreateSendBase:
     overridden (e.g. when using the apikey route with username and password)."""
         if username and password:
             headers['Authorization'] = "Basic %s" % base64.b64encode(
-                ("{}:{}".format(username, password)).encode()).decode()
+                (f"{username}:{password}").encode()).decode()
         elif self.auth_details:
             if 'api_key' in self.auth_details and self.auth_details['api_key']:
                 headers['Authorization'] = "Basic %s" % base64.b64encode(

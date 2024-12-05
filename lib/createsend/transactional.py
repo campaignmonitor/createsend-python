@@ -18,7 +18,7 @@ class Transactional(CreateSendBase):
                 "/transactional/smartEmail?status=%s" % status)
         else:
             response = self._get(
-                "/transactional/smartEmail?status={}&clientID={}".format(status, client_id))
+                f"/transactional/smartEmail?status={status}&clientID={client_id}")
         return json_to_py(response)
 
     def smart_email_details(self, smart_email_id):
@@ -91,7 +91,7 @@ class Transactional(CreateSendBase):
     def message_details(self, message_id, statistics=False, exclude_message_body=False):
         """Gets the details of this message."""
         response = self._get(
-            "/transactional/messages/{}?statistics={}&excludemessagebody={}".format(message_id, statistics, exclude_message_body))
+            f"/transactional/messages/{message_id}?statistics={statistics}&excludemessagebody={exclude_message_body}")
         return json_to_py(response)
 
     def message_resend(self, message_id):

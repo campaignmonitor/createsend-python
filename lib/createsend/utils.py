@@ -143,7 +143,7 @@ def validate_consent_to_track(user_input):
         user_input = user_input.lower()
     if user_input in VALID_CONSENT_TO_TRACK_VALUES:
         return
-    raise ClientError("Consent to track value must be one of {}".format(VALID_CONSENT_TO_TRACK_VALUES))
+    raise ClientError(f"Consent to track value must be one of {VALID_CONSENT_TO_TRACK_VALUES}")
 
 
 def get_faker(expected_url, filename, status=None, body=None):
@@ -161,7 +161,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
         def open(self):
             if self.filename:
-                return open("{}/../test/fixtures/{}".format(os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
+                return open(f"{os.path.dirname(os.path.dirname(__file__))}/../test/fixtures/{self.filename}", mode='rb').read()
             else:
                 return ''
 

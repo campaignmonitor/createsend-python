@@ -44,5 +44,5 @@ class JourneyEmail(CreateSendBase):
         return json_to_py(response)
 
     def uri_for(self, action):
-        return "/journeys/email/{}/{}.json".format(self.journey_email_id, action)
+        return f"/journeys/email/{self.journey_email_id}/{action}.json"
 

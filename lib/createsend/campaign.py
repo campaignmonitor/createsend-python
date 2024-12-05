@@ -188,4 +188,4 @@ class Campaign(CreateSendBase):
         return json_to_py(response)
 
     def uri_for(self, action):
-        return "/campaigns/{}/{}.json".format(self.campaign_id, action)
+        return f"/campaigns/{self.campaign_id}/{action}.json"

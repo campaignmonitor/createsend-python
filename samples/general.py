@@ -9,4 +9,4 @@ clients = cs.clients()
 
 # Get list of clients 
 for cl in clients:
-  print("Client: {} - Id: {}".format(cl.Name, cl.ClientID))
+  print(f"Client: {cl.Name} - Id: {cl.ClientID}")
