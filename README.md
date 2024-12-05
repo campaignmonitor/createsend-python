@@ -206,7 +206,7 @@ def test_add_with_custom_fields(self):
   self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
   custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
   email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
-  self.assertEquals(email_address, "subscriber@example.com")
+  self.assertEqual(email_address, "subscriber@example.com")
 ```
 
 ## Contributing

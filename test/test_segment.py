@@ -14,8 +14,8 @@ class SegmentTestCase(object):
         s.stub_request("segments/%s.json" % list_id, "create_segment.json", None,
                        "{\"RuleGroups\": [{\"Rules\": [{\"Clause\": \"CONTAINS example.com\", \"RuleType\": \"EmailAddress\"}, {\"Clause\": \"EQUALS subscriber\", \"RuleType\": \"Name\"}]}], \"Title\": \"new segment title\"}")
         segment_id = s.create(list_id, "new segment title", rulegroups)
-        self.assertEquals(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
-        self.assertEquals(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
+        self.assertEqual(segment_id, "0246c2aea610a3545d9780bf6ab890061234")
+        self.assertEqual(s.segment_id, "0246c2aea610a3545d9780bf6ab890061234")
 
     def test_update(self):
         rulegroups = [
@@ -36,41 +36,41 @@ class SegmentTestCase(object):
         self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=False" %
                                   (self.segment.segment_id, quote(min_date)), "segment_subscribers.json")
         res = self.segment.subscribers(min_date)
-        self.assertEquals(res.ResultsOrderedBy, "email")
-        self.assertEquals(res.OrderDirection, "asc")
-        self.assertEquals(res.PageNumber, 1)
-        self.assertEquals(res.PageSize, 1000)
-        self.assertEquals(res.RecordsOnThisPage, 2)
-        self.assertEquals(res.TotalNumberOfRecords, 2)
-        self.assertEquals(res.NumberOfPages, 1)
-        self.assertEquals(len(res.Results), 2)
-        self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
-        self.assertEquals(res.Results[0].Name, "Person One")
-        self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
-        self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
-        self.assertEquals(res.Results[0].State, "Active")
-        self.assertEquals(res.Results[0].CustomFields, [])
+        self.assertEqual(res.ResultsOrderedBy, "email")
+        self.assertEqual(res.OrderDirection, "asc")
+        self.assertEqual(res.PageNumber, 1)
+        self.assertEqual(res.PageSize, 1000)
+        self.assertEqual(res.RecordsOnThisPage, 2)
+        self.assertEqual(res.TotalNumberOfRecords, 2)
+        self.assertEqual(res.NumberOfPages, 1)
+        self.assertEqual(len(res.Results), 2)
+        self.assertEqual(res.Results[0].EmailAddress, "personone@example.com")
+        self.assertEqual(res.Results[0].Name, "Person One")
+        self.assertEqual(res.Results[0].Date, "2010-10-27 13:13:00")
+        self.assertEqual(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
+        self.assertEqual(res.Results[0].State, "Active")
+        self.assertEqual(res.Results[0].CustomFields, [])
 
     def test_subscribers_with_tracking_information_included(self):
         min_date = "2010-01-01"
         self.segment.stub_request("segments/%s/active.json?date=%s&orderfield=email&page=1&pagesize=1000&orderdirection=asc&includetrackinginformation=True" %
                                   (self.segment.segment_id, quote(min_date)), "segment_subscribers_with_tracking_preference.json")
         res = self.segment.subscribers(min_date, include_tracking_information=True)
-        self.assertEquals(res.ResultsOrderedBy, "email")
-        self.assertEquals(res.OrderDirection, "asc")
-        self.assertEquals(res.PageNumber, 1)
-        self.assertEquals(res.PageSize, 1000)
-        self.assertEquals(res.RecordsOnThisPage, 2)
-        self.assertEquals(res.TotalNumberOfRecords, 2)
-        self.assertEquals(res.NumberOfPages, 1)
-        self.assertEquals(len(res.Results), 2)
-        self.assertEquals(res.Results[0].EmailAddress, "personone@example.com")
-        self.assertEquals(res.Results[0].Name, "Person One")
-        self.assertEquals(res.Results[0].Date, "2010-10-27 13:13:00")
-        self.assertEquals(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
-        self.assertEquals(res.Results[0].State, "Active")
-        self.assertEquals(res.Results[0].CustomFields, [])
-        self.assertEquals(res.Results[0].ConsentToTrack, "Yes")
+        self.assertEqual(res.ResultsOrderedBy, "email")
+        self.assertEqual(res.OrderDirection, "asc")
+        self.assertEqual(res.PageNumber, 1)
+        self.assertEqual(res.PageSize, 1000)
+        self.assertEqual(res.RecordsOnThisPage, 2)
+        self.assertEqual(res.TotalNumberOfRecords, 2)
+        self.assertEqual(res.NumberOfPages, 1)
+        self.assertEqual(len(res.Results), 2)
+        self.assertEqual(res.Results[0].EmailAddress, "personone@example.com")
+        self.assertEqual(res.Results[0].Name, "Person One")
+        self.assertEqual(res.Results[0].Date, "2010-10-27 13:13:00")
+        self.assertEqual(res.Results[0].ListJoinedDate, "2010-10-27 13:13:00")
+        self.assertEqual(res.Results[0].State, "Active")
+        self.assertEqual(res.Results[0].CustomFields, [])
+        self.assertEqual(res.Results[0].ConsentToTrack, "Yes")
 
     def test_delete(self):
         self.segment.stub_request("segments/%s.json" %
@@ -86,16 +86,16 @@ class SegmentTestCase(object):
         self.segment.stub_request("segments/%s.json" %
                                   self.segment.segment_id, "segment_details.json")
         res = self.segment.details()
-        self.assertEquals(res.ActiveSubscribers, 0)
-        self.assertEquals(len(res.RuleGroups), 2)
-        self.assertEquals(res.RuleGroups[0].Rules[0].RuleType, "EmailAddress")
-        self.assertEquals(res.RuleGroups[0].Rules[
+        self.assertEqual(res.ActiveSubscribers, 0)
+        self.assertEqual(len(res.RuleGroups), 2)
+        self.assertEqual(res.RuleGroups[0].Rules[0].RuleType, "EmailAddress")
+        self.assertEqual(res.RuleGroups[0].Rules[
                           0].Clause, "CONTAINS @hello.com")
-        self.assertEquals(res.RuleGroups[1].Rules[0].RuleType, "Name")
-        self.assertEquals(res.RuleGroups[1].Rules[0].Clause, "PROVIDED")
-        self.assertEquals(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
-        self.assertEquals(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
-        self.assertEquals(res.Title, "My Segment")
+        self.assertEqual(res.RuleGroups[1].Rules[0].RuleType, "Name")
+        self.assertEqual(res.RuleGroups[1].Rules[0].Clause, "PROVIDED")
+        self.assertEqual(res.ListID, "2bea949d0bf96148c3e6a209d2e82060")
+        self.assertEqual(res.SegmentID, "dba84a225d5ce3d19105d7257baac46f")
+        self.assertEqual(res.Title, "My Segment")
 
 
 class OAuthSegmentTestCase(unittest.TestCase, SegmentTestCase):

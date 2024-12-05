@@ -11,147 +11,147 @@ class ClientTestCase(object):
         c.stub_request("clients.json", "create_client.json")
         client_id = c.create(
             "Client Company Name", "(GMT+10:00) Canberra, Melbourne, Sydney", "Australia")
-        self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", client_id)
-        self.assertEquals("32a381c49a2df99f1d0c6f3c112352b9", c.client_id)
+        self.assertEqual("32a381c49a2df99f1d0c6f3c112352b9", client_id)
+        self.assertEqual("32a381c49a2df99f1d0c6f3c112352b9", c.client_id)
 
     def test_details(self):
         self.cl.stub_request("clients/%s.json" %
                              self.cl.client_id, "client_details.json")
         cl = self.cl.details()
-        self.assertEquals(
+        self.assertEqual(
             cl.ApiKey, "639d8cc27198202f5fe6037a8b17a29a59984b86d3289bc9")
-        self.assertEquals(cl.BasicDetails.ClientID,
+        self.assertEqual(cl.BasicDetails.ClientID,
                           "4a397ccaaa55eb4e6aa1221e1e2d7122")
-        self.assertEquals(cl.BasicDetails.ContactName, "Client One (contact)")
-        self.assertEquals(cl.AccessDetails.Username, "clientone")
-        self.assertEquals(cl.AccessDetails.AccessLevel, 23)
-        self.assertEquals(cl.BillingDetails.Credits, 500)
+        self.assertEqual(cl.BasicDetails.ContactName, "Client One (contact)")
+        self.assertEqual(cl.AccessDetails.Username, "clientone")
+        self.assertEqual(cl.AccessDetails.AccessLevel, 23)
+        self.assertEqual(cl.BillingDetails.Credits, 500)
 
     def test_campaigns(self):
         self.cl.stub_request("clients/%s/campaigns.json?sentfromdate=&senttodate=&page=1&tags=&pagesize=1000&orderdirection=desc" %
                              self.cl.client_id, "campaigns.json")
         sentCampaigns = self.cl.campaigns()
         campaigns = sentCampaigns.Results
-        self.assertEquals(len(campaigns), 2)
-        self.assertEquals(campaigns[0].CampaignID,
+        self.assertEqual(len(campaigns), 2)
+        self.assertEqual(campaigns[0].CampaignID,
                           'fc0ce7105baeaf97f47c99be31d02a91')
-        self.assertEquals(campaigns[0].WebVersionURL,
+        self.assertEqual(campaigns[0].WebVersionURL,
                           'http://createsend.com/t/r-765E86829575EE2C')
-        self.assertEquals(campaigns[0].WebVersionTextURL,
+        self.assertEqual(campaigns[0].WebVersionTextURL,
                           'http://createsend.com/t/r-765E86829575EE2C/t')
-        self.assertEquals(campaigns[0].Subject, 'Campaign One')
-        self.assertEquals(campaigns[0].Name, 'Campaign One')
-        self.assertEquals(campaigns[0].SentDate, '2010-10-12 12:58:00')
-        self.assertEquals(campaigns[0].TotalRecipients, 2245)
-        self.assertEquals(campaigns[0].FromName, 'My Name')
-        self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
-        self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
-        self.assertEquals(campaigns[0].Tags, ["Tag1", "Tag2"])
-        self.assertEquals(sentCampaigns.ResultsOrderedBy, "SentDate")
-        self.assertEquals(sentCampaigns.OrderDirection, "desc")
-        self.assertEquals(sentCampaigns.PageNumber, 1)
-        self.assertEquals(sentCampaigns.PageSize, 2)
-        self.assertEquals(sentCampaigns.RecordsOnThisPage, 2)
-        self.assertEquals(sentCampaigns.TotalNumberOfRecords, 49)
-        self.assertEquals(sentCampaigns.NumberOfPages, 25)
+        self.assertEqual(campaigns[0].Subject, 'Campaign One')
+        self.assertEqual(campaigns[0].Name, 'Campaign One')
+        self.assertEqual(campaigns[0].SentDate, '2010-10-12 12:58:00')
+        self.assertEqual(campaigns[0].TotalRecipients, 2245)
+        self.assertEqual(campaigns[0].FromName, 'My Name')
+        self.assertEqual(campaigns[0].FromEmail, 'myemail@example.com')
+        self.assertEqual(campaigns[0].ReplyTo, 'myemail@example.com')
+        self.assertEqual(campaigns[0].Tags, ["Tag1", "Tag2"])
+        self.assertEqual(sentCampaigns.ResultsOrderedBy, "SentDate")
+        self.assertEqual(sentCampaigns.OrderDirection, "desc")
+        self.assertEqual(sentCampaigns.PageNumber, 1)
+        self.assertEqual(sentCampaigns.PageSize, 2)
+        self.assertEqual(sentCampaigns.RecordsOnThisPage, 2)
+        self.assertEqual(sentCampaigns.TotalNumberOfRecords, 49)
+        self.assertEqual(sentCampaigns.NumberOfPages, 25)
 
     def test_scheduled(self):
         self.cl.stub_request("clients/%s/scheduled.json" %
                              self.cl.client_id, "scheduled_campaigns.json")
         campaigns = self.cl.scheduled()
-        self.assertEquals(len(campaigns), 2)
-        self.assertEquals(campaigns[0].DateScheduled, "2011-05-25 10:40:00")
-        self.assertEquals(campaigns[0].ScheduledTimeZone,
+        self.assertEqual(len(campaigns), 2)
+        self.assertEqual(campaigns[0].DateScheduled, "2011-05-25 10:40:00")
+        self.assertEqual(campaigns[0].ScheduledTimeZone,
                           "(GMT+10:00) Canberra, Melbourne, Sydney")
-        self.assertEquals(campaigns[0].CampaignID,
+        self.assertEqual(campaigns[0].CampaignID,
                           "827dbbd2161ea9989fa11ad562c66937")
-        self.assertEquals(campaigns[0].Name, "Magic Issue One")
-        self.assertEquals(campaigns[0].Subject, "Magic Issue One")
-        self.assertEquals(campaigns[0].DateCreated, "2011-05-24 10:37:00")
-        self.assertEquals(campaigns[0].PreviewURL,
+        self.assertEqual(campaigns[0].Name, "Magic Issue One")
+        self.assertEqual(campaigns[0].Subject, "Magic Issue One")
+        self.assertEqual(campaigns[0].DateCreated, "2011-05-24 10:37:00")
+        self.assertEqual(campaigns[0].PreviewURL,
                           "http://createsend.com/t/r-DD543521A87C9B8B")
-        self.assertEquals(campaigns[0].PreviewTextURL,
+        self.assertEqual(campaigns[0].PreviewTextURL,
                           "http://createsend.com/t/r-DD543521A87C9B8B/t")
-        self.assertEquals(campaigns[0].FromName, 'My Name')
-        self.assertEquals(campaigns[0].FromEmail, 'myemail@example.com')
-        self.assertEquals(campaigns[0].ReplyTo, 'myemail@example.com')
-        self.assertEquals(campaigns[0].Tags, [])
+        self.assertEqual(campaigns[0].FromName, 'My Name')
+        self.assertEqual(campaigns[0].FromEmail, 'myemail@example.com')
+        self.assertEqual(campaigns[0].ReplyTo, 'myemail@example.com')
+        self.assertEqual(campaigns[0].Tags, [])
 
     def test_drafts(self):
         self.cl.stub_request("clients/%s/drafts.json" %
                              self.cl.client_id, "drafts.json")
         drafts = self.cl.drafts()
-        self.assertEquals(len(drafts), 2)
-        self.assertEquals(drafts[0].CampaignID,
+        self.assertEqual(len(drafts), 2)
+        self.assertEqual(drafts[0].CampaignID,
                           '7c7424792065d92627139208c8c01db1')
-        self.assertEquals(drafts[0].Name, 'Draft One')
-        self.assertEquals(drafts[0].Subject, 'Draft One')
-        self.assertEquals(drafts[0].DateCreated, '2010-08-19 16:08:00')
-        self.assertEquals(drafts[0].PreviewURL,
+        self.assertEqual(drafts[0].Name, 'Draft One')
+        self.assertEqual(drafts[0].Subject, 'Draft One')
+        self.assertEqual(drafts[0].DateCreated, '2010-08-19 16:08:00')
+        self.assertEqual(drafts[0].PreviewURL,
                           'http://createsend.com/t/r-E97A7BB2E6983DA1')
-        self.assertEquals(drafts[0].PreviewTextURL,
+        self.assertEqual(drafts[0].PreviewTextURL,
                           'http://createsend.com/t/r-E97A7BB2E6983DA1/t')
-        self.assertEquals(drafts[0].FromName, 'My Name')
-        self.assertEquals(drafts[0].FromEmail, 'myemail@example.com')
-        self.assertEquals(drafts[0].ReplyTo, 'myemail@example.com')
-        self.assertEquals(drafts[0].Tags, ["Tags5"])
+        self.assertEqual(drafts[0].FromName, 'My Name')
+        self.assertEqual(drafts[0].FromEmail, 'myemail@example.com')
+        self.assertEqual(drafts[0].ReplyTo, 'myemail@example.com')
+        self.assertEqual(drafts[0].Tags, ["Tags5"])
     
     def test_tags(self):
         self.cl.stub_request("clients/%s/tags.json" %
                              self.cl.client_id, "tags.json")
         tags = self.cl.tags()
-        self.assertEquals(len(tags), 2)
-        self.assertEquals(tags[0].Name, 'Happy')
-        self.assertEquals(tags[0].NumberOfCampaigns, 3)
-        self.assertEquals(tags[1].Name, 'Sad')
-        self.assertEquals(tags[1].NumberOfCampaigns, 1)
+        self.assertEqual(len(tags), 2)
+        self.assertEqual(tags[0].Name, 'Happy')
+        self.assertEqual(tags[0].NumberOfCampaigns, 3)
+        self.assertEqual(tags[1].Name, 'Sad')
+        self.assertEqual(tags[1].NumberOfCampaigns, 1)
 
     def test_lists(self):
         self.cl.stub_request("clients/%s/lists.json" %
                              self.cl.client_id, "lists.json")
         lists = self.cl.lists()
-        self.assertEquals(len(lists), 2)
-        self.assertEquals(lists[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
-        self.assertEquals(lists[0].Name, 'List One')
+        self.assertEqual(len(lists), 2)
+        self.assertEqual(lists[0].ListID, 'a58ee1d3039b8bec838e6d1482a8a965')
+        self.assertEqual(lists[0].Name, 'List One')
 
     def test_lists_for_email(self):
         email = "valid@example.com"
         self.cl.stub_request("clients/%s/listsforemail.json?email=%s" %
                              (self.cl.client_id, quote(email)), "listsforemail.json")
         lists = self.cl.lists_for_email(email)
-        self.assertEquals(len(lists), 2)
-        self.assertEquals(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
-        self.assertEquals(lists[0].ListName, 'List Number One')
-        self.assertEquals(lists[0].SubscriberState, 'Active')
-        self.assertEquals(lists[0].DateSubscriberAdded, '2012-08-20 22:32:00')
+        self.assertEqual(len(lists), 2)
+        self.assertEqual(lists[0].ListID, 'ab4a2b57c7c8f1ba62f898a1af1a575b')
+        self.assertEqual(lists[0].ListName, 'List Number One')
+        self.assertEqual(lists[0].SubscriberState, 'Active')
+        self.assertEqual(lists[0].DateSubscriberAdded, '2012-08-20 22:32:00')
 
     def test_segments(self):
         self.cl.stub_request("clients/%s/segments.json" %
                              self.cl.client_id, "segments.json")
         segments = self.cl.segments()
-        self.assertEquals(len(segments), 2)
-        self.assertEquals(segments[0].ListID,
+        self.assertEqual(len(segments), 2)
+        self.assertEqual(segments[0].ListID,
                           'a58ee1d3039b8bec838e6d1482a8a965')
-        self.assertEquals(segments[0].SegmentID,
+        self.assertEqual(segments[0].SegmentID,
                           '46aa5e01fd43381863d4e42cf277d3a9')
-        self.assertEquals(segments[0].Title, 'Segment One')
+        self.assertEqual(segments[0].Title, 'Segment One')
 
     def test_suppressionlist(self):
         self.cl.stub_request("clients/%s/suppressionlist.json?orderfield=email&page=1&pagesize=1000&orderdirection=asc" %
                              self.cl.client_id, "suppressionlist.json")
         res = self.cl.suppressionlist()
-        self.assertEquals(res.ResultsOrderedBy, "email")
-        self.assertEquals(res.OrderDirection, "asc")
-        self.assertEquals(res.PageNumber, 1)
-        self.assertEquals(res.PageSize, 1000)
-        self.assertEquals(res.RecordsOnThisPage, 5)
-        self.assertEquals(res.TotalNumberOfRecords, 5)
-        self.assertEquals(res.NumberOfPages, 1)
-        self.assertEquals(len(res.Results), 5)
-        self.assertEquals(res.Results[0].SuppressionReason, "Unsubscribed")
-        self.assertEquals(res.Results[0].EmailAddress, "example+1@example.com")
-        self.assertEquals(res.Results[0].Date, "2010-10-26 10:55:31")
-        self.assertEquals(res.Results[0].State, "Suppressed")
+        self.assertEqual(res.ResultsOrderedBy, "email")
+        self.assertEqual(res.OrderDirection, "asc")
+        self.assertEqual(res.PageNumber, 1)
+        self.assertEqual(res.PageSize, 1000)
+        self.assertEqual(res.RecordsOnThisPage, 5)
+        self.assertEqual(res.TotalNumberOfRecords, 5)
+        self.assertEqual(res.NumberOfPages, 1)
+        self.assertEqual(len(res.Results), 5)
+        self.assertEqual(res.Results[0].SuppressionReason, "Unsubscribed")
+        self.assertEqual(res.Results[0].EmailAddress, "example+1@example.com")
+        self.assertEqual(res.Results[0].Date, "2010-10-26 10:55:31")
+        self.assertEqual(res.Results[0].State, "Suppressed")
 
     def test_suppress_with_single_email(self):
         self.cl.stub_request("clients/%s/suppress.json" %
@@ -173,10 +173,10 @@ class ClientTestCase(object):
         self.cl.stub_request("clients/%s/templates.json" %
                              self.cl.client_id, "templates.json")
         templates = self.cl.templates()
-        self.assertEquals(len(templates), 2)
-        self.assertEquals(templates[0].TemplateID,
+        self.assertEqual(len(templates), 2)
+        self.assertEqual(templates[0].TemplateID,
                           '5cac213cf061dd4e008de5a82b7a3621')
-        self.assertEquals(templates[0].Name, 'Template One')
+        self.assertEqual(templates[0].Name, 'Template One')
 
     def test_set_basics(self):
         self.cl.stub_request("clients/%s/setbasics.json" %
@@ -208,30 +208,30 @@ class ClientTestCase(object):
         self.cl.stub_request("clients/%s/credits.json" %
                              self.cl.client_id, "transfer_credits.json")
         result = self.cl.transfer_credits(200, False)
-        self.assertEquals(result.AccountCredits, 800)
-        self.assertEquals(result.ClientCredits, 200)
+        self.assertEqual(result.AccountCredits, 800)
+        self.assertEqual(result.ClientCredits, 200)
 
     def test_people(self):
         self.cl.stub_request("clients/%s/people.json" %
                              self.cl.client_id, "people.json")
         people = self.cl.people()
-        self.assertEquals(2, len(people))
-        self.assertEquals('person1@blackhole.com', people[0].EmailAddress)
-        self.assertEquals('Person One', people[0].Name)
-        self.assertEquals('Active', people[0].Status)
+        self.assertEqual(2, len(people))
+        self.assertEqual('person1@blackhole.com', people[0].EmailAddress)
+        self.assertEqual('Person One', people[0].Name)
+        self.assertEqual('Active', people[0].Status)
 
     def test_get_primary_contact(self):
         self.cl.stub_request("clients/%s/primarycontact.json" %
                              self.cl.client_id, "client_get_primary_contact.json")
         primary_contact = self.cl.get_primary_contact()
-        self.assertEquals('person@blackhole.com', primary_contact.EmailAddress)
+        self.assertEqual('person@blackhole.com', primary_contact.EmailAddress)
 
     def test_set_primary_contact(self):
         email = 'person@blackhole.com'
         self.cl.stub_request("clients/%s/primarycontact.json?email=%s" %
                              (self.cl.client_id, quote(email, '')), 'client_set_primary_contact.json')
         result = self.cl.set_primary_contact(email)
-        self.assertEquals(email, result.EmailAddress)
+        self.assertEqual(email, result.EmailAddress)
 
     def test_delete(self):
         self.cl.stub_request("clients/%s.json" % self.cl.client_id, None)
