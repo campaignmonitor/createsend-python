@@ -7,7 +7,6 @@
 ```
 pip install twine
 ```
-
 - You must install [setuptools](https://pypi.org/project/setuptools/)
 ```
 pip install setuptools
