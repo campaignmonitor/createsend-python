@@ -19,6 +19,8 @@ jobs:
 ***REMOVED******REMOVED******REMOVED***with:
 ***REMOVED******REMOVED******REMOVED******REMOVED***python-version: ${{ matrix.python-version }}
 ***REMOVED******REMOVED***- name: Install dependencies
-***REMOVED******REMOVED******REMOVED***run: pip install tox tox-gh
+***REMOVED******REMOVED******REMOVED***run: |
+***REMOVED******REMOVED******REMOVED******REMOVED***python -m pip install --upgrade pip
+***REMOVED******REMOVED******REMOVED******REMOVED***pip install tox tox-gh
 ***REMOVED******REMOVED***- name: Test with tox
 ***REMOVED******REMOVED******REMOVED***run: tox -e ${{ matrix.python-version }}
