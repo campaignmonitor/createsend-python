@@ -1,8 +1,6 @@
-from __future__ import absolute_import
-
 ***REMOVED***
 import re
-from six.moves.http_client import HTTPSConnection
+from http.client import HTTPSConnection
 import socket
 import ssl
 import json
@@ -101,21 +99,12 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
 
-***REMOVED******REMOVED******REMOVED******REMOVED***# for >= py3.7, mandatory since 3.12
-***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(ssl.SSLContext, 'wrap_socket'):
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext()
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.verify_mode = ssl.CERT_REQUIRED
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_verify_locations(cert_path)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.sock = context.wrap_socket(sock)
-***REMOVED******REMOVED******REMOVED******REMOVED***else:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.sock = ssl.wrap_socket(
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***sock,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.key_file,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.cert_file,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***cert_reqs=ssl.CERT_REQUIRED,
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***ca_certs=cert_path)
+***REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext()
+***REMOVED******REMOVED******REMOVED******REMOVED***context.verify_mode = ssl.CERT_REQUIRED
+***REMOVED******REMOVED******REMOVED******REMOVED***context.load_verify_locations(cert_path)
+***REMOVED******REMOVED******REMOVED******REMOVED***if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.sock = context.wrap_socket(sock)
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***match_hostname(self.sock.getpeercert(), self.host)
@@ -154,12 +143,12 @@ def validate_consent_to_track(user_input):
 ***REMOVED******REMOVED******REMOVED******REMOVED***user_input = user_input.lower()
 ***REMOVED******REMOVED***if user_input in VALID_CONSENT_TO_TRACK_VALUES:
 ***REMOVED******REMOVED******REMOVED******REMOVED***return
-***REMOVED******REMOVED***raise ClientError("Consent to track value must be one of %s" % (VALID_CONSENT_TO_TRACK_VALUES,))
+***REMOVED******REMOVED***raise ClientError(f"Consent to track value must be one of {VALID_CONSENT_TO_TRACK_VALUES}")
 
 
 def get_faker(expected_url, filename, status=None, body=None):
 
-***REMOVED******REMOVED***class Faker(object):
+***REMOVED******REMOVED***class Faker:
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Represents a fake web request, including the expected URL, an open 
 ***REMOVED******REMOVED******REMOVED******REMOVED***function which reads the expected response from a fixture file, and the
 ***REMOVED******REMOVED******REMOVED******REMOVED***expected response status code."""
@@ -172,7 +161,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***def open(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***if self.filename:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open("%s/../test/fixtures/%s" % (os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return open(f"{os.path.dirname(os.path.dirname(__file__))}/../test/fixtures/{self.filename}", mode='rb').read()
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***else:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***return ''
 

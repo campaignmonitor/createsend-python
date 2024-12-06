@@ -3,7 +3,7 @@ import unittest
 from createsend.transactional import Transactional
 
 
-class TransactionalTestCase(object):
+class TransactionalTestCase:
 
 ***REMOVED******REMOVED***def test_smart_email_list(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***status = "all"

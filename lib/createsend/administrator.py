@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Administrator(CreateSendBase):
 
 ***REMOVED******REMOVED***def __init__(self, auth=None, email_address=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.email_address = email_address
-***REMOVED******REMOVED******REMOVED******REMOVED***super(Administrator, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def get(self, email_address=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Gets an administrator by***REMOVED***email address."""

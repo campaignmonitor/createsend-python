@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Client(CreateSendBase):
 
 ***REMOVED******REMOVED***def __init__(self, auth=None, client_id=None):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.client_id = client_id
-***REMOVED******REMOVED******REMOVED******REMOVED***super(Client, self).__init__(auth)
+***REMOVED******REMOVED******REMOVED******REMOVED***super().__init__(auth)
 
 ***REMOVED******REMOVED***def create(self, company, timezone, country):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Creates a client."""
@@ -186,4 +184,4 @@ class Client(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
 ***REMOVED******REMOVED***def uri_for(self, action):
-***REMOVED******REMOVED******REMOVED******REMOVED***return "/clients/%s/%s.json" % (self.client_id, action)
+***REMOVED******REMOVED******REMOVED******REMOVED***return f"/clients/{self.client_id}/{action}.json"

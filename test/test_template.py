@@ -3,7 +3,7 @@ import unittest
 from createsend.template import Template
 
 
-class TemplateTestCase(object):
+class TemplateTestCase:
 
 ***REMOVED******REMOVED***def test_create(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'

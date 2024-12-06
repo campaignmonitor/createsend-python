@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.segment import Segment
 
 
-class SegmentTestCase(object):
+class SegmentTestCase:
 
 ***REMOVED******REMOVED***def test_create(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***list_id = "2983492834987394879837498"
