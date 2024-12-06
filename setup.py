@@ -34,8 +34,6 @@ setup(
 ***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3",
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***# Specifically, we support the following releases.
-***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3.6",
-***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3.7",
 ***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3.8",
 ***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3.9",
 ***REMOVED******REMOVED******REMOVED******REMOVED***"Programming Language :: Python :: 3.10",
