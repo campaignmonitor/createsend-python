@@ -87,6 +87,9 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 ***REMOVED******REMOVED******REMOVED******REMOVED***sock = socket.create_connection(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***(self.host, self.port), **self.connection_kwargs)
 
+***REMOVED******REMOVED******REMOVED******REMOVED***if self._tunnel_host:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self._tunnel()
+
 ***REMOVED******REMOVED******REMOVED******REMOVED***cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
 
 ***REMOVED******REMOVED******REMOVED******REMOVED***context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
