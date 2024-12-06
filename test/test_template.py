@@ -3,7 +3,7 @@ import unittest
 from createsend.template import Template
 
 
-class TemplateTestCase(object):
+class TemplateTestCase:
 
 ***REMOVED******REMOVED***def test_create(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -11,18 +11,18 @@ class TemplateTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***t.stub_request("templates/%s.json" % client_id, "create_template.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***template_id = t.create(client_id, "Template One", "http://templates.org/index.html",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "http://templates.org/files.zip")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(template_id, "98y2e98y289dh89h9383891234")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(t.template_id, "98y2e98y289dh89h9383891234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(template_id, "98y2e98y289dh89h9383891234")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(t.template_id, "98y2e98y289dh89h9383891234")
 
 ***REMOVED******REMOVED***def test_details(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.template.stub_request(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"templates/%s.json" % self.template.template_id, "template_details.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***t = self.template.details()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(t.TemplateID, "98y2e98y289dh89h938389")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(t.Name, "Template One")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(t.TemplateID, "98y2e98y289dh89h938389")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(t.Name, "Template One")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***t.PreviewURL, "http://preview.createsend.com/createsend/templates/previewTemplate.aspx?ID=01AF532CD8889B33&d=r&c=E816F55BFAD1A753")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***t.ScreenshotURL, "http://preview.createsend.com/ts/r/14/833/263/14833263.jpg?0318092600")
 
 ***REMOVED******REMOVED***def test_update(self):

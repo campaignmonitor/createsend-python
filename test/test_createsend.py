@@ -1,4 +1,4 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.createsend import (
@@ -13,75 +13,75 @@ from createsend.client import Client
 from createsend.template import Template
 
 
-class CreateSendTestCase(object):
+class CreateSendTestCase:
 ***REMOVED******REMOVED***"""CreateSend tests to be run in the context of both using an API key 
 ***REMOVED******REMOVED***and using OAuth."""
 
 ***REMOVED******REMOVED***def test_that_default_user_agent_is_set(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("clients.json", "clients.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***cl = self.cs.clients()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.cs.headers['User-Agent'], CreateSend.default_user_agent)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(2, len(cl))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(2, len(cl))
 
 ***REMOVED******REMOVED***def test_that_custom_user_agent_can_be_set(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***CreateSend.user_agent = "custom user agent"
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("clients.json", "clients.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***cl = self.cs.clients()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(self.cs.headers['User-Agent'], "custom user agent")
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(2, len(cl))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(self.cs.headers['User-Agent'], "custom user agent")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(2, len(cl))
 ***REMOVED******REMOVED******REMOVED******REMOVED***CreateSend.user_agent = CreateSend.default_user_agent
 
 ***REMOVED******REMOVED***def test_clients(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("clients.json", "clients.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***cl = self.cs.clients()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(2, len(cl))
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals("4a397ccaaa55eb4e6aa1221e1e2d7122", cl[0].ClientID)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals("Client One", cl[0].Name)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(2, len(cl))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual("4a397ccaaa55eb4e6aa1221e1e2d7122", cl[0].ClientID)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual("Client One", cl[0].Name)
 
 ***REMOVED******REMOVED***def test_billing_details(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("billingdetails.json", "billingdetails.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***bd = self.cs.billing_details()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(3021, bd.Credits)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(3021, bd.Credits)
 
 ***REMOVED******REMOVED***def test_countries(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("countries.json", "countries.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***countries = self.cs.countries()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(245, len(countries))
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals("Australia", countries[11])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(245, len(countries))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual("Australia", countries[11])
 
 ***REMOVED******REMOVED***def test_systemdate(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("systemdate.json", "systemdate.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***systemdate = self.cs.systemdate()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(systemdate, "2010-10-15 09:27:00")
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(systemdate, "2010-10-15 09:27:00")
 
 ***REMOVED******REMOVED***def test_timezones(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("timezones.json", "timezones.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***timezones = self.cs.timezones()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(97, len(timezones))
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals("(GMT+12:00) Fiji", timezones[61])
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(97, len(timezones))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual("(GMT+12:00) Fiji", timezones[61])
 
 ***REMOVED******REMOVED***def test_administrators(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("admins.json", "administrators.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***administrators = self.cs.administrators()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(2, len(administrators))
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('admin1@blackhole.com',
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(2, len(administrators))
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('admin1@blackhole.com',
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***administrators[0].EmailAddress)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('Admin One', administrators[0].Name)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('Active', administrators[0].Status)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('Admin One', administrators[0].Name)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('Active', administrators[0].Status)
 
 ***REMOVED******REMOVED***def test_get_primary_contact(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request("primarycontact.json",
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** "admin_get_primary_contact.json")
 ***REMOVED******REMOVED******REMOVED******REMOVED***primary_contact = self.cs.get_primary_contact()
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('admin@blackhole.com', primary_contact.EmailAddress)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('admin@blackhole.com', primary_contact.EmailAddress)
 
 ***REMOVED******REMOVED***def test_set_primary_contact(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***email = 'admin@blackhole.com'
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request('primarycontact.json?email=%s' %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** quote(email, ''), 'admin_set_primary_contact.json')
 ***REMOVED******REMOVED******REMOVED******REMOVED***result = self.cs.set_primary_contact(email)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(email, result.EmailAddress)
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(email, result.EmailAddress)
 
 ***REMOVED******REMOVED***def test_external_session_url(self):
 ***REMOVED******REMOVED******REMOVED******REMOVED***email = "exammple@example.com"
@@ -92,7 +92,7 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***self.cs.stub_request('externalsession.json', 'external_session.json')
 ***REMOVED******REMOVED******REMOVED******REMOVED***result = self.cs.external_session_url(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***email, chrome, url, integrator_id, client_id)
-***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"https://external1.createsend.com/cd/create/ABCDEF12/DEADBEEF?url=FEEDDAD1", result.SessionUrl)
 
 ***REMOVED******REMOVED***# Test fake web mode
@@ -114,9 +114,9 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***c.create("", "", "")
 ***REMOVED******REMOVED******REMOVED******REMOVED***except BadRequest as br:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(98798, br.data.Code)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('A crazy API error', br.data.Message)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(98798, br.data.Code)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('A crazy API error', br.data.Message)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***'The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % br)
 
 ***REMOVED******REMOVED***def test_unauthorized(self):
@@ -125,9 +125,9 @@ class CreateSendTestCase(object):
 ***REMOVED******REMOVED******REMOVED******REMOVED***try:
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***c.create("", "", "")
 ***REMOVED******REMOVED******REMOVED******REMOVED***except Unauthorized as ua:
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(98798, ua.data.Code)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals('A crazy API error', ua.data.Message)
-***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEquals(
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(98798, ua.data.Code)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual('A crazy API error', ua.data.Message)
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***self.assertEqual(
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***'The CreateSend API responded with the following error - 98798: A crazy API error', "%s" % ua)
 
 ***REMOVED******REMOVED***# Test that the corresponding exceptions are raised according to the
