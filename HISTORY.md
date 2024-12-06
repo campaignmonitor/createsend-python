@@ -1,7 +1,7 @@
 # createsend-python history
 
 ## v8.0.2 - 6 Dec, 2024
-* Tidy up of code (https://github.com/campaignmonitor/createsend-python/pull/84)
+* Tidy up of code from [#84](https://github.com/campaignmonitor/createsend-python/pull/84)
 
 ## v8.0.1 - 5 Dec, 2024
 * No changes to actual wrapper code.
