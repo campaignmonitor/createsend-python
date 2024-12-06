@@ -2,16 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name="createsend",
-    version='8.0.1',
+    version='8.0.2',
     description="A library which implements the complete functionality of the Campaign Monitor API.",
     author='Campaign Monitor',
     author_email='support@campaignmonitor.com',
     url="http://campaignmonitor.github.io/createsend-python/",
     license="MIT",
     keywords="createsend campaign monitor email",
-    install_requires=[
-        'six>=1.10',
-    ],
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
     package_data={'': ['cacert.pem']},

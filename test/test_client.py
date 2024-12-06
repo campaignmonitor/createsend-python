@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.client import Client
 
 
-class ClientTestCase(object):
+class ClientTestCase:
 
     def test_create(self):
         c = Client()

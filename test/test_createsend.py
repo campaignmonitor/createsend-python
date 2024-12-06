@@ -1,4 +1,4 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.createsend import (
@@ -13,7 +13,7 @@ from createsend.client import Client
 from createsend.template import Template
 
 
-class CreateSendTestCase(object):
+class CreateSendTestCase:
     """CreateSend tests to be run in the context of both using an API key 
     and using OAuth."""
 

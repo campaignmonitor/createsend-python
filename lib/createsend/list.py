@@ -1,7 +1,5 @@
-from __future__ import absolute_import
-
 import json
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
@@ -12,7 +10,7 @@ class List(CreateSendBase):
 
     def __init__(self, auth=None, list_id=None):
         self.list_id = list_id
-        super(List, self).__init__(auth)
+        super().__init__(auth)
 
     def create(self, client_id, title, unsubscribe_page, confirmed_opt_in,
                confirmation_success_page, unsubscribe_setting="AllClientLists"):
@@ -206,4 +204,4 @@ class List(CreateSendBase):
             "webhooks/%s/deactivate" % webhook_id), ' ')
 
     def uri_for(self, action):
-        return "/lists/%s/%s.json" % (self.list_id, action)
+        return f"/lists/{self.list_id}/{action}.json"

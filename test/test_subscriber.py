@@ -1,11 +1,11 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.createsend import BadRequest
 from createsend.subscriber import Subscriber
 
 
-class SubscriberTestCase(object):
+class SubscriberTestCase:
 
     def test_get(self):
         email = "subscriber@example.com"
@@ -189,7 +189,7 @@ class SubscriberTestCase(object):
         self.subscriber.unsubscribe()
 
     def test_history(self):
-        self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (
+        self.subscriber.stub_request("subscribers/{}/history.json?email={}".format(
             self.list_id, quote(self.subscriber.email_address)), "subscriber_history.json")
         history = self.subscriber.history()
         self.assertEqual(len(history), 1)

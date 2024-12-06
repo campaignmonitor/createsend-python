@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.list import List
 
 
-class ListTestCase(object):
+class ListTestCase:
 
     def test_create_without_unsubscribe_setting(self):
         l = List()
@@ -59,7 +57,7 @@ class ListTestCase(object):
 
     def test_update_custom_field(self):
         key = "[mycustomfield]"
-        self.list.stub_request("lists/%s/customfields/%s.json" % (self.list.list_id, quote(key)),
+        self.list.stub_request(f"lists/{self.list.list_id}/customfields/{quote(key)}.json",
                                "update_custom_field.json", None,
                                "{\"FieldName\": \"my renamed custom field\", \"VisibleInPreferenceCenter\": true}")
         personalisation_tag = self.list.update_custom_field(
@@ -108,7 +106,7 @@ class ListTestCase(object):
         self.assertEqual(len(cfs), 2)
         self.assertEqual(cfs[0].FieldName, "salary_range")
         self.assertEqual(cfs[0].FieldOptions, [
-                          u"£0-20k", u"£20-30k", u"£30k+"])
+                          "£0-20k", "£20-30k", "£30k+"])
 
     def test_segments(self):
         self.list.stub_request("lists/%s/segments.json" %
@@ -317,7 +315,7 @@ class ListTestCase(object):
     def test_deactivate_webhook(self):
         webhook_id = "jiuweoiwueoiwueowiueo"
         self.list.stub_request(
-            "lists/%s/webhooks/%s/deactivate.json" % (self.list.list_id, webhook_id), None)
+            f"lists/{self.list.list_id}/webhooks/{webhook_id}/deactivate.json", None)
         self.list.deactivate_webhook(webhook_id)
 
 

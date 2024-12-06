@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.person import Person
 
 
-class PeopleTestCase(object):
+class PeopleTestCase:
 
     def test_get(self):
         email = "person@example.com"

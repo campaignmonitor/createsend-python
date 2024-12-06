@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.campaign import Campaign
 
 
-class CampaignTestCase(object):
+class CampaignTestCase:
 
     def test_create(self):
         client_id = '87y8d7qyw8d7yq8w7ydwqwd'

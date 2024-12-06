@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.journey_email import JourneyEmail
 
 
-class JourneyEmailTestCase(object):
+class JourneyEmailTestCase:
 
     def test_bounces_no_params(self):
         self.journey_email.stub_request(self.no_param_uri_for("bounces"), "journey_email_bounces_no_params.json")

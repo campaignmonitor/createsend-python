@@ -1,8 +1,6 @@
-from __future__ import absolute_import
-
 import os
 import re
-from six.moves.http_client import HTTPSConnection
+from http.client import HTTPSConnection
 import socket
 import ssl
 import json
@@ -101,21 +99,12 @@ class VerifiedHTTPSConnection(HTTPSConnection):
 
         cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
 
-        # for >= py3.7, mandatory since 3.12
-        if hasattr(ssl.SSLContext, 'wrap_socket'):
-            context = ssl.SSLContext()
-            context.verify_mode = ssl.CERT_REQUIRED
-            context.load_verify_locations(cert_path)
-            if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
-                context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
-            self.sock = context.wrap_socket(sock)
-        else:
-            self.sock = ssl.wrap_socket(
-                sock,
-                self.key_file,
-                self.cert_file,
-                cert_reqs=ssl.CERT_REQUIRED,
-                ca_certs=cert_path)
+        context = ssl.SSLContext()
+        context.verify_mode = ssl.CERT_REQUIRED
+        context.load_verify_locations(cert_path)
+        if hasattr(self, 'cert_file') and hasattr(self, 'key_file') and self.cert_file and self.key_file:
+            context.load_cert_chain(certfile=self.cert_file, keyfile=self.key_file)
+        self.sock = context.wrap_socket(sock)
 
         try:
             match_hostname(self.sock.getpeercert(), self.host)
@@ -154,12 +143,12 @@ def validate_consent_to_track(user_input):
         user_input = user_input.lower()
     if user_input in VALID_CONSENT_TO_TRACK_VALUES:
         return
-    raise ClientError("Consent to track value must be one of %s" % (VALID_CONSENT_TO_TRACK_VALUES,))
+    raise ClientError(f"Consent to track value must be one of {VALID_CONSENT_TO_TRACK_VALUES}")
 
 
 def get_faker(expected_url, filename, status=None, body=None):
 
-    class Faker(object):
+    class Faker:
         """Represents a fake web request, including the expected URL, an open 
         function which reads the expected response from a fixture file, and the
         expected response status code."""
@@ -172,7 +161,7 @@ def get_faker(expected_url, filename, status=None, body=None):
 
         def open(self):
             if self.filename:
-                return open("%s/../test/fixtures/%s" % (os.path.dirname(os.path.dirname(__file__)), self.filename), mode='rb').read()
+                return open(f"{os.path.dirname(os.path.dirname(__file__))}/../test/fixtures/{self.filename}", mode='rb').read()
             else:
                 return ''
 

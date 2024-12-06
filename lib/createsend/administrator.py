@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -11,7 +9,7 @@ class Administrator(CreateSendBase):
 
     def __init__(self, auth=None, email_address=None):
         self.email_address = email_address
-        super(Administrator, self).__init__(auth)
+        super().__init__(auth)
 
     def get(self, email_address=None):
         """Gets an administrator by  email address."""

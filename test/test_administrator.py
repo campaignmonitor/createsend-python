@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.administrator import Administrator
 
 
-class AdministratorTestCase(object):
+class AdministratorTestCase:
 
     def test_get(self):
         email = "admin@example.com"
