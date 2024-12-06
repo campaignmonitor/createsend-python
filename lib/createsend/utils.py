@@ -87,6 +87,9 @@ class VerifiedHTTPSConnection(HTTPSConnection):
         sock = socket.create_connection(
             (self.host, self.port), **self.connection_kwargs)
 
+        if self._tunnel_host:
+            self._tunnel()
+
         cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
 
         context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
