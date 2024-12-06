@@ -8,6 +8,11 @@
 pip install twine
 ```
 
+- You must install [setuptools](https://pypi.org/project/setuptools/)
+```
+pip install setuptools
+```
+
 ## Prepare the release
 
 - Increment `version` in the `setup.py` file, ensuring that you use [Semantic Versioning](http://semver.org/).
