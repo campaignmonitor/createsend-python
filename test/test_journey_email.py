@@ -1,10 +1,10 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.journey_email import JourneyEmail
 
 
-class JourneyEmailTestCase(object):
+class JourneyEmailTestCase:
 
     def test_bounces_no_params(self):
         self.journey_email.stub_request(self.no_param_uri_for("bounces"), "journey_email_bounces_no_params.json")
@@ -55,13 +55,13 @@ class JourneyEmailTestCase(object):
         self.assertEqual(click_one.Region, "New South Wales")
         self.assertEqual(click_one.CountryCode, "AU")
         self.assertEqual(click_one.CountryName, "Australia")
-        self.assertEquals(clicks.ResultsOrderedBy, "Date")
-        self.assertEquals(clicks.OrderDirection, "ASC")
-        self.assertEquals(clicks.PageNumber, 1)
-        self.assertEquals(clicks.PageSize, 1000)
-        self.assertEquals(clicks.RecordsOnThisPage, 2)
-        self.assertEquals(clicks.TotalNumberOfRecords, 2)
-        self.assertEquals(clicks.NumberOfPages, 1)
+        self.assertEqual(clicks.ResultsOrderedBy, "Date")
+        self.assertEqual(clicks.OrderDirection, "ASC")
+        self.assertEqual(clicks.PageNumber, 1)
+        self.assertEqual(clicks.PageSize, 1000)
+        self.assertEqual(clicks.RecordsOnThisPage, 2)
+        self.assertEqual(clicks.TotalNumberOfRecords, 2)
+        self.assertEqual(clicks.NumberOfPages, 1)
 
     def test_clicks_with_params(self):
         self.journey_email.stub_request(self.param_uri_for("clicks", "2019-01-01", 1, 10, "desc"), "journey_email_clicks_with_params.json")
@@ -78,13 +78,13 @@ class JourneyEmailTestCase(object):
         self.assertEqual(click_one.Region, "New South Wales")
         self.assertEqual(click_one.CountryCode, "AU")
         self.assertEqual(click_one.CountryName, "Australia")
-        self.assertEquals(clicks.ResultsOrderedBy, "Date")
-        self.assertEquals(clicks.OrderDirection, "DESC")
-        self.assertEquals(clicks.PageNumber, 1)
-        self.assertEquals(clicks.PageSize, 10)
-        self.assertEquals(clicks.RecordsOnThisPage, 2)
-        self.assertEquals(clicks.TotalNumberOfRecords, 2)
-        self.assertEquals(clicks.NumberOfPages, 1)
+        self.assertEqual(clicks.ResultsOrderedBy, "Date")
+        self.assertEqual(clicks.OrderDirection, "DESC")
+        self.assertEqual(clicks.PageNumber, 1)
+        self.assertEqual(clicks.PageSize, 10)
+        self.assertEqual(clicks.RecordsOnThisPage, 2)
+        self.assertEqual(clicks.TotalNumberOfRecords, 2)
+        self.assertEqual(clicks.NumberOfPages, 1)
 
     def test_opens_no_params(self):
         self.journey_email.stub_request(self.no_param_uri_for("opens"), "journey_email_opens_no_params.json")
@@ -100,13 +100,13 @@ class JourneyEmailTestCase(object):
         self.assertEqual(open_one.Region, "New South Wales")
         self.assertEqual(open_one.CountryCode, "AU")
         self.assertEqual(open_one.CountryName, "Australia")
-        self.assertEquals(opens.ResultsOrderedBy, "Date")
-        self.assertEquals(opens.OrderDirection, "ASC")
-        self.assertEquals(opens.PageNumber, 1)
-        self.assertEquals(opens.PageSize, 1000)
-        self.assertEquals(opens.RecordsOnThisPage, 2)
-        self.assertEquals(opens.TotalNumberOfRecords, 2)
-        self.assertEquals(opens.NumberOfPages, 1)
+        self.assertEqual(opens.ResultsOrderedBy, "Date")
+        self.assertEqual(opens.OrderDirection, "ASC")
+        self.assertEqual(opens.PageNumber, 1)
+        self.assertEqual(opens.PageSize, 1000)
+        self.assertEqual(opens.RecordsOnThisPage, 2)
+        self.assertEqual(opens.TotalNumberOfRecords, 2)
+        self.assertEqual(opens.NumberOfPages, 1)
 
     def test_opens_with_params(self):
         self.journey_email.stub_request(self.param_uri_for("opens", "2019-01-01", 1, 10, "desc"), "journey_email_opens_with_params.json")
@@ -122,13 +122,13 @@ class JourneyEmailTestCase(object):
         self.assertEqual(open_one.Region, "New South Wales")
         self.assertEqual(open_one.CountryCode, "AU")
         self.assertEqual(open_one.CountryName, "Australia")
-        self.assertEquals(opens.ResultsOrderedBy, "Date")
-        self.assertEquals(opens.OrderDirection, "DESC")
-        self.assertEquals(opens.PageNumber, 1)
-        self.assertEquals(opens.PageSize, 10)
-        self.assertEquals(opens.RecordsOnThisPage, 2)
-        self.assertEquals(opens.TotalNumberOfRecords, 2)
-        self.assertEquals(opens.NumberOfPages, 1)
+        self.assertEqual(opens.ResultsOrderedBy, "Date")
+        self.assertEqual(opens.OrderDirection, "DESC")
+        self.assertEqual(opens.PageNumber, 1)
+        self.assertEqual(opens.PageSize, 10)
+        self.assertEqual(opens.RecordsOnThisPage, 2)
+        self.assertEqual(opens.TotalNumberOfRecords, 2)
+        self.assertEqual(opens.NumberOfPages, 1)
 
     def test_recipients_no_params(self):
         self.journey_email.stub_request(self.no_param_uri_for("recipients"), "journey_email_recipients_no_params.json")

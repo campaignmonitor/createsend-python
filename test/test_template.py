@@ -3,7 +3,7 @@ import unittest
 from createsend.template import Template
 
 
-class TemplateTestCase(object):
+class TemplateTestCase:
 
     def test_create(self):
         client_id = '87y8d7qyw8d7yq8w7ydwqwd'
@@ -11,18 +11,18 @@ class TemplateTestCase(object):
         t.stub_request("templates/%s.json" % client_id, "create_template.json")
         template_id = t.create(client_id, "Template One", "http://templates.org/index.html",
                                "http://templates.org/files.zip")
-        self.assertEquals(template_id, "98y2e98y289dh89h9383891234")
-        self.assertEquals(t.template_id, "98y2e98y289dh89h9383891234")
+        self.assertEqual(template_id, "98y2e98y289dh89h9383891234")
+        self.assertEqual(t.template_id, "98y2e98y289dh89h9383891234")
 
     def test_details(self):
         self.template.stub_request(
             "templates/%s.json" % self.template.template_id, "template_details.json")
         t = self.template.details()
-        self.assertEquals(t.TemplateID, "98y2e98y289dh89h938389")
-        self.assertEquals(t.Name, "Template One")
-        self.assertEquals(
+        self.assertEqual(t.TemplateID, "98y2e98y289dh89h938389")
+        self.assertEqual(t.Name, "Template One")
+        self.assertEqual(
             t.PreviewURL, "http://preview.createsend.com/createsend/templates/previewTemplate.aspx?ID=01AF532CD8889B33&d=r&c=E816F55BFAD1A753")
-        self.assertEquals(
+        self.assertEqual(
             t.ScreenshotURL, "http://preview.createsend.com/ts/r/14/833/263/14833263.jpg?0318092600")
 
     def test_update(self):

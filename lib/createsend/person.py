@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 import json
 
 from createsend.createsend import CreateSendBase
@@ -12,7 +10,7 @@ class Person(CreateSendBase):
     def __init__(self, auth=None, client_id=None, email_address=None):
         self.client_id = client_id
         self.email_address = email_address
-        super(Person, self).__init__(auth)
+        super().__init__(auth)
 
     def get(self, client_id=None, email_address=None):
         """Gets a person by client ID and email address."""

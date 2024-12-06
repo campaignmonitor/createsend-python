@@ -1,5 +1,3 @@
-from __future__ import absolute_import
-
 from createsend.createsend import CreateSendBase
 from createsend.utils import json_to_py
 
@@ -9,7 +7,7 @@ class Journey(CreateSendBase):
 
     def __init__(self, auth=None, journey_id=None):
         self.journey_id = journey_id
-        super(Journey, self).__init__(auth)
+        super().__init__(auth)
 
     def summary(self):
         """Gets the summary of the journey"""

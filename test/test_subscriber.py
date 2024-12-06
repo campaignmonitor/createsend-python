@@ -1,67 +1,67 @@
-from six.moves.urllib.parse import quote
+from urllib.parse import quote
 import unittest
 
 from createsend.createsend import BadRequest
 from createsend.subscriber import Subscriber
 
 
-class SubscriberTestCase(object):
+class SubscriberTestCase:
 
     def test_get(self):
         email = "subscriber@example.com"
         self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
                                      (self.list_id, quote(email)), "subscriber_details.json")
         subscriber = self.subscriber.get(self.list_id, email)
-        self.assertEquals(subscriber.EmailAddress, email)
-        self.assertEquals(subscriber.Name, "Subscriber One")
-        self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.State, "Active")
-        self.assertEquals(len(subscriber.CustomFields), 3)
-        self.assertEquals(subscriber.CustomFields[0].Key, 'website')
-        self.assertEquals(subscriber.CustomFields[
+        self.assertEqual(subscriber.EmailAddress, email)
+        self.assertEqual(subscriber.Name, "Subscriber One")
+        self.assertEqual(subscriber.Date, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.State, "Active")
+        self.assertEqual(len(subscriber.CustomFields), 3)
+        self.assertEqual(subscriber.CustomFields[0].Key, 'website')
+        self.assertEqual(subscriber.CustomFields[
                           0].Value, 'http://example.com')
-        self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+        self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
 
     def test_get_without_arguments(self):
         email = "subscriber@example.com"
         self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=False" %
                                      (self.list_id, quote(email)), "subscriber_details.json")
         subscriber = self.subscriber.get()
-        self.assertEquals(subscriber.EmailAddress, email)
-        self.assertEquals(subscriber.Name, "Subscriber One")
-        self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.State, "Active")
-        self.assertEquals(len(subscriber.CustomFields), 3)
-        self.assertEquals(subscriber.CustomFields[0].Key, 'website')
-        self.assertEquals(subscriber.CustomFields[
+        self.assertEqual(subscriber.EmailAddress, email)
+        self.assertEqual(subscriber.Name, "Subscriber One")
+        self.assertEqual(subscriber.Date, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.State, "Active")
+        self.assertEqual(len(subscriber.CustomFields), 3)
+        self.assertEqual(subscriber.CustomFields[0].Key, 'website')
+        self.assertEqual(subscriber.CustomFields[
                           0].Value, 'http://example.com')
-        self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
+        self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
 
     def test_get_with_tracking_preference_included(self):
         email = "subscriber@example.com"
         self.subscriber.stub_request("subscribers/%s.json?email=%s&includetrackingpreference=True" %
                                      (self.list_id, quote(email)), "subscriber_details_with_tracking_preference.json")
         subscriber = self.subscriber.get(self.list_id, email, include_tracking_preference=True)
-        self.assertEquals(subscriber.EmailAddress, email)
-        self.assertEquals(subscriber.Name, "Subscriber One")
-        self.assertEquals(subscriber.Date, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
-        self.assertEquals(subscriber.State, "Active")
-        self.assertEquals(len(subscriber.CustomFields), 3)
-        self.assertEquals(subscriber.CustomFields[0].Key, 'website')
-        self.assertEquals(subscriber.CustomFields[
+        self.assertEqual(subscriber.EmailAddress, email)
+        self.assertEqual(subscriber.Name, "Subscriber One")
+        self.assertEqual(subscriber.Date, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.ListJoinedDate, "2010-10-25 10:28:00")
+        self.assertEqual(subscriber.State, "Active")
+        self.assertEqual(len(subscriber.CustomFields), 3)
+        self.assertEqual(subscriber.CustomFields[0].Key, 'website')
+        self.assertEqual(subscriber.CustomFields[
                           0].Value, 'http://example.com')
-        self.assertEquals(subscriber.ReadsEmailWith, "Gmail")
-        self.assertEquals(subscriber.ConsentToTrack, "Yes")
+        self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
+        self.assertEqual(subscriber.ConsentToTrack, "Yes")
 
     def test_add_without_custom_fields(self):
         self.subscriber.stub_request(
             "subscribers/%s.json" % self.list_id, "add_subscriber.json")
         email_address = self.subscriber.add(
             self.list_id, "subscriber@example.com", "Subscriber", [], True, "Unchanged")
-        self.assertEquals(email_address, "subscriber@example.com")
+        self.assertEqual(email_address, "subscriber@example.com")
 
     def test_add_with_custom_fields(self):
         self.subscriber.stub_request(
@@ -69,7 +69,7 @@ class SubscriberTestCase(object):
         custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
         email_address = self.subscriber.add(
             self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "No")
-        self.assertEquals(email_address, "subscriber@example.com")
+        self.assertEqual(email_address, "subscriber@example.com")
 
     def test_add_with_custom_fields_including_multioption(self):
         self.subscriber.stub_request(
@@ -79,7 +79,7 @@ class SubscriberTestCase(object):
                          {"Key": 'multioptionselectmany', "Value": 'secondoption'}]
         email_address = self.subscriber.add(
             self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "Yes")
-        self.assertEquals(email_address, "subscriber@example.com")
+        self.assertEqual(email_address, "subscriber@example.com")
 
     def test_update_with_custom_fields(self):
         new_email = "new_email_address@example.com"
@@ -87,7 +87,7 @@ class SubscriberTestCase(object):
                                      (self.list_id, quote(self.subscriber.email_address)), None)
         custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
         self.subscriber.update(new_email, "Subscriber", custom_fields, True, "Yes")
-        self.assertEquals(self.subscriber.email_address, new_email)
+        self.assertEqual(self.subscriber.email_address, new_email)
 
     def test_update_with_custom_fields_including_clear_option(self):
         new_email = "new_email_address@example.com"
@@ -96,7 +96,7 @@ class SubscriberTestCase(object):
         custom_fields = [
             {"Key": 'website', "Value": 'http://example.com/', "Clear": True}]
         self.subscriber.update(new_email, "Subscriber", custom_fields, True, "No")
-        self.assertEquals(self.subscriber.email_address, new_email)
+        self.assertEqual(self.subscriber.email_address, new_email)
 
     def test_import_subscribers(self):
         self.subscriber.stub_request(
@@ -108,11 +108,11 @@ class SubscriberTestCase(object):
         ]
         import_result = self.subscriber.import_subscribers(
             self.list_id, subscribers, True)
-        self.assertEquals(len(import_result.FailureDetails), 0)
-        self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
-        self.assertEquals(import_result.TotalExistingSubscribers, 0)
-        self.assertEquals(import_result.TotalNewSubscribers, 3)
-        self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+        self.assertEqual(len(import_result.FailureDetails), 0)
+        self.assertEqual(import_result.TotalUniqueEmailsSubmitted, 3)
+        self.assertEqual(import_result.TotalExistingSubscribers, 0)
+        self.assertEqual(import_result.TotalNewSubscribers, 3)
+        self.assertEqual(len(import_result.DuplicateEmailsInSubmission), 0)
 
     def test_import_subscribers_start_subscription_autoresponders(self):
         self.subscriber.stub_request(
@@ -124,11 +124,11 @@ class SubscriberTestCase(object):
         ]
         import_result = self.subscriber.import_subscribers(
             self.list_id, subscribers, True, True)
-        self.assertEquals(len(import_result.FailureDetails), 0)
-        self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
-        self.assertEquals(import_result.TotalExistingSubscribers, 0)
-        self.assertEquals(import_result.TotalNewSubscribers, 3)
-        self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+        self.assertEqual(len(import_result.FailureDetails), 0)
+        self.assertEqual(import_result.TotalUniqueEmailsSubmitted, 3)
+        self.assertEqual(import_result.TotalExistingSubscribers, 0)
+        self.assertEqual(import_result.TotalNewSubscribers, 3)
+        self.assertEqual(len(import_result.DuplicateEmailsInSubmission), 0)
 
     def test_import_subscribers_with_custom_fields_including_clear_option(self):
         self.subscriber.stub_request(
@@ -143,11 +143,11 @@ class SubscriberTestCase(object):
         ]
         import_result = self.subscriber.import_subscribers(
             self.list_id, subscribers, True)
-        self.assertEquals(len(import_result.FailureDetails), 0)
-        self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
-        self.assertEquals(import_result.TotalExistingSubscribers, 0)
-        self.assertEquals(import_result.TotalNewSubscribers, 3)
-        self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+        self.assertEqual(len(import_result.FailureDetails), 0)
+        self.assertEqual(import_result.TotalUniqueEmailsSubmitted, 3)
+        self.assertEqual(import_result.TotalExistingSubscribers, 0)
+        self.assertEqual(import_result.TotalNewSubscribers, 3)
+        self.assertEqual(len(import_result.DuplicateEmailsInSubmission), 0)
 
     def test_import_subscribers_partial_success(self):
         # Stub request with 400 Bad Request as the expected response status
@@ -160,16 +160,16 @@ class SubscriberTestCase(object):
         ]
         import_result = self.subscriber.import_subscribers(
             self.list_id, subscribers, True)
-        self.assertEquals(len(import_result.FailureDetails), 1)
-        self.assertEquals(import_result.FailureDetails[
+        self.assertEqual(len(import_result.FailureDetails), 1)
+        self.assertEqual(import_result.FailureDetails[
                           0].EmailAddress, "example+1@example")
-        self.assertEquals(import_result.FailureDetails[0].Code, 1)
-        self.assertEquals(import_result.FailureDetails[
+        self.assertEqual(import_result.FailureDetails[0].Code, 1)
+        self.assertEqual(import_result.FailureDetails[
                           0].Message, "Invalid Email Address")
-        self.assertEquals(import_result.TotalUniqueEmailsSubmitted, 3)
-        self.assertEquals(import_result.TotalExistingSubscribers, 2)
-        self.assertEquals(import_result.TotalNewSubscribers, 0)
-        self.assertEquals(len(import_result.DuplicateEmailsInSubmission), 0)
+        self.assertEqual(import_result.TotalUniqueEmailsSubmitted, 3)
+        self.assertEqual(import_result.TotalExistingSubscribers, 2)
+        self.assertEqual(import_result.TotalNewSubscribers, 0)
+        self.assertEqual(len(import_result.DuplicateEmailsInSubmission), 0)
 
     def test_import_subscribers_complete_failure_because_of_bad_request(self):
         # Stub request with 400 Bad Request as the expected response status
@@ -189,18 +189,18 @@ class SubscriberTestCase(object):
         self.subscriber.unsubscribe()
 
     def test_history(self):
-        self.subscriber.stub_request("subscribers/%s/history.json?email=%s" % (
+        self.subscriber.stub_request("subscribers/{}/history.json?email={}".format(
             self.list_id, quote(self.subscriber.email_address)), "subscriber_history.json")
         history = self.subscriber.history()
-        self.assertEquals(len(history), 1)
-        self.assertEquals(history[0].Name, "Campaign One")
-        self.assertEquals(history[0].Type, "Campaign")
-        self.assertEquals(history[0].ID, "fc0ce7105baeaf97f47c99be31d02a91")
-        self.assertEquals(len(history[0].Actions), 6)
-        self.assertEquals(history[0].Actions[0].Event, "Open")
-        self.assertEquals(history[0].Actions[0].Date, "2010-10-12 13:18:00")
-        self.assertEquals(history[0].Actions[0].IPAddress, "192.168.126.87")
-        self.assertEquals(history[0].Actions[0].Detail, "")
+        self.assertEqual(len(history), 1)
+        self.assertEqual(history[0].Name, "Campaign One")
+        self.assertEqual(history[0].Type, "Campaign")
+        self.assertEqual(history[0].ID, "fc0ce7105baeaf97f47c99be31d02a91")
+        self.assertEqual(len(history[0].Actions), 6)
+        self.assertEqual(history[0].Actions[0].Event, "Open")
+        self.assertEqual(history[0].Actions[0].Date, "2010-10-12 13:18:00")
+        self.assertEqual(history[0].Actions[0].IPAddress, "192.168.126.87")
+        self.assertEqual(history[0].Actions[0].Detail, "")
 
     def test_delete(self):
         self.subscriber.stub_request("subscribers/%s.json?email=%s" %
