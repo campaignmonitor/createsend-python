@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v9.0.1 - 7 Dec, 2024
+* Fix deprecation warnings from [#86](https://github.com/campaignmonitor/createsend-python/pull/86)
+
 ## v9.0.0 - 7 Dec, 2024
 * Tidy up of code from [#83](https://github.com/campaignmonitor/createsend-python/pull/83)
 * Fixing tox config

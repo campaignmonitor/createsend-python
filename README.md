@@ -211,6 +211,7 @@ def test_add_with_custom_fields(self):
 
 ## Running unit tests
 
+Here are some commands to help run the unit tests:
 ```
 > python -m venv venv
 > source venv/bin/activate  # On Windows, use: venv\Scripts\activate
