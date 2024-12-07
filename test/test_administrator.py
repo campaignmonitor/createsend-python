@@ -42,7 +42,7 @@ class AdministratorTestCase:
 ***REMOVED******REMOVED******REMOVED******REMOVED***email_address = self.administrator.delete()
 
 
-class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+class OAuthAdministratorTestCase(unittest.TestCase, AdministratorTestCase):
 ***REMOVED******REMOVED***"""Test when using OAuth to authenticate"""
 
 ***REMOVED******REMOVED***def setUp(self):
@@ -50,7 +50,7 @@ class OAuthAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***{"access_token": "ASP95S4aR+9KsgfHB0dapTYxNA==", "refresh_token": "5S4aASP9R+9KsgfHB0dapTYxNA=="}, "admin@example.com")
 
 
-class ApiKeyAdministatorTestCase(unittest.TestCase, AdministratorTestCase):
+class ApiKeyAdministratorTestCase(unittest.TestCase, AdministratorTestCase):
 ***REMOVED******REMOVED***"""Test when using an API key to authenticate"""
 
 ***REMOVED******REMOVED***def setUp(self):

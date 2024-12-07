@@ -1,0 +1,25 @@
+name: Python package
+
+on:
+***REMOVED***- push
+***REMOVED***- pull_request
+
+jobs:
+***REMOVED***test:
+***REMOVED******REMOVED***runs-on: ubuntu-latest
+***REMOVED******REMOVED***strategy:
+***REMOVED******REMOVED******REMOVED***matrix:
+***REMOVED******REMOVED******REMOVED******REMOVED***python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13']
+
+***REMOVED******REMOVED***steps:
+***REMOVED******REMOVED***- uses: actions/checkout@v4
+***REMOVED******REMOVED***- name: Set up Python ${{ matrix.python-version }}
+***REMOVED******REMOVED******REMOVED***uses: actions/setup-python@v5
+***REMOVED******REMOVED******REMOVED***with:
+***REMOVED******REMOVED******REMOVED******REMOVED***python-version: ${{ matrix.python-version }}
+***REMOVED******REMOVED***- name: Install dependencies
+***REMOVED******REMOVED******REMOVED***run: |
+***REMOVED******REMOVED******REMOVED******REMOVED***python -m pip install --upgrade pip
+***REMOVED******REMOVED******REMOVED******REMOVED***pip install tox tox-gh
+***REMOVED******REMOVED***- name: Test with tox
+***REMOVED******REMOVED******REMOVED***run: tox -e ${{ matrix.python-version }}
