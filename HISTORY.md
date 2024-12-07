@@ -1,5 +1,11 @@
 # createsend-python history
 
+## v9.0.0 - 7 Dec, 2024
+* Tidy up of code from [#83](https://github.com/campaignmonitor/createsend-python/pull/83)
+* Fixing tox config
+* Github workflow added
+* Breaking: Python versions 3.7 and prior will no longer work with this version of the wrapper. The actual wrapper code might work with Python 3.6 and 3.7. However, some of the tox testing around it may not work with those versions. So we've dropped support for that.
+
 ## v8.0.2 - 6 Dec, 2024
 * Tidy up of code from [#84](https://github.com/campaignmonitor/createsend-python/pull/84)
 

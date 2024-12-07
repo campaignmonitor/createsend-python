@@ -1,6 +1,6 @@
 # createsend
 
-A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 3.6, 3.7, 3.8, 3.9, 3.10, 3.11, 3.12, 3.13 or later.
+A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 3.8 or above.
 
 ## Installation
 
@@ -207,6 +207,33 @@ def test_add_with_custom_fields(self):
   custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
   email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
   self.assertEqual(email_address, "subscriber@example.com")
+```
+
+## Running unit tests
+
+```
+> python -m venv venv
+> source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+> pip install pytest
+> export PYTHONPATH=$(pwd)/lib # on Windows: set PYTHONPATH=%cd%\lib
+> pytest
+> # To run a specific test file
+> pytest test/test_administrator.py
+```
+
+To deactivate the virtual environment run:
+```
+> deactivate
+```
+
+## Automated testing with tox
+
+There is some testing available to test this wrapper against different versions of Python with [tox](https://tox.wiki/).
+
+Here are the commands to get that runnning:
+```
+> pip install tox
+> tox
 ```
 
 ## Contributing
