@@ -231,7 +231,7 @@ To deactivate the virtual environment run:
 
 There is some testing available to test this wrapper against different versions of Python with [tox](https://tox.wiki/).
 
-Here are the commands to get that runnning:
+Here are the commands to get that running:
 ```
 > pip install tox
 > tox
