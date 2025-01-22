@@ -229,9 +229,11 @@ class CreateSendBase:
         elif status == 404:
             raise NotFound()
         elif status in range(400, 500):
-            raise ClientError()
+              json_data = json_to_py(data)
+              raise ClientError(f"Code: {json_data.Code} {json_data.Message}")
         elif status in range(500, 600):
-            raise ServerError()
+            json_data = json_to_py(data)
+            raise ServerError(f"Code: {json_data.Code} {json_data.Message}")
         return data
 
     def _get(self, path, params={}, username=None, password=None):
