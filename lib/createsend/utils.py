@@ -107,8 +107,9 @@ class VerifiedHTTPSConnection(HTTPSConnection):
             raise
 
 
-def json_to_py(j):
-    o = json.loads(j.decode('utf-8'))
+def json_to_py(o):
+    if isinstance(o,bytes):
+        o = json.loads(o.decode('utf-8'))
     if isinstance(o, dict):
         return dict_to_object(o)
     else:
