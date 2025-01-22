@@ -22,7 +22,7 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** (list_id or self.list_id), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
+***REMOVED******REMOVED***def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False, mobile_number=False, consent_to_track_sms="Unchanged"):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Adds a subscriber to a subscriber list."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***validate_consent_to_track(consent_to_track)
 ***REMOVED******REMOVED******REMOVED******REMOVED***body = {
@@ -32,11 +32,16 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"ConsentToTrack": consent_to_track,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
+***REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED******REMOVED******REMOVED***if mobile_number:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***body["MobileNumber"] = mobile_number
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***body["ConsentToSendSms"] = consent_to_track_sms
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._post("/subscribers/%s.json" %
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***list_id, json.dumps(body))
 ***REMOVED******REMOVED******REMOVED******REMOVED***return json_to_py(response)
 
-***REMOVED******REMOVED***def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
+***REMOVED******REMOVED***def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False, mobile_number=False, consent_to_track_sms="Unchanged"):
 ***REMOVED******REMOVED******REMOVED******REMOVED***"""Updates any aspect of a subscriber, including email address, name, and
 ***REMOVED******REMOVED******REMOVED******REMOVED***custom field data if supplied."""
 ***REMOVED******REMOVED******REMOVED******REMOVED***validate_consent_to_track(consent_to_track)
@@ -48,6 +53,12 @@ class Subscriber(CreateSendBase):
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"Resubscribe": resubscribe,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"ConsentToTrack": consent_to_track,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***"RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
+***REMOVED******REMOVED******REMOVED******REMOVED***
+***REMOVED******REMOVED******REMOVED******REMOVED***if mobile_number:
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***body["MobileNumber"] = mobile_number
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***body["ConsentToSendSms"] = consent_to_track_sms
+
+***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED***
 ***REMOVED******REMOVED******REMOVED******REMOVED***response = self._put("/subscribers/%s.json" % self.list_id,
 ***REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED******REMOVED*** body=json.dumps(body), params=params)
 ***REMOVED******REMOVED******REMOVED******REMOVED***# Update self.email_address, so this object can continue to be used
