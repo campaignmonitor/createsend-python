@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v9.0.2 - 23 Jan, 2025
+* Improved error handling for 400 and 500 errors: Now displays error codes and error messages for better debugging.
+
 ## v9.0.1 - 7 Dec, 2024
 * Fix deprecation warnings from [#86](https://github.com/campaignmonitor/createsend-python/pull/86)
 
