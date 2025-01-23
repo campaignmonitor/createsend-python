@@ -22,7 +22,7 @@ class Subscriber(CreateSendBase):
                              (list_id or self.list_id), params=params)
         return json_to_py(response)
 
-    def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
+    def add(self, list_id, email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False, mobile_number=False, consent_to_track_sms="Unchanged"):
         """Adds a subscriber to a subscriber list."""
         validate_consent_to_track(consent_to_track)
         body = {
@@ -32,11 +32,16 @@ class Subscriber(CreateSendBase):
             "Resubscribe": resubscribe,
             "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
+
+        if mobile_number:
+            body["MobileNumber"] = mobile_number
+            body["ConsentToSendSms"] = consent_to_track_sms
+            
         response = self._post("/subscribers/%s.json" %
                               list_id, json.dumps(body))
         return json_to_py(response)
 
-    def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False):
+    def update(self, new_email_address, name, custom_fields, resubscribe, consent_to_track, restart_subscription_based_autoresponders=False, mobile_number=False, consent_to_track_sms="Unchanged"):
         """Updates any aspect of a subscriber, including email address, name, and
         custom field data if supplied."""
         validate_consent_to_track(consent_to_track)
@@ -48,6 +53,11 @@ class Subscriber(CreateSendBase):
             "Resubscribe": resubscribe,
             "ConsentToTrack": consent_to_track,
             "RestartSubscriptionBasedAutoresponders": restart_subscription_based_autoresponders}
+        
+        if mobile_number:
+            body["MobileNumber"] = mobile_number
+            body["ConsentToSendSms"] = consent_to_track_sms
+            
         response = self._put("/subscribers/%s.json" % self.list_id,
                              body=json.dumps(body), params=params)
         # Update self.email_address, so this object can continue to be used
