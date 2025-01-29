@@ -35,6 +35,7 @@ class Subscriber(CreateSendBase):
 
         if mobile_number:
             body["MobileNumber"] = mobile_number
+            validate_consent_to_track(consent_to_track_sms)
             body["ConsentToSendSms"] = consent_to_track_sms
             
         response = self._post("/subscribers/%s.json" %
@@ -56,6 +57,7 @@ class Subscriber(CreateSendBase):
         
         if mobile_number:
             body["MobileNumber"] = mobile_number
+            validate_consent_to_track(consent_to_track_sms)
             body["ConsentToSendSms"] = consent_to_track_sms
             
         response = self._put("/subscribers/%s.json" % self.list_id,
