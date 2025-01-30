@@ -247,7 +247,6 @@ Please check the [instructions for releasing](https://github.com/campaignmonitor
 
 ## This stuff should be green
 
-[![Build Status](https://secure.travis-ci.org/campaignmonitor/createsend-python.png)][travis] [![Coverage Status](https://coveralls.io/repos/campaignmonitor/createsend-python/badge.png?branch=master)][coveralls]
+[![Python tests](https://github.com/campaignmonitor/createsend-python/actions/workflows/tests.yml/badge.svg)](https://github.com/campaignmonitor/createsend-python/actions/workflows/tests.yml) [![Coverage Status](https://coveralls.io/repos/campaignmonitor/createsend-python/badge.png?branch=master)][coveralls]
 
-[travis]: http://travis-ci.org/campaignmonitor/createsend-python
 [coveralls]: https://coveralls.io/r/campaignmonitor/createsend-python
