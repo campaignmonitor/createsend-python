@@ -47,7 +47,7 @@ class JourneyEmailTestCase:
         click_one = clicks.Results[0]
         self.assertEqual(click_one.EmailAddress, "asdf@example.com")
         self.assertEqual(click_one.Date, "2019-08-19 10:23:00")
-        self.assertEqual(click_one.URL, "http://mail.google.com/mail/?hl=en&tab=wm")
+        self.assertEqual(click_one.URL, "https://mail.google.com/mail/?hl=en&tab=wm")
         self.assertEqual(click_one.IPAddress, "198.148.196.144")
         self.assertEqual(click_one.Latitude, -33.8591)
         self.assertEqual(click_one.Longitude, 151.200195)

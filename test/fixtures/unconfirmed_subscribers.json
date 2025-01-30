@@ -9,7 +9,7 @@
             "CustomFields": [
                 {
                     "Key": "website",
-                    "Value": "http://example.com"
+                    "Value": "https://example.com"
                 }
             ],
             "ReadsEmailWith": ""
@@ -23,7 +23,7 @@
             "CustomFields": [
                 {
                     "Key": "website",
-                    "Value": "http://subdomain.example.com"
+                    "Value": "https://subdomain.example.com"
                 }
             ],
             "ReadsEmailWith": ""

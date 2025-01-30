@@ -13,7 +13,7 @@ class AuthenticationTestCase(unittest.TestCase):
 
     def test_authorize_url_with_state(self):
         client_id = 8998879
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         scope = 'ViewReports,CreateCampaigns,SendCampaigns'
         state = 89879287
 
@@ -30,7 +30,7 @@ class AuthenticationTestCase(unittest.TestCase):
 
     def test_authorize_url_without_state(self):
         client_id = 8998879
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         scope = 'ViewReports,CreateCampaigns,SendCampaigns'
 
         self.cs = CreateSend(self.oauth_auth_details)
@@ -46,7 +46,7 @@ class AuthenticationTestCase(unittest.TestCase):
     def test_exchange_token_success(self):
         client_id = 8998879
         client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         code = '98uqw9d8qu9wdu'
         self.cs = CreateSend(self.oauth_auth_details)
         self.cs.stub_request(
@@ -66,7 +66,7 @@ class AuthenticationTestCase(unittest.TestCase):
     def test_echange_token_failure(self):
         client_id = 8998879
         client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         code = 'invalidcode'
         self.cs = CreateSend(self.oauth_auth_details)
         self.cs.stub_request(
