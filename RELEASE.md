@@ -34,7 +34,7 @@ pip install setuptools
   git push origin master --tags
   ```
 
-- Ensure that all [tests](https://travis-ci.org/campaignmonitor/createsend-python) pass, and that [coverage](https://coveralls.io/r/campaignmonitor/createsend-python) is maintained or improved.
+- Ensure that all [tests](https://github.com/campaignmonitor/createsend-python/actions/workflows/tests.yml) pass, and that [coverage](https://coveralls.io/r/campaignmonitor/createsend-python) is maintained or improved.
 
 - Add a new [GitHub Release](https://github.com/campaignmonitor/createsend-python/releases) using the newly created tag.
 
