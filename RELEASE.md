@@ -14,7 +14,7 @@ pip install setuptools
 
 ## Prepare the release
 
-- Increment `version` in the `setup.py` file, ensuring that you use [Semantic Versioning](http://semver.org/).
+- Increment `version` in the `setup.py` file, ensuring that you use [Semantic Versioning](https://semver.org/).
 - Add an entry to `HISTORY.md` which clearly explains the new release.
 - Commit your changes:
 
