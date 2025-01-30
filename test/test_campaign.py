@@ -11,12 +11,12 @@ class CampaignTestCase:
         c = Campaign()
         c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
         campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com",
-                               "http://example.com/campaign.html", "http://example.com/campaign.txt", [
+                               "https://example.com/campaign.html", "https://example.com/campaign.txt", [
                                    '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
                                ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
         self.assertEqual(
-            "\"TextUrl\": \"http://example.com/campaign.txt\"" in c.faker.actual_body, True)
+            "\"TextUrl\": \"https://example.com/campaign.txt\"" in c.faker.actual_body, True)
         self.assertEqual(c.campaign_id, "787y87y87y87y87y87y8712341234")
         self.assertEqual(campaign_id, "787y87y87y87y87y87y8712341234")
 
@@ -25,7 +25,7 @@ class CampaignTestCase:
         c = Campaign()
         c.stub_request("campaigns/%s.json" % client_id, "create_campaign.json")
         campaign_id = c.create(client_id, "subject", "name", "g'day", "good.day@example.com", "good.day@example.com",
-                               "http://example.com/campaign.html", None, [
+                               "https://example.com/campaign.html", None, [
                                    '7y12989e82ue98u2e', 'dh9w89q8w98wudwd989'],
                                ['y78q9w8d9w8ud9q8uw', 'djw98quw9duqw98uwd98'])
 
@@ -38,19 +38,19 @@ class CampaignTestCase:
             "Singlelines": [
                 {
                     "Content": "This is a heading",
-                    "Href": "http://example.com/"
+                    "Href": "https://example.com/"
                 }
             ],
             "Multilines": [
                 {
-                    "Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+                    "Content": "<p>This is example</p><p>multiline <a href=\"https://example.com\">content</a>...</p>"
                 }
             ],
             "Images": [
                 {
-                    "Content": "http://example.com/image.png",
+                    "Content": "https://example.com/image.png",
                     "Alt": "This is alt text for an image",
-                    "Href": "http://example.com/"
+                    "Href": "https://example.com/"
                 }
             ],
             "Repeaters": [
@@ -61,19 +61,19 @@ class CampaignTestCase:
                             "Singlelines": [
                                 {
                                     "Content": "This is a repeater heading",
-                                    "Href": "http://example.com/"
+                                    "Href": "https://example.com/"
                                 }
                             ],
                             "Multilines": [
                                 {
-                                    "Content": "<p>This is example</p><p>multiline <a href=\"http://example.com\">content</a>...</p>"
+                                    "Content": "<p>This is example</p><p>multiline <a href=\"https://example.com\">content</a>...</p>"
                                 }
                             ],
                             "Images": [
                                 {
-                                    "Content": "http://example.com/repeater-image.png",
+                                    "Content": "https://example.com/repeater-image.png",
                                     "Alt": "This is alt text for a repeater image",
-                                    "Href": "http://example.com/"
+                                    "Href": "https://example.com/"
                                 }
                             ]
                         }
@@ -156,11 +156,11 @@ class CampaignTestCase:
         self.assertEqual(summary.Forwards, 11)
         self.assertEqual(summary.Likes, 32)
         self.assertEqual(summary.WebVersionURL,
-                          "http://createsend.com/t/r-3A433FC72FFE3B8B")
+                          "https://createsend.com/t/r-3A433FC72FFE3B8B")
         self.assertEqual(summary.WebVersionTextURL,
-                          "http://createsend.com/t/r-3A433FC72FFE3B8B/t")
+                          "https://createsend.com/t/r-3A433FC72FFE3B8B/t")
         self.assertEqual(
-            summary.WorldviewURL, "http://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
+            summary.WorldviewURL, "https://client.createsend.com/reports/wv/r/3A433FC72FFE3B8B")
         self.assertEqual(summary.SpamComplaints, 23)
 
     def test_email_client_usage(self):
@@ -240,7 +240,7 @@ class CampaignTestCase:
         self.assertEqual(
             clicks.Results[0].EmailAddress, "subs+6576576576@example.com")
         self.assertEqual(
-            clicks.Results[0].URL, "http://video.google.com.au/?hl=en&tab=wv")
+            clicks.Results[0].URL, "https://video.google.com.au/?hl=en&tab=wv")
         self.assertEqual(
             clicks.Results[0].ListID, "512a3bc577a58fdf689c654329b50fa0")
         self.assertEqual(clicks.Results[0].Date, "2010-10-11 08:29:00")

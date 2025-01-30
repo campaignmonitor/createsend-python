@@ -9,7 +9,7 @@
       "CustomFields": [
         {
           "Key": "website",
-          "Value": "http://example.com"
+          "Value": "https://example.com"
         },
         {
           "Key": "multi select field",
@@ -39,7 +39,7 @@
       "CustomFields": [
         {
           "Key": "website",
-          "Value": "http://subdomain.example.com"
+          "Value": "https://subdomain.example.com"
         }
       ],
       "ReadsEmailWith": "Gmail"
@@ -53,7 +53,7 @@
       "CustomFields": [
         {
           "Key": "website",
-          "Value": "http://subdomain.example.com"
+          "Value": "https://subdomain.example.com"
         }
       ],
       "ReadsEmailWith": ""

@@ -57,7 +57,7 @@
             "EmailAddress": "jamesmith@example.com",
             "Date": "2009-05-18 16:45:00",
             "IPAddress": "192.168.0.1",
-            "URL": "http://www.myexammple.com/index.html",
+            "URL": "https://www.myexammple.com/index.html",
             "Geolocation": {
               "Latitude": -33.8683,
               "Longitude": 151.2086,

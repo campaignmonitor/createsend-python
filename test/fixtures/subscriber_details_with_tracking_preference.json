@@ -7,7 +7,7 @@
   "CustomFields": [
     {
       "Key": "website",
-      "Value": "http://example.com"
+      "Value": "https://example.com"
     },
     {
       "Key": "age",

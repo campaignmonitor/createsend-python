@@ -13,7 +13,7 @@ class AuthenticationTestCase(unittest.TestCase):
 
     def test_authorize_url_with_state(self):
         client_id = 8998879
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         scope = 'ViewReports,CreateCampaigns,SendCampaigns'
         state = 89879287
 
@@ -25,12 +25,12 @@ class AuthenticationTestCase(unittest.TestCase):
             state=state
         )
         self.assertEqual(authorize_url,
-                          "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
+                          "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns&state=89879287"
                           )
 
     def test_authorize_url_without_state(self):
         client_id = 8998879
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         scope = 'ViewReports,CreateCampaigns,SendCampaigns'
 
         self.cs = CreateSend(self.oauth_auth_details)
@@ -40,13 +40,13 @@ class AuthenticationTestCase(unittest.TestCase):
             scope=scope
         )
         self.assertEqual(authorize_url,
-                          "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
+                          "https://api.createsend.com/oauth?client_id=8998879&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&scope=ViewReports%2CCreateCampaigns%2CSendCampaigns"
                           )
 
     def test_exchange_token_success(self):
         client_id = 8998879
         client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         code = '98uqw9d8qu9wdu'
         self.cs = CreateSend(self.oauth_auth_details)
         self.cs.stub_request(
@@ -58,7 +58,7 @@ class AuthenticationTestCase(unittest.TestCase):
             code=code
         )
         self.assertEqual(self.cs.faker.actual_body,
-                          "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&code=98uqw9d8qu9wdu")
+                          "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&code=98uqw9d8qu9wdu")
         self.assertEqual(access_token, "SlAV32hkKG")
         self.assertEqual(expires_in, 1209600)
         self.assertEqual(refresh_token, "tGzv3JOkF0XG5Qx2TlKWIA")
@@ -66,7 +66,7 @@ class AuthenticationTestCase(unittest.TestCase):
     def test_echange_token_failure(self):
         client_id = 8998879
         client_secret = 'iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd'
-        redirect_uri = 'http://example.com/auth'
+        redirect_uri = 'https://example.com/auth'
         code = 'invalidcode'
         self.cs = CreateSend(self.oauth_auth_details)
         self.cs.stub_request(
@@ -74,7 +74,7 @@ class AuthenticationTestCase(unittest.TestCase):
         self.assertRaises(Exception, self.cs.exchange_token,
                           client_id, client_secret, redirect_uri, code)
         self.assertEqual(self.cs.faker.actual_body,
-                          "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=http%3A%2F%2Fexample.com%2Fauth&code=invalidcode")
+                          "grant_type=authorization_code&client_id=8998879&client_secret=iou0q9wud0q9wd0q9wid0q9iwd0q9wid0q9wdqwd&redirect_uri=https%3A%2F%2Fexample.com%2Fauth&code=invalidcode")
 
     def test_can_authenticate_by_calling_auth_with_api_key(self):
         self.cs = CreateSend(self.api_key_auth_details)
