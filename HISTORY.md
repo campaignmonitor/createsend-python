@@ -172,7 +172,7 @@
 
 ## v3.1.0 - 15 Apr, 2013
 
-* Added support for [single sign on](http://www.campaignmonitor.com/api/account/#single_sign_on) which allows initiation of external login sessions to Campaign Monitor.
+* Added support for [single sign on](https://www.campaignmonitor.com/api/account/#single_sign_on) which allows initiation of external login sessions to Campaign Monitor.
 
 ## v3.0.0 - 25 Mar, 2013
 

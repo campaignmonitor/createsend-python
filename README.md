@@ -1,6 +1,6 @@
 # createsend
 
-A Python library which implements the complete functionality of the [Campaign Monitor API](http://www.campaignmonitor.com/api/). Requires Python 3.8 or above.
+A Python library which implements the complete functionality of the [Campaign Monitor API](https://www.campaignmonitor.com/api/). Requires Python 3.8 or above.
 
 ## Installation
 
@@ -14,9 +14,9 @@ The Campaign Monitor API supports authentication using either OAuth or an API ke
 
 ### Using OAuth
 
-Depending on the environment you are developing in, you may wish to use a Python OAuth library to get access tokens for your users. If you use [Flask](http://flask.pocoo.org/), you may like to refer to this [example application](https://gist.github.com/jdennes/4754097), which uses the [Flask-OAuth](http://pythonhosted.org/Flask-OAuth/) package to authenticate.
+Depending on the environment you are developing in, you may wish to use a Python OAuth library to get access tokens for your users. If you use [Flask](https://flask.palletsprojects.com/en/stable/), you may like to refer to this [example application](https://gist.github.com/jdennes/4754097), which uses the [Flask-OAuth](https://pythonhosted.org/Flask-OAuth/) package to authenticate.
 
-If you don't use an OAuth library, you will need to manually get access tokens for your users by following the instructions included in the Campaign Monitor API [documentation](http://www.campaignmonitor.com/api/getting-started/#authenticating_with_oauth). This package provides functionality to help you do this, as described below. There's also another Flask [example application](https://gist.github.com/jdennes/4761254) you may wish to reference, which doesn't depend on any OAuth libraries.
+If you don't use an OAuth library, you will need to manually get access tokens for your users by following the instructions included in the Campaign Monitor API [documentation](https://www.campaignmonitor.com/api/v3-3/getting-started/#authentication). This package provides functionality to help you do this, as described below. There's also another Flask [example application](https://gist.github.com/jdennes/4761254) you may wish to reference, which doesn't depend on any OAuth libraries.
 
 The first thing your application should do is redirect your user to the Campaign Monitor authorization URL where they will have the opportunity to approve your application to access their Campaign Monitor account. You can get this authorization URL by using the `authorize_url()` function, like so:
 
@@ -204,7 +204,7 @@ For example, if you wanted to find out how to call the `Subscriber.add()` method
 ```python
 def test_add_with_custom_fields(self):
   self.subscriber.stub_request("subscribers/%s.json" % self.list_id, "add_subscriber.json")
-  custom_fields = [ { "Key": 'website', "Value": 'http://example.com/' } ]
+  custom_fields = [ { "Key": 'website', "Value": 'https://example.com/' } ]
   email_address = self.subscriber.add(self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True)
   self.assertEqual(email_address, "subscriber@example.com")
 ```
