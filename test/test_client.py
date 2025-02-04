@@ -36,9 +36,9 @@ class ClientTestCase:
         self.assertEqual(campaigns[0].CampaignID,
                           'fc0ce7105baeaf97f47c99be31d02a91')
         self.assertEqual(campaigns[0].WebVersionURL,
-                          'http://createsend.com/t/r-765E86829575EE2C')
+                          'https://createsend.com/t/r-765E86829575EE2C')
         self.assertEqual(campaigns[0].WebVersionTextURL,
-                          'http://createsend.com/t/r-765E86829575EE2C/t')
+                          'https://createsend.com/t/r-765E86829575EE2C/t')
         self.assertEqual(campaigns[0].Subject, 'Campaign One')
         self.assertEqual(campaigns[0].Name, 'Campaign One')
         self.assertEqual(campaigns[0].SentDate, '2010-10-12 12:58:00')
@@ -69,9 +69,9 @@ class ClientTestCase:
         self.assertEqual(campaigns[0].Subject, "Magic Issue One")
         self.assertEqual(campaigns[0].DateCreated, "2011-05-24 10:37:00")
         self.assertEqual(campaigns[0].PreviewURL,
-                          "http://createsend.com/t/r-DD543521A87C9B8B")
+                          "https://createsend.com/t/r-DD543521A87C9B8B")
         self.assertEqual(campaigns[0].PreviewTextURL,
-                          "http://createsend.com/t/r-DD543521A87C9B8B/t")
+                          "https://createsend.com/t/r-DD543521A87C9B8B/t")
         self.assertEqual(campaigns[0].FromName, 'My Name')
         self.assertEqual(campaigns[0].FromEmail, 'myemail@example.com')
         self.assertEqual(campaigns[0].ReplyTo, 'myemail@example.com')
@@ -88,9 +88,9 @@ class ClientTestCase:
         self.assertEqual(drafts[0].Subject, 'Draft One')
         self.assertEqual(drafts[0].DateCreated, '2010-08-19 16:08:00')
         self.assertEqual(drafts[0].PreviewURL,
-                          'http://createsend.com/t/r-E97A7BB2E6983DA1')
+                          'https://createsend.com/t/r-E97A7BB2E6983DA1')
         self.assertEqual(drafts[0].PreviewTextURL,
-                          'http://createsend.com/t/r-E97A7BB2E6983DA1/t')
+                          'https://createsend.com/t/r-E97A7BB2E6983DA1/t')
         self.assertEqual(drafts[0].FromName, 'My Name')
         self.assertEqual(drafts[0].FromEmail, 'myemail@example.com')
         self.assertEqual(drafts[0].ReplyTo, 'myemail@example.com')

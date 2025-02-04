@@ -312,7 +312,7 @@ class CreateSend(CreateSendBase):
         """
         Get a URL which initiates a new external session for the user with the
         given email.
-        Full details: http://www.campaignmonitor.com/api/account/#single_sign_on
+        Full details: https://www.campaignmonitor.com/api/account/#single_sign_on
 
         :param email: String The representing the email address of the
           Campaign Monitor user for whom the login session should be created.

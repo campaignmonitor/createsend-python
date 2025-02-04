@@ -20,7 +20,7 @@ class SubscriberTestCase:
         self.assertEqual(len(subscriber.CustomFields), 3)
         self.assertEqual(subscriber.CustomFields[0].Key, 'website')
         self.assertEqual(subscriber.CustomFields[
-                          0].Value, 'http://example.com')
+                          0].Value, 'https://example.com')
         self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
 
     def test_get_without_arguments(self):
@@ -36,7 +36,7 @@ class SubscriberTestCase:
         self.assertEqual(len(subscriber.CustomFields), 3)
         self.assertEqual(subscriber.CustomFields[0].Key, 'website')
         self.assertEqual(subscriber.CustomFields[
-                          0].Value, 'http://example.com')
+                          0].Value, 'https://example.com')
         self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
 
     def test_get_with_tracking_preference_included(self):
@@ -52,7 +52,7 @@ class SubscriberTestCase:
         self.assertEqual(len(subscriber.CustomFields), 3)
         self.assertEqual(subscriber.CustomFields[0].Key, 'website')
         self.assertEqual(subscriber.CustomFields[
-                          0].Value, 'http://example.com')
+                          0].Value, 'https://example.com')
         self.assertEqual(subscriber.ReadsEmailWith, "Gmail")
         self.assertEqual(subscriber.ConsentToTrack, "Yes")
 
@@ -66,7 +66,7 @@ class SubscriberTestCase:
     def test_add_with_custom_fields(self):
         self.subscriber.stub_request(
             "subscribers/%s.json" % self.list_id, "add_subscriber.json")
-        custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
+        custom_fields = [{"Key": 'website', "Value": 'https://example.com/'}]
         email_address = self.subscriber.add(
             self.list_id, "subscriber@example.com", "Subscriber", custom_fields, True, "No")
         self.assertEqual(email_address, "subscriber@example.com")
@@ -85,7 +85,7 @@ class SubscriberTestCase:
         new_email = "new_email_address@example.com"
         self.subscriber.stub_request("subscribers/%s.json?email=%s" %
                                      (self.list_id, quote(self.subscriber.email_address)), None)
-        custom_fields = [{"Key": 'website', "Value": 'http://example.com/'}]
+        custom_fields = [{"Key": 'website', "Value": 'https://example.com/'}]
         self.subscriber.update(new_email, "Subscriber", custom_fields, True, "Yes")
         self.assertEqual(self.subscriber.email_address, new_email)
 
@@ -94,7 +94,7 @@ class SubscriberTestCase:
         self.subscriber.stub_request("subscribers/%s.json?email=%s" %
                                      (self.list_id, quote(self.subscriber.email_address)), None)
         custom_fields = [
-            {"Key": 'website', "Value": 'http://example.com/', "Clear": True}]
+            {"Key": 'website', "Value": 'https://example.com/', "Clear": True}]
         self.subscriber.update(new_email, "Subscriber", custom_fields, True, "No")
         self.assertEqual(self.subscriber.email_address, new_email)
 

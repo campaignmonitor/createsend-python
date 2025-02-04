@@ -1,5 +1,16 @@
 # createsend-python history
 
+## v9.1.3 - 4 Feb, 2025
+* Updated cacert.pem. From [#92](https://github.com/campaignmonitor/createsend-python/pull/92) 
+* Updates various URLs to use HTTPS
+* Fixes some URLs in CONTRIBUTING.md
+* Use GH Workflow badge instead of inactive Travis one in documentation. From [#91](https://github.com/campaignmonitor/createsend-python/pull/91)
+
+
+## v9.1.2 - 29 Jan, 2025
+* This release updates the add() and update() methods in lib/subscriber.py, enabling users to add subscribers' mobile numbers along with their consent to receive SMS messages.
+* Updated subscriber.py within samples to showcase new use cases resulting from these updates. [PR](https://github.com/campaignmonitor/createsend-python/pull/90)
+
 ## v9.0.2 - 23 Jan, 2025
 * Improved error handling for 400 and 500 errors: Now displays error codes and error messages for better debugging.
 
@@ -172,7 +183,7 @@
 
 ## v3.1.0 - 15 Apr, 2013
 
-* Added support for [single sign on](http://www.campaignmonitor.com/api/account/#single_sign_on) which allows initiation of external login sessions to Campaign Monitor.
+* Added support for [single sign on](https://www.campaignmonitor.com/api/account/#single_sign_on) which allows initiation of external login sessions to Campaign Monitor.
 
 ## v3.0.0 - 25 Mar, 2013
 

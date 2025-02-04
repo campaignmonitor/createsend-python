@@ -150,7 +150,7 @@ class ListTestCase:
         self.assertEqual(len(res.Results[0].CustomFields), 5)
         self.assertEqual(res.Results[0].CustomFields[0].Key, "website")
         self.assertEqual(res.Results[0].CustomFields[
-                          0].Value, "http://example.com")
+                          0].Value, "https://example.com")
         self.assertEqual(res.Results[0].CustomFields[
                           1].Key, "multi select field")
         self.assertEqual(res.Results[0].CustomFields[1].Value, "option one")
@@ -181,7 +181,7 @@ class ListTestCase:
         self.assertEqual(len(res.Results[0].CustomFields), 5)
         self.assertEqual(res.Results[0].CustomFields[0].Key, "website")
         self.assertEqual(res.Results[0].CustomFields[
-                          0].Value, "http://example.com")
+                          0].Value, "https://example.com")
         self.assertEqual(res.Results[0].CustomFields[
                           1].Key, "multi select field")
         self.assertEqual(res.Results[0].CustomFields[1].Value, "option one")
@@ -283,7 +283,7 @@ class ListTestCase:
         self.assertEqual(hooks[0].WebhookID, "943678317049bc13")
         self.assertEqual(len(hooks[0].Events), 1)
         self.assertEqual(hooks[0].Events[0], "Deactivate")
-        self.assertEqual(hooks[0].Url, "http://www.postbin.org/d9w8ud9wud9w")
+        self.assertEqual(hooks[0].Url, "https://www.postbin.org/d9w8ud9wud9w")
         self.assertEqual(hooks[0].Status, "Active")
         self.assertEqual(hooks[0].PayloadFormat, "Json")
 
@@ -291,7 +291,7 @@ class ListTestCase:
         self.list.stub_request("lists/%s/webhooks.json" %
                                self.list.list_id, "create_list_webhook.json")
         webhook_id = self.list.create_webhook(
-            ["Unsubscribe", "Spam"], "http://example.com/unsub", "json")
+            ["Unsubscribe", "Spam"], "https://example.com/unsub", "json")
         self.assertEqual(webhook_id, "6a783d359bd44ef62c6ca0d3eda4412a")
 
     def test_test_webhook(self):
