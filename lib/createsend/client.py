@@ -108,7 +108,7 @@ class Client(CreateSendBase):
         response = self._put(self.uri_for('setbasics'), json.dumps(body))
 
     def set_payg_billing(self, currency, can_purchase_credits, client_pays, markup_percentage,
-                         markup_on_delivery=0, markup_per_recipient=0, markup_on_design_spam_test=0):
+                         markup_on_delivery=0, markup_per_recipient=0):
         """Sets the PAYG billing settings for this client."""
         body = {
             "Currency": currency,
@@ -116,8 +116,7 @@ class Client(CreateSendBase):
             "ClientPays": client_pays,
             "MarkupPercentage": markup_percentage,
             "MarkupOnDelivery": markup_on_delivery,
-            "MarkupPerRecipient": markup_per_recipient,
-            "MarkupOnDesignSpamTest": markup_on_design_spam_test}
+            "MarkupPerRecipient": markup_per_recipient}
         response = self._put(self.uri_for('setpaygbilling'), json.dumps(body))
 
     def set_monthly_billing(self, currency, client_pays, markup_percentage, monthly_scheme=None):
