@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v9.1.4 - 16 Jun, 2025
+* Removed now redundant parameter ```markup_on_design_spam_test``` from method client.set_payg_billing
+
 ## v9.1.3 - 4 Feb, 2025
 * Updated cacert.pem. From [#92](https://github.com/campaignmonitor/createsend-python/pull/92) 
 * Updates various URLs to use HTTPS
