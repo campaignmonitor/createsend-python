@@ -14,7 +14,6 @@ setup(
     keywords="createsend campaign monitor email",
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
-    package_data={'': ['cacert.pem']},
 
     classifiers=[
         "Development Status :: 5 - Production/Stable",
