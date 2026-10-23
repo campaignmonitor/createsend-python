@@ -4,6 +4,7 @@ from http.client import HTTPSConnection
 import socket
 import ssl
 import json
+import certifi
 
 
 
@@ -90,7 +91,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
         if self._tunnel_host:
             self._tunnel()
 
-        cert_path = os.path.join(os.path.dirname(__file__), 'cacert.pem')
+        cert_path = certifi.where()
 
         context = ssl.SSLContext(protocol=ssl.PROTOCOL_TLS_CLIENT)
         context.verify_mode = ssl.CERT_REQUIRED
