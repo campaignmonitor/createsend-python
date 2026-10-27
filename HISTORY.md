@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v9.1.5 - 28 Oct, 2026
+* Updated cacert.pem to Mozilla's 2026-10-20 bundle. From [#98](https://github.com/campaignmonitor/createsend-python/pull/98)
+
 ## v9.1.4 - 16 Jun, 2025
 * Removed now redundant parameter ```markup_on_design_spam_test``` from method client.set_payg_billing
 
