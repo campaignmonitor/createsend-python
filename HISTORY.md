@@ -1,5 +1,8 @@
 # createsend-python history
 
+## v9.2.0 - 30 Oct, 2026
+* Replaced the bundled cacert.pem with the certifi package for SSL certificate verification. certifi (>=2026.10.18) is now a runtime dependency. From [#99](https://github.com/campaignmonitor/createsend-python/pull/99)
+
 ## v9.1.5 - 28 Oct, 2026
 * Updated cacert.pem to Mozilla's 2026-10-20 bundle. From [#98](https://github.com/campaignmonitor/createsend-python/pull/98)
 

@@ -5,7 +5,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="createsend",
-    version='9.1.5',
+    version='9.2.0',
     description="A library which implements the complete functionality of the Campaign Monitor API.",
     author='Campaign Monitor',
     author_email='support@campaignmonitor.com',
