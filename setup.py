@@ -1,5 +1,8 @@
 from setuptools import setup, find_packages
 
+with open("requirements.txt") as f:
+    requirements = f.read().splitlines()
+
 setup(
     name="createsend",
     version='9.1.5',
@@ -11,7 +14,6 @@ setup(
     keywords="createsend campaign monitor email",
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
-    package_data={'': ['cacert.pem']},
 
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -40,5 +42,6 @@ setup(
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
-    ]
+    ],
+    install_requires=requirements
 )
